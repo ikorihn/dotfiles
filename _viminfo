@@ -8,8 +8,8 @@
 # hlsearch on (H) or off (h):
 ~h
 # コマンドライン 項目の履歴 (新しいものから古いものへ):
-:wq
 :q
+:wq
 :echo home
 :echo $backup
 :echo $vim
@@ -81,18 +81,20 @@
 	evening
 
 # ファイルマーク:
-'0  11  0  ~/_gvimrc
-'1  74  19  ~/_vimrc
-'2  4  21  ~/_gvimrc
-'3  2  5  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
-'4  1  0  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
-'5  2  37  D:\cygwin\bin\vi
-'6  17  0  D:\utils\afxw64_158\AFXW.DEF
-'7  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
-'8  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
-'9  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+'0  2  1  ~/.git/COMMIT_EDITMSG
+'1  11  0  ~/_gvimrc
+'2  74  19  ~/_vimrc
+'3  4  21  ~/_gvimrc
+'4  2  5  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+'5  1  0  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+'6  2  37  D:\cygwin\bin\vi
+'7  17  0  D:\utils\afxw64_158\AFXW.DEF
+'8  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+'9  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
 
 # ジャンプリスト (新しいものが先):
+-'  2  1  ~/.git/COMMIT_EDITMSG
+-'  1  0  ~/.git/COMMIT_EDITMSG
 -'  11  0  ~/_gvimrc
 -'  4  19  ~/_gvimrc
 -'  74  19  ~/_vimrc
@@ -188,10 +190,11 @@
 -'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
 -'  17  0  D:\utils\afxw64_158\AFXW.DEF
 -'  1  0  D:\utils\afxw64_158\AFXW.DEF
--'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
--'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
 
 # ファイル内マークの履歴 (新しいものから古いもの):
+
+> ~/.git/COMMIT_EDITMSG
+	"	2	1
 
 > ~/_gvimrc
 	"	11	0
