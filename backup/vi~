@@ -1,2 +1,0 @@
-#!/bin/bash
-"D:/utils/vim73-kaoriya-win64/gvim"  $(cygpath -aw $*) &
