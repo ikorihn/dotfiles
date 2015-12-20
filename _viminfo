@@ -1,0 +1,229 @@
+# この viminfo ファイルは Vim 7.4 によって生成されました.
+# 変更する際には十分注意してください!
+
+# このファイルが書かれた時の 'encoding' の値
+*encoding=utf-8
+
+
+# hlsearch on (H) or off (h):
+~h
+# コマンドライン 項目の履歴 (新しいものから古いものへ):
+:wq
+:q
+:echo home
+:echo $backup
+:echo $vim
+:echo $HOME
+
+# 検索文字列 項目の履歴 (新しいものから古いものへ):
+
+# 式 項目の履歴 (新しいものから古いものへ):
+
+# 入力行 項目の履歴 (新しいものから古いものへ):
+
+# 入力行 項目の履歴 (新しいものから古いものへ):
+
+# レジスタ:
+""1	LINE	0
+	　
+"2	LINE	0
+	"ディレクトリの設定
+	let $BACKUP='D:\vimhome\backup'
+	set directory=$BACKUP
+	set backupdir=$BACKUP
+	set undodir=$BACKUP
+	
+	" vim起動時のみruntimepathにneobundle.vimを追加
+	if has('vim_starting')
+	  set nocompatible
+	  set runtimepath+=D:/cygwin/home/hirokin/.vim/bundle/neobundle.vim
+	endif
+	
+	" neobundle.vimの初期化 
+	" NeoBundleを更新するための設定
+	call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
+	NeoBundleFetch 'Shougo/neobundle.vim'
+	call neobundle#end()
+	
+	" 読み込むプラグインを記載
+	call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
+	NeoBundle 'Shougo/unite.vim'
+	NeoBundle 'itchyny/lightline.vim'
+	call neobundle#end()
+	
+	" 読み込んだプラグインも含め、ファイルタイプの検出、ファイルタイプ別プラグイン/インデントを有効化する
+	filetype plugin indent on
+	
+	" インストールのチェック
+	call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
+	NeoBundleCheck
+	call neobundle#end()
+	
+	
+	set nocompatible
+	
+	" 画面表示の設定
+	
+	set number         " 行番号を表示する
+	set cursorline     " カーソル行の背景色を変える
+	set cursorcolumn   " カーソル位置のカラムの背景色を変える
+	set laststatus=2   " ステータス行を常に表示
+	set cmdheight=2    " メッセージ表示欄を2行確保
+	set showmatch      " 対応する括弧を強調表示
+	set helpheight=999 " ヘルプを画面いっぱいに開く
+	set list           " 不可視文字を表示
+	" 不可視文字の表示記号指定
+	set listchars=tab:>.,eol:$,extends:_
+	
+	" カーソル移動関連の設定
+	
+"-	CHAR	0
+	evening
+
+# ファイルマーク:
+'0  11  0  ~/_gvimrc
+'1  74  19  ~/_vimrc
+'2  4  21  ~/_gvimrc
+'3  2  5  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+'4  1  0  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+'5  2  37  D:\cygwin\bin\vi
+'6  17  0  D:\utils\afxw64_158\AFXW.DEF
+'7  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+'8  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+'9  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+
+# ジャンプリスト (新しいものが先):
+-'  11  0  ~/_gvimrc
+-'  4  19  ~/_gvimrc
+-'  74  19  ~/_vimrc
+-'  1  0  ~/_vimrc
+-'  1  17  ~/_gvimrc
+-'  2  5  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+-'  1  0  D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+-'  2  37  D:\cygwin\bin\vi
+-'  1  0  D:\cygwin\bin\vi
+-'  17  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  17  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  17  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  1  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  28  6  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  1  0  D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+-'  17  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\utils\afxw64_158\AFXW.DEF
+-'  1  0  D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+-'  421  0  C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+
+# ファイル内マークの履歴 (新しいものから古いもの):
+
+> ~/_gvimrc
+	"	11	0
+	^	4	22
+	.	12	0
+	+	1	0
+	+	4	16
+	+	12	0
+
+> ~/_vimrc
+	"	74	19
+	^	74	20
+	.	74	19
+	+	74	19
+
+> D:\cygwin\home\hirokin\dotfiles\.git\COMMIT_EDITMSG
+	"	2	5
+
+> D:\cygwin\bin\vi
+	"	2	37
+	^	2	38
+	.	2	37
+	+	2	37
+
+> D:\utils\afxw64_158\AFXW.DEF
+	"	17	0
+
+> D:\bk\20150517Backup\Firefox�ݒ�\zu4tkvo5.default\webapps\webapps.json
+	"	1	0
+
+> C:\Program Files (x86)\CLaunch\Data\hirokin\CLaunch.ini
+	"	421	0
+
+> D:\Users\hirokin\Downloads\vim74-kaoriya-win64\gvimrc
+	"	28	6
