@@ -1,4 +1,9 @@
 set nocompatible
+"$HOME/_vimrcをスペース＋ドットで開く
+nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
+
+"行末の空白を削除
+nnoremap <A-l> :<C-u>s/ *$//g
 
 "Encode
 "下記の指定は環境によって文字化けする可能性があるので適宜変更する
@@ -28,6 +33,11 @@ call neobundle#end()
 call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'itchyny/lightline.vim'
+" jellybeans
+NeoBundle 'nanotech/jellybeans.vim'
+" vim-go
+NeoBundle 'fatif/vim-go'
+NeoBundle 'vim-jp/vim-go-extra'
 call neobundle#end()
 
 " 読み込んだプラグインも含め、ファイルタイプの検出、ファイルタイプ別プラグイン/インデントを有効化する
@@ -38,17 +48,7 @@ call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
 NeoBundleCheck
 call neobundle#end()
 
-" 画面表示の設定
-set number         " 行番号を表示する
-set cursorline     " カーソル行の背景色を変える
-set cursorcolumn   " カーソル位置のカラムの背景色を変える
-set laststatus=2   " ステータス行を常に表示
-set cmdheight=2    " メッセージ表示欄を2行確保
-set showmatch      " 対応する括弧を強調表示
-set helpheight=999 " ヘルプを画面いっぱいに開く
-
 " Move
-
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
 set whichwrap=b,s,h,l,<,>,[,]  " 行頭行末の左右移動で行をまたぐ
 set scrolloff=8                " 上下8行の視界を確保
@@ -77,6 +77,7 @@ set shiftwidth=4  " 自動インデントでずれる幅
 set softtabstop=4 " 連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent    " 改行時に前の行のインデントを継続する
 set smartindent   " 改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set textwidth=0
 
 " 動作環境との統合関連の設定
 
@@ -108,6 +109,31 @@ set listchars=tab:>.,trail:_,eol:$
 scriptencoding utf-8 "これ入れないと下記が反映されない
 augroup highlightZenkakuSpace "全角スペースを赤色にする
   autocmd!
+  autocmd ColorScheme * highlight ZenkakuSpace term=underline ctermbg=Red guibg=Red
+  autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+augroup END
+
+
+"==========================
+" オートコマンド          =
+"==========================
+"入力モード時、ステータスラインのカラーを変更
+
+augroup InsertHook
+autocmd!
+autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
+autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
+augroup END
+
+"全角スペースを赤色にする
+
+augroup highlightZenkakuSpace
+  autocmd!
   autocmd VimEnter,ColorScheme * highlight ZenkakuSpace term=underline ctermbg=Red guibg=Red
   autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
 augroup END
+
+"F6で時刻を入力
+nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+
+set matchpairs=(:),{:},<:>,[:]
