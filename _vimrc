@@ -1,9 +1,7 @@
 set nocompatible
 "$HOME/_vimrcをスペース＋ドットで開く
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
-
-"行末の空白を削除
-nnoremap <A-l> :<C-u>s/ *$//g
+nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
 
 "Encode
 "下記の指定は環境によって文字化けする可能性があるので適宜変更する
@@ -11,42 +9,75 @@ set encoding=UTF-8 "文字コードをUTF-8にする
 set fileencoding=UTF-8 "文字コードをUTF-8にする
 set termencoding=UTF-8 "文字コードをUTF-8にする
 
+set shellslash
+
 "ディレクトリの設定
 let $BACKUP='D:\vimhome\backup'
 set directory=$BACKUP
 set backupdir=$BACKUP
 set undodir=$BACKUP
 
-" vim起動時のみruntimepathにneobundle.vimを追加
-if has('vim_starting')
-  set nocompatible
-  set runtimepath+=D:/cygwin/home/hirokin/.vim/bundle/neobundle.vim
+" プラグインが実際にインストールされるディレクトリ
+let s:dein_dir = expand('$HOME/.cache/dein')
+" dein.vim 本体
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+" dein.vim がなければ github から落としてくる
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-" neobundle.vimの初期化 
-" NeoBundleを更新するための設定
-call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
-NeoBundleFetch 'Shougo/neobundle.vim'
-call neobundle#end()
+" 設定開始
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
-" 読み込むプラグインを記載
-call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'itchyny/lightline.vim'
-" jellybeans
-NeoBundle 'nanotech/jellybeans.vim'
-" vim-go
-NeoBundle 'fatif/vim-go'
-NeoBundle 'vim-jp/vim-go-extra'
-call neobundle#end()
+  " プラグインリストを収めた TOML ファイル
+  " 予め TOML ファイル（後述）を用意しておく
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+  " TOML を読み込み、キャッシュしておく
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+    " もし、未インストールものものがあったらインストール
+    if dein#check_install()
+      call dein#install()
+    endif
+
+  " 設定終了
+  call dein#end()
+  call dein#save_state()
+endif
 
 " 読み込んだプラグインも含め、ファイルタイプの検出、ファイルタイプ別プラグイン/インデントを有効化する
 filetype plugin indent on
 
-" インストールのチェック
-call neobundle#begin(expand('D:/cygwin/home/hirokin/.vim/bundle'))
-NeoBundleCheck
-call neobundle#end()
+" ----
+" Plugin
+let g:vimproc#download_windows_dll = 1
+
+" neocomplete用設定
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_ignore_case = 1
+let g:neocomplete#enable_smart_case = 1
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns._ = '\h\w*'
+
+"autocmd FileType python setlocal omnifunc=jedi#completions
+"let g:jedi#completions_enabled = 0
+"let g:jedi#auto_vim_configuration = 0
+"if !exists('g:neocomplete#force_omni_input_patterns')
+"    let g:neocomplete#force_omni_input_patterns = {}
+"endif
+"
+"g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 " Move
 set backspace=indent,eol,start " Backspaceキーの影響範囲に制限を設けない
@@ -63,13 +94,29 @@ set nobackup   " ファイル保存時にバックアップファイルを作らない
 set noswapfile " ファイル編集中にスワップファイルを作らない
 
 " Search/Replace
-set hlsearch   " 検索文字列をハイライトする
+set nohlsearch   " 検索文字列をハイライトする
 set incsearch  " インクリメンタルサーチを行う
 set ignorecase " 大文字と小文字を区別しない
 set smartcase  " 大文字と小文字が混在した言葉で検索を行った場合に限り、大文字と小文字を区別する
 set wrapscan   " 最後尾まで検索を終えたら次の検索で先頭に移る
 set gdefault   " 置換の時 g オプションをデフォルトで有効にする
 
+" View
+set number    "行番号を表示する
+set title
+set background=dark
+set ruler    "座標を表示する
+set showcmd    "入力中のコマンドを表示する
+set showmatch   "閉じ括弧の入力時に対応する括弧を表示する
+set matchtime=3 "showmatchの表示時間
+set laststatus=2    "ステータスラインを常に表示する
+set cursorline     " カーソル行の背景色を変える
+set columns=85
+set cmdheight=2    " メッセージ表示欄を2行確保
+" set helpheight=999 " ヘルプを画面いっぱいに開く
+" アンダーラインを引く(color terminal)
+highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+"
 "Input
 set expandtab     " タブ入力を複数の空白入力に置き換える
 set tabstop=4     " 画面上でタブ文字が占める幅

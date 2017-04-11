@@ -8,18 +8,170 @@
 # hlsearch on (H) or off (h):
 ~h
 # 最後の 検索パターン:
-~MSle0~/go
+~MSle0/neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 # 最後の Substitute 検索パターン:
-~MSle0&service
+~MSle0~&neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
 
 # 最後に置換された文字列:
 $contact
 
 # コマンドライン 項目の履歴 (新しいものから古いものへ):
-:q
 :wq
+:se tw=0
+:se tw
+:w d:/Learning/20170406_デュアルブート.txt
 :w
+:q
+:source $MYVIMRC
+:help jedi
+:help jedi-vim
+:Jedi
+:help je
+:let g:jedi#completions_command = "<C-Space>"
+:let g:jedi#auto_vim_configuration = 1
+:let g:jedi#auto_initialization=1
+:let g:jedi#auto_initialization
+:let g:jedi#auto_
+:echo has('conceal')
+:hel
+:VimFilerBufferDir
+:VimFiler
+:UniteBookmarkAdd
+:UniteBufferDIr
+:help neosnippet
+:neosn
+:ver
+:ve
+:rtp
+:vi
+:jedi
+:q!
+:e C:\Python36\lib\site.py
+:NeoComplete
+:filetype
+:se compatible?
+:let
+:se wildmode]
+:se wildmenu?
+:help wildmenu
+:se
+:noh
+:se hls
+:se noh
+:hls
+:help hlsearch
+:se hl
+:se nohlsearch
+:se smarttab?
+:se fileformats
+:set t_Co
+:help t_Co
+:se t_Co
+:syntax enable
+:syntax?
+:syntax
+:synta
+:he
+:call dein#install()
+:VimFile
+:VimFIle
+:Vi
+:se bg
+:colo
+:se number
+:se bg=dark
+:se bg=lig
+:w]
+:highlight CursorLine cterm=underline ctermfg=red ctermbg=red
+:highlight CursorLine cterm=underline ctermfg=red ctermbg=NONE
+:highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
+:ÎÔ
+:se nocursorline
+:highlight CursorLine cterm=underline
+:highlight 
+:help
+:se helpheight
+:se cmdheight
+:se columns
+:se cursor:se 
+:se cursorline
+:se laststatus=2
+:se la
+:se laststatus=0
+:se laststatus=1
+:se laststatus
+:se matchtime
+:se matchtim
+:se showmatch
+:se showcmd
+:ser
+:se ruler
+:colo evening
+:colo default
+:colo d
+:se bg?
+:se title?
+:se nonumber
+:set number
+:se number?
+:se 
+:se shellslash
+:help :source
+:source
+:se num
+:se nuber
+:colo =def
+:se bg=light
+:colo hybrid
+:colorscheme
+:se numberb
+:Unite
+:Unit
+:let $HOME=
+:let 
+:e ~/_gvimrc
+:se shell
+:se rtp
+:echo s:dein_dir
+:call dein#check_lazy_plugins()
+:call dein#install(]
+:call dein#
+:call dein#install
+:call de
+:call 
+:echo $home
+:de
+:help :dein
+:dein
+:dein#check_install
+:pwd
+:cd ~
+:ech
+:echo ~
+:bd
+:se noet
+:se et
+:se textwidth
+:se wrap
+:se nowrap
+:w d:/Users/hirokin/Desktop/日記.txt
+:echo %desktop%
+:w %desktop
+:se twt
+:w d:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+:W
+:w!
+:s
+:colorscheme jellybeans
+:colorscheme blue
+:NeoBundle 'fatih/vim-go'
+:NeoBundle 'fatif/vim-go'
+:NeoBundleReinstall fatif/vim-go
+:wqw
+:jw
+:'<,'>Align :
+:wkko
 :Import fmt
 :Fmt
 :'<,'>Fmt
@@ -28,20 +180,16 @@ $contact
 :Godoc
 :Import
 :GoInstallBinaries
-:colorscheme jellybeans
 :GoInstallbinaries
 :PlugInstall
 :vim-go
 :help vim-go
 :GoFmt
-:se noet
 :go fmt
 :w D:/Learning/gomemo.txt
-:q!
 :colorscheme solarized
 :h numbe
 :colorscheme hybrid
-:e ~/_gvimrc
 :k
 :h :cw
 :h copen
@@ -54,13 +202,10 @@ $contact
 :h tab
 :ta
 :tabe
-:se 
 :se nu
 :se nonu
 :h number
 :syntax 
-:se number
-:se nonumber
 :se nonum
 :color=jellybeans
 :color=jellybeand
@@ -68,9 +213,6 @@ $contact
 :bro sav
 :se e
 :u
-:se tw=0
-:se tw
-:se textwidth
 :e memory_game.css
 :e
 :e mystyle3.css
@@ -93,7 +235,6 @@ $contact
 :echo &guifont
 :echo &echo
 :echo %echo
-:noh
 :npj
 :'<,'>s/service/contact
 :'<,'>s/about/service
@@ -110,7 +251,6 @@ $contact
 :'<,'>s/start/reset
 :'<,'>s/start/stop/g
 :'<,'>s/div/button/g
-:s
 :se wr
 :se smartindent
 :se colorcolumn
@@ -149,9 +289,7 @@ $contact
 :se fenc?
 :fenc
 :fenc?
-:W
 :wjkl
-:colorscheme
 :q confirm
 :q! confirm
 :e $HOME/_gvimrc
@@ -159,7 +297,6 @@ $contact
 :e _vimrc
 :echo $VIM
 :echo $HOME
-:se
 :tabclose
 :tabnew
 :tabnext
@@ -168,11 +305,34 @@ $contact
 :echo $vim
 
 # 検索文字列 項目の履歴 (新しいものから古いものへ):
+? neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+?/_on_defaul
+?/52_
+?/on_de
+?/list
+?/hlsearch
+?/inc
+?/ignore
+?/smart
+?/filetype
+?/bg
+?/number
+?/show
+?/view
+?/nocompa
+?/home
+?/tw
+?/user
+?/jerry
+?/[
+?/numkey
+?/cygwin
+?/neobundle
+?/cent
 ?/ 
 ?/go
 ?/Neo
 ?/NeoBundle
-?/cent
 ?/memory
 ?/cw
 ?/vm.net
@@ -197,236 +357,892 @@ $contact
 
 # レジスタ:
 "0	LINE	0
-	filetype indent on
+	filetype plugin indent on
 ""1	LINE	0
-	フジファブリック\フジファブリック\01-桜の季節 _Album ver__.oma
-	フジファブリック\フジファブリック\02-TAIFU.oma
-	フジファブリック\フジファブリック\03-陽炎.oma
-	フジファブリック\フジファブリック\04-追ってけ 追ってけ.oma
-	フジファブリック\フジファブリック\05-打上げ花火.oma
-	フジファブリック\フジファブリック\06-TOKYO MIDNIGHT.oma
-	フジファブリック\フジファブリック\07-花.oma
-	フジファブリック\フジファブリック\08-サボテンレコード.oma
-	フジファブリック\フジファブリック\09-赤黄色の金木犀.oma
+	
 "2	LINE	0
-	フジファブリック\TEENAGER\01-ペダル.oma
-	フジファブリック\TEENAGER\02-記念写真.oma
-	フジファブリック\TEENAGER\03-B_O_I_P.oma
-	フジファブリック\TEENAGER\04-若者のすべて.oma
-	フジファブリック\TEENAGER\05-Chocolate Panic.oma
-	フジファブリック\TEENAGER\06-Strawberry Shortcakes.oma
-	フジファブリック\TEENAGER\07-Surfer King.oma
-	フジファブリック\TEENAGER\08-ロマネ.oma
-	フジファブリック\TEENAGER\09-パッション・フルーツ.oma
-	フジファブリック\TEENAGER\10-東京炎上 _Album Mix_.oma
-	フジファブリック\TEENAGER\11-まばたき.oma
-	フジファブリック\TEENAGER\12-星降る夜になったら.oma
+	一応
 "3	LINE	0
-	フジファブリック\MUSIC\02-夜明けのBEAT.oma
-	フジファブリック\MUSIC\03-Bye Bye.oma
-	フジファブリック\MUSIC\04-Hello.oma
-	フジファブリック\MUSIC\05-君は僕じゃないのに.oma
-	フジファブリック\MUSIC\06-wedding song.oma
-	フジファブリック\MUSIC\07-会いに.oma
-	フジファブリック\MUSIC\08-パンチドランカー.oma
-	フジファブリック\MUSIC\09-Mirror.oma
-	フジファブリック\MUSIC\10-眠れぬ夜.oma
+	
 "4	LINE	0
-	フジファブリック\FAB FOX\02-Sunny Morning.oma
-	フジファブリック\FAB FOX\03-銀河 [Album ver_].oma
-	フジファブリック\FAB FOX\04-唇のソレ.oma
-	フジファブリック\FAB FOX\05-地平線を越えて.oma
-	フジファブリック\FAB FOX\06-マリアとアマゾネス.oma
-	フジファブリック\FAB FOX\07-ベースボールは終わらない.oma
-	フジファブリック\FAB FOX\08-雨のマーチ.oma
-	フジファブリック\FAB FOX\09-水飴と綿飴.oma
-	フジファブリック\FAB FOX\10-虹.oma
-	フジファブリック\FAB FOX\11-Birthday.oma
-	フジファブリック\FAB FOX\12-茜色の夕日.oma
+	
 "5	LINE	0
-	フジファブリック\CHRONICLE\02-Sugar!!.oma
-	フジファブリック\CHRONICLE\03-Merry-Go-Round.oma
-	フジファブリック\CHRONICLE\04-Monster.oma
-	フジファブリック\CHRONICLE\05-クロニクル.oma
-	フジファブリック\CHRONICLE\06-エイプリル.oma
-	フジファブリック\CHRONICLE\07-Clock.oma
-	フジファブリック\CHRONICLE\08-Listen to the music.oma
-	フジファブリック\CHRONICLE\09-同じ月.oma
-	フジファブリック\CHRONICLE\10-Anthem.oma
-	フジファブリック\CHRONICLE\11-Laid Back.oma
-	フジファブリック\CHRONICLE\12-All Right.oma
-	フジファブリック\CHRONICLE\13-タイムマシン.oma
-	フジファブリック\CHRONICLE\14-ないものねだり.oma
-	フジファブリック\CHRONICLE\15-Stockholm.oma
-"6	LINE	0
-	Mr_Children\Mr_Children 1996-2000\02-花 -Memento-Mori -.oma
-	Mr_Children\Mr_Children 1996-2000\03-Mirror.oma
-	Mr_Children\Mr_Children 1996-2000\04-Everything (It's you).oma
-	Mr_Children\Mr_Children 1996-2000\05-ALIVE.oma
-	Mr_Children\Mr_Children 1996-2000\06-ニシエヒガシエ.oma
-	Mr_Children\Mr_Children 1996-2000\07-光の射す方へ.oma
-	Mr_Children\Mr_Children 1996-2000\08-終わりなき旅.oma
-	Mr_Children\Mr_Children 1996-2000\09-ラララ.oma
-	Mr_Children\Mr_Children 1996-2000\10-つよがり.oma
-	Mr_Children\Mr_Children 1996-2000\11-口笛.oma
-	Mr_Children\Mr_Children 1996-2000\12-NOT FOUND.oma
-	Mr_Children\Mr_Children 1996-2000\13-Hallelujah.oma
-"7	LINE	0
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\02-アゲハ (alternate version “アゲハとトカゲ”).oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\03-STAND BY ME.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\04-きらり.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\05-トゥモロウズ ソング.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\06-Happy Birthday.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\07-VISTA.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\08-ハミングライフ.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\09-胸いっぱい.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\10-TWISTER.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\11-さかさまワールド.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\12-初恋.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\13-My Treasure.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 2]\14-初恋 ～アコースティック ver_～.oma
-"8	LINE	0
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\02-思春期のブルース.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\03-桜が咲いたら.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\04-ロマンチック街道.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\05-アロー.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\06-グラフティー.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\07-センチメント・エキスプレス.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\08-ミラージュ.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\09-ランブル.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\10-ダイアリー.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\11-トワイライト.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\12-ハートビート.oma
-	GOING UNDER GROUND\COMPLETE SINGLE COLLECTION 1998-2008 [Disc 1]\13-サンキュー.oma
+	
+"6	BLOCK	1
+	# 
+	# 
+	# 
+"7	BLOCK	0
+	#
+	#
+	#
+"8	BLOCK	0
+	#
+	#
 "9	LINE	0
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\02-トワイライト.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\03-VISTA.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\04-グラフティー.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\05-アゲハ (alternate version _アゲハとトカゲ_).oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\06-ダイアリー.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\07-かよわきエナジー ～Take Me Home, Country Roads.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\08-同じ月を見てた.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\09-ランブル.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\10-タッシ.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\11-ハートビート.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\12-南十字.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\13-kodama.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\14-東京.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\15-STAND BY ME.oma
-	GOING UNDER GROUND\BEST OF GOING UNDER GROUND with YOU\16-ハミングライフ.oma
+	on_i = 1
+"j	CHAR	0
+	j
 "-	CHAR	0
-	indent
+	い
 
 # ファイルマーク:
-'0  20  18  D:/Personal/Go環境構築メモ.txt
-'1  1  0  D:/utils/vlc/README.txt
-'2  1  245  D:/bk/Backup-codes-ama10walnuts.txt
-'3  9  0  D:/Learning/go/test.go
-'4  10  27  D:/Learning/gomemo.txt
-'5  2  24  D:/Users/hirokin/Desktop/パスワード.txt
-'6  14  11  D:/Learning/JavaScript/stopwatch.html
-'7  43  0  D:/Learning/文章/20161212.txt
-'8  74  29  ~/_vimrc
-'9  387  0  D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/quickfix.jax
+'0  3  6  ~/.gitignore
+'1  16  205  D:/Users/hirokin/Desktop/日記.txt
+'2  5  0  d:/Learning/20170406_デュアルブート.txt
+'3  12  33  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+'4  17  0  ~/.vim/rc/dein.toml
+'5  30  0  ~/.vim/rc/dein_lazy.toml
+'6  27  0  ~/.vim/rc/dein_lazy.toml
+'7  28  0  ~/.vim/rc/dein_lazy.toml
+'8  10  14  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+'9  13  18  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
 
 # ジャンプリスト (新しいものが先):
--'  20  18  D:/Personal/Go環境構築メモ.txt
--'  1  0  D:/utils/vlc/README.txt
--'  1  245  D:/bk/Backup-codes-ama10walnuts.txt
--'  1  0  D:/Personal/Go環境構築メモ.txt
--'  9  0  D:/Learning/go/test.go
--'  8  24  D:/Learning/go/test.go
--'  10  27  D:/Learning/gomemo.txt
--'  1  0  D:/Learning/gomemo.txt
--'  2  24  D:/Users/hirokin/Desktop/パスワード.txt
--'  14  11  D:/Learning/JavaScript/stopwatch.html
--'  15  28  D:/Learning/JavaScript/stopwatch.html
--'  68  30  D:/Learning/JavaScript/stopwatch.html
--'  69  16  D:/Learning/JavaScript/stopwatch.html
--'  91  47  D:/Learning/JavaScript/stopwatch.html
--'  44  11  D:/Learning/JavaScript/stopwatch.html
--'  45  10  D:/Learning/JavaScript/stopwatch.html
--'  41  29  D:/Learning/JavaScript/stopwatch.html
--'  1  0  D:/Learning/JavaScript/stopwatch.html
--'  1  0  D:/Users/hirokin/Desktop/パスワード.txt
--'  43  0  D:/Learning/文章/20161212.txt
--'  1  0  D:/Learning/文章/20161212.txt
--'  42  15  D:/Learning/文章/20161212.txt
--'  73  29  ~/_vimrc
--'  107  23  ~/_vimrc
--'  387  0  D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/quickfix.jax
--'  1  0  D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/quickfix.jax
--'  12  0  D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/help.jax
--'  1  0  D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/help.jax
--'  28  25  C:/Windows/System32/drivers/etc/hosts
--'  19  34  C:/Windows/System32/drivers/etc/hosts
--'  17  0  C:/Windows/System32/drivers/etc/hosts
--'  15  0  C:/Windows/System32/drivers/etc/hosts
--'  1  0  C:/Windows/System32/drivers/etc/hosts
--'  3  18  C:/Users/hirokin/AppData/Local/Temp/scp28986/home/vagrant/php_lessons/index.php
--'  1  0  C:/Users/hirokin/AppData/Local/Temp/scp28986/home/vagrant/php_lessons/index.php
--'  1  0  C:/Users/hirokin/AppData/Local/Temp/scp28770/home/vagrant/php_lessons/index.php
--'  38  0  D:/utils/vim74-kaoriya-win64/CHANGES.txt
--'  13  33  D:/utils/vim74-kaoriya-win64/CHANGES.txt
--'  1  0  D:/utils/vim74-kaoriya-win64/CHANGES.txt
--'  155  15  D:/utils/KeePass/KeePass.config.xml
--'  1  0  D:/utils/KeePass/KeePass.config.xml
--'  22  14  D:/utils/KeePass/KeePass.exe.config
--'  1  0  D:/utils/KeePass/KeePass.exe.config
--'  2  129  D:/temp/rmt/Windows8.1/手順.txt
--'  9  45  D:/temp/rmt/Windows8.1/手順.txt
--'  7  42  D:/temp/rmt/Windows8.1/手順2.txt
--'  30  13  D:/temp/rmt/VPN.pcf
--'  13  17  D:/temp/rmt/VPN.pcf
--'  8  89  D:/temp/rmt/Windows8.1/手順.txt
--'  5  44  D:/temp/rmt/Windows8.1/手順.txt
--'  3  24  D:/temp/rmt/Windows8.1/手順.txt
--'  1  0  D:/temp/rmt/Windows8.1/手順2.txt
--'  2  129  F:/rmt/Windows8.1/手順.txt
--'  1  0  F:/rmt/Windows8.1/手順.txt
--'  51  32  D:/temp/cashbook.csv
--'  50  0  D:/temp/cashbook.csv
--'  483  32  D:/temp/cashbook.csv
--'  1  0  D:/temp/cashbook.csv
--'  10  36  D:/temp/cashbook.csv
--'  3  0  D:/temp/mizuho201608.csv
--'  1  0  D:/temp/mizuho201608.csv
--'  6  52  D:/temp/mizuho201608.csv
--'  8  38  D:/temp/mizuho201608.csv
--'  5  10  D:/temp/mizuho201608.csv
--'  11  10  D:/temp/mizuho201608.csv
--'  2  10  D:/temp/mizuho201608.csv
--'  601  0  D:/temp/cashbook.csv
--'  7  15  D:/temp/2016100901980280044322012.ofx
--'  164  0  D:/temp/2016100901980280044322012.ofx
--'  1  0  D:/temp/2016100901980280044322012.ofx
--'  166  0  D:/temp/2016100901980280044322012.ofx
--'  9  0  D:/temp/2016100901980280044322012.ofx
--'  3  0  D:/temp/2016100901980280044322012.ofx
--'  136  0  D:/temp/2016100901980280044322012.ofx
--'  3445  47  D:/temp/cashbook.csv
--'  3480  0  D:/Users/hirokin/Dropbox/アプリ/かけ〜ぼ/cashbook.csv
--'  4  33  D:/Users/hirokin/Dropbox/アプリ/かけ〜ぼ/cashbook.csv
--'  1  0  D:/Users/hirokin/Dropbox/アプリ/かけ〜ぼ/cashbook.csv
--'  28  0  C:/Users/hirokin/AppData/Local/atom/app-1.9.9/resources/app/apm/bin/apm
--'  1  0  C:/Users/hirokin/AppData/Local/atom/app-1.9.9/resources/app/apm/bin/apm
--'  9  68  D:/Users/hirokin/Music/MP3 Conversion Tool/2016-08-27-2324_log.txt
--'  1  0  D:/Users/hirokin/Music/MP3 Conversion Tool/2016-08-27-2324_log.txt
--'  5  0  D:/Users/hirokin/Downloads/STEP038bin/sample_csv.txt
--'  1  0  D:/Users/hirokin/Downloads/STEP038bin/sample_csv.txt
--'  6  0  D:/Users/hirokin/Music/Cocco/MP3 Conversion Tool/2015-03-01-0200_log.txt
--'  1  0  D:/Users/hirokin/Music/Cocco/MP3 Conversion Tool/2015-03-01-0200_log.txt
--'  1  0  D:/bk/android/Android/data/com.amazon.kindle/files/B00BULR3H6/B00BULR3H6_EBOK.prc
--'  1  254  D:/bk/android/Android/data/com.amazon.kindle/files/B00BULR3H6/B00BULR3H6_EBOK.phl
--'  1  663  D:/bk/android/backups/system/.confd
--'  1  59  D:/bk/android/.qKAXQ6OZAAfL/.5TEVOLkwqaD0/.cz1dSIahvQOO/backup
--'  9  26  D:/Learning/jQuery/index.html
--'  1  0  D:/Learning/jQuery/index.html
--'  7  267  D:/Learning/文章/20160727.txt
--'  1  232  D:/Learning/文章/20160727.txt
--'  1  245  D:/bk/Backup-codes-ama10walnuts.txt
+-'  3  6  ~/.gitignore
+-'  16  205  D:/Users/hirokin/Desktop/日記.txt
+-'  15  0  D:/Users/hirokin/Desktop/日記.txt
+-'  51  0  D:/Users/hirokin/Desktop/日記.txt
+-'  1  0  D:/Users/hirokin/Desktop/日記.txt
+-'  5  0  d:/Learning/20170406_デュアルブート.txt
+-'  2  0  d:/Learning/20170406_デュアルブート.txt
+-'  12  33  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  3  0  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  7  12  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  17  0  ~/.vim/rc/dein.toml
+-'  30  0  ~/.vim/rc/dein_lazy.toml
+-'  29  0  ~/.vim/rc/dein_lazy.toml
+-'  27  0  ~/.vim/rc/dein_lazy.toml
+-'  1  0  ~/.vim/rc/dein.toml
+-'  28  0  ~/.vim/rc/dein_lazy.toml
+-'  19  0  ~/.vim/rc/dein_lazy.toml
+-'  5  0  ~/.vim/rc/dein_lazy.toml
+-'  18  0  ~/.vim/rc/dein_lazy.toml
+-'  10  14  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  13  18  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  7  16  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  11  58  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  7  0  ~/.vim/rc/dein_lazy.toml
+-'  1  0  ~/.vim/rc/dein_lazy.toml
+-'  18  0  ~/.vim/rc/dein.toml
+-'  15  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  12  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  13  0  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  14  9  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  8  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  3  0  ~/.vim/rc/vimfiler:default
+-'  1  0  ~/.vim/rc/vimfiler:default
+-'  10  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  5  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  1  0  D:/bk/onetab.txt
+-'  25  21  D:/Learning/20170402_pythonインストール/windows10にpython3インストール.txt
+-'  3  0  D:/Learning/20170402_pythonインストール/vimprocをwindowsで使う.txt
+-'  7  0  ~/.vim/rc/dein.toml
+-'  15  0  ~/.vim/rc/dein.toml
+-'  13  0  ~/.vim/rc/dein.toml
+-'  11  17  ~/.vim/rc/dein.toml
+-'  19  0  ~/.vim/rc/dein.toml
+-'  12  20  ~/.vim/rc/dein.toml
+-'  1  22  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  9  2  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  23  2  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  104  10  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  81  24  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  106  0  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  83  17  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  6  0  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  1  0  ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+-'  4  0  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  15  5  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  14  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  6  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  4  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  1  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  3  9  C:/Users/hirokin/AppData/Local/nvim/ginit.vim
+-'  2  22  C:/Users/hirokin/AppData/Local/nvim/ginit.vim
+-'  3  0  ~/.vim/rc/dein.toml
+-'  31  46  ~/_vimrc
+-'  1  0  ~/_gvimrc
+-'  53  1  ~/_vimrc
+-'  148  0  ~/_vimrc
+-'  124  0  ~/_vimrc
+-'  90  0  ~/_vimrc
+-'  18  56  D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+-'  13  15  D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+-'  11  15  D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+-'  22  0  D:/Users/hirokin/Desktop/日記.txt
+-'  21  66  D:/Users/hirokin/Desktop/日記.txt
+-'  43  0  D:/Users/hirokin/Desktop/日記.txt
+-'  30  0  D:/Users/hirokin/Desktop/日記.txt
+-'  23  6  D:/Users/hirokin/Desktop/日記.txt
+-'  28  0  D:/Users/hirokin/Desktop/日記.txt
+-'  33  0  D:/Users/hirokin/Desktop/日記.txt
+-'  38  0  D:/Users/hirokin/Desktop/日記.txt
+-'  40  48  D:/Users/hirokin/Desktop/日記.txt
+-'  2  0  D:/Users/hirokin/Desktop/日記.txt
+-'  1  0  D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+-'  9  16  D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+-'  4  14  D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+-'  6  0  D:/Learning/python/bh_sshcmd.py
+-'  1  0  D:/Learning/python/bh_sshcmd.py
+-'  153  0  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  147  0  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  127  22  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  125  0  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  4  52  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  1  0  D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+-'  13  18  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  7  16  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  11  58  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  15  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+-'  12  0  D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
 
 # ファイル内マークの履歴 (新しいものから古いもの):
+
+> ~/.gitignore
+	"	3	6
+	^	3	7
+	.	3	7
+	+	3	7
+
+> D:/Users/hirokin/Desktop/日記.txt
+	"	16	205
+	^	16	208
+	.	16	205
+	+	56	39
+	+	46	6
+	+	51	0
+	+	49	0
+	+	48	132
+	+	49	0
+	+	50	72
+	+	51	0
+	+	51	0
+	+	7	0
+	+	17	0
+	+	8	15
+	+	10	90
+	+	19	33
+	+	13	21
+	+	14	36
+	+	14	93
+	+	17	0
+	+	15	0
+	+	16	54
+	+	20	102
+	+	16	205
+
+> D:/Learning/python/CyberSecurityProgramming/1/udp_client.py
+	"	12	33
+	.	7	0
+	+	3	14
+	+	15	0
+	+	19	0
+	+	18	56
+	+	5	0
+	+	12	33
+	+	14	9
+	+	13	0
+	+	14	10
+	+	10	14
+	+	12	0
+	+	10	0
+	+	12	0
+	+	7	20
+	+	4	8
+	+	3	13
+	+	7	0
+
+> ~/_vimrc
+	"	94	4
+	.	74	0
+	+	166	0
+	+	167	0
+	+	167	0
+	+	170	0
+	+	171	0
+	+	172	0
+	+	173	0
+	+	178	0
+	+	179	0
+	+	180	0
+	+	181	0
+	+	182	0
+	+	184	0
+	+	184	0
+	+	183	18
+	+	127	14
+	+	186	29
+	+	159	10
+	+	57	0
+	+	135	0
+	+	57	0
+	+	57	7
+	+	57	0
+	+	57	0
+	+	57	22
+	+	57	0
+	+	59	0
+	+	59	0
+	+	57	0
+	+	59	0
+	+	57	0
+	+	57	0
+	+	57	0
+	+	57	28
+	+	57	38
+	+	57	38
+	+	59	38
+	+	57	15
+	+	57	4
+	+	57	0
+	+	57	0
+	+	19	0
+	+	59	0
+	+	6	0
+	+	12	13
+	+	33	0
+	+	2	0
+	+	4	16
+	+	6	0
+	+	21	29
+	+	57	0
+	+	52	0
+	+	47	0
+	+	49	0
+	+	47	0
+	+	97	9
+	+	2	0
+	+	4	35
+	+	105	0
+	+	105	0
+	+	97	0
+	+	106	0
+	+	105	0
+	+	106	8
+	+	107	0
+	+	114	0
+	+	107	0
+	+	108	0
+	+	109	0
+	+	113	0
+	+	114	0
+	+	115	0
+	+	115	0
+	+	116	0
+	+	116	0
+	+	119	0
+	+	117	0
+	+	106	0
+	+	97	5
+	+	2	0
+	+	6	0
+	+	6	0
+	+	5	0
+	+	62	0
+	+	81	0
+	+	61	7
+	+	64	0
+	+	64	26
+	+	64	0
+	+	63	0
+	+	62	0
+	+	60	5
+	+	62	0
+	+	62	1
+	+	62	0
+	+	62	0
+	+	81	0
+	+	81	0
+	+	81	0
+	+	74	0
+
+> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/help.jax
+	"	1	0
+
+> ~/.vim/rc/dein.toml
+	"	17	0
+	.	17	0
+	+	16	0
+	+	17	0
+
+> ~/.vim/rc/dein_lazy.toml
+	"	30	0
+	^	18	1
+	.	28	0
+	+	1	0
+	+	34	0
+	+	1	0
+	+	1	13
+	+	1	15
+	+	1	14
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	34	0
+	+	1	0
+	+	31	0
+	+	1	0
+	+	33	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	1	0
+	+	18	0
+	+	29	0
+	+	6	0
+	+	19	0
+	+	28	0
+
+> D:/Learning/python/CyberSecurityProgramming/1/tcp_client.py
+	"	13	18
+	.	13	0
+	+	8	0
+	+	10	0
+	+	11	0
+	+	8	0
+	+	9	0
+	+	8	0
+	+	15	14
+	+	11	0
+	+	13	0
+	+	15	0
+	+	11	58
+	+	13	0
+	+	11	0
+	+	13	0
+	+	11	0
+	+	13	18
+	+	7	0
+	+	7	0
+	+	13	0
+
+> ~/.cache/dein/.cache/_vimrc/.dein/doc/jedi-vim.txt
+	"	5	0
+
+> ~/_gvimrc
+	"	6	31
+	.	2	0
+	+	2	0
+	+	5	16
+	+	8	0
+	+	10	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	2	0
+	+	5	18
+	+	8	0
+	+	6	0
+	+	7	0
+	+	6	0
+	+	7	0
+	+	8	0
+	+	8	13
+	+	6	0
+	+	5	17
+	+	6	0
+	+	7	0
+	+	5	17
+	+	8	0
+	+	5	0
+	+	8	0
+	+	3	0
+	+	8	0
+	+	8	0
+	+	4	18
+	+	3	0
+	+	1	1
+	+	1	0
+	+	2	0
+	+	2	0
+
+> ~/.vim/rc/vimfiler:default
+	"	3	0
+	.	3	0
+	+	3	0
+	+	3	0
+
+> D:/bk/onetab.txt
+	"	1	0
+	.	1	0
+	+	1	0
+
+> D:/Learning/20170402_pythonインストール/windows10にpython3インストール.txt
+	"	25	21
+	^	31	10
+	.	33	15
+	+	5	0
+	+	19	0
+	+	6	0
+	+	9	0
+	+	11	0
+	+	11	0
+	+	10	57
+	+	18	0
+	+	17	77
+	+	29	38
+	+	30	28
+	+	32	9
+	+	33	15
+
+> D:/Learning/20170402_pythonインストール/vimprocをwindowsで使う.txt
+	"	3	0
+	^	2	0
+	.	3	14
+	+	2	0
+	+	1	0
+	+	3	14
+
+> ~/.cache/dein/.cache/_vimrc/.dein/doc/neocomplete.txt
+	"	1001	26
+
+> D:/Learning/python/CyberSecurityProgramming/1/test.bat
+	"	3	0
+	^	3	0
+	.	2	5
+	+	2	5
+
+> ~/.cache/dein/.cache/_vimrc/.dein/autoload/dein/autoload.vim
+	"	23	2
+
+> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/various.jax
+	"	311	7
+
+> C:/ProgramData/chocolatey/logs/chocolatey.log
+	"	1051	0
+
+> C:/Python36/lib/site.py
+	"	178	30
+
+> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/term.jax
+	"	235	0
+
+> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/options.jax
+	"	8295	18
+
+> D:/utils/vim74-kaoriya-win64/vimfiler:default
+	"	13	0
+	.	21	0
+	+	75	0
+	+	75	0
+	+	74	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	55	0
+	+	54	0
+	+	41	0
+	+	21	0
+
+> C:/Users/hirokin/AppData/Local/nvim/ginit.vim
+	"	3	9
+	^	3	10
+	.	3	9
+	+	1	0
+	+	1	7
+	+	2	0
+	+	3	9
+
+> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/repeat.jax
+	"	178	29
+
+> D:/utils/vim74-kaoriya-win64/[unite] - default
+	"	1	0
+	.	22	0
+	+	22	0
+
+> ~/.neovim/init.vim
+	"	26	0
+	^	16	9
+	.	16	21
+	+	2	8
+	+	17	0
+	+	16	0
+	+	2	0
+	+	16	21
+
+> ~/.cache/dein/.cache/_vimrc/.dein/doc/dein.txt
+	"	483	0
+
+> D:/Users/hirokin/Desktop/パスワード.txt
+	"	3	21
+	^	3	22
+	.	3	21
+	+	2	20
+	+	5	0
+	+	5	0
+	+	5	0
+	+	6	14
+	+	7	15
+	+	9	0
+	+	7	15
+	+	5	0
+	+	4	8
+	+	8	20
+	+	3	21
+
+> D:/Learning/python/CyberSecurityProgramming/tcp_client.py
+	"	13	15
+	^	4	23
+	.	4	0
+	+	15	13
+	+	4	30
+	+	11	48
+	+	4	0
+
+> D:/Learning/python/bh_sshcmd.py
+	"	6	0
+
+> D:/Learning/20170327_KaliLinuxインストール/インストール手順.txt
+	"	153	0
+	^	152	0
+	.	147	0
+	+	154	0
+	+	122	60
+	+	125	10
+	+	124	20
+	+	147	0
+	+	146	47
+	+	125	13
+	+	154	0
+	+	153	0
+	+	154	0
+	+	154	0
+	+	127	0
+	+	125	0
+	+	126	45
+	+	153	0
+	+	152	0
+	+	147	64
+	+	147	0
+
+> C:/Vagrant/KaliLinux/Vagrantfile
+	"	1	0
+	^	48	18
+	.	48	0
+	+	29	0
+	+	47	0
+	+	46	2
+	+	48	0
+
+> C:/Vagrant/KaliLinux/public_key
+	"	1	0
+
+> C:/Users/hirokin/.vagrant.d/insecure_private_key
+	"	1	0
+
+> D:/Users/hirokin/Downloads/Nadesath/readme.txt
+	"	89	0
+
+> D:/Users/hirokin/Downloads/cretab/setup.log
+	"	63	0
+
+> D:/Users/hirokin/Desktop/driver-list.txt
+	"	135	0
+
+> F:/FileHistory/hirokin/DESKTOP-3HKIQ1T/Configuration/Config2.xml
+	"	72	0
+
+> F:/FileHistory/hirokin/DESKTOP-3HKIQ1T/Configuration/Config1.xml
+	"	12	2
+
+> C:/Windows/System32/drivers/etc/hosts
+	"	26	0
+	^	29	32
+	.	29	31
+	+	30	0
+	+	29	31
+
+> C:/Vagrant/MyCentOS/Vagrantfile
+	"	15	0
+
+> E:/Docs/JPN/ReadmeJPN.txt
+	"	90	0
+
+> C:/Users/hirokin/AppData/Local/nvim/init.vim
+	"	1	0
+
+> D:/utils/Neovim/share/nvim/.dein.toml
+	"	12	8
+	^	10	0
+	.	13	0
+	+	12	7
+	+	10	0
+	+	11	0
+	+	12	7
+	+	13	0
+
+> D:/Learning/20170312_Neovimインストール/init.vim
+	"	78	0
+	^	73	10
+	.	73	9
+	+	1	0
+	+	12	28
+	+	25	19
+	+	26	24
+	+	34	0
+	+	38	0
+	+	34	0
+	+	34	0
+	+	33	0
+	+	7	0
+	+	8	7
+	+	10	0
+	+	9	19
+	+	38	0
+	+	39	17
+	+	42	21
+	+	1	0
+	+	4	3
+	+	1	0
+	+	4	16
+	+	6	3
+	+	5	0
+	+	43	0
+	+	45	0
+	+	45	0
+	+	52	0
+	+	53	0
+	+	79	0
+	+	59	0
+	+	60	0
+	+	69	0
+	+	68	0
+	+	51	0
+	+	59	0
+	+	43	0
+	+	44	0
+	+	71	0
+	+	72	0
+	+	75	0
+	+	72	5
+	+	59	0
+	+	77	0
+	+	74	0
+	+	73	9
+
+> D:/utils/Neovim/share/nvim/.dein_lazy.toml
+	"	1	0
+	.	1	0
+	+	1	0
+	+	1	0
+
+> D:/utils/Neovim/share/nvim/dein.toml
+	"	4	0
+	.	1	0
+	+	1	0
+
+> D:/utils/xf13/XF.ini
+	"	566	0
+
+> D:/Learning/20170311_cygwin削除/vim.txt
+	"	8	18
+	^	3	33
+	.	3	33
+	+	5	63
+	+	7	57
+	+	8	18
+	+	2	30
+	+	3	33
+
+> D:/Learning/20170311_cygwin削除/vagrant.txt
+	"	8	0
+	^	2	0
+	.	2	0
+	+	1	19
+	+	3	0
+	+	2	0
+
+> D:/cygwin/Cygwin.bat
+	"	6	0
+
+> C:/Program Files (x86)/OpenOffice 4/readme.txt
+	"	144	0
+
+> C:/Users/hirokin/AppData/Local/Temp/7zO476D5B4B/QuickStartV2.txt
+	"	121	0
+
+> D:/utils/vlc/README.txt
+	"	40	0
+
+> D:/Learning/パスワード.txt
+	"	1	0
+	^	4	16
+	.	4	15
+	+	4	15
+
+> C:/Users/hirokin/AppData/Local/Temp/Temp1_cretab.zip/cretab.sql
+	"	33	0
+
+> D:/Vagrant/MyCentOS/Vagrantfile
+	"	1	0
+	^	51	22
+	.	51	21
+	+	29	2
+	+	51	2
+	+	52	2
+	+	46	2
+	+	51	21
+
+> C:/Users/hirokin/.vagrant.d/boxes/bento-VAGRANTSLASH-centos-6.8/metadata_url
+	"	1	43
+
+> D:/Learning/JavaScript/5秒当て/index.html
+	"	12	4
+	^	11	0
+	.	12	0
+	+	7	7
+	+	7	7
+	+	14	6
+	+	4	0
+	+	10	29
+	+	9	20
+	+	7	0
+	+	6	0
+	+	6	11
+	+	6	8
+	+	6	29
+	+	6	0
+	+	6	29
+	+	6	0
+	+	5	0
+	+	6	0
+	+	5	62
+	+	6	0
+	+	5	60
+	+	6	38
+	+	6	0
+	+	6	0
+	+	6	0
+	+	6	0
+	+	6	53
+	+	6	0
+	+	6	0
+	+	6	0
+	+	6	0
+	+	6	0
+	+	6	0
+	+	13	0
+	+	13	0
+	+	6	0
+	+	11	0
+	+	13	0
+	+	12	0
+
+> D:/Learning/JavaScript/5秒当て/style.css
+	"	30	0
+	^	29	18
+	.	29	17
+	+	31	0
+	+	8	0
+	+	1	16
+	+	16	0
+	+	27	0
+	+	16	0
+	+	21	16
+	+	21	0
+	+	21	0
+	+	13	0
+	+	21	0
+	+	21	0
+	+	21	0
+	+	21	18
+	+	22	17
+	+	24	0
+	+	23	0
+	+	21	0
+	+	20	0
+	+	25	0
+	+	15	0
+	+	25	29
+	+	24	27
+	+	25	17
+	+	25	0
+	+	26	20
+	+	30	0
+	+	29	17
+
+> D:/Learning/JavaScript/5秒当て/common.js
+	"	11	44
+	^	16	47
+	.	16	46
+	+	32	4
+	+	32	0
+	+	32	47
+	+	32	0
+	+	32	13
+	+	32	41
+	+	32	6
+	+	32	9
+	+	32	25
+	+	32	25
+	+	32	8
+	+	32	35
+	+	32	0
+	+	32	0
+	+	32	15
+	+	32	0
+	+	32	8
+	+	32	28
+	+	32	34
+	+	32	0
+	+	1	0
+	+	32	0
+	+	7	4
+	+	7	0
+	+	32	0
+	+	15	34
+	+	21	32
+	+	21	0
+	+	20	36
+	+	21	50
+	+	29	29
+	+	32	0
+	+	14	22
+	+	19	22
+	+	20	12
+	+	5	15
+	+	29	0
+	+	22	23
+	+	21	49
+	+	26	21
+	+	24	26
+	+	26	12
+	+	22	42
+	+	24	0
+	+	23	42
+	+	24	31
+	+	26	0
+	+	26	0
+	+	25	0
+	+	26	0
+	+	25	80
+	+	27	0
+	+	26	19
+	+	28	12
+	+	27	89
+	+	16	46
 
 > D:/Personal/Go環境構築メモ.txt
 	"	20	18
@@ -447,9 +1263,6 @@ $contact
 > D:/Learning/gomemo.txt
 	"	1	0
 
-> D:/utils/vlc/README.txt
-	"	1	0
-
 > D:/bk/Backup-codes-ama10walnuts.txt
 	"	1	245
 
@@ -462,104 +1275,11 @@ $contact
 	+	9	0
 	+	8	25
 
-> ~/_vimrc
-	"	136	18
-	^	40	0
-	.	40	0
-	+	85	19
-	+	94	0
-	+	94	3
-	+	94	0
-	+	64	0
-	+	106	0
-	+	64	0
-	+	140	0
-	+	116	0
-	+	115	0
-	+	116	0
-	+	116	0
-	+	2	0
-	+	3	0
-	+	6	0
-	+	8	0
-	+	116	0
-	+	118	0
-	+	119	0
-	+	120	0
-	+	120	0
-	+	123	0
-	+	124	0
-	+	125	0
-	+	126	0
-	+	131	0
-	+	132	0
-	+	133	0
-	+	134	0
-	+	135	0
-	+	137	0
-	+	137	0
-	+	136	18
-	+	80	14
-	+	139	29
-	+	112	10
-	+	41	0
-	+	88	0
-	+	36	0
-	+	41	7
-	+	41	0
-	+	41	0
-	+	41	22
-	+	34	0
-	+	49	0
-	+	48	0
-	+	34	0
-	+	48	0
-	+	38	0
-	+	41	0
-	+	40	0
-
 > D:/Users/hirokin/Desktop/mycentos.txt
 	"	1	4
 	^	1	5
 	.	1	4
 	+	1	4
-
-> ~/_gvimrc
-	"	5	0
-	^	2	22
-	.	2	21
-	+	1	0
-	+	4	16
-	+	14	0
-	+	26	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	1	0
-	+	2	18
-	+	7	0
-	+	5	0
-	+	6	0
-	+	5	0
-	+	6	0
-	+	15	0
-	+	17	13
-	+	5	0
-	+	2	21
-
-> D:/Users/hirokin/Desktop/パスワード.txt
-	"	2	24
 
 > D:/Learning/JavaScript/stopwatch.html
 	"	14	11
@@ -673,37 +1393,14 @@ $contact
 	+	44	0
 	+	43	15
 
-> D:/vagrant/MyCentOS/Vagrantfile
-	"	47	21
-	^	51	22
-	.	51	21
-	+	29	2
-	+	51	2
-	+	52	2
-	+	46	2
-	+	51	21
-
 > D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/quickfix.jax
 	"	387	0
 
 > D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/change.jax
 	"	243	1
 
-> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/help.jax
-	"	12	0
-
 > D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/windows.jax
 	"	302	58
-
-> C:/Windows/System32/drivers/etc/hosts
-	"	28	25
-	^	29	32
-	.	29	31
-	+	30	0
-	+	29	31
-
-> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/various.jax
-	"	116	55
 
 > D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/intro.jax
 	"	404	27
@@ -932,1623 +1629,3 @@ $contact
 	+	34	10
 	+	41	21
 	+	42	0
-
-> D:/Learning/JavaScript/PasswordGenerator.html
-	"	100	16
-	^	94	43
-	.	94	42
-	+	129	58
-	+	129	44
-	+	129	0
-	+	129	28
-	+	129	22
-	+	129	26
-	+	129	12
-	+	129	57
-	+	129	0
-	+	129	27
-	+	129	8
-	+	129	34
-	+	129	0
-	+	129	0
-	+	129	23
-	+	129	24
-	+	129	30
-	+	129	0
-	+	129	0
-	+	129	0
-	+	129	0
-	+	129	0
-	+	129	29
-	+	129	0
-	+	129	0
-	+	129	0
-	+	129	0
-	+	1	0
-	+	126	0
-	+	124	11
-	+	89	0
-	+	85	49
-	+	89	0
-	+	89	38
-	+	68	40
-	+	89	0
-	+	116	0
-	+	119	0
-	+	119	42
-	+	123	14
-	+	122	0
-	+	116	0
-	+	126	0
-	+	126	0
-	+	126	0
-	+	126	0
-	+	126	0
-	+	126	28
-	+	125	0
-	+	112	28
-	+	126	0
-	+	112	29
-	+	113	15
-	+	114	13
-	+	115	56
-	+	122	29
-	+	119	0
-	+	17	0
-	+	90	0
-	+	89	0
-	+	110	12
-	+	109	22
-	+	119	0
-	+	118	29
-	+	109	31
-	+	92	30
-	+	92	29
-	+	109	0
-	+	91	0
-	+	108	0
-	+	109	33
-	+	107	16
-	+	106	72
-	+	92	54
-	+	93	0
-	+	94	0
-	+	93	27
-	+	92	31
-	+	93	31
-	+	94	31
-	+	97	39
-	+	93	45
-	+	94	36
-	+	74	59
-	+	75	59
-	+	74	59
-	+	75	60
-	+	86	0
-	+	87	0
-	+	86	55
-	+	87	57
-	+	88	57
-	+	97	67
-	+	103	16
-	+	102	40
-	+	102	0
-	+	98	0
-	+	101	26
-	+	102	39
-	+	94	42
-
-> D:/Learning/jQuery/character.html
-	"	21	21
-	^	26	27
-	.	26	26
-	+	12	6
-	+	45	6
-	+	3	6
-	+	12	0
-	+	5	26
-	+	10	11
-	+	7	7
-	+	13	27
-	+	9	8
-	+	13	26
-	+	14	48
-	+	15	56
-	+	16	17
-	+	17	46
-	+	19	0
-	+	43	12
-	+	42	10
-	+	41	0
-	+	23	43
-	+	41	33
-	+	23	26
-	+	41	0
-	+	41	0
-	+	41	0
-	+	29	82
-	+	30	73
-	+	35	73
-	+	17	17
-	+	36	39
-	+	28	0
-	+	31	0
-	+	32	15
-	+	32	29
-	+	33	28
-	+	32	90
-	+	33	74
-	+	35	61
-	+	33	41
-	+	18	33
-	+	38	48
-	+	40	0
-	+	38	73
-	+	40	32
-	+	18	18
-	+	40	41
-	+	38	74
-	+	40	0
-	+	38	81
-	+	39	84
-	+	27	16
-	+	25	54
-	+	26	26
-
-> D:/Learning/文章/20160727.txt
-	"	7	267
-	^	7	267
-	.	13	108
-	+	1	0
-	+	1	114
-	+	1	249
-	+	1	233
-	+	1	0
-	+	1	232
-	+	15	0
-	+	2	341
-	+	9	105
-	+	10	261
-	+	15	0
-	+	11	0
-	+	12	342
-	+	13	108
-
-> D:/Learning/文章/20160725.txt
-	"	6	1020
-	^	6	1023
-	.	8	237
-	+	1	114
-	+	1	362
-	+	9	0
-	+	1	0
-	+	9	0
-	+	2	243
-	+	3	331
-	+	4	239
-	+	6	266
-	+	9	0
-	+	6	1059
-	+	8	75
-	+	8	237
-
-> D:/Learning/javascript/shinkeisuijaku.html
-	"	89	47
-	^	102	23
-	.	102	22
-	+	7	27
-	+	7	8
-	+	7	38
-	+	6	43
-	+	7	0
-	+	10	29
-	+	10	0
-	+	10	0
-	+	10	0
-	+	106	0
-	+	105	11
-	+	44	12
-	+	26	18
-	+	39	40
-	+	39	0
-	+	39	0
-	+	39	0
-	+	39	22
-	+	39	22
-	+	39	22
-	+	39	38
-	+	39	38
-	+	63	12
-	+	47	27
-	+	48	25
-	+	49	20
-	+	47	25
-	+	50	89
-	+	63	0
-	+	63	60
-	+	51	0
-	+	63	0
-	+	59	51
-	+	62	36
-	+	63	0
-	+	43	16
-	+	42	82
-	+	43	0
-	+	50	91
-	+	58	28
-	+	59	28
-	+	15	25
-	+	39	0
-	+	38	16
-	+	36	55
-	+	37	0
-	+	10	0
-	+	18	32
-	+	19	19
-	+	56	22
-	+	55	38
-	+	83	16
-	+	71	16
-	+	83	0
-	+	70	48
-	+	73	16
-	+	77	16
-	+	77	24
-	+	82	16
-	+	81	27
-	+	98	12
-	+	86	57
-	+	92	16
-	+	88	34
-	+	93	48
-	+	94	26
-	+	95	16
-	+	96	32
-	+	97	21
-	+	69	52
-	+	68	16
-	+	19	21
-	+	23	48
-	+	25	0
-	+	92	0
-	+	91	20
-	+	90	49
-	+	104	0
-	+	10	37
-	+	103	14
-	+	35	0
-	+	30	34
-	+	35	0
-	+	34	16
-	+	20	0
-	+	21	0
-	+	23	12
-	+	20	18
-	+	21	24
-	+	32	42
-	+	33	39
-	+	10	0
-	+	11	0
-	+	33	53
-	+	25	0
-	+	24	0
-	+	25	0
-	+	24	49
-	+	21	27
-	+	102	22
-
-> D:/Learning/javascript/memory_game.css
-	"	64	0
-	^	60	28
-	.	63	0
-	+	1	0
-	+	65	0
-	+	1	0
-	+	14	25
-	+	61	0
-	+	57	23
-	+	58	19
-	+	59	14
-	+	64	0
-	+	63	10
-	+	60	27
-	+	63	0
-
-> D:/Learning/css/css_layout3.html
-	"	24	105
-	^	12	16
-	.	18	0
-	+	13	0
-	+	46	0
-	+	46	15
-	+	13	16
-	+	13	20
-	+	13	31
-	+	13	68
-	+	13	43
-	+	13	25
-	+	13	0
-	+	13	42
-	+	13	0
-	+	13	0
-	+	13	0
-	+	13	0
-	+	17	0
-	+	12	15
-	+	5	21
-	+	7	40
-	+	41	28
-	+	27	0
-	+	18	0
-
-> D:/Learning/css/mystyle3.css
-	"	46	23
-	^	45	30
-	.	45	0
-	+	14	0
-	+	17	0
-	+	8	0
-	+	16	19
-	+	40	0
-	+	40	14
-	+	40	0
-	+	25	0
-	+	30	0
-	+	19	0
-	+	25	27
-	+	22	25
-	+	28	19
-	+	36	0
-	+	39	0
-	+	36	23
-	+	37	15
-	+	31	0
-	+	36	23
-	+	37	15
-	+	33	15
-	+	38	15
-	+	41	0
-	+	43	0
-	+	50	0
-	+	41	13
-	+	42	20
-	+	31	14
-	+	36	14
-	+	50	0
-	+	43	23
-	+	43	43
-	+	45	0
-	+	44	0
-	+	43	0
-	+	46	0
-	+	49	0
-	+	45	0
-
-> D:/Learning/css/css_layout2.html
-	"	21	12
-	^	22	29
-	.	22	29
-	+	7	40
-	+	19	0
-	+	20	28
-	+	24	0
-	+	22	15
-	+	16	16
-	+	17	0
-	+	13	24
-	+	16	0
-	+	13	40
-	+	14	0
-	+	15	0
-	+	14	36
-	+	15	36
-	+	12	24
-	+	5	21
-	+	23	45
-	+	21	0
-	+	25	0
-	+	21	30
-	+	22	29
-
-> D:/Learning/css/mystyle2.css
-	"	56	0
-	^	50	12
-	.	50	11
-	+	1	0
-	+	5	0
-	+	61	0
-	+	14	0
-	+	20	0
-	+	18	25
-	+	35	0
-	+	27	25
-	+	36	0
-	+	22	0
-	+	26	16
-	+	30	22
-	+	19	16
-	+	31	20
-	+	36	0
-	+	32	25
-	+	33	22
-	+	34	8
-	+	37	0
-	+	40	0
-	+	37	21
-	+	38	16
-	+	39	20
-	+	41	0
-	+	59	19
-	+	55	0
-	+	42	0
-	+	46	0
-	+	47	10
-	+	43	22
-	+	44	25
-	+	54	21
-	+	53	20
-	+	49	12
-	+	50	11
-
-> D:/Learning/css/css_layout.html
-	"	26	8
-	^	23	38
-	.	26	0
-	+	34	6
-	+	3	0
-	+	8	0
-	+	33	11
-	+	33	0
-	+	6	43
-	+	7	0
-	+	6	41
-	+	33	0
-	+	14	12
-	+	32	12
-	+	12	13
-	+	27	11
-	+	32	13
-	+	11	30
-	+	13	13
-	+	12	0
-	+	23	0
-	+	32	0
-	+	32	0
-	+	29	0
-	+	30	17
-	+	26	15
-	+	20	9
-	+	20	0
-	+	17	0
-	+	20	0
-	+	18	19
-	+	15	8
-	+	23	0
-	+	21	6
-	+	25	0
-	+	25	0
-	+	25	25
-	+	25	23
-	+	25	14
-	+	25	15
-	+	25	20
-	+	25	21
-	+	25	29
-	+	25	29
-	+	25	0
-	+	26	0
-	+	27	39
-	+	23	37
-	+	27	0
-	+	23	35
-	+	25	30
-	+	25	29
-	+	24	0
-	+	25	26
-	+	25	35
-	+	23	20
-	+	25	0
-	+	24	31
-	+	25	28
-	+	25	34
-	+	26	0
-	+	25	34
-	+	25	29
-	+	25	0
-	+	24	0
-	+	26	0
-
-> D:/Learning/css/mystyle.css
-	"	52	26
-	^	53	15
-	.	53	14
-	+	1	2
-	+	7	1
-	+	5	15
-	+	6	0
-	+	27	0
-	+	26	22
-	+	66	0
-	+	69	0
-	+	51	3
-	+	66	5
-	+	52	22
-	+	69	24
-	+	19	12
-	+	23	0
-	+	22	26
-	+	69	30
-	+	12	6
-	+	12	5
-	+	12	0
-	+	12	6
-	+	12	26
-	+	12	0
-	+	17	0
-	+	13	35
-	+	14	26
-	+	13	44
-	+	16	17
-	+	15	31
-	+	45	0
-	+	28	0
-	+	45	3
-	+	51	4
-	+	52	25
-	+	46	24
-	+	48	15
-	+	48	15
-	+	48	16
-	+	53	0
-	+	53	11
-	+	45	0
-	+	51	0
-	+	69	0
-	+	69	0
-	+	69	0
-	+	67	15
-	+	69	0
-	+	12	0
-	+	68	0
-	+	69	0
-	+	60	0
-	+	59	15
-	+	10	0
-	+	9	34
-	+	62	0
-	+	60	1
-	+	64	0
-	+	63	20
-	+	48	22
-	+	48	11
-	+	48	0
-	+	48	12
-	+	53	15
-	+	31	0
-	+	36	0
-	+	34	14
-	+	35	26
-	+	48	6
-	+	48	5
-	+	53	5
-	+	53	0
-	+	48	0
-	+	53	14
-	+	39	0
-	+	44	0
-	+	50	0
-	+	42	12
-	+	48	12
-	+	53	11
-	+	32	1
-	+	37	1
-	+	45	6
-	+	46	23
-	+	43	22
-	+	48	12
-	+	48	22
-	+	43	0
-	+	42	14
-	+	48	0
-	+	48	13
-	+	53	13
-	+	42	16
-	+	48	15
-	+	53	15
-	+	53	15
-	+	48	0
-	+	47	19
-	+	44	1
-	+	49	1
-	+	53	14
-
-> D:/Learning/css/normlize.css
-	"	1	0
-
-> D:/Learning/css/index.html
-	"	14	6
-	^	18	33
-	.	18	32
-	+	20	15
-	+	15	6
-	+	12	11
-	+	10	8
-	+	9	25
-	+	20	27
-	+	7	9
-	+	11	9
-	+	7	10
-	+	13	45
-	+	20	0
-	+	16	10
-	+	17	22
-	+	18	0
-	+	19	0
-	+	18	16
-	+	19	15
-	+	18	19
-	+	19	18
-	+	18	32
-
-> D:/Learning/html/canvas.html
-	"	12	38
-	^	12	39
-	.	12	38
-	+	5	23
-	+	8	26
-	+	9	59
-	+	9	51
-	+	10	0
-	+	12	38
-
-> D:/Learning/html/myscript.js
-	"	58	0
-	^	58	0
-	.	66	3
-	+	67	0
-	+	10	37
-	+	18	6
-	+	40	33
-	+	67	33
-	+	18	4
-	+	67	0
-	+	18	19
-	+	40	18
-	+	18	31
-	+	40	30
-	+	13	41
-	+	17	11
-	+	16	0
-	+	14	21
-	+	15	26
-	+	14	20
-	+	15	27
-	+	11	0
-	+	14	0
-	+	21	47
-	+	40	29
-	+	21	48
-	+	27	0
-	+	23	30
-	+	24	0
-	+	25	0
-	+	24	30
-	+	25	28
-	+	26	21
-	+	21	0
-	+	22	0
-	+	21	6
-	+	22	6
-	+	23	0
-	+	20	25
-	+	12	16
-	+	30	24
-	+	31	0
-	+	32	0
-	+	31	19
-	+	32	20
-	+	30	16
-	+	31	16
-	+	30	10
-	+	31	10
-	+	32	10
-	+	33	0
-	+	33	0
-	+	34	0
-	+	33	24
-	+	28	7
-	+	30	0
-	+	37	0
-	+	36	0
-	+	38	24
-	+	35	10
-	+	33	0
-	+	37	0
-	+	39	0
-	+	40	6
-	+	50	0
-	+	45	23
-	+	46	20
-	+	50	0
-	+	49	0
-	+	42	16
-	+	47	4
-	+	49	4
-	+	49	0
-	+	47	0
-	+	47	0
-	+	48	0
-	+	44	0
-	+	57	16
-	+	53	59
-	+	56	14
-	+	57	0
-	+	56	5
-	+	55	23
-	+	53	0
-	+	63	38
-	+	63	0
-	+	62	29
-	+	64	46
-	+	63	41
-	+	61	0
-	+	63	0
-	+	66	3
-
-> D:/Learning/html/html5.html
-	"	4	12
-	^	5	19
-	.	5	18
-	+	6	6
-	+	9	6
-	+	5	18
-
-> D:/Learning/html/index.html
-	"	99	34
-	^	91	59
-	.	110	50
-	+	48	0
-	+	43	19
-	+	47	16
-	+	47	26
-	+	47	0
-	+	47	0
-	+	47	29
-	+	47	26
-	+	43	25
-	+	38	0
-	+	32	0
-	+	39	0
-	+	41	0
-	+	40	0
-	+	39	13
-	+	42	14
-	+	44	13
-	+	47	14
-	+	40	26
-	+	41	26
-	+	43	19
-	+	47	0
-	+	45	24
-	+	46	0
-	+	45	22
-	+	46	40
-	+	30	43
-	+	34	63
-	+	35	49
-	+	17	36
-	+	30	85
-	+	17	33
-	+	30	98
-	+	32	25
-	+	57	32
-	+	78	19
-	+	63	23
-	+	77	23
-	+	62	24
-	+	60	24
-	+	60	24
-	+	60	0
-	+	65	0
-	+	66	44
-	+	69	0
-	+	75	0
-	+	69	28
-	+	75	28
-	+	69	39
-	+	75	39
-	+	68	0
-	+	74	0
-	+	70	0
-	+	67	0
-	+	71	0
-	+	75	46
-	+	112	11
-	+	87	24
-	+	111	8
-	+	88	22
-	+	89	52
-	+	110	47
-	+	89	0
-	+	89	61
-	+	89	88
-	+	110	0
-	+	109	60
-	+	110	57
-	+	89	0
-	+	92	15
-	+	94	69
-	+	96	73
-	+	96	0
-	+	95	0
-	+	97	0
-	+	100	13
-	+	98	62
-	+	99	61
-	+	94	108
-	+	108	15
-	+	104	55
-	+	107	24
-	+	105	0
-	+	106	0
-	+	105	39
-	+	106	40
-	+	105	47
-	+	107	0
-	+	105	49
-	+	103	44
-	+	90	0
-	+	91	0
-	+	90	18
-	+	91	21
-	+	89	38
-	+	90	40
-	+	91	42
-	+	90	54
-	+	91	58
-	+	110	50
-
-> D:/Learning/html/mystyle.css
-	"	4	0
-	^	3	35
-	.	3	34
-	+	4	0
-	+	4	0
-	+	3	34
-
-> D:/Learning/html/more.html
-	"	23	0
-	.	51	0
-	+	1	0
-	+	51	0
-
-> D:/Learning/javascript/numtouch.html
-	"	89	27
-	^	90	47
-	.	90	46
-	+	148	0
-	+	140	0
-	+	148	0
-	+	140	0
-	+	139	46
-	+	140	46
-	+	138	46
-	+	140	0
-	+	149	0
-	+	147	0
-	+	147	0
-	+	147	16
-	+	147	0
-	+	147	0
-	+	148	0
-	+	142	81
-	+	147	0
-	+	148	0
-	+	144	46
-	+	146	20
-	+	145	71
-	+	77	24
-	+	72	0
-	+	142	32
-	+	144	44
-	+	118	61
-	+	126	18
-	+	119	23
-	+	78	30
-	+	81	0
-	+	122	20
-	+	121	36
-	+	119	44
-	+	77	23
-	+	122	0
-	+	125	20
-	+	125	39
-	+	77	23
-	+	138	35
-	+	78	29
-	+	77	0
-	+	80	23
-	+	83	0
-	+	84	0
-	+	83	24
-	+	84	26
-	+	83	61
-	+	84	65
-	+	98	14
-	+	97	26
-	+	106	33
-	+	111	12
-	+	107	82
-	+	110	0
-	+	109	30
-	+	110	20
-	+	125	0
-	+	124	45
-	+	104	14
-	+	103	41
-	+	99	0
-	+	103	34
-	+	102	48
-	+	98	0
-	+	96	59
-	+	109	23
-	+	97	0
-	+	89	27
-	+	94	30
-	+	137	0
-	+	132	0
-	+	137	16
-	+	137	55
-	+	144	0
-	+	142	22
-	+	144	0
-	+	140	0
-	+	143	46
-	+	142	0
-	+	142	0
-	+	143	0
-	+	137	1
-	+	137	2
-	+	137	0
-	+	143	0
-	+	144	0
-	+	135	0
-	+	66	0
-	+	58	16
-	+	62	0
-	+	61	11
-	+	40	22
-	+	65	0
-	+	116	45
-	+	94	16
-	+	94	0
-	+	94	0
-	+	90	33
-	+	91	33
-	+	90	46
-
-> D:/Learning/javascript/tabmenu.html
-	"	101	0
-	^	105	86
-	.	106	0
-	+	113	6
-	+	113	6
-	+	113	14
-	+	113	33
-	+	113	27
-	+	113	9
-	+	113	12
-	+	113	36
-	+	113	0
-	+	113	0
-	+	113	34
-	+	113	34
-	+	113	0
-	+	113	0
-	+	113	13
-	+	113	29
-	+	113	0
-	+	113	29
-	+	113	0
-	+	113	59
-	+	113	37
-	+	113	87
-	+	113	0
-	+	113	0
-	+	113	0
-	+	113	0
-	+	113	0
-	+	113	0
-	+	113	11
-	+	113	8
-	+	113	0
-	+	113	8
-	+	113	25
-	+	113	32
-	+	113	8
-	+	113	23
-	+	113	15
-	+	113	24
-	+	113	12
-	+	113	33
-	+	113	0
-	+	113	0
-	+	113	20
-	+	113	18
-	+	113	23
-	+	113	25
-	+	113	41
-	+	113	0
-	+	113	8
-	+	113	23
-	+	113	8
-	+	113	0
-	+	113	41
-	+	113	8
-	+	113	0
-	+	1	0
-	+	3	5
-	+	2	14
-	+	32	29
-	+	67	33
-	+	63	50
-	+	64	27
-	+	65	28
-	+	64	35
-	+	65	35
-	+	110	12
-	+	109	7
-	+	85	4
-	+	109	8
-	+	108	0
-	+	85	15
-	+	107	8
-	+	106	14
-	+	93	34
-	+	96	0
-	+	96	0
-	+	98	16
-	+	99	0
-	+	97	56
-	+	100	51
-	+	94	0
-	+	96	0
-	+	91	39
-	+	89	0
-	+	88	63
-	+	99	0
-	+	106	0
-	+	102	39
-	+	103	51
-	+	63	43
-	+	64	45
-	+	65	45
-	+	105	85
-	+	106	0
-
-> D:/Users/hirokin/Downloads/migu-1p-20150712/migu-README.txt
-	"	72	0
-
-> D:/Learning/文章/20160713.txt
-	"	8	888
-	^	8	891
-	.	8	888
-	+	2	649
-	+	2	0
-	+	9	0
-	+	2	428
-	+	4	468
-	+	5	174
-	+	7	0
-	+	8	888
-
-> D:/Learning/css/default.css
-	"	3	6
-	^	3	25
-	.	3	24
-	+	1	1
-	+	3	24
-
-> D:/Learning/javascript/omikuji.html
-	"	49	80
-	^	51	61
-	.	51	60
-	+	64	6
-	+	63	7
-	+	64	0
-	+	42	0
-	+	45	39
-	+	42	0
-	+	13	8
-	+	11	22
-	+	12	22
-	+	10	17
-	+	14	7
-	+	7	12
-	+	24	8
-	+	17	25
-	+	12	42
-	+	22	26
-	+	11	23
-	+	22	32
-	+	23	53
-	+	20	19
-	+	25	11
-	+	25	14
-	+	33	8
-	+	33	0
-	+	30	30
-	+	31	39
-	+	33	0
-	+	32	27
-	+	41	8
-	+	36	8
-	+	35	24
-	+	62	12
-	+	61	12
-	+	48	26
-	+	49	0
-	+	48	16
-	+	49	12
-	+	52	0
-	+	49	70
-	+	54	14
-	+	52	58
-	+	49	33
-	+	58	69
-	+	60	14
-	+	59	41
-	+	55	0
-	+	58	67
-	+	37	20
-	+	40	8
-	+	40	0
-	+	39	0
-	+	40	0
-	+	39	0
-	+	40	0
-	+	39	26
-	+	59	0
-	+	62	0
-	+	51	58
-	+	51	29
-	+	52	0
-	+	52	18
-	+	53	68
-	+	62	8
-	+	62	0
-	+	50	66
-	+	53	68
-	+	51	24
-	+	53	69
-	+	51	55
-	+	50	74
-	+	51	60
-
-> D:/Learning/文章/20160712.txt
-	"	9	279
-	^	7	0
-	.	10	436
-	+	2	284
-	+	11	0
-	+	2	235
-	+	2	117
-	+	8	276
-	+	7	0
-	+	10	436
-
-> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/eval.jax
-	"	3805	35
-
-> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/options.jax
-	"	8516	60
-
-> D:/Learning/文章/20160711.txt
-	"	1	0
-	.	1	0
-	+	3	779
-	+	3	779
-	+	16	59
-	+	21	114
-	+	42	27
-	+	3	0
-	+	1	0
-
-> D:/utils/vim74-kaoriya-win64/plugins/vimdoc-ja/doc/insert.jax
-	"	1746	52
-
-> D:/Learning/メモ/C#メモ.txt
-	"	69	0
-	.	1	0
-	+	1	0
-
-> D:/Learning/メモ/Git.txt
-	"	14	0
-	.	1	0
-	+	1	0
-
-> D:/Learning/メモ/Oracle.txt
-	"	7	0
-	^	7	0
-	.	6	18
-	+	1	40
-	+	6	18
-
-> D:/Learning/メモ/Wildfly.txt
-	"	1	0
-	.	1	0
-	+	1	0
-
-> D:/Learning/パスワード.txt
-	"	4	15
-	^	4	16
-	.	4	15
-	+	4	15
-
-> D:/Learning/javascript/index.html
-	"	24	13
-	.	23	0
-	+	29	27
-	+	29	31
-	+	29	15
-	+	29	5
-	+	29	9
-	+	29	0
-	+	29	26
-	+	29	19
-	+	29	0
-	+	29	12
-	+	29	0
-	+	29	0
-	+	29	0
-	+	29	0
-	+	29	27
-	+	29	16
-	+	29	13
-	+	29	27
-	+	29	16
-	+	29	18
-	+	29	0
-	+	29	31
-	+	29	0
-	+	29	0
-	+	29	8
-	+	29	13
-	+	29	21
-	+	29	12
-	+	29	0
-	+	29	36
-	+	29	0
-	+	29	0
-	+	29	20
-	+	29	9
-	+	29	27
-	+	29	34
-	+	29	31
-	+	29	26
-	+	29	30
-	+	29	0
-	+	28	0
-	+	28	9
-	+	28	12
-	+	28	26
-	+	28	21
-	+	28	48
-	+	28	28
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	41
-	+	28	32
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	22
-	+	28	9
-	+	28	22
-	+	28	0
-	+	28	28
-	+	28	0
-	+	28	0
-	+	28	0
-	+	28	33
-	+	28	34
-	+	28	29
-	+	28	34
-	+	28	0
-	+	28	0
-	+	28	41
-	+	28	32
-	+	28	0
-	+	28	27
-	+	28	33
-	+	28	54
-	+	28	0
-	+	28	0
-	+	28	17
-	+	28	0
-	+	28	0
-	+	28	0
-	+	13	17
-	+	14	28
-	+	17	25
-	+	20	31
-	+	28	0
-	+	11	0
-	+	17	32
-	+	20	8
-	+	21	0
-	+	22	51
-	+	15	25
-	+	22	77
-	+	27	8
-	+	23	0
-	+	22	0
-	+	23	0
-
-> D:/Learning/javascript/myscript.js
-	"	1	36
-	^	1	32
-	.	1	31
-	+	1	31
-
-> D:/Users/hirokin/Downloads/cretab/cretab.sql
-	"	8	14
-	^	19	20
-	.	17	0
-	+	17	0
-
-> D:/app/oracleuser/product/12.1.0/dbhome_1/NETWORK/ADMIN/tnsnames.ora
-	"	30	47
-	^	30	48
-	.	30	47
-	+	36	0
-	+	28	0
-	+	27	0
-	+	28	6
-	+	33	29
-	+	30	47
-
-> E:/Win/readme.txt
-	"	10	98
-
-> C:/Users/hirokin/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml
-	"	1	0
-
-> C:/Users/hirokin/AndroidStudioProjects/MyApplication/app/build/generated/source/r/debug/android/support/v7/appcompat/R.java
-	"	5	33
-
-> C:/Users/hirokin/AppData/Local/Android/sdk/extras/intel/Hardware_Accelerated_Execution_Manager/silent_install_readme.txt
-	"	16	0
-	^	3	1
-	.	3	0
-	+	3	0
-
-> D:/Learning/java/algo/MyLinkedList.java
-	"	64	0
-	.	64	0
-	+	75	4
-	+	73	8
-	+	70	30
-	+	72	28
-	+	70	33
-	+	28	4
-	+	19	23
-	+	68	16
-	+	70	8
-	+	70	8
-	+	69	19
-	+	70	23
-	+	72	27
-	+	71	28
-	+	28	0
-	+	28	0
-	+	16	0
-	+	11	0
-	+	13	39
-	+	15	32
-	+	4	17
-	+	25	37
-	+	27	24
-	+	20	52
-	+	23	8
-	+	22	22
-	+	13	0
-	+	16	4
-	+	28	0
-	+	43	0
-	+	37	49
-	+	40	8
-	+	39	41
-	+	42	28
-	+	67	0
-	+	91	4
-	+	89	22
-	+	90	0
-	+	87	0
-	+	85	0
-	+	83	0
-	+	81	0
-	+	83	20
-	+	85	20
-	+	87	20
-	+	89	20
-	+	4	25
-	+	22	17
-	+	39	25
-	+	34	3
-	+	31	34
-	+	33	4
-	+	32	30
-	+	4	52
-	+	31	26
-	+	32	32
-	+	31	18
-	+	4	0
-	+	4	25
-	+	67	11
-	+	67	10
-	+	67	4
-	+	67	56
-	+	67	0
-	+	32	28
-	+	67	8
-	+	67	18
-	+	67	9
-	+	67	0
-	+	67	23
-	+	67	23
-	+	67	0
-	+	67	0
-	+	67	0
-	+	67	0
-	+	67	8
-	+	67	0
-	+	4	0
-	+	91	0
-	+	93	0
-	+	31	21
-	+	67	0
-	+	45	0
-	+	47	0
-	+	50	0
-	+	49	27
-	+	53	0
-	+	52	33
-	+	60	0
-	+	57	12
-	+	56	50
-	+	2	39
-	+	59	25
-	+	62	53
-	+	3	0
-	+	32	33
-	+	59	27
-	+	64	0
-	+	64	0
-	+	64	0
-	i	31	11
-
-> D:/Learning/java/algo/MyIterator.java
-	"	3	2
-	.	2	0
-	+	3	0
-	+	1	0
-	+	2	0
-
-> D:/Learning/java/algo/Test.java
-	"	3	8
-	^	3	33
-	.	3	0
-	+	5	0
-	+	4	4
-	+	3	0
-
-> D:/Learning/java/algo/BinarySearch.java
-	"	21	10
-	.	19	0
-	+	37	0
-	+	37	4
-	+	37	0
-	+	36	0
-	+	3	24
-	+	11	4
-	+	10	8
-	+	9	28
-	+	35	4
-	+	32	8
-	+	34	0
-	+	25	42
-	+	32	0
-	+	25	32
-	+	28	45
-	+	29	30
-	+	31	28
-	+	29	32
-	+	31	31
-	+	32	0
-	+	33	20
-	+	19	4
-	+	19	0
-
-> D:/Learning/java/algo/TestLinearSearch.java
-	"	8	0
-	.	7	0
-	+	8	0
-	+	7	4
-	+	8	0
-	+	7	0
-	+	3	18
-	+	4	0
-	+	7	0
-
-> D:/Learning/java/algo/LinearSearch.java
-	"	27	19
-	^	35	20
-	.	35	19
-	+	38	0
-	+	14	4
-	+	38	0
-	+	12	8
-	+	11	28
-	+	14	0
-	+	8	0
-	+	25	4
-	+	23	8
-	+	22	69
-	+	23	0
-	+	24	41
-	+	37	0
-	+	36	4
-	+	34	8
-	+	29	9
-	+	33	15
-	+	34	0
-	+	35	19
-
-> D:/Learning/python/bh_sshcmd.py
-	"	3	15
-	^	18	58
-	.	18	57
-	+	1	0
-	+	18	57
-
-> D:/utils/vim74-kaoriya-win64/vimrc
-	"	33	0
-
-> C:/Users/hirokin/AppData/Local/Microsoft/Windows/INetCache/IE/OST8ZDQV/.enref[1].enref
-	"	1	0
-
-> D:/cygwin/home/hirokin/LearningDir/c/Sample3.c
-	"	11	0
-	^	9	36
-	.	9	35
-	+	11	0
-	+	4	20
-	+	10	13
-	+	4	15
-	+	4	18
-	+	10	0
-	+	10	0
-	+	10	0
-	+	10	18
-	+	10	18
-	+	4	15
-	+	10	15
-	+	10	15
-	+	4	18
-	+	5	0
-	+	6	31
-	+	7	0
-	+	8	0
-	+	9	0
-	+	10	0
-	+	7	19
-	+	8	19
-	+	9	19
-	+	7	35
-	+	8	35
-	+	9	35
