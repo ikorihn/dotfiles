@@ -49,6 +49,11 @@ on_i = 1
 #if = 'has("nvim")'
 #on_i = 1
  
+##############
+# HTML
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'css']
 
 ##############
 # python設定 
