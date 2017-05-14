@@ -6,7 +6,7 @@ export LANG=ja_JP.UTF-8
 autoload -Uz colors
 colors
 
-# emacs 風キーバインドにする
+# vim 風キーバインドにする
 bindkey -v
 
 # ヒストリの設定
@@ -161,3 +161,24 @@ case darwin16 in
 esac
 
 # vim:set ft=zsh:
+
+########################################
+# zplug
+export ZPLUG_HOME=~/.zplug
+source $ZPLUG_HOME/init.zsh
+
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+#zplug "yous/lime"
+
+# 未インストール項目をインストールする
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# コマンドをリンクして、PATH に追加し、プラグインは読み込む
+zplug load --verbose

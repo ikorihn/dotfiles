@@ -1,6 +1,57 @@
 ##############
-# python設定 #
+# 一般設定
+
+# 入力
+[[plugins]]
+repo = 'Shougo/neocomplete.vim'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neocomplcache.vim'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets']
+on_i = 1
+on_ft = ['snippet']
+ 
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['md']
+
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+on_i = 1
+
+# ファイル操作
+[[plugins]]
+repo   = 'Shougo/unite.vim'
+
+[[plugins]]
+repo   = 'Shougo/vimfiler.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+ 
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_path = '.*'
+on_i = 1
+ 
+#[[plugins]]
+#repo = 'Shougo/deoplete.nvim'
+#if = 'has("nvim")'
+#on_i = 1
+ 
+
 ##############
+# python設定 
 
 #[[plugins]]
 #repo = 'hynek/vim-python-pep8-indent'
@@ -23,8 +74,3 @@ on_ft = 'python'
 #repo = 'andviro/flake8-vim'
 #on_ft = 'python'
 
-##############
-# 一般設定
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1

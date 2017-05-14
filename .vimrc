@@ -1,4 +1,5 @@
 set nocompatible
+:let mapleader = "\<Space>"
 
 "Charset, Line Ending
 set encoding=UTF-8
@@ -51,6 +52,12 @@ if !exists('g:neocomplete#keyword_patterns')
     let g:neocomplete#keyword_patterns = {}
 endif
 let g:neocomplete#keyword_patterns._ = '\h\w*'
+" NeoComplCache
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 "autocmd FileType python setlocal omnifunc=jedi#completions
 "let g:jedi#completions_enabled = 0
@@ -60,6 +67,22 @@ let g:neocomplete#keyword_patterns._ = '\h\w*'
 "endif
 "
 "g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+" Unite
+nnoremap [Unite] <Nop>
+nmap <leader>u [Unite]
+nnoremap [Unite]b   :<C-u>Unite buffer<CR>
+nnoremap [Unite]mr  :<C-u>Unite file_mru buffer<CR>
+nnoremap [Unite]y   :<C-u>Unite history/yank<CR>
+nnoremap [Unite]gr  :<C-u>Unite grep:.<CR>
+
+" VimFiler
+:let g:vimfiler_as_default_explorer = 1
+nnoremap <C-e> :VimFilerBufferDir<CR>
+nnoremap <leader><C-e> :VimFilerBufferDir -tab<CR>
+
+" vim-easy-align
+vmap ga <Plug>(EasyAlign)
 " ---- Plugin
 
 " Key mappings
@@ -67,12 +90,14 @@ nnoremap j gj
 nnoremap k gk
 nnoremap gj j
 nnoremap gk k
+nnoremap Y y$
 nnoremap <ESC><ESC> :noh<CR><ESC>
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 "Open .vimrc with space + dot
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
-
+nnoremap <Space>/ :<C-u>tabedit $HOME/.vim/rc/dein.toml<CR>
+nnoremap <Space>? :<C-u>tabedit $HOME/.vim/rc/dein_lazy.toml<CR>
 
 " Move
 set backspace=indent,eol,start
@@ -85,6 +110,8 @@ set sidescroll=1
 set confirm
 set nobackup
 set noswapfile
+set undodir=$HOME/.vim/undo
+set undofile
 set autoread " 編集中のファイルが変更されたら自動で読み直す
 set hidden " バッファが編集中でもその他のファイルを開けるように
 colorscheme hybrid
