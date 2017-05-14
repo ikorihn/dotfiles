@@ -93,6 +93,7 @@ nnoremap gk k
 nnoremap Y y$
 nnoremap <ESC><ESC> :noh<CR><ESC>
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+nnoremap <leader>r :redraw!<CR>
 "Open .vimrc with space + dot
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
@@ -158,8 +159,15 @@ set clipboard=unnamed,unnamedplus
 set mouse=a
 set history=1000
 
+" for Markup ---------------------------
+augroup MyML
+  autocmd!
+  autocmd Filetype xml inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype html inoremap <buffer> </ </<C-x><C-o>
+  autocmd Filetype eruby inoremap <buffer> </ </<C-x><C-o>
+augroup END
+
 " for Python ---------------------------
-filetype plugin on
 autocmd Filetype python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl tabstop=4 shiftwidth=4 softtabstop=0
