@@ -97,11 +97,12 @@ set ignorecase
 set smartcase
 set wrapscan
 set gdefault
+set hlsearch
 
 " View
 set cmdheight=2
 set columns=85
-set cursorline
+set nocursorline
 set laststatus=2
 set list
 set listchars=tab:>.,trail:_,eol:$
@@ -112,7 +113,6 @@ set ruler
 set showcmd
 set showmatch
 set title
-highlight CursorLine cterm=underline ctermfg=NONE ctermbg=NONE
 hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
 match ZenkakuSpace /　/ " 全角スペースの色を変更
 
