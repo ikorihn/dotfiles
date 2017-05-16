@@ -6,8 +6,20 @@ export LANG=ja_JP.UTF-8
 autoload -Uz colors
 colors
 
-# vim 風キーバインドにする
-bindkey -v
+# emacs 風キーバインドにする
+bindkey -e
+# # vim 風キーバインドにする
+# bindkey -v
+# # Vi mode表示
+# function zle-line-init zle-keymap-select {
+#     VIM_NORMAL="%K{208}%F{black} %k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208} %k%f"
+#     VIM_INSERT="%K{075}%F{black} %k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075} %k%f"
+#     RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
+#     RPS2=$RPS1
+#     zle reset-prompt
+# }
+# zle -N zle-line-init
+# zle -N zle-keymap-select
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -109,6 +121,7 @@ setopt extended_glob
 
 # ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
 bindkey '^R' history-incremental-pattern-search-backward
+
 
 ########################################
 # エイリアス
