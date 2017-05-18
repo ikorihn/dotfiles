@@ -17,12 +17,19 @@ on_i = 1
 on_ft = ['snippet']
  
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['md']
-
-[[plugins]]
 repo = 'junegunn/vim-easy-align'
 on_i = 1
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+
+# Markdown
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['md']
+[[plugins]]
+repo = 'kannokanno/previm'
+on_ft = ['md']
 
 # ファイル操作
 [[plugins]]

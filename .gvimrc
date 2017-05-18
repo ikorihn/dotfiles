@@ -4,3 +4,4 @@ set background=dark
 syntax on
 highlight CursorLine gui=underline guifg=NONE guibg=NONE
 set imdisable
+set macmeta
