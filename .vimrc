@@ -43,8 +43,8 @@ endif
 filetype plugin indent on
 colorscheme hybrid
 
-" Plugin ------
-" neocomplete
+" #### Plugin ####
+" -- NeoComplete --
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1 " Use smartcase.
 let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
@@ -94,17 +94,13 @@ endif
 "endif
 "
 
-" neosnippet
+" -- NeoSnippet --
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 
@@ -113,7 +109,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=niv
 endif
 
-" Unite
+" -- Unite --
 nnoremap [Unite] <Nop>
 nmap <leader>u [Unite]
 nnoremap [Unite]b   :<C-u>Unite buffer<CR>
@@ -121,14 +117,21 @@ nnoremap [Unite]mr  :<C-u>Unite file_mru buffer<CR>
 nnoremap [Unite]y   :<C-u>Unite history/yank<CR>
 nnoremap [Unite]gr  :<C-u>Unite grep:.<CR>
 
-" VimFiler
-:let g:vimfiler_as_default_explorer = 1
-nnoremap <C-e> :VimFilerBufferDir<CR>
-nnoremap <leader><C-e> :VimFilerBufferDir -tab<CR>
+" -- VimFiler --
+let g:vimfiler_as_default_explorer = 1
+nnoremap <C-e> :VimFilerCurrentDir -explorer -find<CR>
+"let g:vimfiler_edit_action = 'tabopen'
 
-" vim-easy-align
+" -- vim-easy-align --
 vmap ga <Plug>(EasyAlign)
-" ---- Plugin
+
+" -- Previm --
+let g:previm_open_cmd = ''
+nnoremap [previm] <Nop>
+nmap <Space>p [previm]
+nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
+nnoremap <silent> [previm]r :call previm#refresh()<CR>
+" #### Plugin ####
 
 " Key mappings
 nnoremap j gj
@@ -139,6 +142,9 @@ nnoremap Y y$
 nnoremap <ESC><ESC> :noh<CR><ESC>
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 nnoremap <leader>r :redraw!<CR>
+nnoremap <M-n> :tabnew<CR>
+nnoremap <M-h> gT
+nnoremap <M-l> gt
 "Open .vimrc with space + dot
 nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
@@ -192,9 +198,9 @@ match ZenkakuSpace /　/ " 全角スペースの色を変更
 
 " Input
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoindent
 set smartindent
 set textwidth=0
