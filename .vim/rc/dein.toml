@@ -8,4 +8,5 @@ build = 'make'
 [[plugins]]
 repo = 'w0ng/vim-hybrid'
 
-
+[[plugins]] # solarized
+repo = 'altercation/vim-colors-solarized'

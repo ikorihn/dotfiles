@@ -1,9 +1,8 @@
 ##############
-# 一般設定
-
 # 入力
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+if = '!has("nvim")'
 on_i = 1
 
 [[plugins]]
@@ -22,6 +21,7 @@ on_i = 1
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
+on_source = ['previm']
 
 # Markdown
 [[plugins]]
@@ -47,10 +47,10 @@ repo = 'Shougo/neoyank.vim'
 on_path = '.*'
 on_i = 1
  
-#[[plugins]]
-#repo = 'Shougo/deoplete.nvim'
-#if = 'has("nvim")'
-#on_i = 1
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = 'has("nvim")'
+on_i = 1
  
 ##############
 # HTML

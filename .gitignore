@@ -1,3 +1,4 @@
 backup/
 _viminfo
 .cache/
+.DS_STORE
