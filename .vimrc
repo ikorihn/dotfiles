@@ -24,15 +24,17 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  " TOMLファイルを読み込む
+  " プラグイン設定はすべてTOMLファイルに記載
   let g:rc_dir    = expand('~/.vim/rc')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+  let s:nvim_toml = g:rc_dir . '/nvim.toml'
   call dein#load_toml(s:toml,      {'lazy': 0})
-  call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  "  if has("nvim")
-  "    call dein#load_toml(s:nvim_toml, {'lazy': 1})
-  "  endif
+  if has("nvim")
+    call dein#load_toml(s:nvim_toml, {'lazy': 1})
+  else
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+  endif
 
   if dein#check_install()
     call dein#install()
@@ -41,64 +43,13 @@ if dein#load_state(s:dein_dir)
   call dein#end()
   call dein#save_state()
 endif
-" #### dein.vim end ####
 
-" #### Plugin ####
 filetype plugin indent on
 syntax enable
 colorscheme hybrid
+" #### dein.vim end ####
 
-" -- NeoComplete --
-if !has("nvim")
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1 " Use smartcase.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-  if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-  " Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
-  " Recommended key-mappings.
-  " <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    "return pumvisible() ? "\<C-y>" : "\<CR>"
-  endfunction
-  " <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  " <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-  " Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-  " Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-  "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-  "let g:neocomplete#sources#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-endif
-
-" jedi
-"autocmd FileType python setlocal omnifunc=jedi#completions
-"let g:jedi#completions_enabled = 0
-"let g:jedi#auto_vim_configuration = 0
-"if !exists('g:neocomplete#force_omni_input_patterns')
-"    let g:neocomplete#force_omni_input_patterns = {}
-"endif
-"
+" #### Plugin ####
 
 " -- NeoSnippet --
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -125,7 +76,7 @@ nnoremap [Unite]gr  :<C-u>Unite grep:.<CR>
 
 " -- VimFiler --
 let g:vimfiler_as_default_explorer = 1
-nnoremap <C-e> :VimFilerCurrentDir -explorer -find<CR>
+nnoremap <C-e> :VimFilerBufferDir -explorer -find<CR>
 "let g:vimfiler_edit_action = 'tabopen'
 
 " -- vim-easy-align --
