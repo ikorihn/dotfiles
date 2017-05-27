@@ -200,3 +200,8 @@ zplug load --verbose
 # 開発設定
 # Ruby
 eval "$(rbenv init -)"
+# Python
+export PYENV_ROOT="${HOME}/.pyenv"
+export PATH="${PYENV_ROOT}/bin":$PATH
+eval "$(pyenv init -)"
+

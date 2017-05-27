@@ -1,0 +1,93 @@
+##############
+# 入力
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_ignore_case = 1
+    let g:deoplete#enable_smart_case = 1
+
+    " <TAB>: completion.
+    imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
+ 
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+on_i = 1
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets']
+on_i = 1
+on_ft = ['snippet']
+ 
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+on_i = 1
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_source = ['previm']
+
+# Markdown
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = ['md']
+[[plugins]]
+repo = 'kannokanno/previm'
+on_ft = ['md']
+
+# ファイル操作
+[[plugins]]
+repo   = 'Shougo/unite.vim'
+
+[[plugins]]
+repo   = 'Shougo/vimfiler.vim'
+
+[[plugins]]
+repo = 'Shougo/neomru.vim'
+on_source = ['unite.vim']
+ 
+[[plugins]]
+repo = 'Shougo/neoyank.vim'
+on_path = '.*'
+on_i = 1
+ 
+##############
+# HTML
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'css', 'eruby']
+
+##############
+# python設定 
+
+#[[plugins]]
+#repo = 'hynek/vim-python-pep8-indent'
+#on_ft = 'python'
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = 'python'
+
+#[[plugins]]
+#repo = 'lambdalisue/vim-pyenv'
+#depends = 'davidhalter/jedi-vim'
+#on_ft = 'python'
+
+#[[plugins]]
+#repo = 'jmcantrell/vim-virtualenv'
+#on_ft = 'python'
+#
+#[[plugins]]
+#repo = 'andviro/flake8-vim'
+#on_ft = 'python'
+
