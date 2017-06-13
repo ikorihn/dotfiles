@@ -11,7 +11,6 @@ hook_source = '''
   endif
   let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 '''
-
 hook_post_source = '''
   # Plugin key-mappings.
   inoremap <expr><C-g>     neocomplete#undo_completion()

@@ -103,10 +103,12 @@ nnoremap <M-n> :tabnew<CR>
 nnoremap <M-h> gT
 nnoremap <M-l> gt
 "Open .vimrc with space + dot
-nnoremap <Space>. :<C-u>tabedit $MYVIMRC<CR>
+nnoremap <Space>. :<C-u>tabedit $HOME/.vimrc<CR>
 nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
+nnoremap <Space>> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>/ :<C-u>tabedit $HOME/.vim/rc/dein.toml<CR>
 nnoremap <Space>? :<C-u>tabedit $HOME/.vim/rc/dein_lazy.toml<CR>
+nnoremap <Space>_ :<C-u>tabedit $HOME/.vim/rc/nvim.toml<CR>
 
 " Move
 set backspace=indent,eol,start
