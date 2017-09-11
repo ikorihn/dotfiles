@@ -27,12 +27,8 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-# 1行表示
 # PROMPT="%~ %# "
-# 2行表示
-PROMPT="%{%}[%n@%m]%{%} %~
-%# "
-
+PROMPT="[%{${fg[green]}%}%n %{${fg[red]}%}%~%{${reset_color}%}]$ "
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
