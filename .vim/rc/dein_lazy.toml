@@ -1,70 +1,59 @@
 ##############
 # 入力
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-hook_source = '''
-  let g:neocomplete#enable_at_startup = 1
-  let g:neocomplete#enable_smart_case = 1 " Use smartcase.
-  let g:neocomplete#sources#syntax#min_keyword_length = 3 " Set minimum syntax keyword length.
-  if !exists('g:neocomplete#keyword_patterns')
-      let g:neocomplete#keyword_patterns = {}
-  endif
-  let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-'''
-hook_post_source = '''
-  # Plugin key-mappings.
-  inoremap <expr><C-g>     neocomplete#undo_completion()
-  inoremap <expr><C-l>     neocomplete#complete_common_string()
-  # Recommended key-mappings.
-  # <CR>: close popup and save indent.
-  inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-  function! s:my_cr_function()
-    return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    # For no inserting <CR> key.
-    #return pumvisible() ? "\<C-y>" : "\<CR>"
-  endfunction
-  # <TAB>: completion.
-  inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-  # <C-h>, <BS>: close popup and delete backword char.
-  inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-  inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-
-  # Enable omni completion.
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-
-  # Enable heavy omni completion.
-  if !exists('g:neocomplete#sources#omni#input_patterns')
-    let g:neocomplete#sources#omni#input_patterns = {}
-  endif
-  #let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-  #let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-  #let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-  #let g:neocomplete#sources#omni#input_patterns.python = '\h\w*\|[^. \t]\.\w*'
-'''
+# 入力補完
+repo = 'Shougo/deoplete.nvim'
 on_i = 1
+hook_add = '''
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#enable_ignore_case = 1
+    let g:deoplete#enable_smart_case = 1
+
+    " <TAB>: completion.
+    imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
+    function! s:check_back_space() abort
+        let col = col('.') - 1
+        return !col || getline('.')[col - 1]  =~ '\s'
+    endfunction
+
+    " <S-TAB>: completion back.
+    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 on_i = 1
+
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
 depends = ['neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
+hook_add = '''
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+    " SuperTab like snippets behavior.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+    " For conceal markers.
+    if has('conceal')
+      set conceallevel=2 concealcursor=niv
+    endif
+'''
  
 [[plugins]]
+# 位置揃え
 repo = 'junegunn/vim-easy-align'
 on_i = 1
+hook_add = '''
+    vmap ga <Plug>(EasyAlign)
+'''
 
-[[plugins]]
-repo = 'tyru/open-browser.vim'
-on_source = ['previm']
-
+##############
 # Markdown
 [[plugins]]
 repo = 'plasticboy/vim-markdown'
@@ -72,28 +61,68 @@ on_ft = ['md']
 [[plugins]]
 repo = 'kannokanno/previm'
 on_ft = ['md']
+hook_add = '''
+    let g:previm_open_cmd = ''
+    nnoremap [previm] <Nop>
+    nmap <Space>p [previm]
+    nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
+    nnoremap <silent> [previm]r :call previm#refresh()<CR>
+'''
 
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+on_source = ['previm']
+
+##############
 # ファイル操作
 [[plugins]]
-repo   = 'Shougo/unite.vim'
+repo = 'Shougo/denite.nvim'
+if = 'has("python3")'
+on_cmd = 'Denite'
+hook_add = '''
+  nnoremap [Denite] <Nop>
+  nnoremap <leader>u [Denite]
+  nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
+  nnoremap <silent> [Denite]f :<C-u>Denite file_rec<CR>
+  nnoremap <silent> [Denite]g :<C-u>Denite grep<CR>
+  nnoremap <silent> [Denite]m :<C-u>Denite file_mru<CR>
+  nnoremap <silent> [Denite]y :<C-u>Denite neoyank<CR>
+  nnoremap <silent> [Denite]<C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
+'''
+hook_post_source = '''
+  " file_rec
+  if executable('pt')
+      call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+  endif
 
-[[plugins]]
-repo   = 'Shougo/vimfiler.vim'
+  " grep
+  if executable('pt')
+      call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
+      call denite#custom#var('grep', 'default_opts', [])
+      call denite#custom#var('grep', 'recursive_opts', [])
+  endif
+
+  call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
+  call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+'''
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
-on_source = ['unite.vim']
- 
+depends = 'denite.nvim'
+on_path = '.*'
+
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
-on_path = '.*'
-on_i = 1
+depends = 'denite.nvim'
+on_event = 'TextYankPost'
  
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-if = 'has("nvim")'
-on_i = 1
- 
+repo = 'scrooloose/nerdtree'
+on_path = '.*'
+hook_add = '''
+    nnoremap <C-e> :<C-u>NERDTreeToggle<CR>
+```
+
 ##############
 # HTML
 [[plugins]]
@@ -102,25 +131,6 @@ on_ft = ['html', 'css', 'eruby']
 
 ##############
 # python設定 
-
-#[[plugins]]
-#repo = 'hynek/vim-python-pep8-indent'
-#on_ft = 'python'
-
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
 on_ft = 'python'
-
-#[[plugins]]
-#repo = 'lambdalisue/vim-pyenv'
-#depends = 'davidhalter/jedi-vim'
-#on_ft = 'python'
-
-#[[plugins]]
-#repo = 'jmcantrell/vim-virtualenv'
-#on_ft = 'python'
-#
-#[[plugins]]
-#repo = 'andviro/flake8-vim'
-#on_ft = 'python'
-

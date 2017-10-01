@@ -28,13 +28,8 @@ if dein#load_state(s:dein_dir)
   let g:rc_dir    = expand('~/.vim/rc')
   let s:toml      = g:rc_dir . '/dein.toml'
   let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-  let s:nvim_toml = g:rc_dir . '/nvim.toml'
   call dein#load_toml(s:toml,      {'lazy': 0})
-  if has("nvim")
-    call dein#load_toml(s:nvim_toml, {'lazy': 1})
-  else
-    call dein#load_toml(s:lazy_toml, {'lazy': 1})
-  endif
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   if dein#check_install()
     call dein#install()
@@ -48,47 +43,6 @@ filetype plugin indent on
 syntax enable
 colorscheme hybrid
 " #### dein.vim end ####
-
-" #### Plugin ####
-
-" -- NeoSnippet --
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-" -- Unite --
-nnoremap [Unite] <Nop>
-nmap <leader>u [Unite]
-nnoremap [Unite]b   :<C-u>Unite buffer<CR>
-nnoremap [Unite]mr  :<C-u>Unite file_mru buffer<CR>
-nnoremap [Unite]y   :<C-u>Unite history/yank<CR>
-nnoremap [Unite]gr  :<C-u>Unite grep:.<CR>
-
-" -- VimFiler --
-let g:vimfiler_as_default_explorer = 1
-nnoremap <C-e> :VimFilerBufferDir -explorer -find<CR>
-"let g:vimfiler_edit_action = 'tabopen'
-
-" -- vim-easy-align --
-vmap ga <Plug>(EasyAlign)
-
-" -- Previm --
-let g:previm_open_cmd = ''
-nnoremap [previm] <Nop>
-nmap <Space>p [previm]
-nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
-nnoremap <silent> [previm]r :call previm#refresh()<CR>
-" #### Plugin ####
 
 " Key mappings
 nnoremap j gj
@@ -108,7 +62,6 @@ nnoremap <Space>, :<C-u>tabedit $MYGVIMRC<CR>
 nnoremap <Space>> :<C-u>tabedit $MYVIMRC<CR>
 nnoremap <Space>/ :<C-u>tabedit $HOME/.vim/rc/dein.toml<CR>
 nnoremap <Space>? :<C-u>tabedit $HOME/.vim/rc/dein_lazy.toml<CR>
-nnoremap <Space>_ :<C-u>tabedit $HOME/.vim/rc/nvim.toml<CR>
 
 " Move
 set backspace=indent,eol,start
@@ -175,7 +128,5 @@ augroup MyML
 augroup END
 
 " for Python ---------------------------
-autocmd Filetype python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
-autocmd FileType python setl tabstop=4 shiftwidth=4 softtabstop=0
 
