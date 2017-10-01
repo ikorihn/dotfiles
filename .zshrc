@@ -138,7 +138,10 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
+# vim
 alias mvim='open -a MacVim'
+alias vim='nvim'
+alias vi='nvim'
 
 # C で標準出力をクリップボードにコピーする
 # mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
@@ -200,4 +203,5 @@ eval "$(rbenv init -)"
 export PYENV_ROOT="${HOME}/.pyenv"
 export PATH="${PYENV_ROOT}/bin":$PATH
 eval "$(pyenv init -)"
-
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
