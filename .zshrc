@@ -1,25 +1,16 @@
-########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+export XDG_CONFIG_HOME=~/.config
 
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
 
+# キーバインド
 # emacs 風キーバインドにする
 bindkey -e
-# # vim 風キーバインドにする
-# bindkey -v
-# # Vi mode表示
-# function zle-line-init zle-keymap-select {
-#     VIM_NORMAL="%K{208}%F{black} %k%f%K{208}%F{white} % NORMAL %k%f%K{black}%F{208} %k%f"
-#     VIM_INSERT="%K{075}%F{black} %k%f%K{075}%F{white} % INSERT %k%f%K{black}%F{075} %k%f"
-#     RPS1="${${KEYMAP/vicmd/$VIM_NORMAL}/(main|viins)/$VIM_INSERT}"
-#     RPS2=$RPS1
-#     zle reset-prompt
-# }
-# zle -N zle-line-init
-# zle -N zle-keymap-select
+# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
+bindkey '^R' history-incremental-pattern-search-backward
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -27,8 +18,19 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-# PROMPT="%~ %# "
-PROMPT="[%{${fg[green]}%}%n %{${fg[red]}%}%~%{${reset_color}%}]$ "
+PROMPT="[%{${fg[green]}%}%n]$ "
+autoload -Uz vcs_info
+setopt prompt_subst
+zstyle ':vcs_info:*' git
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+precmd () { vcs_info }
+
+RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -56,20 +58,6 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin       
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
-
-########################################
-# vcs_info
-autoload -Uz vcs_info
-autoload -Uz add-zsh-hook
-
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
-
-function _update_vcs_info_msg() {
-    LANG=en_US.UTF-8 vcs_info
-    RPROMPT=""
-}
-add-zsh-hook precmd _update_vcs_info_msg
 
 
 ########################################
@@ -112,16 +100,11 @@ setopt hist_reduce_blanks
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
-########################################
-# キーバインド
-
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
-
 
 ########################################
 # エイリアス
 
+alias ls='ls -G -F'
 alias la='ls -a'
 alias ll='ls -al'
 
@@ -140,39 +123,8 @@ alias -g G='| grep'
 
 # vim
 alias mvim='open -a MacVim'
-alias vim='nvim'
 alias vi='nvim'
-
-# C で標準出力をクリップボードにコピーする
-# mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-    # Mac
-    alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-    # Linux
-    alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-    # Cygwin
-    alias -g C='| putclip'
-fi
-
-
-
-########################################
-# OS 別の設定
-case darwin16 in
-    darwin*)
-        #Mac用の設定
-        export CLICOLOR=1
-        alias ls='ls -G -F'
-        ;;
-    linux*)
-        #Linux用の設定
-        alias ls='ls -F --color=auto'
-        ;;
-esac
-
-# vim:set ft=zsh:
+alias vim='nvim'
 
 ########################################
 # zplug
@@ -199,9 +151,5 @@ zplug load --verbose
 # 開発設定
 # Ruby
 eval "$(rbenv init -)"
-# Python
-export PYENV_ROOT="${HOME}/.pyenv"
-export PATH="${PYENV_ROOT}/bin":$PATH
-eval "$(pyenv init -)"
 # Java
 export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)

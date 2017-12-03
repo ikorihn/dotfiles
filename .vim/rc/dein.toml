@@ -1,5 +1,6 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
+if = 'has("python3")'
 
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
@@ -15,6 +16,10 @@ hook_post_update = '''
   endif
   let g:dein#plugin.build = cmd
 '''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+if = 'has("python3")'
 
 [[plugins]] # hybrid
 repo = 'w0ng/vim-hybrid'
