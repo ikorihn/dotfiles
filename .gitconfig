@@ -1,0 +1,30 @@
+[include]
+	path = ~/.gitconfig.local
+
+[core]
+	editor = vim
+	precomposeunicode = true
+	quotepath = false
+
+[difftool]
+	prompt = false
+
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[diff]
+	tool = meld
+[mergetool "meld"]
+	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --auto-merge
+[merge]
+	tool = meld
+
+[alias]
+	meld = difftool --dir-diff
+	br = branch
+	cm = commit
+	co = checkout
+	difff = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
+	lo = log --oneline
+	st = status
+	stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
+	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
