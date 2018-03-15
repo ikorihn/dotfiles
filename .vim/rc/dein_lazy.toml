@@ -2,7 +2,7 @@
 # ファイル操作
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-if = 'has("python3")'
+if = 'has("nvim") && has("python3")'
 on_cmd = 'Denite'
 hook_add = '''
   nnoremap [Denite] <Nop>
