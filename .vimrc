@@ -142,3 +142,27 @@ augroup END
 " for Python ---------------------------
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 
+" for Binary ---------------------------
+" バイナリ編集(xxd)モード（vim -b での起動、もしくは *.bin ファイルを開くと発動します）
+" http://d.hatena.ne.jp/rdera/20081022/1224682665
+augroup BinaryXXD
+  autocmd!
+  " autocmd BufReadPre  *.bin let &bin =1
+  autocmd BufReadPost * if &bin && &filetype != 'xxd'
+  autocmd BufReadPost * silent %!xxd -g 1
+  "autocmd BufReadPost * %!xxd -r
+  autocmd BufReadPost * set ft=xxd noeol 
+  autocmd BufReadPost * silent %s///g
+  autocmd BufReadPost * endif
+
+  autocmd BufWritePre * if &bin
+  autocmd BufWritePre * %!xxd -r
+  autocmd BufWritePre * endif
+
+  autocmd BufWritePost * if &bin
+  autocmd BufWritePost * silent %!xxd -g 1
+  autocmd BufWritePost * silent %s///g
+  autocmd BufWritePost * endif
+augroup END
+
+
