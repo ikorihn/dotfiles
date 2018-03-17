@@ -2,3 +2,9 @@ backup/
 _viminfo
 .cache/
 .DS_STORE
+
+# Asr
+Asr/Bar/
+Asr/Tablet/
+Asr/LastTab2.dat
+Asr/Window6.hist
