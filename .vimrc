@@ -3,7 +3,7 @@ if &compatible
     set nocompatible
 endif
 "set shellslash
-"
+
 "Charset, Line Ending
 set encoding=UTF-8
 set fileencoding=UTF-8
@@ -88,9 +88,11 @@ set autoread " 編集中のファイルが変更されたら自動で読み直�
 set background=dark
 set confirm
 set hidden " バッファが編集中でもその他のファイルを開けるように
-set nobackup
-set noswapfile
-set undodir=$HOME/.vim/undo
+set backupdir=$HOME/.vim/backup//
+set directory=$HOME/.vim/swp//
+set undodir=$HOME/.vim/undo//
+set backup
+set swapfile
 set undofile
 
 " Search/Replace

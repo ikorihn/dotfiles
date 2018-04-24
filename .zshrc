@@ -18,7 +18,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="[%{${fg[green]}%}%n]$ "
+PROMPT="[%{%}%n]$ "
 autoload -Uz vcs_info
 setopt prompt_subst
 zstyle ':vcs_info:*' git
@@ -134,6 +134,10 @@ source $ZPLUG_HOME/init.zsh
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+zplug "b4b4r07/enhancd", use:init.sh
 #zplug "yous/lime"
 
 # 未インストール項目をインストールする
