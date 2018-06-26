@@ -2,6 +2,11 @@
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
 
+export XDG_CONFIG_HOME=~/.config # NeoVim
+export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+export PATH=${JAVA_HOME}/bin:${PATH} # nodebrew
+export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH # Android Tool
+export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -114,6 +119,9 @@ alias mv='mv -i'
 
 alias mkdir='mkdir -p'
 
+alias python='python3'
+alias pip='pip3'
+
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
@@ -121,14 +129,10 @@ alias sudo='sudo '
 alias -g L='| less'
 alias -g G='| grep'
 
-# vim
-alias mvim='open -a MacVim'
-alias vi='nvim'
-alias vim='nvim'
 
 ########################################
 # zplug
-export ZPLUG_HOME=~/.zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -139,6 +143,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 zplug "b4b4r07/enhancd", use:init.sh
 #zplug "yous/lime"
+zplug "mollifier/cd-gitroot"
 
 # 未インストール項目をインストールする
 if ! zplug check --verbose; then
