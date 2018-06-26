@@ -177,6 +177,6 @@ fbrm() {
   local branches branch
   branches=$(git branch -r | grep -v 'HEAD')
   branch=$(echo "$branches" | fzy )
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/origin/##")
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
 }
 
