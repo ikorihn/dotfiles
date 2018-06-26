@@ -169,14 +169,55 @@ zplug load --verbose
 # 関数
 fbr() {
   local branches branch
-  branches=$(git branch -vv)
-  branch=$(echo "$branches" | fzy)
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzy) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 fbrm() {
   local branches branch
-  branches=$(git branch -r | grep -v 'HEAD')
-  branch=$(echo "$branches" | fzy )
+  branches=$(git branch -r | grep -v 'HEAD') &&
+  branch=$(echo "$branches" | fzy ) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
 }
 
+# fshow - git commit browser
+fshow() {
+  git log --graph --color=always \
+      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
+  fzy
+}
+
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzy) &&
+  cd "$dir"
+}
+
+
+# fvim
+fvim() {
+  local file
+  file=$(find . -type f -name ${1}> /dev/null | fzy) &&
+  nvim $file
+}
+
+# worktree移動
+function cdworktree() {
+    # カレントディレクトリがGitリポジトリ上かどうか
+    git rev-parse &>/dev/null
+    if [ $? -ne 0 ]; then
+        echo fatal: Not a git repository.
+        return
+    fi
+
+    local selectedWorkTreeDir=`git worktree list | fzy | awk '{print $1}'`
+
+    if [ "$selectedWorkTreeDir" = "" ]; then
+        # Ctrl-C.
+        return
+    fi
+
+    cd ${selectedWorkTreeDir}
+}
