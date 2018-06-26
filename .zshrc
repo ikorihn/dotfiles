@@ -173,3 +173,10 @@ fbr() {
   branch=$(echo "$branches" | fzy)
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
+fbrm() {
+  local branches branch
+  branches=$(git branch -r | grep -v HEAD)
+  branch=$(echo "$branches" | fzy )
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
