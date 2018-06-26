@@ -1,12 +1,13 @@
 # 環境変数
 export LANG=ja_JP.UTF-8
-export XDG_CONFIG_HOME=~/.config
-
 export XDG_CONFIG_HOME=~/.config # NeoVim
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
 export PATH=${JAVA_HOME}/bin:${PATH} # nodebrew
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH # Android Tool
 export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
+
+export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH # GNU
+export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH # GNU 
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -159,6 +160,16 @@ zplug load --verbose
 ########################################
 # 開発設定
 # Ruby
-eval "$(rbenv init -)"
+# eval "$(rbenv init -)"
 # Java
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+# export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+
+
+########################################
+# 関数
+fbr() {
+  local branches branch
+  branches=$(git branch -vv)
+  branch=$(echo "$branches" | fzy)
+  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+}
