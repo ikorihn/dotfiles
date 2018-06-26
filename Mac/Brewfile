@@ -1,0 +1,38 @@
+tap "homebrew/core"
+tap "homebrew/cask"
+tap "homebrew/bundle"
+cask "java"
+brew "coreutils"
+brew "diffutils"
+brew "ffmpeg"
+brew "findutils", args: ["with-default-names"]
+brew "fzy"
+brew "gawk"
+brew "git"
+brew "gnu-sed", args: ["with-default-names"]
+brew "gradle"
+brew "gradle-completion"
+brew "graphviz"
+brew "grep", args: ["with-default-names"]
+brew "httpd"
+brew "imagemagick"
+brew "kotlin"
+brew "mas"
+brew "maven"
+brew "neovim"
+brew "plantuml"
+brew "python"
+brew "reattach-to-user-namespace"
+brew "tmux"
+brew "zplug"
+brew "zsh"
+brew "zsh-completions"
+cask "keepassxc"
+cask "meld"
+mas "CotEditor", id: 1024640650
+mas "GarageBand", id: 682658836
+mas "iMovie", id: 408981434
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "OneDrive", id: 823766827
+mas "Pages", id: 409201541
