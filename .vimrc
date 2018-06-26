@@ -88,11 +88,10 @@ set autoread " 編集中のファイルが変更されたら自動で読み直�
 set background=dark
 set confirm
 set hidden " バッファが編集中でもその他のファイルを開けるように
-set backupdir=$HOME/.vim/backup//
-set directory=$HOME/.vim/swp//
-set undodir=$HOME/.vim/undo//
 set backup
-set swapfile
+set backupdir=$HOME/.vim/backup
+set noswapfile
+set undodir=$HOME/.vim/undo
 set undofile
 
 " Search/Replace
