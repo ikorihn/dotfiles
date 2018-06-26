@@ -2,7 +2,7 @@
 	path = ~/.gitconfig.local
 
 [core]
-	editor = vim
+	editor = nvim
 	precomposeunicode = true
 	quotepath = false
 
@@ -10,20 +10,26 @@
 	prompt = false
 
 [difftool "meld"]
-	cmd = meld "$LOCAL" "$REMOTE"
-[diff]
-	tool = meld
+	cmd = meld $LOCAL $REMOTE
+[difftool "p4merge"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "$LOCAL" "$REMOTE"
 [mergetool "meld"]
-	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --auto-merge
+	cmd = meld $LOCAL $BASE $REMOTE --auto-merge -o $MERGED
+[mergetool "p4merge"]
+	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $BASE $LOCAL $REMOTE $MERGED
+[diff]
+  tool = meld
 [merge]
 	tool = meld
 
 [alias]
-	meld = difftool --dir-diff
+	difft = difftool --dir-diff
+	merget = mergetool --dir-diff
 	br = branch
 	cm = commit
 	co = checkout
-	difff = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
+	cp = cherry-pick
+	diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
 	lo = log --oneline
 	st = status
 	stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する

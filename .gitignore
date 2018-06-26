@@ -3,6 +3,11 @@ _viminfo
 .cache/
 .DS_STORE
 
+.vim/undo/
+
+.config/*
+!.config/nvim/
+
 # Asr
 Asr/Bar/
 Asr/Tablet/
