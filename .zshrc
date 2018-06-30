@@ -59,7 +59,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' ignore-parents parent pwd ..
 
 # sudo の後ろでコマンド名を補完する
-zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin                    /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
+zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/sbin /usr/bin /sbin /bin /usr/X11R6/bin
 
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
@@ -133,7 +133,7 @@ alias -g G='| grep'
 
 ########################################
 # zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=~/.zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -170,41 +170,37 @@ zplug load --verbose
 fbr() {
   local branches branch
   branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzy) &&
+  branch=$(echo "$branches" | fzf +m ) &&
   git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 fbrm() {
   local branches branch
   branches=$(git branch -r | grep -v 'HEAD') &&
-  branch=$(echo "$branches" | fzy ) &&
+  branch=$(echo "$branches" | fzf +m ) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
 }
 
 # fshow - git commit browser
-fshow() {
+fgr() {
   git log --graph --color=always \
       --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" |
-  fzy
+  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
+      --bind "ctrl-m:execute:
+                (grep -o '[a-f0-9]\{7\}' | head -1 |
+                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {}
+                FZF-EOF"
 }
-
-# fd - cd to selected directory
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzy) &&
-  cd "$dir"
-}
-
 
 # fvim
 fvim() {
   local file
-  file=$(find . -type f -name ${1}> /dev/null | fzy) &&
+  file=$(find . -type f > /dev/null | fzf-tmux +m) &&
   nvim $file
 }
 
 # worktree移動
-function cdworktree() {
+fwt() {
     # カレントディレクトリがGitリポジトリ上かどうか
     git rev-parse &>/dev/null
     if [ $? -ne 0 ]; then
@@ -212,7 +208,7 @@ function cdworktree() {
         return
     fi
 
-    local selectedWorkTreeDir=`git worktree list | fzy | awk '{print $1}'`
+    local selectedWorkTreeDir=`git worktree list | fzf +m | awk '{print $1}'`
 
     if [ "$selectedWorkTreeDir" = "" ]; then
         # Ctrl-C.
@@ -220,4 +216,22 @@ function cdworktree() {
     fi
 
     cd ${selectedWorkTreeDir}
+}
+
+fadd() {
+  local out q n addfiles
+  while out=$(
+      git status --short |
+      awk '{if (substr($0,2,1) !~ / /) print $2}' |
+      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
+    q=$(head -1 <<< "$out")
+    n=$[$(wc -l <<< "$out") - 1]
+    addfiles=(`echo $(tail "-$n" <<< "$out")`)
+    [[ -z "$addfiles" ]] && continue
+    if [ "$q" = ctrl-d ]; then
+      git diff --color=always $addfiles | less -R
+    else
+      git add $addfiles
+    fi
+  done
 }
