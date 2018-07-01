@@ -192,13 +192,6 @@ fgr() {
                 FZF-EOF"
 }
 
-# fvim
-fvim() {
-  local file
-  file=$(find . -type f > /dev/null | fzf-tmux +m) &&
-  nvim $file
-}
-
 # worktree移動
 fwt() {
     # カレントディレクトリがGitリポジトリ上かどうか
@@ -218,20 +211,32 @@ fwt() {
     cd ${selectedWorkTreeDir}
 }
 
+# fcoc - checkout git commit
+fcoc() {
+  local commits commit
+  commits=$(git log --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e) &&
+  git checkout $(echo "$commit" | sed "s/ .*//")
+}
+
 fadd() {
-  local out q n addfiles
-  while out=$(
-      git status --short |
-      awk '{if (substr($0,2,1) !~ / /) print $2}' |
-      fzf-tmux --multi --exit-0 --expect=ctrl-d); do
-    q=$(head -1 <<< "$out")
-    n=$[$(wc -l <<< "$out") - 1]
-    addfiles=(`echo $(tail "-$n" <<< "$out")`)
-    [[ -z "$addfiles" ]] && continue
-    if [ "$q" = ctrl-d ]; then
-      git diff --color=always $addfiles | less -R
-    else
-      git add $addfiles
-    fi
-  done
+  git status --short |
+  awk '{if (substr($0,2,1) !~ / /) print $2}' |
+  fzf --bind "ctrl-d:execute:
+              git diff --color=always {} | less -R
+             " \
+      --bind "ctrl-m:execute:
+              git add {}
+             "
+}
+
+fh() {
+  eval $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# fvim
+fvim() {
+  local file
+  file=$(find ${1:-.} -type f > /dev/null | fzf-tmux +m) &&
+  nvim $file
 }
