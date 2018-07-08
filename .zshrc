@@ -8,9 +8,14 @@ export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
 
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH # GNU
 export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH # GNU 
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
+
+# powerlineを有効化
+powerline-daemon -q
+source /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
 
 # キーバインド
 # emacs 風キーバインドにする
@@ -110,7 +115,7 @@ setopt extended_glob
 ########################################
 # エイリアス
 
-alias ls='ls -G -F'
+alias ls='ls --color=auto'
 alias la='ls -a'
 alias ll='ls -al'
 
