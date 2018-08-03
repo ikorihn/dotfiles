@@ -2,8 +2,9 @@
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config # NeoVim
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
 export PATH=${JAVA_HOME}/bin:${PATH} # nodebrew
-export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH # Android Tool
+export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH # Android Tool
 export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
 
 export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH # GNU
@@ -15,7 +16,8 @@ colors
 
 # powerlineを有効化
 powerline-daemon -q
-source /usr/local/lib/python3.7/site-packages/powerline/bindings/zsh/powerline.zsh
+export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
+source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
 
 # キーバインド
 # emacs 風キーバインドにする
@@ -29,7 +31,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="[%{%}%n]$ "
+PROMPT="[%n]$ "
 autoload -Uz vcs_info
 setopt prompt_subst
 zstyle ':vcs_info:*' git
@@ -124,9 +126,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
-
-alias python='python3'
-alias pip='pip3'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
@@ -242,6 +241,6 @@ fh() {
 # fvim
 fvim() {
   local file
-  file=$(find ${1:-.} -type f > /dev/null | fzf-tmux +m) &&
+  file=$(find . -name "${1:-*}" -type f > /dev/null | fzf-tmux +m) &&
   nvim $file
 }
