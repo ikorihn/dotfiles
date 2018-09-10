@@ -1,22 +1,9 @@
-# 環境変数
-export LANG=ja_JP.UTF-8
-export XDG_CONFIG_HOME=~/.config # NeoVim
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
-export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
-export PATH=${JAVA_HOME}/bin:${PATH} # nodebrew
-export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH # Android Tool
-export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
-
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH # GNU
-export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH # GNU 
-
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
 
 # powerlineを有効化
 powerline-daemon -q
-export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
 source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
 
 # キーバインド
@@ -183,6 +170,12 @@ fbrm() {
   branch=$(echo "$branches" | fzf +m ) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
 }
+fbrd() {
+  local branches branch
+  branches=$(git branch -vv) &&
+  branch=$(echo "$branches" | fzf -m ) &&
+  echo "$branch" | awk '{print $1}' | sed "s/.* //" | xargs -I{} git branch -D {}
+}
 
 # fshow - git commit browser
 fgr() {
@@ -244,3 +237,25 @@ fvim() {
   file=$(find . -name "${1:-*}" -type f > /dev/null | fzf-tmux +m) &&
   nvim $file
 }
+
+## Android
+adb_screencap() {
+  local DATE_TIME=`date +"%Y%m%d-%H%M%S"`
+  local FILE_NAME=${DATE_TIME}.png
+   
+  adb shell screencap -p /sdcard/${FILE_NAME}
+  pushd ~/Desktop
+  adb pull /sdcard/${FILE_NAME}
+  adb shell rm /sdcard/${FILE_NAME}
+   
+  mogrify -resize 300x -unsharp 2x1.4+0.5+0 \
+          -colors 65 -quality 100 -verbose \
+          ~/Desktop/${FILE_NAME}
+
+  popd
+}
+
+
+source ~/.local_functions
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
