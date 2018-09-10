@@ -1,32 +1,45 @@
-tap "homebrew/core"
-tap "homebrew/cask"
 tap "homebrew/bundle"
+tap "homebrew/cask"
+tap "homebrew/core"
+tap "sanemat/font"
 cask "java"
 brew "coreutils"
+brew "ctags"
 brew "diffutils"
 brew "ffmpeg"
 brew "findutils", args: ["with-default-names"]
+brew "sqlite"
+brew "fzf"
 brew "fzy"
 brew "gawk"
 brew "git"
+brew "global"
 brew "gnu-sed", args: ["with-default-names"]
+brew "go"
 brew "gradle"
 brew "gradle-completion"
 brew "graphviz"
 brew "grep", args: ["with-default-names"]
 brew "httpd"
 brew "imagemagick"
+brew "jq"
 brew "kotlin"
 brew "mas"
 brew "maven"
 brew "neovim"
+brew "nkf"
+brew "pidcat"
 brew "plantuml"
 brew "python"
 brew "reattach-to-user-namespace"
+brew "tig"
 brew "tmux"
+brew "yank"
 brew "zplug"
 brew "zsh"
 brew "zsh-completions"
+brew "sanemat/font/ricty", args: ["with-powerline"]
+cask "db-browser-for-sqlite"
 cask "keepassxc"
 cask "meld"
 mas "CotEditor", id: 1024640650
@@ -36,3 +49,5 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
 mas "Pages", id: 409201541
+mas "Table Tool", id: 1122008420
+mas "Wunderlist", id: 410628904
