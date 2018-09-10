@@ -1,131 +1,231 @@
-##############
-# ファイル操作
+#####################################################################
+# Edit util
+#####################################################################
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-if = 'has("nvim") && has("python3")'
-on_cmd = 'Denite'
+repo = 'Shougo/unite.vim'
+if = "!has('nvim')"
+on_cmd = 'Unite'
+depends = ['neomru.vim']
+hook_source = 'source ~/.vim/rc/plugins/unite.rc.vim'
 hook_add = '''
-  nnoremap [Denite] <Nop>
-  nnoremap <leader>u [Denite]
-  nnoremap <silent> [Denite]b :<C-u>Denite buffer<CR>
-  nnoremap <silent> [Denite]f :<C-u>Denite file_rec<CR>
-  nnoremap <silent> [Denite]g :<C-u>Denite grep<CR>
-  nnoremap <silent> [Denite]m :<C-u>Denite file_mru<CR>
-  nnoremap <silent> [Denite]y :<C-u>Denite neoyank<CR>
-  nnoremap <silent> [Denite]<C-d> :<C-u>call denite#start([{'name': 'file_rec', 'args': ['~/dotfiles']}])<CR>
-'''
-hook_post_source = '''
-  " file_rec
-  if executable('pt')
-      call denite#custom#var('file_rec', 'command', ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-  endif
+    " Prefix key
+    nnoremap [unite] <Nop>
+    nmap <Space>u [unite]
 
-  " grep
-  if executable('pt')
-      call denite#custom#var('grep', 'command', ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-      call denite#custom#var('grep', 'default_opts', [])
-      call denite#custom#var('grep', 'recursive_opts', [])
-  endif
-
-  call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_project_files'])
-  call denite#custom#source('file_mru', 'converters', ['converter_relative_word'])
+    " Keymap
+    " Current direcotry files
+    nnoremap <silent> [unite]<C-p> :<C-u>Unite<Space>file_rec/async:!<CR>
+    " Buffer files
+    nnoremap <silent> [unite]<C-b> :<C-u>Unite buffer<CR>
+    " Grep files
+    nnoremap <silent> [unite]<C-g> :<C-u>Unite<Space>grep -buffer-name=search -auto-preview -no-quit -no-empty -resume<CR>
+    " Recent files
+    nnoremap <silent> [unite]<C-r> :<C-u>Unite file_mru buffer<CR>
+    " Yank history
+    nnoremap <silent> [unite]<C-y> :<C-u>Unite history/yank<CR>
 '''
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
-depends = 'denite.nvim'
-on_path = '.*'
-
-[[plugins]]
-repo = 'Shougo/neoyank.vim'
-depends = 'denite.nvim'
-on_event = 'TextYankPost'
- 
-[[plugins]]
-repo = 'scrooloose/nerdtree'
-on_path = '.*'
-hook_add = '''
-    nnoremap <C-e> :<C-u>NERDTreeToggle<CR>
-'''
-
-##############
-# 入力
-[[plugins]]
-# 入力補完
-repo = 'Shougo/deoplete.nvim'
-on_i = 1
-hook_add = '''
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_ignore_case = 1
-    let g:deoplete#enable_smart_case = 1
-
-    " <TAB>: completion.
-    imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
-    function! s:check_back_space() abort
-        let col = col('.') - 1
-        return !col || getline('.')[col - 1]  =~ '\s'
-    endfunction
-
-    " <S-TAB>: completion back.
-    inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<C-h>"
-'''
-
-[[plugins]]
-repo = 'Shougo/neosnippet'
-depends = ['neosnippet-snippets']
-on_i = 1
-on_ft = ['snippet']
-hook_add = '''
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    xmap <C-k>     <Plug>(neosnippet_expand_target)
-    " SuperTab like snippets behavior.
-    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
-    " For conceal markers.
-    if has('conceal')
-      set conceallevel=2 concealcursor=niv
-    endif
-'''
- 
-[[plugins]]
-# 位置揃え
 repo = 'junegunn/vim-easy-align'
-on_i = 1
+on_map = ['<Plug>(EasyAlign)']
 hook_add = '''
-    vmap ga <Plug>(EasyAlign)
+    vmap <Enter> <Plug>(EasyAlign)
 '''
 
-##############
-# Markdown
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['md']
+repo = 'haya14busa/vim-asterisk'
+on_map = [
+    '<Plug>(asterisk-z*)',
+    '<Plug>(asterisk-z#)',
+    '<Plug>(asterisk-gz*)',
+    '<Plug>(asterisk-gz#)',
+]
+hook_add = '''
+    map *  <Plug>(asterisk-z*)
+    map #  <Plug>(asterisk-z#)
+    map g* <Plug>(asterisk-gz*)
+    map g# <Plug>(asterisk-gz#)
+'''
+
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+on_cmd = ['IndentLinesToggle']
+hook_add = '''
+    let g:loaded_indentLine = 1
+    nnoremap <Space>i <C-u>:IndentLinesToggle<CR>
+'''
+
+#####################################################################
+# Programing util
+#####################################################################
+[[plugins]]
+repo = 'tyru/caw.vim'
+on_map = ['<Plug>(caw:hatpos:toggle)', '<Plug>(caw:zeropos:toggle)']
+hook_add = '''
+    " Add comment to beginning line(consider whitespace)
+    nmap <Leader>c <Plug>(caw:hatpos:toggle)
+    vmap <Leader>c <Plug>(caw:hatpos:toggle)
+    " Add comment to beginning line(ignore whitespace)
+    nmap <Leader>, <Plug>(caw:zeropos:toggle)
+    vmap <Leader>, <Plug>(caw:zeropos:toggle)
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+depends = ['vimproc.vim']
+on_ft = ['python', 'go']
+hook_source = '''
+  source ~/.vim/rc/plugins/vimquickrun.rc.vim
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+on_ft = ['go', 'python', 'javascript', 'html', 'css', 'markdown', 'make', 'vim']
+hook_source = '''
+    source ~/.vim/rc/plugins/ale.rc.vim
+'''
+
+[[plugins]]
+repo = 'jsfaint/gen_tags.vim'
+on_ft = ['python', 'go', 'vim']
+hook_source = '''
+    let g:gen_tags#ctags_auto_gen = 1
+    let g:gen_tags#gtags_auto_gen = 0
+'''
+
+[[plugins]]
+repo = 'janko-m/vim-test'
+depends = ['vim-dispatch']
+hook_source = '''
+    let g:test#strategy = 'dispatch'
+'''
+
+[[plugins]]
+repo = 'tpope/vim-dispatch'
+
+[[plugins]]
+repo = 'majutsushi/tagbar'
+on_cmd = ['TagbarToggle']
+hook_add = '''
+    nnoremap <Leader>o :<C-u>TagbarToggle<CR>
+    let g:tagbar_sort = 0
+    let g:tagbar_case_insensitive = 1
+    let g:tagbar_compact = 1
+'''
+
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+hook_add = '''
+    nmap <silent> <Leader>w :<C-u>StripWhitespace<CR>
+'''
+
+#####################################################################
+# Fuzzy Finder
+#####################################################################
+
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+on_cmd = [
+  'Files',
+  'GFiles?',
+  'Tags',
+]
+hook_add = '''
+    " Keymap
+    " Git change files
+    nnoremap <C-j><C-g> :<C-u>GFiles?<CR>
+    " Ctags index
+    nnoremap <C-j><C-]> :<C-u>Tags<CR>
+    " My cli setting
+    nnoremap <Space>e :<C-u>Files ~/.dotfiles<CR>
+'''
+
+#####################################################################
+# Other Util
+#####################################################################
 [[plugins]]
 repo = 'kannokanno/previm'
-on_ft = ['md']
+depends = ['open-browser.vim']
+on_ft = ['markdown']
 hook_add = '''
-    let g:previm_open_cmd = ''
-    nnoremap [previm] <Nop>
-    nmap <Space>p [previm]
-    nnoremap <silent> [previm]o :<C-u>PrevimOpen<CR>
-    nnoremap <silent> [previm]r :call previm#refresh()<CR>
+    nnoremap <leader>p :PrevimOpen<CR>
+'''
+
+[[plugins]]
+repo = 'Shougo/vimproc.vim'
+build = 'make'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_cmd = ['NERDTreeToggle']
+on_map = ['<plug>NERDTreeTabsToggle', '<plug>NERDTreeTabsFind']
+depends = ['nerdtree-git-plugin', 'vim-nerdtree-tabs']
+hook_add = '''
+    let NERDTreeShowHidden=1
+    let NERDTreeIgnore=['\.pyc$', '__pycache__']
+    nmap <Leader>t <plug>NERDTreeTabsToggle<CR>
+'''
+
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
+hook_add = '''
+    let g:nerdtree_tabs_autofind = 0
+    nmap <Leader>f <plug>NERDTreeTabsFind<CR>
+'''
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+depends = ['vim-fugitive']
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+on_cmd = [
+  'Git',
+  'Gcommit',
+  'Gstatus',
+  'Gdiff',
+  'Gblame',
+  'Glog'
+]
+hook_add = '''
+    nmap [figitive] <Nop>
+    map <Leader>g [figitive]
+    nnoremap <silent> [figitive]c :<C-u>Gcommit<CR>
+    nnoremap <silent> [figitive]d :<C-u>Gdiff<CR>
+    nnoremap <silent> [figitive]b :<C-u>Gblame<CR>
+    nnoremap <silent> [figitive]l :<C-u>Glog<CR>
 '''
 
 [[plugins]]
 repo = 'tyru/open-browser.vim'
-on_source = ['previm']
+on_map = ['<Plug>(openbrowser-smart-search)']
+hook_add = '''
+    let g:netrw_nogx = 1 " disable netrw's gx mapping.
+    nmap <Leader>b <Plug>(openbrowser-smart-search)
+    vmap <Leader>b <Plug>(openbrowser-smart-search)
+'''
 
-##############
-# HTML
 [[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['html', 'css', 'eruby']
+repo = 'lighttiger2505/lab.vim'
+on_cmd = ['LabBrowse', 'LabIssue', 'LabMergeRequest']
+hook_add = '''
+    nnoremap <Leader>lb :<C-u>LabBrowse<CR>
+    nnoremap <Leader>li :<C-u>LabIssue<CR>
+    nnoremap <Leader>lm :<C-u>LabMergeRequest<CR>
+'''
 
-##############
-# python設定 
 [[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = 'python'
+repo = 'echuraev/translate-shell.vim'
+on_cmd = ['Trans', 'TransVisual']
+hook_add = '''
+nnoremap <silent> <leader>se :Trans :en+ja<CR>
+vnoremap <silent> <leader>se :TransVisual :en+ja<CR>
+nnoremap <silent> <leader>sj :Trans :ja+en<CR>
+vnoremap <silent> <leader>sj :TransVisual :ja+en<CR>
+'''

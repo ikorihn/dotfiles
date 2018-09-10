@@ -1,28 +1,66 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
-if = 'has("nvim") && has("python3")'
 
 [[plugins]]
-repo = 'Shougo/vimproc.vim'
-hook_post_update = '''
-  if dein#util#_is_windows()
-    let cmd = 'tools\\update-dll-mingw'
-  elseif dein#util#_is_cygwin()
-    let cmd = 'make -f make_cygwin.mak'
-  elseif executable('gmake')
-    let cmd = 'gmake'
-  else
-    let cmd = 'make'
-  endif
-  let g:dein#plugin.build = cmd
+repo = 'vim-scripts/wombat256.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+depends = ['iceberg.vim']
+hook_add = 'source ~/.vim/rc/plugins/lightline.rc.vim'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    let g:gitgutter_map_keys = 0
+    nmap [g <Plug>GitGutterPrevHunk
+    nmap ]g <Plug>GitGutterNextHunk
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-if = 'has("nvim") && has("python3")'
+repo = 'machakann/vim-sandwich'
+hook_add = '''
+    nmap s <Nop>
+    xmap s <Nop>
+'''
 
-[[plugins]] # hybrid
-repo = 'w0ng/vim-hybrid'
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
 
-[[plugins]] # solarized
-repo = 'altercation/vim-colors-solarized'
+[[plugins]]
+repo = 'airblade/vim-rooter'
+hook_add = '''
+    let g:rooter_patterns = ['.git/']
+    let g:rooter_change_directory_for_non_project_files = 'current'
+    let g:rooter_use_lcd = 1
+'''
+
+[[plugins]]
+repo = 'rhysd/committia.vim'
+depends = ['vim-fugitive']
+hook_add = '''
+    let g:committia_hooks = {}
+    function! g:committia_hooks.edit_open(info)
+        " Additional settings
+        setlocal spell
+
+        " If no commit message, start with insert mode
+        if a:info.vcs ==# 'git' && getline(1) ==# ''
+            startinsert
+        end
+
+        " Scroll the diff window from insert mode
+        " Map <C-n> and <C-p>
+        imap <buffer><C-n> <Plug>(committia-scroll-diff-down-half)
+        imap <buffer><C-p> <Plug>(committia-scroll-diff-up-half)
+    endfunction
+'''
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+hook_add = '''
+    set helplang=ja,en
+'''
