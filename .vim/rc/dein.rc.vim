@@ -2,7 +2,7 @@ if &compatible
   set nocompatible
 endif
 
-let s:dein_dir = expand('$CACHE/dein')
+let s:dein_dir = expand('$CACHE/vim/dein')
 
 if !dein#load_state(s:dein_dir)
   finish

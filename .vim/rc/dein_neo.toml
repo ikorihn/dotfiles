@@ -51,22 +51,22 @@ hook_add = '''
 
     " Keymap
     " Current direcotry files
-    nnoremap <silent> [denite]<C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
     " Buffer files
-    nnoremap <silent> [denite]<C-b> :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-b> :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
     " Outline current file
-    nnoremap <silent> [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
     " Reccent file
-    nnoremap <silent> [denite]<C-r> :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-r> :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
     " Help tag
-    nnoremap <silent> [denite]<C-h> :<C-u>Denite help -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-h> :<C-u>Denite help -highlight-mode-insert=Search<CR>
 '''
 
 [[plugins]]
 repo = 'lighttiger2505/denite-lab'
 hook_add = '''
-    nnoremap <silent> [denite]<C-i> :<C-u>Denite lab_issue -highlight-mode-insert=Search<CR>
-    nnoremap <silent> [denite]<C-m> :<C-u>Denite lab_merge_request -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-i> :<C-u>Denite lab_issue -highlight-mode-insert=Search<CR>
+    nnoremap [denite]<C-m> :<C-u>Denite lab_merge_request -highlight-mode-insert=Search<CR>
 '''
 
 
@@ -83,12 +83,12 @@ repo = 'Shougo/neoinclude.vim'
 # if = "has('nvim')"
 # hook_add = '''
 # " escape on terminal mode
-# tnoremap <silent> <ESC> <C-\><C-n>
+# tnoremap <ESC> <C-\><C-n>
 # " launch tig on terminal emurater
-# nnoremap <silent> <Leader>tg :T tig status<CR>
+# nnoremap <Leader>tg :T tig status<CR>
 # " repl on terminal
-# nnoremap <silent> <Leader>tl :TREPLSendLine<CR>
-# nnoremap <silent> <Leader>tv :TREPLSendSelection<CR>
+# nnoremap <Leader>tl :TREPLSendLine<CR>
+# nnoremap <Leader>tv :TREPLSendSelection<CR>
 # '''
 # hook_source = '''
 # " neoterm options

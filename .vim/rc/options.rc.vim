@@ -9,10 +9,11 @@ endif
 scriptencoding utf-8
 
 " Don't create swp file
-set writebackup
-set nobackup
+set backup
+set backupdir=$HOME/.vim/backup
 set noswapfile
-set noundofile
+set undodir=$HOME/.vim/undo
+set undofile
 
 " set modifiable
 " set write
@@ -26,12 +27,17 @@ set wrap
 set textwidth=0
 set colorcolumn=256
 
+"Move
+set backspace=indent,eol,start
+set whichwrap=b,s,h,l,<,>,[,]
+
 " Highlight cursor line
 " set cursorline
 
 " Invisible stirng
 set list
 set listchars=tab:»-,extends:»,precedes:«,nbsp:%,eol:↲,trail:~
+
 
 " Don't unload buffer when it is abandones
 set hidden
@@ -47,15 +53,17 @@ set expandtab
 
 " Auto insert indent.
 set autoindent
+set smartindent
+set softtabstop=2
 
 " Round indent by shiftwidth.
-set shiftwidth=4
+set shiftwidth=2
 
 " Round indent to multipul of shiftwidth
 set shiftround
 
 " Space insert by autoindent
-set tabstop=4
+set tabstop=2
 set scrolloff=15
 
 " Splitting a window will put the new window below the current one.
@@ -94,6 +102,8 @@ endif
 " Show search result highlight
 set hlsearch
 
+set wrapscan     "検索をファイルの先頭へループする
+
 " Share clipborad with system
 set clipboard+=unnamedplus
 
@@ -125,3 +135,21 @@ set synmaxcol=512
 
 " Disable sql omni complete
 let g:omni_sql_no_default_maps = 1
+
+" View
+set cmdheight=2
+set laststatus=2    "ステータスラインを常に表示する
+set matchpairs=(:),{:},<:>,[:]
+set matchtime=1     "showmatchの表示時間
+set ruler           "座標を表示する
+set showcmd         "入力中のコマンドを表示する
+set showmatch       "閉じ括弧の入力時に対応する括弧を表示する
+set statusline=%F%m%r%h%w%=[%{&ff}][%{&fenc}][%Y][%v,%l/%L]
+set title           "編集中のファイル名を表示する
+hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
+match ZenkakuSpace /　/ " 全角スペースの色を変更
+
+
+" Operate
+set mouse=a
+

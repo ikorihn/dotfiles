@@ -14,22 +14,22 @@ hook_add = '''
 
     " Keymap
     " Current direcotry files
-    nnoremap <silent> [unite]<C-p> :<C-u>Unite<Space>file_rec/async:!<CR>
+    nnoremap [unite]<C-p> :<C-u>Unite<Space>file_rec/async:!<CR>
     " Buffer files
-    nnoremap <silent> [unite]<C-b> :<C-u>Unite buffer<CR>
+    nnoremap [unite]<C-b> :<C-u>Unite buffer<CR>
     " Grep files
-    nnoremap <silent> [unite]<C-g> :<C-u>Unite<Space>grep -buffer-name=search -auto-preview -no-quit -no-empty -resume<CR>
+    nnoremap [unite]<C-g> :<C-u>Unite<Space>grep -buffer-name=search -auto-preview -no-quit -no-empty -resume<CR>
     " Recent files
-    nnoremap <silent> [unite]<C-r> :<C-u>Unite file_mru buffer<CR>
+    nnoremap [unite]<C-r> :<C-u>Unite file_mru buffer<CR>
     " Yank history
-    nnoremap <silent> [unite]<C-y> :<C-u>Unite history/yank<CR>
+    nnoremap [unite]<C-y> :<C-u>Unite history/yank<CR>
 '''
 
 [[plugins]]
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
 hook_add = '''
-    vmap <Enter> <Plug>(EasyAlign)
+    vmap ga <Plug>(EasyAlign)
 '''
 
 [[plugins]]
@@ -97,12 +97,12 @@ hook_source = '''
 [[plugins]]
 repo = 'lighttiger2505/gtags.vim'
 hook_add = '''
-    nnoremap <silent> <Space>f :Gtags -f %<CR>
-    nnoremap <silent> <Space>j :GtagsCursor<CR>
+    nnoremap <Space>f :Gtags -f %<CR>
+    nnoremap <Space>j :GtagsCursor<CR>
     " Show definition of function cousor word on quickfix
-    nnoremap <silent> <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
+    nnoremap <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
     " Show reference of cousor word on quickfix
-    nnoremap <silent> <Space>r :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
+    nnoremap <Space>r :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
 '''
 
 [[plugins]]
@@ -128,7 +128,7 @@ hook_add = '''
 [[plugins]]
 repo = 'ntpeters/vim-better-whitespace'
 hook_add = '''
-    nmap <silent> <Leader>w :<C-u>StripWhitespace<CR>
+    nmap <Leader>w :<C-u>StripWhitespace<CR>
 '''
 
 #####################################################################
@@ -207,10 +207,10 @@ on_cmd = [
 hook_add = '''
     nmap [figitive] <Nop>
     map <Leader>g [figitive]
-    nnoremap <silent> [figitive]c :<C-u>Gcommit<CR>
-    nnoremap <silent> [figitive]d :<C-u>Gdiff<CR>
-    nnoremap <silent> [figitive]b :<C-u>Gblame<CR>
-    nnoremap <silent> [figitive]l :<C-u>Glog<CR>
+    nnoremap [figitive]c :<C-u>Gcommit<CR>
+    nnoremap [figitive]d :<C-u>Gdiff<CR>
+    nnoremap [figitive]b :<C-u>Gblame<CR>
+    nnoremap [figitive]l :<C-u>Glog<CR>
 '''
 
 [[plugins]]
@@ -235,8 +235,8 @@ hook_add = '''
 repo = 'echuraev/translate-shell.vim'
 on_cmd = ['Trans', 'TransVisual']
 hook_add = '''
-nnoremap <silent> <leader>se :Trans :en+ja<CR>
-vnoremap <silent> <leader>se :TransVisual :en+ja<CR>
-nnoremap <silent> <leader>sj :Trans :ja+en<CR>
-vnoremap <silent> <leader>sj :TransVisual :ja+en<CR>
+nnoremap <leader>se :Trans :en+ja<CR>
+vnoremap <leader>se :TransVisual :en+ja<CR>
+nnoremap <leader>sj :Trans :ja+en<CR>
+vnoremap <leader>sj :TransVisual :ja+en<CR>
 '''

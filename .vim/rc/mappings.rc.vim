@@ -1,29 +1,30 @@
 " Change leader mapping
-let g:mapleader = ','
+let g:mapleader = ' '
 let g:maplocalleader = '\'
 
-" Reload .vimrc
-nnoremap <Space>s :source $HOME/.vimrc<CR>
-
-" Switch colon and semicolon
-noremap ; :
-noremap : ;
+"Open .vimrc with space + dot
+nnoremap <Space>. :<C-u>tabedit $HOME/.vimrc<CR>
+nnoremap <Space>/ :<C-u>tabedit $HOME/.vim/rc/dein.toml<CR>
+nnoremap <Space>? :<C-u>tabedit $HOME/.vim/rc/dein_lazy.toml<CR>
 
 " Multi line move
-noremap k gk
-noremap j gj
-noremap gk k
-noremap gj j
+inoremap jj <ESC>
+nnoremap j gj
+nnoremap k gk
+nnoremap gj j
+nnoremap gk k
 noremap <Down> gj
 noremap <Up> gk
 
-" Skip move
-noremap H <Nop>
-noremap L <Nop>
-noremap H ^
-noremap L $
+nnoremap Y y$
+nnoremap <Space>h :noh<CR>
+nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+nnoremap <Space>r :redraw!<CR>
+nnoremap <M-n> :tabnew<CR>
+nnoremap <M-h> gT
+nnoremap <M-l> gt
 
-" Insert mode move
+" Insert mode emacs like move
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-a> <C-o>^
@@ -31,13 +32,9 @@ inoremap <C-e> <End>
 inoremap <C-d> <Del>
 
 " Change tab width
-nnoremap <silent> ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
-nnoremap <silent> ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
-nnoremap <silent> ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
-
-" " The prefix key of tab.
-" nnoremap [tab] <Nop>
-" nmap t [tab]
+nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
+nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
+nnoremap ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
 
 " Disable close window
 nnoremap <C-w>c <Nop>
@@ -51,19 +48,11 @@ noremap <C-w>- 10<C-w>-
 " Search yank string
 nnoremap <Space>sy /<C-r>"<CR>
 " Search of under cousor
-vnoremap <silent> * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
-
-" Replace cousor word"
-nnoremap <expr> c* ':%s ;\<' . expand('<cword>') . '\>;'
-vnoremap <expr> c* ':s ;\<' . expand('<cword>') . '\>;'
-
-" Auto Escape
-cnoremap <expr> / getcmdtype() == '/' ? '\/' : '/'
-cnoremap <expr> ? getcmdtype() == '?' ? '\?' : '?'
+vnoremap * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
 
 " Indent keybind for shutcut
-nnoremap <silent>> >>
-nnoremap <silent>< <<
+nnoremap > >>
+nnoremap < <<
 
 " Paste explicitly yanked text
 nnoremap <Space>p "0p
@@ -76,16 +65,13 @@ vnoremap <Space>c "*p
 " Not yank is delete operation
 nnoremap x "_x
 
-" Shortcut of write
-nnoremap <silent> <Space>w :<C-u>w<CR>
-
 " Jump quickfix
-nnoremap <silent> <C-p> :<C-u>cp<CR>
-nnoremap <silent> <C-n> :<C-u>cn<CR>
-nnoremap <silent> [f :<C-u>cp<CR>
-nnoremap <silent> ]f :<C-u>cn<CR>
-nnoremap <silent> [F :<C-u>cfirst<CR>
-nnoremap <silent> ]F :<C-u>clast<CR>
+nnoremap <C-p> :<C-u>cp<CR>
+nnoremap <C-n> :<C-u>cn<CR>
+nnoremap [f :<C-u>cp<CR>
+nnoremap ]f :<C-u>cn<CR>
+nnoremap [F :<C-u>cfirst<CR>
+nnoremap ]F :<C-u>clast<CR>
 
 " Toggle quickfix
 if exists('g:__QUICKFIX_TOGGLE_jfklds__')
@@ -101,7 +87,7 @@ function! ToggleQuickfix()
         cclose
     endif
 endfunction
-nnoremap <script> <silent> <Space>f :call ToggleQuickfix()<CR>
+nnoremap <script> <silent> <Space>q :call ToggleQuickfix()<CR>
 
 " Jump locationlist
 nnoremap [t :<C-u>lp<CR>
@@ -123,10 +109,8 @@ function! ToggleLocationlist()
         lclose
     endif
 endfunction
-nnoremap <script> <silent> <Space>t :call ToggleLocationlist()<CR>
+nnoremap <script> <Space>t :call ToggleLocationlist()<CR>
 
-" Clear search hi
-nnoremap <silent> <Space>h :noh<CR>
 
 " Grep astarisk text
 nnoremap <Space>gg :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>'<CR>
@@ -167,8 +151,6 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
-" Switch to last file
-nnoremap <Space><Space> <c-^>
 
 " Rename current file
 function! RenameFile() abort
@@ -190,17 +172,27 @@ function! ToggleRelativenumber() abort
      setlocal relativenumber
   endif
 endfunction
-nnoremap <silent> <Space>n :call ToggleRelativenumber()<cr>
+nnoremap <Space>n :call ToggleRelativenumber()<cr>
 
-let g:toggle_window_size = 0
-function! ToggleWindowFullSize()
-  if g:toggle_window_size == 1
-    exec "normal \<C-w>="
-    let g:toggle_window_size = 0
+" let g:toggle_window_size = 0
+" function! ToggleWindowFullSize()
+"   if g:toggle_window_size == 1
+"     exec "normal \<C-w>="
+"     let g:toggle_window_size = 0
+"   else
+"     exec ':resize'
+"     exec ':vertical resize'
+"     let g:toggle_window_size = 1
+"   endif
+" endfunction
+" nnoremap <Space>u :<C-u>call ToggleWindowFullSize()<CR>
+
+" Toggle wrap or unwrap
+function! ToggleWrap()
+  if &wrap
+    set nowrap
   else
-    exec ':resize'
-    exec ':vertical resize'
-    let g:toggle_window_size = 1
+    set wrap
   endif
 endfunction
-nnoremap <silent> <Space>u :<C-u>call ToggleWindowFullSize()<CR>
+nnoremap <Space>w :call ToggleWrap()<CR>
