@@ -1,4 +1,7 @@
-# 環境変数
+setopt no_global_rcs # path_helperを無効化
+
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config # NeoVim
 export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
@@ -9,8 +12,8 @@ export PATH=${PATH}:$HOME/.nodebrew/current/bin # nodebrew
 export GOPATH=$HOME/go #go
 export PATH=${PATH}:$GOPATH/bin
 
-export PATH=$(brew --prefix coreutils)/libexec/gnubin:$PATH # GNU
-export MANPATH=$(brew --prefix coreutils)/libexec/gnuman:$MANPATH # GNU 
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH # GNU
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH # GNU 
 
 export fpath=(~/.zsh/completion $fpath)
 
