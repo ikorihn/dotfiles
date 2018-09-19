@@ -26,23 +26,14 @@ call denite#custom#source(
 " endif
 
 " pt and ag command on grep source
-if executable('pt')
-    call denite#custom#var('file_rec', 'command',
-        \ ['pt', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-    call denite#custom#var('grep', 'command',
-        \ ['pt', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-    call denite#custom#var('grep', 'default_opts', [])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-elseif executable('ag')
-    call denite#custom#var('file_rec', 'command',
-        \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
-    call denite#custom#var('grep', 'command',
-        \ ['ag', '--nogroup', '--nocolor', '--smart-case', '--hidden'])
-    call denite#custom#var('grep', 'default_opts', [])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-endif
+call denite#custom#var('file_rec', 'command',
+    \ ['ag', '--follow', '--nocolor', '--nogroup', '--hidden', '-g', ''])
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['--nogroup', '--nocolor', '--smart-case', '--hidden'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
 
 " outline source variable
 " call denite#custom#var('outline', 'ignore_types', ['v'])

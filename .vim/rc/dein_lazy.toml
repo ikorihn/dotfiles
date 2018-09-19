@@ -154,7 +154,7 @@ hook_add = '''
     " Ctags index
     nnoremap <C-j><C-]> :<C-u>Tags<CR>
     " My cli setting
-    nnoremap <Space>e :<C-u>Files ~/.dotfiles<CR>
+    nnoremap <Space>e :<C-u>Files ~/dotfiles<CR>
 '''
 
 #####################################################################

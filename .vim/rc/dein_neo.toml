@@ -46,20 +46,21 @@ build = ':UpdateRemotePlugins'
 hook_source = 'source ~/.vim/rc/plugins/denite.rc.vim'
 hook_add = '''
     " Prefix key
-    nmap [denite] <Nop>
-    map <C-j> [denite]
+    nmap <Space>u [denite]
 
     " Keymap
     " Current direcotry files
-    nnoremap [denite]<C-p> :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
+    nnoremap [denite]p :<C-u>Denite file_rec -highlight-mode-insert=Search<CR>
     " Buffer files
-    nnoremap [denite]<C-b> :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
+    nnoremap [denite]b :<C-u>Denite buffer -highlight-mode-insert=Search<CR>
     " Outline current file
-    nnoremap [denite]<C-o> :<C-u>Denite outline -highlight-mode-insert=Search<CR>
+    nnoremap [denite]o :<C-u>Denite outline -highlight-mode-insert=Search<CR>
     " Reccent file
-    nnoremap [denite]<C-r> :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
+    nnoremap [denite]r :<C-u>Denite file_mru -highlight-mode-insert=Search<CR>
+    " Grep
+    nnoremap [denite]g :<C-u>Denite grep -highlight-mode-insert=Search<CR>
     " Help tag
-    nnoremap [denite]<C-h> :<C-u>Denite help -highlight-mode-insert=Search<CR>
+    nnoremap [denite]h :<C-u>Denite help -highlight-mode-insert=Search<CR>
 '''
 
 [[plugins]]

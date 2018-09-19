@@ -32,12 +32,12 @@ set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 
 " Highlight cursor line
-" set cursorline
+set cursorline
+set cursorcolumn
 
 " Invisible stirng
 set list
 set listchars=tab:»-,extends:»,precedes:«,nbsp:%,eol:↲,trail:~
-
 
 " Don't unload buffer when it is abandones
 set hidden

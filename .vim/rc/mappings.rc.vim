@@ -1,5 +1,5 @@
 " Change leader mapping
-let g:mapleader = ' '
+let g:mapleader = ','
 let g:maplocalleader = '\'
 
 "Open .vimrc with space + dot
@@ -195,4 +195,14 @@ function! ToggleWrap()
     set wrap
   endif
 endfunction
-nnoremap <Space>w :call ToggleWrap()<CR>
+nnoremap \r :call ToggleWrap()<CR>
+
+" Toggle wrap or unwrap
+function! ToggleExpandTab()
+  if &expandtab
+    set noexpandtab
+  else
+    set expandtab
+  endif
+endfunction
+nnoremap \t :call ToggleExpandTab()<CR>

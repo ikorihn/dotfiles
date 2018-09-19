@@ -42,7 +42,7 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load python3
-" let g:python3_host_prog = $ANYENV_PATH . '/envs/pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python'
 
 " Load dein.
 let s:dein_dir = expand('~/.cache/vim/dein')
@@ -65,4 +65,4 @@ set t_Co=256
 set background=dark
 syntax on
 filetype plugin indent on
-colorscheme iceberg
+colorscheme wombat256mod
