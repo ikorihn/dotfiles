@@ -24,10 +24,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'machakann/vim-sandwich'
-hook_add = '''
-    nmap s <Nop>
-    xmap s <Nop>
-'''
 
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'

@@ -104,7 +104,7 @@ setopt extended_glob
 ########################################
 # エイリアス
 
-alias ls='ls --color=auto'
+alias ls='ls --color=auto -h'
 alias la='ls -a'
 alias ll='ls -al'
 
