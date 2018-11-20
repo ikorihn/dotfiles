@@ -1,0 +1,64 @@
+{
+    "editor.tabSize": 2,
+    "java.errors.incompleteClasspath.severity": "ignore",
+    "vim.useSystemClipboard": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vsicons.dontShowNewVersionMessage": true,
+    "editor.fontFamily": "Ricty",
+    "editor.fontSize": 14,
+    "csv-preview.lineNumbers": true,
+    "csv-preview.formatValues": false,
+    "alignment.chars": {
+        ":": {
+            "spaceBefore": 0,
+            "spaceAfter": 1
+        },
+        "::": {
+            "spaceBefore": 0,
+            "spaceAfter": 0
+        },
+        "=": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "===": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "==": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "=>": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "+=": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "-=": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "*=": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "/=": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        },
+        "|": {
+            "spaceBefore": 1,
+            "spaceAfter": 1
+        }
+    },
+    "window.title": "${dirty}${activeEditorLong}${separator}${rootName}",
+    "gitlens.defaultDateStyle": "absolute",
+}
