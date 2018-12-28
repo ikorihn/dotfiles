@@ -3,16 +3,20 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "sanemat/font"
 cask "java"
+brew "autoconf"
+brew "automake"
 brew "coreutils"
 brew "ctags"
 brew "diffutils"
 brew "ffmpeg"
 brew "findutils", args: ["with-default-names"]
+brew "libtool"
 brew "sqlite"
 brew "fzf"
 brew "fzy"
 brew "gawk"
 brew "git"
+brew "python"
 brew "global"
 brew "gnu-sed", args: ["with-default-names"]
 brew "go"
@@ -26,14 +30,20 @@ brew "jq"
 brew "kotlin"
 brew "mas"
 brew "maven"
+brew "mysql"
 brew "neovim"
 brew "nkf"
+brew "pacvim"
 brew "pidcat"
 brew "plantuml"
-brew "python"
+brew "postgresql"
 brew "reattach-to-user-namespace"
+brew "the_silver_searcher"
 brew "tig"
 brew "tmux"
+brew "tree"
+brew "ttyrec"
+brew "ttygif"
 brew "yank"
 brew "zplug"
 brew "zsh"
@@ -41,7 +51,7 @@ brew "zsh-completions"
 brew "sanemat/font/ricty", args: ["with-powerline"]
 cask "db-browser-for-sqlite"
 cask "keepassxc"
-cask "meld"
+cask "marp"
 mas "CotEditor", id: 1024640650
 mas "GarageBand", id: 682658836
 mas "iMovie", id: 408981434
@@ -50,4 +60,5 @@ mas "Numbers", id: 409203825
 mas "OneDrive", id: 823766827
 mas "Pages", id: 409201541
 mas "Table Tool", id: 1122008420
+mas "TextWrangler", id: 404010395
 mas "Wunderlist", id: 410628904

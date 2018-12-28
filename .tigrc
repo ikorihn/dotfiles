@@ -67,26 +67,25 @@
 #    - commit-title-overflow (boolint)	: Highlight overflow in log and diff view?
 #
 
-set blame-view	= id:yes,color file-name:auto author:full date:default line-number:yes,interval=1 text
+set blame-view	= date:default author:email-user id:yes,color line-number:yes,interval=1 text
 set grep-view	= file-name:no line-number:yes,interval=1 text
-set main-view	= line-number:no,interval=5 id:no date:default author:full commit-title:yes,graph,refs,overflow=no
+set main-view	= id date author:email-user commit-title:graph=yes,refs=yes
 set refs-view	= line-number:no id:no date:default author:full ref commit-title
 set stash-view	= line-number:no,interval=5 id:no date:default author:full commit-title
 set status-view	= line-number:no,interval=5 status:short file-name
 set tree-view	= line-number:no,interval=5 mode author:full file-size date:default id:no file-name
 
 # Pager based views
-set pager-view	= line-number:no,interval=5 text
-set stage-view	= line-number:no,interval=5 text
-set log-view	= line-number:no,interval=5 text
-set blob-view	= line-number:no,interval=5 text
-set diff-view	= line-number:no,interval=5 text:yes,commit-title-overflow=no
-
+set pager-view	= line-number:yes,interval=1 text
+set stage-view	= line-number:yes,interval=1 text
+set log-view	= line-number:yes,interval=1 text
+set blob-view	= line-number:yes,interval=1 text
+set diff-view	= line-number:yes,interval=1 text:yes,commit-title-overflow=no
 # UI display settings
 set show-changes		= yes		# Show changes commits in the main view?
 set wrap-lines			= no		# Wrap long lines in pager views?
-set tab-size			= 8		# Number of spaces to use when expanding tabs
-set line-graphics		= default	# Enum: ascii, default, utf-8
+set tab-size			= 4		# Number of spaces to use when expanding tabs
+set line-graphics		= utf-8	# Enum: ascii, default, utf-8
 set truncation-delimiter	= ~		# Character drawn for truncations, or "utf-8"
 
 # Format reference names based on type.
@@ -110,7 +109,7 @@ set status-show-untracked-files	= yes		# Show untracked files?
 set ignore-space		= no		# Enum: no, all, some, at-eol (diff)
 set show-notes			= yes		# When non-bool passed as `--show-notes=...` (diff)
 #set diff-context		= 3		# Number of lines to show around diff changes (diff)
-#set diff-options		= -C		# User-defined options for `tig show` (git-diff)
+set diff-options		= -m --first-parent		# User-defined options for `tig show` (git-diff)
 #set diff-highlight		= true		# String (or bool): Path to diff-highlight script,
 						#                   defaults to `diff-highlight`.
 #set blame-options		= -C -C -C	# User-defined options for `tig blame` (git-blame)
@@ -134,7 +133,7 @@ set split-view-width		= 50%		# Width of right-most view for vertical splits
 set editor-line-number		= yes		# Automatically pass line number to editor? Used
 						# for opening file at specific line e.g. from a diff
 set history-size		= 500		# Size of persistent history, 0 to disable
-set mouse			= no		# Enable mouse support?
+set mouse			= yes		# Enable mouse support?
 set mouse-scroll		= 3		# Number of lines to scroll via the mouse
 set mouse-wheel-cursor		= no		# Prefer moving the cursor to scrolling the view?
 
@@ -242,12 +241,10 @@ bind generic	j	move-down
 bind generic	k	move-up
 bind generic	<C-D>	move-half-page-down
 bind generic	<C-U>	move-half-page-up
-bind generic	<PgDown> move-page-down
-bind generic	<Space>	move-page-down
-bind generic	<PgUp>	move-page-up
-bind generic	-	move-page-up
-bind generic	<Home>	move-first-line
-bind generic	<End>	move-last-line
+bind generic	<C-F> move-page-down
+bind generic	<C-B>	move-page-up
+bind generic	H	move-first-line
+bind generic	L	move-last-line
 
 # Scrolling
 bind generic	|	scroll-first-col
