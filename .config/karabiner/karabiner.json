@@ -1895,7 +1895,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "right_alt",
+                                    "key_code": "right_command",
                                     "modifiers": {
                                         "optional": [
                                             "any"
@@ -1907,7 +1907,7 @@
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_alt",
+                                        "key_code": "right_command",
                                         "lazy": true
                                     }
                                 ],
@@ -1918,7 +1918,7 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "key_code": "right_alt"
+                                        "key_code": "right_command"
                                     }
                                 ],
                                 "type": "basic"
