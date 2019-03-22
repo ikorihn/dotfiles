@@ -22,8 +22,8 @@ hook_add = '''
     nmap ]g <Plug>GitGutterNextHunk
 '''
 
-[[plugins]]
-repo = 'machakann/vim-sandwich'
+# [[plugins]]
+# repo = 'machakann/vim-sandwich'
 
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'

@@ -24,6 +24,9 @@ nnoremap <M-n> :tabnew<CR>
 nnoremap <M-h> gT
 nnoremap <M-l> gt
 
+nnoremap ; :
+nnoremap : ;
+
 " Insert mode emacs like move
 inoremap <C-b> <Left>
 inoremap <C-f> <Right>

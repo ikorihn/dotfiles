@@ -20,7 +20,6 @@ set undofile
 
 " Show column number
 set number
-set relativenumber
 
 " Long text
 set wrap
