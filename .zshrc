@@ -1,3 +1,7 @@
+if [ $SHLVL = 1 ]; then
+  tmux
+fi
+
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
@@ -39,6 +43,8 @@ select-word-style default
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
+
+autoload -U zmv
 
 ########################################
 # 補完
@@ -227,6 +233,15 @@ fadd() {
       --bind "ctrl-m:execute:
               git add {}
              "
+}
+git_count() {
+  local author
+  local start_date
+  local end_date
+  author=$1
+  start_date=$2
+  end_date=$3
+  git log --numstat --pretty="%H" --author="${author}" --since=${start_date} --until=${end_date} --no-merges | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("%d (+%d, -%d)\n", plus+minus, plus, minus)}'
 }
 
 fh() {
