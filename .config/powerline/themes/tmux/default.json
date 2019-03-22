@@ -1,0 +1,25 @@
+{
+	"segments": {
+		"right": [
+			{
+				"function": "powerline.segments.common.sys.uptime",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.vcs.branch",
+				"priority": 50
+			},
+			{
+				"function": "powerline.segments.common.time.date",
+				"name": "time",
+				"args": {
+					"format": "%Y/%m/%d %H:%M:%S",
+					"istime": true
+				}
+			},
+			{
+				"function": "powerline.segments.common.net.hostname"
+			}
+		]
+	}
+}

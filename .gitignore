@@ -5,8 +5,7 @@ _viminfo
 
 .vim/undo/
 
-.config/*
-!.config/nvim/
+.config/karabiner/automatic_backups
 
 # Asr
 Asr/Bar/

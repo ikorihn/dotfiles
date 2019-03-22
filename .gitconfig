@@ -6,6 +6,9 @@
 	precomposeunicode = true
 	quotepath = false
 
+[init]
+	templatedir = ~/.git_template
+
 [difftool]
 	prompt = false
 
