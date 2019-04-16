@@ -64,8 +64,6 @@ zstyle ':completion:*:sudo:*' command-path /usr/local/sbin /usr/local/bin /usr/s
 # ps コマンドのプロセス名補完
 zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 
-
-
 ########################################
 # オプション
 # 日本語ファイル名を表示可能にする
@@ -144,6 +142,8 @@ bindkey '^[[B' history-substring-search-down
 zplug "b4b4r07/enhancd", use:init.sh
 #zplug "yous/lime"
 zplug "mollifier/cd-gitroot"
+
+zplug "lukechilds/zsh-better-npm-completion", defer:2
 
 # 未インストール項目をインストールする
 if ! zplug check --verbose; then
@@ -276,3 +276,10 @@ adb_screencap() {
 source ~/.local_functions
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f ~/google-cloud-sdk/path.zsh.inc ]; then source ~/google-cloud-sdk/path.zsh.inc; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/completion.zsh.inc; fi
+
