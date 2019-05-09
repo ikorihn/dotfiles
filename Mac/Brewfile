@@ -1,29 +1,30 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
+tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "sanemat/font"
-cask "java"
 brew "autoconf"
 brew "automake"
+brew "sqlite"
+brew "python"
 brew "coreutils"
 brew "ctags"
 brew "diffutils"
+brew "docker", link: false
 brew "ffmpeg"
-brew "findutils", args: ["with-default-names"]
+brew "findutils"
 brew "libtool"
-brew "sqlite"
 brew "fzf"
 brew "fzy"
 brew "gawk"
 brew "git"
-brew "python"
 brew "global"
-brew "gnu-sed", args: ["with-default-names"]
+brew "gnu-sed"
 brew "go"
 brew "gradle"
 brew "gradle-completion"
 brew "graphviz"
-brew "grep", args: ["with-default-names"]
+brew "grep"
 brew "httpd"
 brew "imagemagick"
 brew "jq"
@@ -33,11 +34,13 @@ brew "maven"
 brew "mysql"
 brew "neovim"
 brew "nkf"
+brew "nodebrew"
 brew "pacvim"
 brew "pidcat"
 brew "plantuml"
 brew "postgresql"
 brew "reattach-to-user-namespace"
+brew "redis"
 brew "the_silver_searcher"
 brew "tig"
 brew "tmux"
@@ -49,16 +52,18 @@ brew "zplug"
 brew "zsh"
 brew "zsh-completions"
 brew "sanemat/font/ricty", args: ["with-powerline"]
-cask "db-browser-for-sqlite"
+cask "alfred"
+cask "cheatsheet"
+cask "clipy"
+cask "corretto8"
+cask "day-o"
+cask "dbeaver-community"
+cask "docker"
+cask "iterm2"
+cask "karabiner-elements"
 cask "keepassxc"
 cask "marp"
-mas "CotEditor", id: 1024640650
-mas "GarageBand", id: 682658836
-mas "iMovie", id: 408981434
-mas "Keynote", id: 409183694
-mas "Numbers", id: 409203825
-mas "OneDrive", id: 823766827
-mas "Pages", id: 409201541
-mas "Table Tool", id: 1122008420
-mas "TextWrangler", id: 404010395
-mas "Wunderlist", id: 410628904
+cask "visual-studio-code"
+mas "com.barebones.textwrangler", id: 404010395
+mas "com.coteditor.CotEditor", id: 1024640650
+mas "com.microsoft.OneDrive-mac", id: 823766827
