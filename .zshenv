@@ -25,6 +25,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 path=(
+    /usr/local/opt/python3/libexec/bin(N-/)
     /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
     /usr/local/opt/ed/libexec/gnubin(N-/) # ed
     /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
