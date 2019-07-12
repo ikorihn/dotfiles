@@ -17,20 +17,20 @@ HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# プロンプト
-PROMPT="[%n]$ "
-autoload -Uz vcs_info
-setopt prompt_subst
-zstyle ':vcs_info:*' git
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
-zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
-zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
-zstyle ':vcs_info:*' actionformats '[%b|%a]'
-precmd () { vcs_info }
+# # プロンプト
+# PROMPT="[%n]$ "
+# autoload -Uz vcs_info
+# setopt prompt_subst
+# zstyle ':vcs_info:*' git
+# zstyle ':vcs_info:git:*' check-for-changes true
+# zstyle ':vcs_info:git:*' stagedstr "%F{yellow}!"
+# zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
+# zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
+# zstyle ':vcs_info:*' actionformats '[%b|%a]'
+# precmd () { vcs_info }
 
-RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
+# RPROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+# RPROMPT=$RPROMPT'${vcs_info_msg_0_}'
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -109,15 +109,18 @@ alias la='ls -a'
 alias ll='ls -al'
 
 alias rm='rm -i'
-alias cp='cp -i'
+alias cp='cp -i -p'
 alias mv='mv -i'
 
 alias mkdir='mkdir -p'
 
 alias vim='nvim'
+alias view='vim -R'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
+
+alias gcd='cd $(ghq list -p | fzf)'
 
 # グローバルエイリアス
 alias -g L='| less'
@@ -268,6 +271,9 @@ adb_screencap() {
   popd
 }
 
+delete_DSStore() {
+  find . -name ".DS_Store" -delete
+}
 
 source ~/.local_functions
 
