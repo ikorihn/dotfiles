@@ -6,7 +6,7 @@ export LANG=ja_JP.UTF-8
 # NeoVim
 export XDG_CONFIG_HOME=~/.config
 # Java
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.8"`
+export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
 export PATH=${PATH}:${JAVA_HOME}/bin
 
 export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
@@ -17,6 +17,12 @@ export PATH=${PATH}:$HOME/.nodebrew/current/bin # nodebrew
 #go
 export GOPATH=$HOME/go
 export PATH=${PATH}:$GOPATH/bin
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
 
 path=(
     /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
@@ -40,3 +46,4 @@ manpath=(
 export fpath=(~/.zsh/completion $fpath)
 
 export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
+

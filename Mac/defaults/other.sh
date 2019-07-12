@@ -21,5 +21,4 @@ defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
 defaults write com.apple.screencapture disable-shadow -bool true    # スクリーンキャプチャの影をなくす
 defaults write com.apple.screencapture type -string "png"    # スクリーンショットの保存形式を PNG にする
 defaults write com.apple.terminal StringEncodings -array 4    # UTF-8 のみを使用する
-sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
 sudo nvram SystemAudioVolume=" "    # ブート時のサウンドを無効化する
