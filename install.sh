@@ -6,18 +6,18 @@ cd Mac
 brew bundle install
 
 # symlink
-ln -s ~/.dotfiles/.gitconfig ~/
-ln -s ~/.dotfiles/.tigrc ~/
-ln -s ~/.dotfiles/.tmux.conf ~/
-ln -s ~/.dotfiles/.vimrc ~/
-ln -s ~/.dotfiles/.zshenv ~/
-ln -s ~/.dotfiles/.zshrc ~/
+ln -sf ~/.dotfiles/.gitconfig ~/
+ln -sf ~/.dotfiles/.tigrc ~/
+ln -sf ~/.dotfiles/.tmux.conf ~/
+ln -sf ~/.dotfiles/.vimrc ~/
+ln -sf ~/.dotfiles/.zshenv ~/
+ln -sf ~/.dotfiles/.zshrc ~/
 mkdir -p .config
-ln -s ~/.dotfiles/.config/karabiner ~/.config/
-ln -s ~/.dotfiles/.config/powerline ~/.config/
-ln -s ~/.dotfiles/.config/nvim ~/.config/
+ln -sf ~/.dotfiles/.config/karabiner ~/.config/
+ln -sf ~/.dotfiles/.config/powerline ~/.config/
+ln -sf ~/.dotfiles/.config/nvim ~/.config/
 mkdir -p .vim
-ln -s ~/.dotfiles/.vim/rc ~/.vim/
+ln -sf ~/.dotfiles/.vim/rc ~/.vim/
 
 # pip 
 
