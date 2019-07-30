@@ -2,19 +2,22 @@
 git clone https://github.com/r57ty7/dotfiles ~/.dotfiles
 
 # symlink
-ln -s ~/.dotfiles/.zshenv ~/.zshenv
-ln -s ~/.dotfiles/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/.vimrc ~/.vimrc
-ln -s ~/.dotfiles/.tigrc ~/.tigrc
-ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.vim ~/.vim
-ln -s ~/.dotfiles/.config/karabiner ~/.config/karabiner
-ln -s ~/.dotfiles/.config/nvim ~/.config/nvim
-ln -s ~/.dotfiles/.config/powerline ~/.config/powerline
+ln -sf ~/.dotfiles/.gitconfig ~/
+ln -sf ~/.dotfiles/.tigrc ~/
+ln -sf ~/.dotfiles/.tmux.conf ~/
+ln -sf ~/.dotfiles/.vimrc ~/
+ln -sf ~/.dotfiles/.zshenv ~/
+ln -sf ~/.dotfiles/.zshrc ~/
+mkdir -p ~/.config
+ln -sf ~/.dotfiles/.config/karabiner ~/.config/
+ln -sf ~/.dotfiles/.config/powerline ~/.config/
+ln -sf ~/.dotfiles/.config/nvim ~/.config/
+ln -sf ~/.dotfiles/.vim ~/
 
 # brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew bundle install --file=Mac/Brewfile
+
 
 # python
 git clone https://github.com/pyenv/pyenv.git ~/.pyenv
