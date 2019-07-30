@@ -18,12 +18,6 @@ export PATH=${PATH}:$HOME/.nodebrew/current/bin # nodebrew
 export GOPATH=$HOME/go
 export PATH=${PATH}:$GOPATH/bin
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
 path=(
     /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
     /usr/local/opt/ed/libexec/gnubin(N-/) # ed
@@ -44,6 +38,13 @@ manpath=(
 )
 
 export fpath=(~/.zsh/completion $fpath)
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+export PIPENV_VENV_IN_PROJECT=1
 
 export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
 
