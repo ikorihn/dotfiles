@@ -26,15 +26,6 @@ function! s:source_rc(path, ...) abort
   endtry
 endfunction"}}}
 
-" echo message vim start up time
-if has('vim_starting') && has('reltime')
-    augroup VimStart
-        autocmd!
-        let g:startuptime = reltime()
-        autocmd VimEnter * let g:startuptime = reltime(g:startuptime) | redraw | echomsg 'startuptime: ' . reltimestr(g:startuptime)
-    augroup END
-endif
-
 let $CACHE = expand('~/.cache')
 
 if !isdirectory(expand($CACHE))
@@ -42,7 +33,7 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load python3
-let g:python3_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '$HOME/.pyenv/shims/python'
 
 " Load dein.
 let s:dein_dir = expand('~/.cache/vim/dein')

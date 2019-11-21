@@ -15,6 +15,8 @@ set noswapfile
 set undodir=$HOME/.vim/undo
 set undofile
 
+set autochdir
+
 " set modifiable
 " set write
 

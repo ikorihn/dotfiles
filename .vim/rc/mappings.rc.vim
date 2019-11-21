@@ -24,8 +24,8 @@ nnoremap <M-n> :tabnew<CR>
 nnoremap <M-h> gT
 nnoremap <M-l> gt
 
-nnoremap ; :
-nnoremap : ;
+"nnoremap ; :
+"nnoremap : ;
 
 " Insert mode emacs like move
 inoremap <C-b> <Left>
@@ -66,7 +66,10 @@ nnoremap <Space>c "*p
 vnoremap <Space>c "*p
 
 " Not yank is delete operation
+vnoremap x "_x
 nnoremap x "_x
+vnoremap s "_s
+nnoremap s "_s
 
 " Jump quickfix
 nnoremap <C-p> :<C-u>cp<CR>
