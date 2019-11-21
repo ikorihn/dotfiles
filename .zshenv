@@ -17,6 +17,7 @@ export PATH=${PATH}:$HOME/.nodebrew/current/bin # nodebrew
 #go
 export GOPATH=$HOME/go
 export PATH=${PATH}:$GOPATH/bin
+export GO111MODULE=on
 
 path=(
     /usr/local/opt/python3/libexec/bin(N-/)
@@ -49,3 +50,6 @@ export PIPENV_VENV_IN_PROJECT=1
 
 export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
 
+eval "$(direnv hook zsh)"
+
+eval "$(rbenv init -)"

@@ -4,8 +4,7 @@ colors
 
 # powerlineを有効化
 powerline-daemon -q
-source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
-
+source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh 
 # キーバインド
 # emacs 風キーバインドにする
 bindkey -e
@@ -97,9 +96,11 @@ setopt hist_ignore_space
 # ヒストリに保存するときに余分なスペースを削除する
 setopt hist_reduce_blanks
 
+# histroyコマンドは記録しない
+setopt hist_no_store
+
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
-
 
 ########################################
 # エイリアス
@@ -169,13 +170,13 @@ fbr() {
   local branches branch
   branches=$(git branch -vv) &&
   branch=$(echo "$branches" | fzf +m ) &&
-  git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  git switch $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
 }
 fbrm() {
   local branches branch
   branches=$(git branch -r | grep -v 'HEAD') &&
   branch=$(echo "$branches" | fzf +m ) &&
-  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
+  git switch $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
 }
 fbrd() {
   local branches branch
@@ -274,6 +275,25 @@ adb_screencap() {
 delete_DSStore() {
   find . -name ".DS_Store" -delete
 }
+
+urldecode() {
+  nkf -w --url-input
+}
+urlencode() {
+  nkf -WwMQ | sed 's/=$//g' | tr "=" "%" | tr -d "\n" |
+    sed -e 's/%7E/~/g' \
+        -e 's/%3D/=/g' \
+        -e 's/%3F/?/g' \
+        -e 's/%5F/_/g' \
+        -e 's/%22/"/g' \
+        -e 's/%2C/,/g' \
+        -e 's/%2D/-/g' \
+        -e 's/%2E/./g'
+}
+urlsort() {
+  tr "&" "\n" | tr "?" "\n" | sort 
+}
+
 
 source ~/.local_functions
 
