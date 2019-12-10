@@ -13,18 +13,14 @@
 [difftool]
 	prompt = false
 
-[difftool "meld"]
-	cmd = meld "$LOCAL" "$REMOTE"
-[difftool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge "$LOCAL" "$REMOTE"
-[mergetool "meld"]
-	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --auto-merge -o "$MERGED"
-[mergetool "p4merge"]
-	cmd = /Applications/p4merge.app/Contents/Resources/launchp4merge $BASE $LOCAL $REMOTE $MERGED
+[difftool "bbdiff"]
+	cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
+[mergetool "bbdiff"]
+	cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [diff]
-  tool = meld
+	tool = bbdiff
 [merge]
-	tool = meld
+	tool = bbdiff
 
 [alias]
 	difft = difftool --dir-diff

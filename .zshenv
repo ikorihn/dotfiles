@@ -7,17 +7,27 @@ export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
 # Java
 export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
-export PATH=${PATH}:${JAVA_HOME}/bin
+export PATH=${JAVA_HOME}/bin:${PATH}
 
 export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
-export PATH=$PATH:$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools # Android Tool
+export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH # Android Tool
 
-export PATH=${PATH}:$HOME/.nodebrew/current/bin # nodebrew
+export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
 
 #go
 export GOPATH=$HOME/go
-export PATH=${PATH}:$GOPATH/bin
+export PATH=$GOPATH/bin:${PATH}
 export GO111MODULE=on
+
+#python
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+export PIPENV_VENV_IN_PROJECT=1
+
+eval "$(rbenv init -)"
 
 path=(
     /usr/local/opt/python3/libexec/bin(N-/)
@@ -41,15 +51,6 @@ manpath=(
 
 export fpath=(~/.zsh/completion $fpath)
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-export PIPENV_VENV_IN_PROJECT=1
-
 export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
 
 eval "$(direnv hook zsh)"
-
-eval "$(rbenv init -)"
