@@ -1,5 +1,6 @@
 #!/bin/bash
 git clone https://github.com/r57ty7/dotfiles ~/.dotfiles
+cd ~/.dotfiles
 
 # symlink
 ln -sf ~/.dotfiles/.gitconfig ~/
@@ -18,12 +19,17 @@ ln -sf ~/.dotfiles/.vim ~/
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew bundle install --file=Mac/Brewfile
 
-
 # python
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
+source ~/.zshenv
+pyenv install 3.8.1
+pip install neovim
+pip install powerline-gitstatus
+pip install powerline-status
+pip install awscli
 
 # node
 curl -L git.io/nodebrew | perl - setup
+source ~/.zshenv
 nodebrew install-binary latest
 npm i -g @google/clasp
 npm i -g @types/google-apps-script
