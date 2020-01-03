@@ -31,21 +31,6 @@ pip install awscli
 curl -L git.io/nodebrew | perl - setup
 source ~/.zshenv
 nodebrew install-binary latest
-npm i -g @google/clasp
-npm i -g @types/google-apps-script
-npm i -g npm
-npm i -g npm-check-updates
-npm i -g typescript
-
-# font
-curl -L -O 'https://github.com/tomokuni/Myrica/raw/master/product/Myrica.zip'
-curl -L -O 'https://github.com/tomokuni/Myrica/raw/master/product/MyricaM.zip'
-unzip -o Myrica.zip -d temp/
-unzip -o MyricaM.zip -d temp/
-cp -f temp/Myrica*.TTC ~/Library/Fonts/
-fc-cache -vf
-rm -rf temp
-rm -f Myrica.zip MyricaM.zip
 
 source ~/.zshenv
 source ~/.zshrc
