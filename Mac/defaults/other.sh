@@ -15,6 +15,8 @@ defaults write com.apple.CrashReporter DialogType -string "none"    # クラッ�
 defaults write com.apple.LaunchServices LSQuarantine -bool false    # 未確認のアプリケーションを実行する際のダイアログを無効にする
 defaults write com.apple.NetworkBrowser ShowThisComputer -bool true    # ファイル共有を有効にした時、共有先に自分の Mac を表示させる
 
+defaults write com.apple.menuextra.battery ShowPercent -string "YES"    # バッテリー表示を % 表記にする
+
 defaults write com.apple.dashboard mcx-disabled -bool true    # Dashboard を無効化する
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true    # USB やネットワークストレージに .DS_Store ファイルを作成しない
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
