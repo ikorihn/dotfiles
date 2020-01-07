@@ -28,7 +28,6 @@ export PIPENV_VENV_IN_PROJECT=1
 eval "$(rbenv init -)"
 
 path=(
-    /usr/local/opt/python3/libexec/bin(N-/)
     /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
     /usr/local/opt/ed/libexec/gnubin(N-/) # ed
     /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
@@ -49,6 +48,6 @@ manpath=(
 
 export fpath=(~/.zsh/completion $fpath)
 
-export POWERLINE_ROOT="/usr/local/lib/python3.7/site-packages/powerline"
+export POWERLINE_ROOT="$(python -c "import site; print (site.getsitepackages()[0]))/powerline"
 
 eval "$(direnv hook zsh)"

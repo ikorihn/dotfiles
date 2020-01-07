@@ -130,7 +130,7 @@ alias -g G='| grep'
 
 ########################################
 # zplug
-export ZPLUG_HOME=~/.zplug
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
