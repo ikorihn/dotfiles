@@ -48,6 +48,6 @@ manpath=(
 
 export fpath=(~/.zsh/completion $fpath)
 
-export POWERLINE_ROOT="$(python -c "import site; print (site.getsitepackages()[0]))/powerline"
+export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
 
 eval "$(direnv hook zsh)"
