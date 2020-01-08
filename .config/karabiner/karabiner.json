@@ -1134,45 +1134,6 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "c",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a 'CotEditor'"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "r",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a 'Preview'"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
                                     "key_code": "t",
                                     "modifiers": {
                                         "mandatory": [
@@ -1211,7 +1172,7 @@
                             },
                             {
                                 "from": {
-                                    "key_code": "f",
+                                    "key_code": "d",
                                     "modifiers": {
                                         "mandatory": [
                                             "right_command",
@@ -1261,14 +1222,14 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a 'Vivaldi'"
+                                        "shell_command": "open -a 'Slack'"
                                     }
                                 ],
                                 "type": "basic"
                             },
                             {
                                 "from": {
-                                    "key_code": "d",
+                                    "key_code": "b",
                                     "modifiers": {
                                         "mandatory": [
                                             "right_command",
@@ -1280,7 +1241,26 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a 'DBeaver'"
+                                        "shell_command": "open -a 'TogglDesktop'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command",
+                                            "right_control",
+                                            "right_shift",
+                                            "right_option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'Finder'"
                                     }
                                 ],
                                 "type": "basic"
