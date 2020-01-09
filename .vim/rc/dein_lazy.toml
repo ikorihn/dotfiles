@@ -2,30 +2,6 @@
 # Edit util
 #####################################################################
 [[plugins]]
-repo = 'Shougo/unite.vim'
-if = "!has('nvim')"
-on_cmd = 'Unite'
-depends = ['neomru.vim']
-hook_source = 'source ~/.vim/rc/plugins/unite.rc.vim'
-hook_add = '''
-    " Prefix key
-    nnoremap [unite] <Nop>
-    nmap <Space>u [unite]
-
-    " Keymap
-    " Current direcotry files
-    nnoremap [unite]<C-p> :<C-u>Unite<Space>file_rec/async:!<CR>
-    " Buffer files
-    nnoremap [unite]<C-b> :<C-u>Unite buffer<CR>
-    " Grep files
-    nnoremap [unite]<C-g> :<C-u>Unite<Space>grep -buffer-name=search -auto-preview -no-quit -no-empty -resume<CR>
-    " Recent files
-    nnoremap [unite]<C-r> :<C-u>Unite file_mru buffer<CR>
-    " Yank history
-    nnoremap [unite]<C-y> :<C-u>Unite history/yank<CR>
-'''
-
-[[plugins]]
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
 hook_add = '''
@@ -33,44 +9,11 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'haya14busa/vim-asterisk'
-on_map = [
-    '<Plug>(asterisk-z*)',
-    '<Plug>(asterisk-z#)',
-    '<Plug>(asterisk-gz*)',
-    '<Plug>(asterisk-gz#)',
-]
-hook_add = '''
-    map *  <Plug>(asterisk-z*)
-    map #  <Plug>(asterisk-z#)
-    map g* <Plug>(asterisk-gz*)
-    map g# <Plug>(asterisk-gz#)
-'''
-
-
-[[plugins]]
 repo = 'Yggdroot/indentLine'
-on_cmd = ['IndentLinesToggle']
-hook_add = '''
-    let g:loaded_indentLine = 1
-    nnoremap <Space>i <C-u>:IndentLinesToggle<CR>
-'''
 
 #####################################################################
 # Programing util
 #####################################################################
-[[plugins]]
-repo = 'tyru/caw.vim'
-on_map = ['<Plug>(caw:hatpos:toggle)', '<Plug>(caw:zeropos:toggle)']
-hook_add = '''
-    " Add comment to beginning line(consider whitespace)
-    nmap <Leader>c <Plug>(caw:hatpos:toggle)
-    vmap <Leader>c <Plug>(caw:hatpos:toggle)
-    " Add comment to beginning line(ignore whitespace)
-    nmap <Leader>, <Plug>(caw:zeropos:toggle)
-    vmap <Leader>, <Plug>(caw:zeropos:toggle)
-'''
-
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = ['vimproc.vim']
@@ -106,29 +49,9 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'janko-m/vim-test'
-depends = ['vim-dispatch']
-hook_source = '''
-    let g:test#strategy = 'dispatch'
-'''
-
-[[plugins]]
-repo = 'tpope/vim-dispatch'
-
-[[plugins]]
-repo = 'majutsushi/tagbar'
-on_cmd = ['TagbarToggle']
-hook_add = '''
-    nnoremap <Leader>o :<C-u>TagbarToggle<CR>
-    let g:tagbar_sort = 0
-    let g:tagbar_case_insensitive = 1
-    let g:tagbar_compact = 1
-'''
-
-[[plugins]]
 repo = 'ntpeters/vim-better-whitespace'
 hook_add = '''
-    nmap <Leader>w :<C-u>StripWhitespace<CR>
+    nmap <Space>w :<C-u>StripWhitespace<CR>
 '''
 
 #####################################################################
@@ -161,14 +84,6 @@ hook_add = '''
 # Other Util
 #####################################################################
 [[plugins]]
-repo = 'kannokanno/previm'
-depends = ['open-browser.vim']
-on_ft = ['markdown']
-hook_add = '''
-    nnoremap <leader>p :PrevimOpen<CR>
-'''
-
-[[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
@@ -176,23 +91,10 @@ build = 'make'
 repo = 'scrooloose/nerdtree'
 on_cmd = ['NERDTreeToggle']
 on_map = ['<plug>NERDTreeTabsToggle', '<plug>NERDTreeTabsFind']
-depends = ['nerdtree-git-plugin', 'vim-nerdtree-tabs']
 hook_add = '''
     let NERDTreeShowHidden=1
     let NERDTreeIgnore=['\.pyc$', '__pycache__']
-    nmap <Leader>t <plug>NERDTreeTabsToggle<CR>
 '''
-
-[[plugins]]
-repo = 'jistr/vim-nerdtree-tabs'
-hook_add = '''
-    let g:nerdtree_tabs_autofind = 0
-    nmap <Leader>f <plug>NERDTreeTabsFind<CR>
-'''
-
-[[plugins]]
-repo = 'Xuyuanp/nerdtree-git-plugin'
-depends = ['vim-fugitive']
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
@@ -206,37 +108,10 @@ on_cmd = [
 ]
 hook_add = '''
     nmap [figitive] <Nop>
-    map <Leader>g [figitive]
+    map <Space>g [figitive]
     nnoremap [figitive]c :<C-u>Gcommit<CR>
     nnoremap [figitive]d :<C-u>Gdiff<CR>
     nnoremap [figitive]b :<C-u>Gblame<CR>
     nnoremap [figitive]l :<C-u>Glog<CR>
 '''
 
-[[plugins]]
-repo = 'tyru/open-browser.vim'
-on_map = ['<Plug>(openbrowser-smart-search)']
-hook_add = '''
-    let g:netrw_nogx = 1 " disable netrw's gx mapping.
-    nmap <Leader>b <Plug>(openbrowser-smart-search)
-    vmap <Leader>b <Plug>(openbrowser-smart-search)
-'''
-
-[[plugins]]
-repo = 'lighttiger2505/lab.vim'
-on_cmd = ['LabBrowse', 'LabIssue', 'LabMergeRequest']
-hook_add = '''
-    nnoremap <Leader>lb :<C-u>LabBrowse<CR>
-    nnoremap <Leader>li :<C-u>LabIssue<CR>
-    nnoremap <Leader>lm :<C-u>LabMergeRequest<CR>
-'''
-
-[[plugins]]
-repo = 'echuraev/translate-shell.vim'
-on_cmd = ['Trans', 'TransVisual']
-hook_add = '''
-nnoremap <leader>se :Trans :en+ja<CR>
-vnoremap <leader>se :TransVisual :en+ja<CR>
-nnoremap <leader>sj :Trans :ja+en<CR>
-vnoremap <leader>sj :TransVisual :ja+en<CR>
-'''

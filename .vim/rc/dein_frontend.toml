@@ -6,10 +6,3 @@ on_ft = ['html']
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'djangohtml']
 
-[[plugins]]
-repo = 'hail2u/vim-css3-syntax'
-on_ft = ['css']
-
-[[plugins]]
-repo = 'ap/vim-css-color'
-on_ft = ['css']

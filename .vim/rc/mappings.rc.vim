@@ -1,12 +1,3 @@
-" Change leader mapping
-let g:mapleader = ','
-let g:maplocalleader = '\'
-
-"Open .vimrc with space + dot
-nnoremap <Space>. :<C-u>tabedit $HOME/.vimrc<CR>
-nnoremap <Space>/ :<C-u>tabedit $HOME/.vim/rc/dein.toml<CR>
-nnoremap <Space>? :<C-u>tabedit $HOME/.vim/rc/dein_lazy.toml<CR>
-
 " Multi line move
 inoremap jj <ESC>
 nnoremap j gj
@@ -19,28 +10,12 @@ noremap <Up> gk
 nnoremap Y y$
 nnoremap <Space>h :noh<CR>
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
-nnoremap <Space>r :redraw!<CR>
 nnoremap <M-n> :tabnew<CR>
-nnoremap <M-h> gT
-nnoremap <M-l> gt
-
-"nnoremap ; :
-"nnoremap : ;
-
-" Insert mode emacs like move
-inoremap <C-b> <Left>
-inoremap <C-f> <Right>
-inoremap <C-a> <C-o>^
-inoremap <C-e> <End>
-inoremap <C-d> <Del>
 
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
 nnoremap ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
-
-" Disable close window
-nnoremap <C-w>c <Nop>
 
 " Resize window
 noremap <C-w>> 10<C-w>>
@@ -170,45 +145,3 @@ function! RenameFile() abort
 endfunction
 noremap <Space>R :call RenameFile()<cr>
 
-" Toggle relativenumber or norelativenumber
-function! ToggleRelativenumber() abort
-  if &relativenumber == 1
-     setlocal norelativenumber
-  else
-     setlocal relativenumber
-  endif
-endfunction
-nnoremap <Space>n :call ToggleRelativenumber()<cr>
-
-" let g:toggle_window_size = 0
-" function! ToggleWindowFullSize()
-"   if g:toggle_window_size == 1
-"     exec "normal \<C-w>="
-"     let g:toggle_window_size = 0
-"   else
-"     exec ':resize'
-"     exec ':vertical resize'
-"     let g:toggle_window_size = 1
-"   endif
-" endfunction
-" nnoremap <Space>u :<C-u>call ToggleWindowFullSize()<CR>
-
-" Toggle wrap or unwrap
-function! ToggleWrap()
-  if &wrap
-    set nowrap
-  else
-    set wrap
-  endif
-endfunction
-nnoremap \r :call ToggleWrap()<CR>
-
-" Toggle wrap or unwrap
-function! ToggleExpandTab()
-  if &expandtab
-    set noexpandtab
-  else
-    set expandtab
-  endif
-endfunction
-nnoremap \t :call ToggleExpandTab()<CR>

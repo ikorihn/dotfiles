@@ -3,29 +3,6 @@ if &compatible
     set nocompatible
 endif
 
-function! s:source_rc(path, ...) abort 
-  let l:use_global = get(a:000, 0, !has('vim_starting'))
-  let l:abspath = resolve(expand('~/.vim/rc/' . a:path))
-  if !l:use_global
-    execute 'source' fnameescape(l:abspath)
-    return
-  endif
-
-  " substitute all 'set' to 'setglobal'
-  let l:content = map(readfile(l:abspath),
-        \ 'substitute(v:val, "^\\W*\\zsset\\ze\\W", "setglobal", "")')
-  " create tempfile and source the tempfile
-  let l:tempfile = tempname()
-  try
-    call writefile(l:content, l:tempfile)
-    execute 'source' fnameescape(l:tempfile)
-  finally
-    if filereadable(l:tempfile)
-      call delete(l:tempfile)
-    endif
-  endtry
-endfunction"}}}
-
 let $CACHE = expand('~/.cache')
 
 if !isdirectory(expand($CACHE))
@@ -33,10 +10,10 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load python3
-let g:python3_host_prog = '$HOME/.pyenv/shims/python'
+let g:python3_host_prog = expand('$HOME/.pyenv/shims/python')
 
 " Load dein.
-let s:dein_dir = expand('~/.cache/vim/dein')
+let s:dein_dir = expand('$CACHE/vim/dein')
 let s:dein_repo_dir = s:dein_dir .'/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -45,11 +22,26 @@ if &runtimepath !~# '/dein.vim'
   execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
-call s:source_rc('mappings.rc.vim')
-call s:source_rc('options.rc.vim')
-call s:source_rc('filetype.rc.vim')
-" call s:source_rc('autocmd.rc.vim')
-call s:source_rc('dein.rc.vim')
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  call dein#load_toml('~/.vim/rc/dein.toml',          {'lazy': 0})
+  call dein#load_toml('~/.vim/rc/dein_lazy.toml',     {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_syntax.toml',   {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_neo.toml',      {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_python.toml',   {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_go.toml',       {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_frontend.toml', {'lazy': 1})
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
+
+runtime! rc/*.vim
 
 " Colors
 set t_Co=256

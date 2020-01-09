@@ -17,9 +17,6 @@ set undofile
 
 set autochdir
 
-" set modifiable
-" set write
-
 " Show column number
 set number
 
@@ -48,22 +45,12 @@ set switchbuf=useopen
 
 " Smart insert tab setting.
 set smarttab
-
-" Excahnge tab to space.
 set expandtab
-
-" Auto insert indent.
 set autoindent
 set smartindent
 set softtabstop=2
-
-" Round indent by shiftwidth.
 set shiftwidth=2
-
-" Round indent to multipul of shiftwidth
 set shiftround
-
-" Space insert by autoindent
 set tabstop=2
 set scrolloff=15
 
@@ -86,24 +73,17 @@ set helpheight=12
 " show tab line
 set showtabline=2
 
-" Ignore case is search patterns
-set ignorecase
-
-" No ignore case when pattern has uppercase
-set smartcase
-
-" Search is incremental search
-set incsearch
-
 " Replace incremental
 if exists('&inccommand')
   set inccommand=split
 endif
 
-" Show search result highlight
+" Search
 set hlsearch
-
-set wrapscan     "検索をファイルの先頭へループする
+set ignorecase
+set smartcase
+set incsearch
+set wrapscan
 
 " Share clipborad with system
 set clipboard+=unnamedplus
@@ -145,12 +125,9 @@ set matchtime=1     "showmatchの表示時間
 set ruler           "座標を表示する
 set showcmd         "入力中のコマンドを表示する
 set showmatch       "閉じ括弧の入力時に対応する括弧を表示する
-set statusline=%F%m%r%h%w%=[%{&ff}][%{&fenc}][%Y][%v,%l/%L]
 set title           "編集中のファイル名を表示する
 hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
 match ZenkakuSpace /　/ " 全角スペースの色を変更
 
-
 " Operate
 set mouse=a
-

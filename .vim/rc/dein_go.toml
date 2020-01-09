@@ -20,6 +20,3 @@ hook_source = '''
   source ~/.vim/rc/plugins/go.rc.vim
 '''
 
-[[plugins]]
-repo = 'buoto/gotests-vim'
-on_ft = ['go']
