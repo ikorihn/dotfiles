@@ -7,6 +7,12 @@ _viminfo
 !.gitkeep
 
 .config/karabiner/automatic_backups
+.config/fish/*
+!.config/fish/config.fish
+!.config/fish/fishfile
+!.config/fish/conf.d
+.config/fish/conf.d/*
+!.config/fish/conf.d/000-env.fish
 
 # Asr
 Asr/Bar/
