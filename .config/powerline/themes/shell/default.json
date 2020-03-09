@@ -5,10 +5,6 @@
 				"function": "powerline.segments.shell.mode"
 			},
 			{
-				"function": "powerline.segments.common.env.user",
-				"priority": 30
-			},
-			{
 				"function": "powerline.segments.common.env.virtualenv",
 				"priority": 50
 			},
@@ -19,6 +15,10 @@
 					"use_path_separator": true,
 					"dir_shorten_len": 2
 				}
+			},
+			{
+				"function": "powerline_gitstatus.gitstatus",
+				"priority": 40
 			}
 		],
 		"right": [

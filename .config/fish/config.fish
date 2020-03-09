@@ -110,6 +110,5 @@ function urlsort
   tr "&" "\n" | tr "?" "\n" | sort
 end
 
-source ~/.local_functions
-
+source ~/.local_functions.(basename $SHELL)
 source ~/.iterm2_shell_integration.(basename $SHELL)
