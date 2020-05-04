@@ -56,9 +56,9 @@ function fadd
 end
 
 function git_count
-  set author argv[1]
-  set start_date argv[2]
-  set end_date argv[3]
+  set author $argv[1]
+  set start_date $argv[2]
+  set end_date $argv[3]
   git log --numstat --pretty="%H" --author="$author" --since=$start_date --until=$end_date --no-merges | awk 'NF==3 {plus+=$1; minus+=$2} END {printf("%d (+%d, -%d)\n", plus+minus, plus, minus)}'
 end
 
@@ -108,6 +108,11 @@ end
 
 function urlsort
   tr "&" "\n" | tr "?" "\n" | sort
+end
+
+function history-merge --on-event fish_preexec
+  history --save
+  history --merge
 end
 
 source ~/.local_functions.(basename $SHELL)

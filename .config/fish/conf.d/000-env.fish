@@ -49,3 +49,6 @@ set -xU manpath \
     $manpath
 
 set -xU POWERLINE_ROOT (python -c 'import site; print (site.getsitepackages()[0])')/powerline
+
+# https://github.com/jethrokuan/fzf#usage
+set -U FZF_LEGACY_KEYBINDINGS 0
