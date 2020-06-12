@@ -33,15 +33,24 @@ function fbrd
   git branch -vv | fzf -m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git branch -D {}
 end
 
-function fgr
-  git log --graph --color=always \
-      --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" |
-  fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort \
-      --bind "ctrl-m:execute:
-                (grep -o '[a-f0-9]\{7\}' | head -1 |
-                xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
-                {}
-                FZF-EOF"
+function gbr --description "Git browse commits"
+    set -l log_line_to_hash "echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+    set -l view_commit "$log_line_to_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -R'"
+    set -l copy_commit_hash "$log_line_to_hash | xclip"
+    set -l git_checkout "$log_line_to_hash | xargs -I % sh -c 'git checkout %'"
+    set -l open_cmd "open"
+
+    if test (uname) = Linux
+        set open_cmd "xdg-open"
+    end
+
+    git log --graph --color=always --format='%C(auto)%h%d %s %C(green)%C(bold)%cr% C(blue)%an' | \
+        fzf --no-sort --reverse --tiebreak=index --no-multi --ansi \
+            --preview="$view_commit" \
+            --header="ENTER to view, CTRL-Y to copy hash, CTRL-O to open on GitHub, CTRL-X to checkout, CTRL-C to exit" \
+            --bind "enter:execute:$view_commit" \
+            --bind "ctrl-y:execute:$copy_commit_hash" \
+            --bind "ctrl-x:execute:$git_checkout"
 end
 
 function fadd
@@ -71,19 +80,14 @@ end
 
 ## Android
 function adb_screencap
-  set DATE_TIME `date +"%Y%m%d-%H%M%S"`
+  set DATE_TIME (date +"%Y-%m-%dT%H-%M-%S")
   set FILE_NAME $DATE_TIME.png
    
   adb shell screencap -p /sdcard/$FILE_NAME
-  pushd ~/Desktop
-  adb pull /sdcard/$FILE_NAME
+  adb pull /sdcard/$FILE_NAME ~/Desktop/$FILE_NAME
   adb shell rm /sdcard/$FILE_NAME
    
-  mogrify -resize 300x -unsharp 2x1.4+0.5+0 \
-          -colors 65 -quality 100 -verbose \
-          ~/Desktop/$FILE_NAME
-
-  popd
+  mogrify -resize 300x -unsharp 2x1.4+0.5+0 -colors 65 -quality 100 -verbose ~/Desktop/$FILE_NAME
 end
 
 function delete_DSStore
@@ -113,6 +117,22 @@ end
 function history-merge --on-event fish_preexec
   history --save
   history --merge
+end
+
+function cd-gitroot
+  if not git rev-parse --is-inside-work-tree > /dev/null 2>&1
+    echo 'cd-gitroot: Not in a git repository'
+    return 1
+  end
+
+  set -l root_path (git rev-parse --show-toplevel)
+  set -l relative_path $argv[1]
+
+  if test -z "$relative_path"
+    cd -- $root_path
+  else
+    cd -- $root_path/$relative_path
+  end
 end
 
 source ~/.local_functions.(basename $SHELL)
