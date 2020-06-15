@@ -7,10 +7,12 @@ defaults write NSGlobalDomain AppleShowScrollBars -string "Always"    # スク�
 defaults write NSGlobalDomain InitialKeyRepeat -int 15    # キーリピート開始までのタイミング
 defaults write NSGlobalDomain KeyRepeat -int 2    # キーリピートの速度
 defaults write NSGlobalDomain NSWindowResizeTime -float 0.001    # コンソールアプリケーションの画面サイズ変更を高速にする
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -int 1 # アプリケーションを終了するときにウィンドウを閉じる(1=閉じない)
 #defaults write NSGlobalDomain WebKitDeveloperExtras -bool true    # Safari のコンテキストメニューに Web インスペクタを追加する
 defaults write NSGlobalDomain com.apple.keyboard.fnState -bool true    # F1,F2などのキーを標準のファンクションキーとして使用する
 defaults write NSGlobalDomain com.apple.springing.delay -float 0    # スプリングロード遅延を除去する
 defaults write NSGlobalDomain com.apple.springing.enabled -bool true    # ディレクトリのスプリングロードを有効にする
+
 
 defaults write com.apple.CrashReporter DialogType -string "none"    # クラッシュレポートを無効化する
 defaults write com.apple.LaunchServices LSQuarantine -bool false    # 未確認のアプリケーションを実行する際のダイアログを無効にする
