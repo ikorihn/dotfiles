@@ -21,6 +21,7 @@
 	tool = bbdiff
 [merge]
 	tool = bbdiff
+	ff = false
 
 [alias]
 	difft = difftool --dir-diff
@@ -45,3 +46,8 @@
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
+
+[credential]
+	helper = osxkeychain
+[pull]
+	ff = only
