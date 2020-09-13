@@ -23,22 +23,9 @@ noremap <C-w>< 10<C-w><
 noremap <C-w>+ 10<C-w>+
 noremap <C-w>- 10<C-w>-
 
-" Search yank string
-nnoremap <Space>sy /<C-r>"<CR>
-" Search of under cousor
-vnoremap * "vy/\V<C-r>=substitute(escape(@v, '\/'), "\n", '\\n', 'g')<CR><CR>
-
 " Indent keybind for shutcut
 nnoremap > >>
 nnoremap < <<
-
-" Paste explicitly yanked text
-nnoremap <Space>p "0p
-vnoremap <Space>p "0p
-
-" Paste clipboard text
-nnoremap <Space>c "*p
-vnoremap <Space>c "*p
 
 " Not yank is delete operation
 vnoremap x "_x

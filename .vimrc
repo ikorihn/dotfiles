@@ -41,7 +41,9 @@ if dein#check_install()
   call dein#install()
 endif
 
-runtime! rc/*.vim
+runtime! rc/options.rc.vim
+runtime! rc/filetype.rc.vim
+runtime! rc/mappings.rc.vim
 
 " Colors
 set t_Co=256
