@@ -9,7 +9,7 @@ set -U fish_user_paths $JAVA_HOME/bin $fish_user_paths
 
 # Android
 set -xU ANDROID_SDK_HOME $HOME/Library/Android/sdk
-set -U fish_user_paths $ANDROID_SDK_HOME/platform-tools $ANDROID_SDK_HOME/tools $fish_user_paths
+set -U fish_user_paths $fish_user_paths $ANDROID_SDK_HOME/platform-tools $ANDROID_SDK_HOME/tools
 
 # Node.js
 set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
@@ -30,6 +30,9 @@ if command -v rbenv 1>/dev/null 2>&1
   set -U fish_user_paths $HOME/.rbenv/shims $fish_user_paths
 end
 
+# flutter
+set -U fish_user_paths $HOME/flutter/bin $fish_user_paths
+
 set -U fish_user_paths \
     /usr/local/opt/coreutils/libexec/gnubin \
     /usr/local/opt/ed/libexec/gnubin \
@@ -39,14 +42,13 @@ set -U fish_user_paths \
     /usr/local/opt/grep/libexec/gnubin \
     $fish_user_paths
 
-set -xU manpath \
+set -x manpath \
     /usr/local/opt/coreutils/libexec/gnuman \
     /usr/local/opt/ed/libexec/gnuman \
     /usr/local/opt/findutils/libexec/gnuman \
     /usr/local/opt/gnu-sed/libexec/gnuman \
     /usr/local/opt/gnu-tar/libexec/gnuman \
-    /usr/local/opt/grep/libexec/gnuman \
-    $manpath
+    /usr/local/opt/grep/libexec/gnuman
 
 set -xU POWERLINE_ROOT (python -c 'import site; print (site.getsitepackages()[0])')/powerline
 

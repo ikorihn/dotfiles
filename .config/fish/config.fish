@@ -135,5 +135,5 @@ function cd-gitroot
   end
 end
 
-source ~/.local_functions.(basename $SHELL)
-source ~/.iterm2_shell_integration.(basename $SHELL)
+test -e ~/.local_functions.fish; and source ~/.local_functions.fish
+test -e ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
