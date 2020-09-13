@@ -31,7 +31,6 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml('~/.vim/rc/dein_neo.toml',      {'lazy': 1})
   call dein#load_toml('~/.vim/rc/dein_python.toml',   {'lazy': 1})
   call dein#load_toml('~/.vim/rc/dein_go.toml',       {'lazy': 1})
-  call dein#load_toml('~/.vim/rc/dein_frontend.toml', {'lazy': 1})
 
   call dein#end()
   call dein#save_state()

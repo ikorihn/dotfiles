@@ -11,6 +11,10 @@ hook_add = '''
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'djangohtml']
+
 #####################################################################
 # Programing util
 #####################################################################
@@ -27,25 +31,6 @@ repo = 'w0rp/ale'
 on_ft = ['go', 'python', 'javascript', 'html', 'css', 'markdown', 'make', 'vim']
 hook_source = '''
     source ~/.vim/rc/plugins/ale.rc.vim
-'''
-
-[[plugins]]
-repo = 'jsfaint/gen_tags.vim'
-on_ft = ['python', 'go', 'vim']
-hook_source = '''
-    let g:gen_tags#ctags_auto_gen = 0
-    let g:gen_tags#gtags_auto_gen = 1
-'''
-
-[[plugins]]
-repo = 'lighttiger2505/gtags.vim'
-hook_add = '''
-    nnoremap <Space>f :Gtags -f %<CR>
-    nnoremap <Space>j :GtagsCursor<CR>
-    " Show definition of function cousor word on quickfix
-    nnoremap <Space>d :<C-u>exe('Gtags '.expand('<cword>'))<CR>
-    " Show reference of cousor word on quickfix
-    nnoremap <Space>r :<C-u>exe('Gtags -r '.expand('<cword>'))<CR>
 '''
 
 [[plugins]]

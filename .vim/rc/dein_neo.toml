@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 if = "has('nvim')"
-on_event = 'InsertCharPre'
+on_event = 'InsertEnter'
 build = ':UpdateRemotePlugins'
 depends = ['neosnippet.vim']
 hook_source = '''
@@ -79,9 +79,4 @@ hook_add = '''
     endfunction
 
 '''
-
-[[plugins]]
-repo = 'zchee/deoplete-zsh'
-on_ft = ['zsh']
-depends = ['deoplete.nvim']
 

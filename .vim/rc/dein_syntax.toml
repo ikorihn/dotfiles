@@ -1,23 +1,4 @@
 [[plugins]]
-repo = 'plasticboy/vim-markdown'
-on_ft = ['markdown']
-hook_add = '''
-let g:vim_markdown_folding_disabled = 0
-let g:vim_markdown_folding_level = 6
-let g:vim_markdown_no_default_key_mappings = 0
-let g:vim_markdown_toc_autofit = 1
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_math = 1
-let g:vim_markdown_autowrite = 0
-let g:vim_markdown_edit_url_in = 'hsplit'
-
-augroup MarkdownCommands
-    autocmd!
-    autocmd FileType markdown nnoremap <silent><LocalLeader>o :<C-u>Toc<CR>
-augroup END
-'''
-
-[[plugins]]
 repo = 'dhruvasagar/vim-table-mode'
 on_ft = ['markdown']
 hook_add = '''
