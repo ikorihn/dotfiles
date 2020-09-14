@@ -79,15 +79,55 @@ function fvim
 end
 
 ## Android
-function adb_screencap
+function adb_pull_file -d 'ファイルを取得する'
+  set FILE_NAME $argv[1]
+  set DIRECTORY $argv[2]
+  if test -z $FILE_NAME
+    or test -z $DIRECTORY
+    echo 'no file'
+    exit 1
+  end
+  adb pull /sdcard/$FILE_NAME $DIRECTORY/$FILE_NAME
+  adb shell rm /sdcard/$FILE_NAME
+end 
+
+function adb_screencap -d 'キャプチャを撮ってサイズを変更'
   set DATE_TIME (date +"%Y-%m-%dT%H-%M-%S")
   set FILE_NAME $DATE_TIME.png
+
+  set DEST_DIR $argv[1]
+  test -z $DEST_DIR; and set DEST_DIR ~/Desktop
+  set SIZE $argv[2]
+  test -z $SIZE; and set SIZE 300x
    
   adb shell screencap -p /sdcard/$FILE_NAME
-  adb pull /sdcard/$FILE_NAME ~/Desktop/$FILE_NAME
-  adb shell rm /sdcard/$FILE_NAME
+
+  adb_pull_file $FILE_NAME $DEST_DIR
    
-  mogrify -resize 300x -unsharp 2x1.4+0.5+0 -colors 65 -quality 100 -verbose ~/Desktop/$FILE_NAME
+  mogrify -resize $SIZE -unsharp 2x1.4+0.5+0 -quality 100 -verbose $DEST_DIR/$FILE_NAME
+end
+
+
+function mp4_to_gif
+  set FILE_NAME $argv[1]
+  set DEST_FILE_NAME (echo $FILE_NAME | tr -d '.mp4')
+  ffmpeg -i $FILE_NAME -an -r 15 -pix_fmt rgb24 -s 540x960 -f gif $DEST_FILE_NAME
+end
+
+function adb_screenrecord -d '画面録画'
+  # function内のtrapがfunctionごと終了してしまって引っ掛けられないのでbash
+  # https://github.com/fish-shell/fish-shell/issues/2036
+  bash -c '
+    DATE_TIME=$(date +"%Y-%m-%dT%H-%M-%S")
+    FILE_NAME=$DATE_TIME.mp4
+
+    DEST_DIR=${0:-~/Desktop}
+
+    trap "echo \"pull to $DEST_DIR/$FILE_NAME\"; adb pull /sdcard/$FILE_NAME $DEST_DIR/$FILE_NAME; adb shell rm /sdcard/$FILE_NAME" SIGINT
+
+    echo "録画を開始しました。録画を終了する場合は、 Ctrl+C を押下してください"
+    adb shell screenrecord /sdcard/$FILE_NAME --size 540x960
+  ' $argv[1]
 end
 
 function delete_DSStore
@@ -135,5 +175,25 @@ function cd-gitroot
   end
 end
 
+# JSON整形&上書き
+function jformat
+  set file $argv[1]
+  set opt $argv[2]
+  cat $file | jq '.' $opt > $file.tmp && mv $file.tmp $file
+end
+
+function distinct -d "Returns a set of the distinct elements of coll."
+  set -l uniq
+  for a in $argv
+    if not contains $a $uniq
+      set uniq $uniq $a
+      echo $a
+    end
+  end
+end
+
 test -e ~/.local_functions.fish; and source ~/.local_functions.fish
 test -e ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
+
+# 補完 awscli
+complete --command aws --no-files --arguments '(begin; set --local --export COMP_SHELL fish; set --local --export COMP_LINE (commandline); aws_completer | sed \'s/ $//\'; end)'
