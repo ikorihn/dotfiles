@@ -31,9 +31,13 @@ bind status + !git commit --amend
 # push
 bind status P ?git push -u %(remote) %(repo:head)
 
+# delete
+bind status D ?git clean -f %(file)
+
 # rebase
 bind main <Ctrl-r> ?git rebase -i %(commit)
 bind refs R ?git rebase %(branch)
+
 
 # . で HEAD との diff
 bind main . !sh -c "git diff %(commit) | tig"
