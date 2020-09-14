@@ -27,8 +27,8 @@ hook_add = '''
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
     let g:gitgutter_map_keys = 0
-    nmap [g <Plug>GitGutterPrevHunk
-    nmap ]g <Plug>GitGutterNextHunk
+    nmap [g <Plug>(GitGutterPrevHunk)
+    nmap ]g <Plug>(GitGutterNextHunk)
 '''
 
 [[plugins]]
@@ -37,3 +37,10 @@ repo = 'machakann/vim-sandwich'
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'
 
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+if = "has('nvim')"
+build = ':UpdateRemotePlugins'
+hook_add = '''
+    source ~/.vim/rc/plugins/defx.rc.vim
+'''

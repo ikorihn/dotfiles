@@ -8,9 +8,7 @@ noremap <Down> gj
 noremap <Up> gk
 
 nnoremap Y y$
-nnoremap <Space>h :noh<CR>
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
-nnoremap <M-n> :tabnew<CR>
 
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
@@ -22,6 +20,11 @@ noremap <C-w>> 10<C-w>>
 noremap <C-w>< 10<C-w><
 noremap <C-w>+ 10<C-w>+
 noremap <C-w>- 10<C-w>-
+
+" Tab
+nnoremap <M-n> :tabnew<CR>
+nnoremap <M-Left> :tabprevious<CR>                                                                            
+nnoremap <M-Right> :tabnext<CR>
 
 " Indent keybind for shutcut
 nnoremap > >>

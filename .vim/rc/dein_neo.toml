@@ -42,25 +42,7 @@ repo = 'Shougo/denite.nvim'
 if = "has('nvim')"
 on_cmd = 'Denite'
 build = ':UpdateRemotePlugins'
-#hook_source = 'source ~/.vim/rc/plugins/denite.rc.vim'
 hook_add = '''
-    " Prefix key
-    nmap <Space>u [denite]
-
-    " Keymap
-    " Current direcotry files
-    nnoremap [denite]p :<C-u>Denite file/rec<CR>
-    " Buffer files
-    nnoremap [denite]b :<C-u>Denite buffer<CR>
-    " Outline current file
-    nnoremap [denite]o :<C-u>Denite outline<CR>
-    " Reccent file
-    nnoremap [denite]r :<C-u>Denite file_mru<CR>
-    " Grep
-    nnoremap [denite]g :<C-u>Denite grep<CR>
-    " Help tag
-    nnoremap [denite]h :<C-u>Denite help<CR>
-
     " Define mappings
     autocmd FileType denite call s:denite_my_settings()
         function! s:denite_my_settings() abort

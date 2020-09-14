@@ -52,17 +52,35 @@ repo = 'junegunn/fzf.vim'
 depends = ['fzf']
 on_cmd = [
   'Files',
+  'GFiles',
   'GFiles?',
   'Tags',
+  'Commands',
+  'Rg',
+  'Buffers',
 ]
 hook_add = '''
-    " Keymap
-    " Git change files
-    nnoremap <C-j><C-g> :<C-u>GFiles?<CR>
-    " Ctags index
-    nnoremap <C-j><C-]> :<C-u>Tags<CR>
-    " My cli setting
-    nnoremap <Space>. :<C-u>Files ~/.dotfiles<CR>
+    command! -bang -nargs=* Rg
+        \ call fzf#vim#grep(
+        \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
+        \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
+        \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
+        \ <bang>0)
+
+    fun! FzfOmniFiles()
+        let is_git = system('git status')
+        if v:shell_error
+            :Files
+        else
+            :GFiles
+        endif
+    endfun
+
+    nnoremap <C-j><C-j> :Commands<CR>
+    nnoremap <C-j><C-p> :call FzfOmniFiles()<CR>
+    nnoremap <C-j><C-g> :Rg<Space>
+    nnoremap <C-j><C-b> :Buffers<CR>
+    nnoremap <C-j>. :<C-u>Files ~/.dotfiles<CR>
 '''
 
 #####################################################################
@@ -73,20 +91,12 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 [[plugins]]
-repo = 'scrooloose/nerdtree'
-on_cmd = ['NERDTreeToggle']
-hook_add = '''
-    let NERDTreeShowHidden=1
-    nnoremap <Space>e :NERDTreeToggle<CR>
-'''
-
-[[plugins]]
 repo = 'tpope/vim-fugitive'
 on_cmd = [
   'Git',
   'Gcommit',
   'Gstatus',
-  'Gdiff',
+  'Gdiffsplit',
   'Gblame',
   'Glog'
 ]
