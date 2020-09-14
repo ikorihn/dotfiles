@@ -14,10 +14,18 @@
 	<integer>1</integer>
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
+	<key>BracketedPasteMode</key>
+	<true/>
+	<key>ConvertDosNewlines</key>
+	<true/>
+	<key>CopyLastNewline</key>
+	<true/>
 	<key>Default Bookmark Guid</key>
 	<string>0E2657AF-F40C-40D9-BDA9-E415621F9266</string>
 	<key>DoubleClickPerformsSmartSelection</key>
 	<true/>
+	<key>EscapeShellCharsWithBackslash</key>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x4a-0x160000</key>
@@ -227,11 +235,11 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>1084 1596 400 129 324 900 1920 1057 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>-946 1398 620 392 -1596 900 1920 1057 </string>
+	<string>410 363 620 392 0 0 1440 877 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>128 428 918 423 0 0 1440 877 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1440 877 0 0 1440 877 </string>
+	<string>758 900 1920 1057 758 900 1920 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>321 269 745 477 0 0 1440 877 </string>
 	<key>New Bookmarks</key>
@@ -1011,7 +1019,7 @@
 		<key>screenFrame</key>
 		<string>{{0, 0}, {1440, 900}}</string>
 		<key>topLeft</key>
-		<string>{234, 859}</string>
+		<string>{431, 853}</string>
 	</dict>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
@@ -1020,7 +1028,11 @@
 	<key>NoSyncLastTipTime</key>
 	<real>577856465.68902695</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>95</integer>
+	<integer>139</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>592969383.75680494</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -1759,7 +1771,7 @@
 		<string>0003</string>
 	</array>
 	<key>OnlyWhenMoreTabs</key>
-	<false/>
+	<true/>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenBookmark</key>
@@ -1769,6 +1781,12 @@
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
+	<key>PasteSpecialRegex</key>
+	<string></string>
+	<key>PasteSpecialSubstitution</key>
+	<string></string>
+	<key>PasteSpecialUseRegexSubstitution</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
 	<integer>4</integer>
@@ -1811,6 +1829,8 @@
 	<true/>
 	<key>PromptOnQuit</key>
 	<false/>
+	<key>QuitWhenAllWindowsClosed</key>
+	<true/>
 	<key>RunJobsInServers</key>
 	<true/>
 	<key>SUEnableAutomaticChecks</key>
@@ -1822,11 +1842,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-04-22T04:14:05Z</date>
+	<date>2020-09-14T00:35:31Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUSkippedVersion</key>
-	<string>3.3.9</string>
+	<string>3.3.12</string>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
@@ -1834,6 +1854,8 @@
 	<key>SoundForEsc</key>
 	<false/>
 	<key>TmuxUsesDedicatedProfile</key>
+	<true/>
+	<key>Use background pattern indicator</key>
 	<true/>
 	<key>UseTmuxStatusBar</key>
 	<true/>
