@@ -57,6 +57,7 @@ on_cmd = [
   'Tags',
   'Commands',
   'Rg',
+  'History',
   'Buffers',
 ]
 hook_add = '''
@@ -77,6 +78,7 @@ hook_add = '''
     endfun
 
     nnoremap <C-j><C-j> :Commands<CR>
+    nnoremap <C-j><C-h> :History<CR>
     nnoremap <C-j><C-p> :call FzfOmniFiles()<CR>
     nnoremap <C-j><C-g> :Rg<Space>
     nnoremap <C-j><C-b> :Buffers<CR>

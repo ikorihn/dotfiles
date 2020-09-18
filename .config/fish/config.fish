@@ -5,8 +5,9 @@ source $POWERLINE_ROOT/bindings/fish/powerline-setup.fish
 ########################################
 # エイリアス
 
-alias ls 'ls --color=auto -h'
-alias ll 'ls -al'
+alias ls 'exa --group-directories-first'
+alias ll 'ls -halF --git --time-style=long-iso'
+alias la 'll -gHiS'
 
 alias rm 'rm -i'
 alias cp 'cp -i -p'
@@ -15,6 +16,8 @@ alias mv 'mv -i'
 alias vim 'nvim'
 alias view 'vim -R'
 
+# zでfzf
+alias zfzf 'cd (z -l | fzf | awk "{ print \$2 }")'
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo 'sudo '
 

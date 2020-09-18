@@ -129,5 +129,3 @@ set title           "編集中のファイル名を表示する
 hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
 match ZenkakuSpace /　/ " 全角スペースの色を変更
 
-" Operate
-set mouse=a
