@@ -1,3 +1,5 @@
+let mapleader = ","
+
 " Multi line move
 inoremap jj <ESC>
 nnoremap j gj
@@ -58,7 +60,7 @@ function! ToggleQuickfix()
         cclose
     endif
 endfunction
-nnoremap <script> <silent> <Space>q :call ToggleQuickfix()<CR>
+nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " Jump locationlist
 nnoremap [t :<C-u>lp<CR>
@@ -80,12 +82,11 @@ function! ToggleLocationlist()
         lclose
     endif
 endfunction
-nnoremap <script> <Space>t :call ToggleLocationlist()<CR>
-
+nnoremap <script> <Leader>t :call ToggleLocationlist()<CR>
 
 " Grep astarisk text
-nnoremap <Space>gg :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>'<CR>
-nnoremap <Space>gl :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>' %<CR>
+nnoremap <Leader>gg :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>'<CR>
+nnoremap <Leader>gl :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>' %<CR>
 function! s:convert_pattern(pat)
     let chars = split(a:pat, '\zs')
     let len = len(chars)
@@ -122,7 +123,6 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
-
 " Rename current file
 function! RenameFile() abort
   let old_name = expand('%')
@@ -133,5 +133,5 @@ function! RenameFile() abort
     redraw!
   endif
 endfunction
-noremap <Space>R :call RenameFile()<cr>
+noremap <Leader>R :call RenameFile()<cr>
 

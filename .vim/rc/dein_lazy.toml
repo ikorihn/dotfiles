@@ -5,7 +5,11 @@
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
 hook_add = '''
-    vmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
 '''
 
 [[plugins]]
@@ -15,13 +19,24 @@ repo = 'Yggdroot/indentLine'
 repo = 'mattn/emmet-vim'
 on_ft = ['html', 'djangohtml']
 
+[[plugins]]
+repo = 'alvan/vim-closetag'
+on_ft = ['html', 'xhtml', 'javascript', 'typescript', 'javascript.jsx', 'typescript.tsx']
+hook_add = '''
+  let g:closetag_filenames='*.html'
+  let g:closetag_xhtml_filenames='*.jsx,*.tsx,*.vue'
+  let g:closetag_filetypes='html'
+  let g:closetag_xhtml_filetypes='jsx,tsx,javascript.jsx,typescript.tsx,vue'
+  let g:closetag_emptyTags_caseSensitive=1
+  let g:closetag_shortcut='>'
+'''
 #####################################################################
 # Programing util
 #####################################################################
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = ['vimproc.vim']
-on_ft = ['python', 'go']
+on_ft = ['python', 'go', 'sh']
 hook_source = '''
   source ~/.vim/rc/plugins/vimquickrun.rc.vim
 '''
@@ -35,8 +50,12 @@ hook_source = '''
 
 [[plugins]]
 repo = 'ntpeters/vim-better-whitespace'
+on_cmd = [
+    'ToggleWhitespace',
+    'StripWhitespace'
+]
 hook_add = '''
-    nmap <Space>w :<C-u>StripWhitespace<CR>
+    nmap <leader>w :<C-u>ToggleWhitespace<CR>
 '''
 
 #####################################################################
@@ -63,10 +82,8 @@ on_cmd = [
 hook_add = '''
     command! -bang -nargs=* Rg
         \ call fzf#vim#grep(
-        \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-        \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-        \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-        \ <bang>0)
+        \   'rg --column --line-number --hidden --no-heading --color=always --smart-case -g "!.git/*" -- '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview(), <bang>0)
 
     fun! FzfOmniFiles()
         let is_git = system('git status')

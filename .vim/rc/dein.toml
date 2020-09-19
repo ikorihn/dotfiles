@@ -66,7 +66,7 @@ repo = 'ryanoasis/vim-devicons'
 repo = 'kristijanhusak/defx-icons'
 
 ####
-# Other
+# View
 ####
 [[plugins]]
 repo = 'itchyny/lightline.vim'
