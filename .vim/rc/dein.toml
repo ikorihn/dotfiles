@@ -29,10 +29,12 @@ repo = 'tpope/vim-fugitive'
 hook_add = '''
     nmap [fugitive] <Nop>
     map <leader>g [fugitive]
-    nnoremap [fugitive]c :<C-u>Gcommit<CR>
-    nnoremap [fugitive]d :<C-u>Gdiff<CR>
-    nnoremap [fugitive]b :<C-u>Gblame<CR>
-    nnoremap [fugitive]l :<C-u>Glog<CR>
+    nnoremap <silent> [fugitive]s :Gstatus<CR><C-w>T
+    nnoremap <silent> [fugitive]a :Gwrite<CR>
+    nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+    nnoremap <silent> [fugitive]b :Gblame<CR>
+    nnoremap <silent> [fugitive]d :Gdiff<CR>
+    nnoremap <silent> [fugitive]m :Gmerge<CR>
 '''
 
 ####
@@ -90,6 +92,18 @@ hook_add = '''
     endfunction
 '''
 
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+hook_add = '''
+    nmap <leader>w :<C-u>ToggleWhitespace<CR>
+'''
+
+####
+# Edit util
+####
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 

@@ -1,3 +1,4 @@
+set shell=bash\ -l
 
 " File encoding
 if !exists ('g:encoding_set') || !has('nvim')

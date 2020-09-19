@@ -12,52 +12,6 @@ hook_add = '''
     nmap ga <Plug>(EasyAlign)
 '''
 
-[[plugins]]
-repo = 'Yggdroot/indentLine'
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['html', 'djangohtml']
-
-[[plugins]]
-repo = 'alvan/vim-closetag'
-on_ft = ['html', 'xhtml', 'javascript', 'typescript', 'javascript.jsx', 'typescript.tsx']
-hook_add = '''
-  let g:closetag_filenames='*.html'
-  let g:closetag_xhtml_filenames='*.jsx,*.tsx,*.vue'
-  let g:closetag_filetypes='html'
-  let g:closetag_xhtml_filetypes='jsx,tsx,javascript.jsx,typescript.tsx,vue'
-  let g:closetag_emptyTags_caseSensitive=1
-  let g:closetag_shortcut='>'
-'''
-#####################################################################
-# Programing util
-#####################################################################
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-depends = ['vimproc.vim']
-on_ft = ['python', 'go', 'sh']
-hook_source = '''
-  source ~/.vim/rc/plugins/vimquickrun.rc.vim
-'''
-
-[[plugins]]
-repo = 'w0rp/ale'
-on_ft = ['go', 'python', 'javascript', 'html', 'css', 'markdown', 'make', 'vim']
-hook_source = '''
-    source ~/.vim/rc/plugins/ale.rc.vim
-'''
-
-[[plugins]]
-repo = 'ntpeters/vim-better-whitespace'
-on_cmd = [
-    'ToggleWhitespace',
-    'StripWhitespace'
-]
-hook_add = '''
-    nmap <leader>w :<C-u>ToggleWhitespace<CR>
-'''
-
 #####################################################################
 # Fuzzy Finder
 #####################################################################
@@ -103,9 +57,207 @@ hook_add = '''
 '''
 
 #####################################################################
-# Other Util
+# Programing util
 #####################################################################
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+depends = ['vimproc.vim']
+on_ft = ['python', 'go', 'sh']
+hook_source = '''
+  source ~/.vim/rc/plugins/vimquickrun.rc.vim
+'''
+
+[[plugins]]
+repo = 'w0rp/ale'
+on_ft = ['go', 'python', 'typescript', 'javascript', 'html', 'css', 'markdown', 'make', 'vim']
+hook_source = '''
+    source ~/.vim/rc/plugins/ale.rc.vim
+'''
+
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+#####################################################################
+# Go
+#####################################################################
+[[plugins]]
+repo = 'zchee/deoplete-go'
+build = 'make'
+on_ft = ['go']
+depends = ['deoplete.nvim']
+hook_source = '''
+    let g:deoplete#sources#go#align_class = 1
+    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
+    let g:deoplete#sources#go#cgo#sort_algo = 'priority'
+    let g:deoplete#sources#go#package_dot = 0
+    let g:deoplete#sources#go#pointer = 1
+'''
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = ['go']
+build = ':GoUpdateBinaries'
+hook_source = '''
+  source ~/.vim/rc/plugins/go.rc.vim
+'''
+
+#####################################################################
+# Python
+#####################################################################
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+depends = ['deoplete.nvim']
+on_ft = ['python']
+hook_source = '''
+    let g:deoplete#sources#jedi#statement_length = 0
+    let g:deoplete#sources#jedi#short_types = 0
+    let g:deoplete#sources#jedi#show_docstring = 0
+    let g:deoplete#sources#jedi#worker_threads = 2
+'''
+
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python']
+hook_source = '''
+    " Disable auto init
+    let g:jedi#auto_initialization = 1
+    let g:jedi#auto_vim_configuration = 0
+
+    " Disable auto complesions
+    let g:jedi#completions_enabled = 0
+    let g:jedi#popup_on_dot = 0
+    let g:jedi#smart_auto_mappings = 0
+    let g:jedi#show_call_signatures = 0
+
+    " Custom keymap
+    let g:jedi#goto_command = "<C-]>"
+    let g:jedi#goto_assignments_command = "<Localleader>g"
+    let g:jedi#goto_definitions_command = ""
+    let g:jedi#documentation_command = "K"
+    let g:jedi#usages_command = "<Localleader>n"
+    let g:jedi#rename_command = "<Localleader>R"
+'''
+
+#####################################################################
+# Web
+#####################################################################
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'djangohtml']
+
+[[plugins]]
+repo = 'alvan/vim-closetag'
+on_ft = ['html', 'xhtml', 'javascript', 'typescript', 'javascript.jsx', 'typescript.tsx']
+hook_add = '''
+  let g:closetag_filenames='*.html'
+  let g:closetag_xhtml_filenames='*.jsx,*.tsx,*.vue'
+  let g:closetag_filetypes='html'
+  let g:closetag_xhtml_filetypes='jsx,tsx,javascript.jsx,typescript.tsx,vue'
+  let g:closetag_emptyTags_caseSensitive=1
+  let g:closetag_shortcut='>'
+'''
+
+#####################################################################
+# Shougo
+#####################################################################
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+if = "has('nvim')"
+on_event = 'InsertEnter'
+build = ':UpdateRemotePlugins'
+depends = ['neosnippet.vim']
+hook_source = '''
+    let g:deoplete#enable_at_startup = 1
+    source ~/.vim/rc/plugins/deoplete.rc.vim
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets']
+hook_source = '''
+    " Plugin key-mappings.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+    xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+    " SuperTab like snippets behavior.
+    " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
+    "imap <expr><TAB>
+    " \ pumvisible() ? "\<C-n>" :
+    " \ neosnippet#expandable_or_jumpable() ?
+    " \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+    \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+    " For conceal markers.
+    if has('conceal')
+    set conceallevel=2 concealcursor=niv
+    endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+if = "has('nvim')"
+on_cmd = 'Denite'
+build = ':UpdateRemotePlugins'
+hook_add = '''
+    " Define mappings
+    autocmd FileType denite call s:denite_my_settings()
+        function! s:denite_my_settings() abort
+        nnoremap <silent><buffer><expr> <CR>
+        \ denite#do_map('do_action')
+        nnoremap <silent><buffer><expr> d
+        \ denite#do_map('do_action', 'delete')
+        nnoremap <silent><buffer><expr> p
+        \ denite#do_map('do_action', 'preview')
+        nnoremap <silent><buffer><expr> q
+        \ denite#do_map('quit')
+        nnoremap <silent><buffer><expr> i
+        \ denite#do_map('open_filter_buffer')
+        nnoremap <silent><buffer><expr> <Space>
+        \ denite#do_map('toggle_select').'j'
+    endfunction
+
+'''
+
+#####################################################################
+# View
+#####################################################################
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = ['markdown']
+hook_add = '''
+    let g:table_mode_corner = '|'
+    let g:table_mode_always_active = 1
+    let g:table_mode_syntax = 1
+    let g:table_mode_auto_align = 1
+
+    augroup TableCommands
+        autocmd!
+        autocmd FileType markdown nnoremap <silent><LocalLeader>a :<C-u>TableModeRealign<CR>
+        autocmd FileType markdown nnoremap <silent><LocalLeader>t :<C-u>Tableize<CR>
+        autocmd FileType markdown vnoremap <silent><LocalLeader>t :<C-u>'<,'>Tableize<CR>
+    augroup END
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
+[[plugins]]
+repo = 'elzr/vim-json'
+on_ft = ['json']
+hook_source = '''
+    let g:vim_json_syntax_conceal = 0
+    let g:indentLine_noConcealCursor = ""
+'''
+
+#####################################################################
+# Other Util
+#####################################################################
