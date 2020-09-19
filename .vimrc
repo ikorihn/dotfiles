@@ -12,6 +12,10 @@ endif
 " Load python3
 let g:python3_host_prog = expand('$HOME/.pyenv/shims/python')
 
+runtime! rc/options.rc.vim
+runtime! rc/filetype.rc.vim
+runtime! rc/mappings.rc.vim
+
 " Load dein.
 let s:dein_dir = expand('$CACHE/vim/dein')
 let s:dein_repo_dir = s:dein_dir .'/repos/github.com/Shougo/dein.vim'
@@ -39,10 +43,6 @@ endif
 if dein#check_install()
   call dein#install()
 endif
-
-runtime! rc/options.rc.vim
-runtime! rc/filetype.rc.vim
-runtime! rc/mappings.rc.vim
 
 " Colors
 set t_Co=256
