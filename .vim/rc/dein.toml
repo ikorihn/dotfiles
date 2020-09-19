@@ -35,6 +35,36 @@ hook_add = '''
     nnoremap [fugitive]l :<C-u>Glog<CR>
 '''
 
+####
+# Filer
+####
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+if = "has('nvim')"
+build = ':UpdateRemotePlugins'
+hook_add = '''
+    nnoremap <silent> <leader>f :<C-u>Defx <CR>
+
+    source ~/.vim/rc/plugins/defx.rc.vim
+
+    call defx#custom#option('_', {
+        \ 'winwidth': 40,
+        \ 'split': 'vertical',
+        \ 'direction': 'topleft',
+        \ 'show_ignored_files': 1,
+        \ 'buffer_name': 'exlorer',
+        \ 'toggle': 1,
+        \ 'resume': 1,
+        \ 'columns': 'indent:icons:filename:mark',
+        \ })
+'''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+
 repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
@@ -59,10 +89,3 @@ repo = 'machakann/vim-sandwich'
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'
 
-[[plugins]]
-repo = 'Shougo/defx.nvim'
-if = "has('nvim')"
-build = ':UpdateRemotePlugins'
-hook_add = '''
-    source ~/.vim/rc/plugins/defx.rc.vim
-'''

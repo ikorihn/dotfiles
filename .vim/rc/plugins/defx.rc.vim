@@ -65,16 +65,3 @@ function! s:defx_my_settings() abort
     nnoremap <silent><buffer><expr> cd
     \ defx#do_action('change_vim_cwd')
 endfunction
-
-call defx#custom#option('_', {
-    \ 'winwidth': 40,
-    \ 'split': 'vertical',
-    \ 'direction': 'topleft',
-    \ 'show_ignored_files': 1,
-    \ 'buffer_name': 'exlorer',
-    \ 'toggle': 1,
-    \ 'resume': 1,
-    \ })
-
-nnoremap <silent> <Space>f :<C-u> Defx <CR>
-
