@@ -1,8 +1,17 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+####
+# colorscheme
+####
 [[plugins]]
 repo = 'vim-scripts/wombat256.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'joshdick/onedark.vim'
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
