@@ -13,10 +13,17 @@ nnoremap Y y$
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 
 " Change tab width
-nnoremap tst :<C-u>set expandtab<CR>
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
 nnoremap ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
+function! ToggleExpandTab()
+    if &expandtab
+        set noexpandtab
+    else
+        set expandtab
+    endif
+endfunction
+nnoremap tst :<C-u>call ToggleExpandTab()<CR>
 
 " Tab
 nnoremap <M-n> :tabnew<CR>
