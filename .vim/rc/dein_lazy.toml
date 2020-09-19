@@ -92,22 +92,3 @@ hook_add = '''
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
-[[plugins]]
-repo = 'tpope/vim-fugitive'
-on_cmd = [
-  'Git',
-  'Gcommit',
-  'Gstatus',
-  'Gdiffsplit',
-  'Gblame',
-  'Glog'
-]
-hook_add = '''
-    nmap [fugitive] <Nop>
-    map <Space>g [fugitive]
-    nnoremap [fugitive]c :<C-u>Gcommit<CR>
-    nnoremap [fugitive]d :<C-u>Gdiff<CR>
-    nnoremap [fugitive]b :<C-u>Gblame<CR>
-    nnoremap [fugitive]l :<C-u>Glog<CR>
-'''
-

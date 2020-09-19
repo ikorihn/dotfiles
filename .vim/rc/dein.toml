@@ -13,7 +13,28 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'joshdick/onedark.vim'
 
+####
+# Git
+####
 [[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    let g:gitgutter_map_keys = 0
+    nmap [g <Plug>(GitGutterPrevHunk)
+    nmap ]g <Plug>(GitGutterNextHunk)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+    nmap [fugitive] <Nop>
+    map <leader>g [fugitive]
+    nnoremap [fugitive]c :<C-u>Gcommit<CR>
+    nnoremap [fugitive]d :<C-u>Gdiff<CR>
+    nnoremap [fugitive]b :<C-u>Gblame<CR>
+    nnoremap [fugitive]l :<C-u>Glog<CR>
+'''
+
 repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
@@ -30,14 +51,6 @@ hook_add = '''
     function! LightlineFilename()
         return ('' != expand('%') ? expand('%') : '[No Name]')
     endfunction
-'''
-
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-hook_add = '''
-    let g:gitgutter_map_keys = 0
-    nmap [g <Plug>(GitGutterPrevHunk)
-    nmap ]g <Plug>(GitGutterNextHunk)
 '''
 
 [[plugins]]
