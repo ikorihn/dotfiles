@@ -65,17 +65,24 @@ repo = 'ryanoasis/vim-devicons'
 [[plugins]]
 repo = 'kristijanhusak/defx-icons'
 
+####
+# Other
+####
+[[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
-        \ 'colorscheme': 'wombat',
+        \ 'colorscheme': 'onedark',
         \ 'active': {
-        \   'left':  [ ['mode', 'paste'], ['readonly', 'myfilename', 'modified'], ],
+        \   'left':  [ ['mode', 'paste'], ['gitbranch', 'readonly', 'myfilename', 'modified'], ],
         \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'ale_ok', 'ale_warning', 'ale_error', 'char_code', 'fileformat', 'fileencoding', 'filetype' ], ],
         \ },
         \ 'component_function': {
         \   'myfilename': 'LightlineFilename',
+        \   'gitbranch': 'FugitiveHead',
         \ },
+        \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
         \ }
 
     function! LightlineFilename()
