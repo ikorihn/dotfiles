@@ -101,6 +101,18 @@ hook_add = '''
     nmap <leader>w :<C-u>ToggleWhitespace<CR>
 '''
 
+[[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+
+####
+# Move
+####
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
 ####
 # Edit util
 ####
