@@ -13,19 +13,14 @@ nnoremap Y y$
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 
 " Change tab width
+nnoremap tst :<C-u>set expandtab<CR>
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
 nnoremap ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
 
-" Resize window
-noremap <C-w>> 10<C-w>>
-noremap <C-w>< 10<C-w><
-noremap <C-w>+ 10<C-w>+
-noremap <C-w>- 10<C-w>-
-
 " Tab
 nnoremap <M-n> :tabnew<CR>
-nnoremap <M-Left> :tabprevious<CR>                                                                            
+nnoremap <M-Left> :tabprevious<CR>
 nnoremap <M-Right> :tabnext<CR>
 
 " Indent keybind for shutcut
@@ -123,15 +118,14 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
-" Rename current file
-function! RenameFile() abort
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'))
-  if new_name !=# '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
+" jq command
+command! -nargs=? Jq call s:Jq(<f-args>)
+function! s:Jq(...)
+    if 0 == a:0
+        let l:arg = "."
+    else
+        let l:arg = a:1
+    endif
+    execute "%! jq \"" . l:arg . "\""
 endfunction
-noremap <Leader>R :call RenameFile()<cr>
 

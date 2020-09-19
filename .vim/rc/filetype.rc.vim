@@ -46,7 +46,7 @@ augroup BinaryXXD
   autocmd BufReadPost * if &bin && &filetype != 'xxd'
   autocmd BufReadPost * silent %!xxd -g 1
   "autocmd BufReadPost * %!xxd -r
-  autocmd BufReadPost * set ft=xxd noeol 
+  autocmd BufReadPost * set ft=xxd noeol
   autocmd BufReadPost * silent %s///g
   autocmd BufReadPost * endif
 
