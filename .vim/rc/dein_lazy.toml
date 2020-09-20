@@ -79,44 +79,134 @@ repo = 'Shougo/vimproc.vim'
 build = 'make'
 
 #####################################################################
-# Go
+# Completion
 #####################################################################
 [[plugins]]
-repo = 'zchee/deoplete-go'
-build = 'make'
-on_ft = ['go']
-depends = ['deoplete.nvim']
-hook_source = '''
-    let g:deoplete#sources#go#align_class = 1
-    let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-    let g:deoplete#sources#go#gocode_binary = $GOPATH . '/bin/gocode'
-    let g:deoplete#sources#go#cgo#sort_algo = 'priority'
-    let g:deoplete#sources#go#package_dot = 0
-    let g:deoplete#sources#go#pointer = 1
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['python', 'go']
+hook_add = '''
+    function! s:on_lsp_buffer_enabled() abort
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=yes
+
+        nnoremap <buffer> ]l   :<C-u>LspNextDiagnostics<CR>
+        nnoremap <buffer> [l   :<C-u>LspPreviousDiagnostics<CR>
+        nnoremap <buffer> gA   :<C-u>LspCodeAction<CR>
+        nnoremap <buffer> gd   :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gD   :<C-u>LspReferences<CR>
+        nnoremap <buffer> gs   :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> gS   :<C-u>LspWorkspaceSymbol<CR>
+        nnoremap <buffer> gQ   :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> gQ   :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> K    :<C-u>LspHover<CR>
+        nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
+        nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+    endfunction
+
+    augroup lsp_install
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
+    command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+    let g:lsp_diagnostics_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
+    " let g:asyncomplete_auto_popup = 1
+    " let g:asyncomplete_auto_completeopt = 0
+    let g:asyncomplete_popup_delay = 200
+    let g:lsp_text_edit_enabled = 1
+    let g:lsp_preview_float = 1
+    let g:lsp_diagnostics_float_cursor = 1
 '''
 
 [[plugins]]
-repo = 'fatih/vim-go'
-on_ft = ['go']
-build = ':GoUpdateBinaries'
-hook_source = '''
-  source ~/.vim/rc/plugins/go.rc.vim
+repo = 'mattn/vim-lsp-settings'
+on_ft = ['python', 'go']
+hook_add = '''
+    let g:lsp_settings = {}
+    let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+    let g:lsp_settings['gopls'] = {
+        \  'workspace_config': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \  'initialization_options': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \}
 '''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
+if = "has('python3')"
+on_ft=['python', 'go']
+depends = ['asyncomplete.vim', 'ultisnips']
+hook_source = '''
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+depends = ['vim-snippets']
+hook_add = '''
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-f>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+    let g:UltiSnipsEditSplit="vertical"
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'priority': 5,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'priority': 3,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#file#completor'),
+      \ }))
+'''
+
+#####################################################################
+# Go
+#####################################################################
+[[plugins]]
+repo = 'mattn/vim-goimports'
+on_ft = ['go']
 
 #####################################################################
 # Python
 #####################################################################
-[[plugins]]
-repo = 'zchee/deoplete-jedi'
-depends = ['deoplete.nvim']
-on_ft = ['python']
-hook_source = '''
-    let g:deoplete#sources#jedi#statement_length = 0
-    let g:deoplete#sources#jedi#short_types = 0
-    let g:deoplete#sources#jedi#show_docstring = 0
-    let g:deoplete#sources#jedi#worker_threads = 2
-'''
-
 [[plugins]]
 repo = 'davidhalter/jedi-vim'
 on_ft = ['python']
