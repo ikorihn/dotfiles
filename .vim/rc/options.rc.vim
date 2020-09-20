@@ -16,8 +16,6 @@ set noswapfile
 set undodir=$HOME/.vim/undo
 set undofile
 
-set autochdir
-
 " Show column number
 set number
 
