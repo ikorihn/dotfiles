@@ -93,8 +93,8 @@ hook_add = '''
 # Edit util
 ####
 [[plugins]]
-repo = 'machakann/vim-sandwich'
+repo = 'mattn/sonictemplate-vim'
 
 [[plugins]]
-repo = 'mattn/sonictemplate-vim'
+repo = 'terryma/vim-multiple-cursors'
 
