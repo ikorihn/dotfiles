@@ -223,8 +223,8 @@ hook_add = '''
         setlocal omnifunc=lsp#complete
         setlocal signcolumn=yes
 
-        nnoremap <buffer> ]l   :<C-u>LspNextDiagnostics<CR>
-        nnoremap <buffer> [l   :<C-u>LspPreviousDiagnostics<CR>
+        nnoremap <buffer> ]l   :<C-u>LspNextDiagnostic<CR>
+        nnoremap <buffer> [l   :<C-u>LspPreviousDiagnostic<CR>
         nnoremap <buffer> gA   :<C-u>LspCodeAction<CR>
         nnoremap <buffer> gd   :<C-u>LspDefinition<CR>
         nnoremap <buffer> gD   :<C-u>LspReferences<CR>

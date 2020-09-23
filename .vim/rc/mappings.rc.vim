@@ -26,9 +26,7 @@ endfunction
 nnoremap tst :<C-u>call ToggleExpandTab()<CR>
 
 " Tab
-nnoremap <M-n> :tabnew<CR>
-nnoremap <M-Left> :tabprevious<CR>
-nnoremap <M-Right> :tabnext<CR>
+nnoremap tn :tabnew<CR>
 
 " Indent keybind for shutcut
 nnoremap > >>
