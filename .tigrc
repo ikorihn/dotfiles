@@ -23,7 +23,7 @@ bind generic L !sh -c "git reflog --pretty=raw | tig --pretty=raw"
 bind generic _ ?git reset --hard HEAD@{"%(prompt Enter HEAD@{} number: )"}
 
 # commitハッシュをコピー
-bind main c @sh -c "echo %(commit) | pbcopy"
+bind main c ?sh -c "echo %(commit) | pbcopy"
 
 # ammend
 bind status + !git commit --amend
