@@ -195,6 +195,36 @@ function distinct -d "Returns a set of the distinct elements of coll."
   end
 end
 
+function multissh -d "SSH multiple server and send keys synchronously"
+  set -l session
+  if test -n "$SESSION_NAME"
+    set session $SESSION_NAME
+  else
+    set session "multi-ssh-"(date +%s)
+  end
+  set window "multi-ssh"
+
+  # tmuxのセッションを作成
+  tmux new-session -d -n $window -s $session
+
+  # 各ホストにsshログイン
+  # 最初の1台はsshするだけ
+  tmux send-keys "ssh $argv[1]" C-m
+  # 残りはpaneを作成してからssh
+  for i in $argv[2..-1]
+    tmux split-window
+    tmux select-layout tiled
+    tmux send-keys "ssh $i" C-m
+  end
+
+  # 最初のpaneを選択状態にする
+  tmux select-pane -t 0
+  # paneの同期モードを設定
+  tmux set-window-option synchronize-panes on
+  # セッションにアタッチ
+  tmux attach-session -t $session
+end
+
 test -e ~/.local_functions.fish; and source ~/.local_functions.fish
 test -e ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish
 

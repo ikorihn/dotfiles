@@ -1,7 +1,8 @@
 set -U fish_user_paths /usr/local/bin /usr/bin /bin /usr/sbin /sbin
 
 # NeoVim
-set XDG_CONFIG_HOME ~/.config
+set -xU XDG_CONFIG_HOME ~/.config
+set -xU EDITOR vim
 
 # Java
 set -U JAVA_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
@@ -16,7 +17,6 @@ set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
 
 # Go
 set -U fish_user_paths (go env GOPATH)/bin $fish_user_paths
-set -U GOPRIVATE "bitbucket.office.navitime.co.jp,alex.ntj.local"
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1
@@ -53,9 +53,23 @@ set -x manpath \
 
 set -xU POWERLINE_ROOT (python -c 'import site; print (site.getsitepackages()[0])')/powerline
 
+# https://github.com/oh-my-fish/theme-bobthefish
+set -U theme_powerline_fonts no
+set -U theme_nerd_fonts yes
+set -U theme_newline_cursor yes
+set -U theme_newline_prompt '$ '
+set -U theme_display_user ssh
+set -U theme_display_hostname ssh
+set -U theme_display_vi no
+set -U theme_display_date no
+set -U theme_display_cmd_duration no
+set -U theme_title_display_process yes
+set -U theme_title_use_abbreviated_path no
+
 # https://github.com/jethrokuan/fzf#usage
 set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_CTRL_T_COMMAND 'rg --files --hidden --follow --glob "!.git/*"'
-set -U FZF_CTRL_T_OPTS '--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
-set -U FZF_COMPLETION_TRIGGER '~~'
-set -U FZF_DEFAULT_COMMAND 'rg --hidden -g "!.git/*" -l ""'
+set -U FZF_FIND_FILE_COMMAND 'rg --files --hidden --follow --glob "!**/.git/*" $dir 2>/dev/null'
+set -U FZF_FIND_FILE_OPTS '--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+set -U FZF_TMUX 1
+set -U FZF_COMPLETE 3
+set -xU FZF_DEFAULT_COMMAND 'rg --hidden -g "!.git/*" -l ""'
