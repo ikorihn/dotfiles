@@ -8,9 +8,7 @@ nnoremap gj j
 nnoremap gk k
 noremap <Down> gj
 noremap <Up> gk
-
 nnoremap Y y$
-nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
@@ -32,11 +30,13 @@ nnoremap tn :tabnew<CR>
 nnoremap > >>
 nnoremap < <<
 
-" Not yank is delete operation
+" Register
 vnoremap x "_x
 nnoremap x "_x
 vnoremap s "_s
 nnoremap s "_s
+vnoremap <Leader>p "0p
+nnoremap <Leader>p "0p
 
 " Jump quickfix
 nnoremap <C-p> :<C-u>cp<CR>
@@ -133,4 +133,8 @@ function! s:Jq(...)
     endif
     execute "%! jq \"" . l:arg . "\""
 endfunction
+
+" util
+nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+command! Q quit
 

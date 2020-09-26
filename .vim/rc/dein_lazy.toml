@@ -16,6 +16,7 @@ hook_add = '''
 repo = 'machakann/vim-sandwich'
 on_event = 'InsertEnter'
 hook_source = '''
+	let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
     let g:sandwich#recipes += [
         \   {
         \     'buns'    : ['TagInput(1)', 'TagInput(0)'],
@@ -174,7 +175,7 @@ repo = 'kristijanhusak/defx-icons'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 depends = ['vimproc.vim']
-on_ft = ['python', 'go', 'sh']
+on_cmd = 'QuickRun'
 hook_add = '''
     " Running vimproc
     " Showing success is buffer and error is quickfix
@@ -198,8 +199,8 @@ hook_add = '''
     " Keymap
     let g:quickrun_no_default_key_mappings = 1
     " Running with close quickfix and save file
-    nnoremap <Leader>r :<C-U>QuickRun<CR>
-    xnoremap <Leader>r gv:<C-U>QuickRun<CR>
+    nnoremap <Leader>r :<C-U>QuickRun
+    xnoremap <Leader>r gv:<C-U>QuickRun
 
     " Stop quickrun is [C-c]
     nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
