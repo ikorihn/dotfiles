@@ -2,22 +2,20 @@
 autoload -Uz colors
 colors
 
-# powerlineを有効化
-powerline-daemon -q
-source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh 
+# # powerlineを有効化
+# powerline-daemon -q
+# source ${POWERLINE_ROOT}/bindings/zsh/powerline.zsh
 # キーバインド
 # emacs 風キーバインドにする
 bindkey -e
-# ^R で履歴検索をするときに * でワイルドカードを使用出来るようにする
-bindkey '^R' history-incremental-pattern-search-backward
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
-# # プロンプト
-# PROMPT="[%n]$ "
+# プロンプト
+PROMPT="[%~]$ "
 # autoload -Uz vcs_info
 # setopt prompt_subst
 # zstyle ':vcs_info:*' git
@@ -123,13 +121,10 @@ alias sudo='sudo '
 
 alias gcd='cd $(ghq list -p | fzf)'
 
-# グローバルエイリアス
-alias -g L='| less'
-alias -g G='| grep'
-
-
+<< "#__CO__"
 ########################################
 # zplug
+########################################
 export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -155,6 +150,7 @@ fi
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
+#__CO__
 
 ########################################
 # 開発設定
@@ -162,8 +158,6 @@ zplug load --verbose
 # eval "$(rbenv init -)"
 # Java
 # export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-
-
 ########################################
 # 関数
 fbr() {
@@ -259,12 +253,12 @@ fvim() {
 adb_screencap() {
   local DATE_TIME=`date +"%Y%m%d-%H%M%S"`
   local FILE_NAME=${DATE_TIME}.png
-   
+
   adb shell screencap -p /sdcard/${FILE_NAME}
   pushd ~/Desktop
   adb pull /sdcard/${FILE_NAME}
   adb shell rm /sdcard/${FILE_NAME}
-   
+
   mogrify -resize 300x -unsharp 2x1.4+0.5+0 \
           -colors 65 -quality 100 -verbose \
           ~/Desktop/${FILE_NAME}
@@ -291,7 +285,7 @@ urlencode() {
         -e 's/%2E/./g'
 }
 urlsort() {
-  tr "&" "\n" | tr "?" "\n" | sort 
+  tr "&" "\n" | tr "?" "\n" | sort
 }
 
 

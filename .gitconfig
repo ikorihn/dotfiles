@@ -28,6 +28,7 @@
 	merget = mergetool --dir-diff
 	st = status
 	sw = switch
+	swc = switch -c
 	br = branch
 	cp = cherry-pick
 	diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
@@ -51,3 +52,6 @@
 	helper = osxkeychain
 [pull]
 	ff = only
+
+[commit]
+	verbose = true

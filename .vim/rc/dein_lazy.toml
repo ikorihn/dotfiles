@@ -5,39 +5,45 @@
 repo = 'junegunn/vim-easy-align'
 on_map = ['<Plug>(EasyAlign)']
 hook_add = '''
-    vmap ga <Plug>(EasyAlign)
+    " Start interactive EasyAlign in visual mode (e.g. vipga)
+    xmap ga <Plug>(EasyAlign)
+
+    " Start interactive EasyAlign for a motion/text object (e.g. gaip)
+    nmap ga <Plug>(EasyAlign)
 '''
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
-
-[[plugins]]
-repo = 'mattn/emmet-vim'
-on_ft = ['html', 'djangohtml']
-
-#####################################################################
-# Programing util
-#####################################################################
-[[plugins]]
-repo = 'thinca/vim-quickrun'
-depends = ['vimproc.vim']
-on_ft = ['python', 'go']
+repo = 'machakann/vim-sandwich'
+on_event = 'InsertEnter'
 hook_source = '''
-  source ~/.vim/rc/plugins/vimquickrun.rc.vim
+	let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+    let g:sandwich#recipes += [
+        \   {
+        \     'buns'    : ['TagInput(1)', 'TagInput(0)'],
+        \     'expr'    : 1,
+        \     'filetype': ['html'],
+        \     'kind'    : ['add', 'replace'],
+        \     'action'  : ['add'],
+        \     'input'   : ['t'],
+        \   },
+        \ ]
+
+    function! TagInput(is_head) abort
+        if a:is_head
+            let s:TagLast = input('Tag: ')
+            if s:TagLast !=# ''
+                let tag = printf('<%s>', s:TagLast)
+            else
+                throw 'OperatorSandwichCancel'
+            endif
+        else
+            let tag = printf('</%s>', matchstr(s:TagLast, '^\a[^[:blank:]>/]*'))
+        endif
+        return tag
+    endfunction
+
 '''
 
-[[plugins]]
-repo = 'w0rp/ale'
-on_ft = ['go', 'python', 'javascript', 'html', 'css', 'markdown', 'make', 'vim']
-hook_source = '''
-    source ~/.vim/rc/plugins/ale.rc.vim
-'''
-
-[[plugins]]
-repo = 'ntpeters/vim-better-whitespace'
-hook_add = '''
-    nmap <Space>w :<C-u>StripWhitespace<CR>
-'''
 
 #####################################################################
 # Fuzzy Finder
@@ -59,14 +65,15 @@ on_cmd = [
   'Rg',
   'History',
   'Buffers',
+  'Snippets',
+  'Maps',
+  'Helptags',
 ]
 hook_add = '''
     command! -bang -nargs=* Rg
         \ call fzf#vim#grep(
-        \ 'rg --column --line-number --hidden --ignore-case --no-heading --color=always '.shellescape(<q-args>), 1,
-        \ <bang>0 ? fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'up:60%')
-        \ : fzf#vim#with_preview({'options': '--delimiter : --nth 4..'}, 'right:50%:hidden', '?'),
-        \ <bang>0)
+        \   'rg --column --line-number --hidden --no-heading --color=always --smart-case -g "!.git/*" -- '.shellescape(<q-args>), 1,
+        \   fzf#vim#with_preview(), <bang>0)
 
     fun! FzfOmniFiles()
         let is_git = system('git status')
@@ -86,28 +93,343 @@ hook_add = '''
 '''
 
 #####################################################################
-# Other Util
+# Filer
 #####################################################################
+[[plugins]]
+repo = 'Shougo/defx.nvim'
+if = "has('nvim')"
+on_cmd = 'Defx'
+depends = ['defx-icons']
+hook_add = '''
+	nnoremap <silent> <leader>f :<C-u>Defx<CR>
+
+    autocmd FileType defx call s:defx_my_settings()
+
+    function! s:defx_my_settings() abort
+        nnoremap <silent><buffer><expr> <CR>  defx#do_action('drop')
+        nnoremap <silent><buffer><expr> c     defx#do_action('copy')
+        nnoremap <silent><buffer><expr> m     defx#do_action('move')
+        nnoremap <silent><buffer><expr> p     defx#do_action('paste')
+        nnoremap <silent><buffer><expr> l     defx#do_action('drop')
+        nnoremap <silent><buffer><expr> t     defx#do_action('open','tabnew')
+        nnoremap <silent><buffer><expr> E     defx#do_action('drop', 'vsplit')
+        nnoremap <silent><buffer><expr> P     defx#do_action('drop', 'pedit')
+        nnoremap <silent><buffer><expr> o     defx#do_action('open_or_close_tree')
+        nnoremap <silent><buffer><expr> K     defx#do_action('new_directory')
+        nnoremap <silent><buffer><expr> N     defx#do_action('new_file')
+        nnoremap <silent><buffer><expr> M     defx#do_action('new_multiple_files')
+        nnoremap <silent><buffer><expr> C     defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
+        nnoremap <silent><buffer><expr> S     defx#do_action('toggle_sort', 'time')
+        nnoremap <silent><buffer><expr> d     defx#do_action('remove')
+        nnoremap <silent><buffer><expr> r     defx#do_action('rename')
+        nnoremap <silent><buffer><expr> !     defx#do_action('execute_command')
+        nnoremap <silent><buffer><expr> x     defx#do_action('execute_system')
+        nnoremap <silent><buffer><expr> yy    defx#do_action('yank_path')
+        nnoremap <silent><buffer><expr> .     defx#do_action('toggle_ignored_files')
+        nnoremap <silent><buffer><expr> ;     defx#do_action('repeat')
+        nnoremap <silent><buffer><expr> h     defx#do_action('cd', ['..'])
+        nnoremap <silent><buffer><expr> ~     defx#do_action('cd')
+        nnoremap <silent><buffer><expr> q     defx#do_action('quit')
+        nnoremap <silent><buffer><expr> <Tab> defx#do_action('toggle_select') . 'j'
+        nnoremap <silent><buffer><expr> *     defx#do_action('toggle_select_all')
+        nnoremap <silent><buffer><expr> j     line('.') == line('$') ? 'gg' : 'j'
+        nnoremap <silent><buffer><expr> k     line('.') == 1 ? 'G' : 'k'
+        nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw')
+        nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
+        nnoremap <silent><buffer><expr> cd    defx#do_action('change_vim_cwd')
+    endfunction
+'''
+hook_source = '''
+
+    call defx#custom#column('filename', {
+        \ 'directory_icon': '',
+        \ 'opened_icon': '',
+        \ })
+
+    call defx#custom#column('mark', {
+        \ 'readonly_icon': '✗',
+        \ 'selected_icon': '✓',
+        \ })
+
+    call defx#custom#option('_', {
+        \ 'winwidth': 40,
+        \ 'split': 'vertical',
+        \ 'direction': 'topleft',
+        \ 'show_ignored_files': 1,
+        \ 'buffer_name': 'exlorer',
+        \ 'toggle': 1,
+        \ 'resume': 1,
+        \ 'columns': 'mark:indent:icons:filename:type:size:time',
+        \ })
+'''
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'kristijanhusak/defx-icons'
+
+#####################################################################
+# Programing util
+#####################################################################
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+depends = ['vimproc.vim']
+on_cmd = 'QuickRun'
+hook_add = '''
+    " Running vimproc
+    " Showing success is buffer and error is quickfix
+    let g:quickrun_config = {
+        \ '_' : {
+            \ 'runner' : 'vimproc',
+            \ 'runner/vimproc/updatetime' : 40,
+            \ 'outputter' : 'error',
+            \ 'outputter/error/success' : 'buffer',
+            \ 'outputter/error/error'   : 'quickfix',
+            \ 'outputter/buffer/split' : ':botright 8sp',
+        \ }
+    \}
+
+    " Close quickfix is [q]
+
+    augroup MyQuickFixClose
+        au FileType qf nnoremap <silent><buffer>q :quit<CR>
+    augroup END
+
+    " Keymap
+    let g:quickrun_no_default_key_mappings = 1
+    " Running with close quickfix and save file
+    nnoremap <Leader>r :<C-U>QuickRun
+    xnoremap <Leader>r gv:<C-U>QuickRun
+
+    " Stop quickrun is [C-c]
+    nnoremap <expr><silent> <C-c> quickrun#is_running() ? quickrun#sweep_sessions() : "\<C-c>"
+'''
+
 [[plugins]]
 repo = 'Shougo/vimproc.vim'
 build = 'make'
 
+#####################################################################
+# Completion
+#####################################################################
 [[plugins]]
-repo = 'tpope/vim-fugitive'
-on_cmd = [
-  'Git',
-  'Gcommit',
-  'Gstatus',
-  'Gdiffsplit',
-  'Gblame',
-  'Glog'
-]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['python', 'go']
 hook_add = '''
-    nmap [fugitive] <Nop>
-    map <Space>g [fugitive]
-    nnoremap [fugitive]c :<C-u>Gcommit<CR>
-    nnoremap [fugitive]d :<C-u>Gdiff<CR>
-    nnoremap [fugitive]b :<C-u>Gblame<CR>
-    nnoremap [fugitive]l :<C-u>Glog<CR>
+    function! s:on_lsp_buffer_enabled() abort
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=yes
+
+        nnoremap <buffer> ]l   :<C-u>LspNextDiagnostic<CR>
+        nnoremap <buffer> [l   :<C-u>LspPreviousDiagnostic<CR>
+        nnoremap <buffer> gA   :<C-u>LspCodeAction<CR>
+        nnoremap <buffer> gd   :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gD   :<C-u>LspReferences<CR>
+        nnoremap <buffer> gs   :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> gS   :<C-u>LspWorkspaceSymbol<CR>
+        nnoremap <buffer> gQ   :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> gQ   :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> K    :<C-u>LspHover<CR>
+        nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
+        nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+    endfunction
+
+    augroup lsp_install
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
+    command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+    let g:lsp_diagnostics_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
+    " let g:asyncomplete_auto_popup = 1
+    " let g:asyncomplete_auto_completeopt = 0
+    let g:asyncomplete_popup_delay = 200
+    let g:lsp_text_edit_enabled = 1
+    let g:lsp_preview_float = 1
+    let g:lsp_diagnostics_float_cursor = 1
 '''
 
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_ft = ['python', 'go']
+hook_add = '''
+    let g:lsp_settings = {}
+    let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+    let g:lsp_settings['gopls'] = {
+        \  'workspace_config': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \  'initialization_options': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \}
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
+if = "has('python3')"
+on_ft=['python', 'go']
+depends = ['asyncomplete.vim', 'ultisnips']
+hook_source = '''
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+depends = ['vim-snippets']
+hook_add = '''
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-f>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+    let g:UltiSnipsEditSplit="vertical"
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+      \ 'name': 'buffer',
+      \ 'priority': 5,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#buffer#completor'),
+      \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+hook_source = '''
+  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+      \ 'name': 'file',
+      \ 'priority': 3,
+      \ 'whitelist': ['*'],
+      \ 'completor': function('asyncomplete#sources#file#completor'),
+      \ }))
+'''
+
+#####################################################################
+# Go
+#####################################################################
+[[plugins]]
+repo = 'mattn/vim-goimports'
+on_ft = ['go']
+
+#####################################################################
+# Python
+#####################################################################
+[[plugins]]
+repo = 'davidhalter/jedi-vim'
+on_ft = ['python']
+hook_source = '''
+    " Disable auto init
+    let g:jedi#auto_initialization = 1
+    let g:jedi#auto_vim_configuration = 0
+
+    " Disable auto complesions
+    let g:jedi#completions_enabled = 0
+    let g:jedi#popup_on_dot = 0
+    let g:jedi#smart_auto_mappings = 0
+    let g:jedi#show_call_signatures = 0
+
+    " Custom keymap
+    let g:jedi#goto_command = "<C-]>"
+    let g:jedi#goto_assignments_command = "<Localleader>g"
+    let g:jedi#goto_definitions_command = ""
+    let g:jedi#documentation_command = "K"
+    let g:jedi#usages_command = "<Localleader>n"
+    let g:jedi#rename_command = "<Localleader>R"
+'''
+
+#####################################################################
+# Web
+#####################################################################
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html', 'djangohtml']
+
+[[plugins]]
+repo = 'alvan/vim-closetag'
+on_ft = ['html', 'xhtml', 'javascript', 'typescript', 'javascript.jsx', 'typescript.tsx']
+hook_add = '''
+  let g:closetag_filenames='*.html'
+  let g:closetag_xhtml_filenames='*.jsx,*.tsx,*.vue'
+  let g:closetag_filetypes='html'
+  let g:closetag_xhtml_filetypes='jsx,tsx,javascript.jsx,typescript.tsx,vue'
+  let g:closetag_emptyTags_caseSensitive=1
+  let g:closetag_shortcut='>'
+'''
+
+#####################################################################
+# Markdown
+#####################################################################
+[[plugins]]
+repo = 'previm/previm'
+on_ft = ['markdown']
+hook_add = '''
+    let g:previm_open_cmd = "open -a 'Google Chrome'"
+'''
+
+#####################################################################
+# Markdown
+#####################################################################
+[[plugins]]
+repo = 'mattn/vim-maketable'
+on_ft = ['markdown']
+
+#####################################################################
+# View
+#####################################################################
+[[plugins]]
+repo = 'dhruvasagar/vim-table-mode'
+on_ft = ['markdown']
+hook_add = '''
+    let g:table_mode_corner = '|'
+    let g:table_mode_always_active = 1
+    let g:table_mode_syntax = 1
+    let g:table_mode_auto_align = 1
+
+    augroup TableCommands
+        autocmd!
+        autocmd FileType markdown nnoremap <silent><LocalLeader>a :<C-u>TableModeRealign<CR>
+        autocmd FileType markdown nnoremap <silent><LocalLeader>t :<C-u>Tableize<CR>
+        autocmd FileType markdown vnoremap <silent><LocalLeader>t :<C-u>'<,'>Tableize<CR>
+    augroup END
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = ['toml']
+
+[[plugins]]
+repo = 'elzr/vim-json'
+on_ft = ['json']
+hook_source = '''
+    let g:vim_json_syntax_conceal = 0
+    let g:indentLine_noConcealCursor = ""
+'''
+
+#####################################################################
+# Other Util
+#####################################################################

@@ -21,6 +21,8 @@ alias zfzf 'cd (z -l | fzf | awk "{ print \$2 }")'
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo 'sudo '
 
+alias tl 'todoist --project-namespace --namespace --color list -f "#Work"'
+alias tge 'toggl stop'
 
 ########################################
 # 関数
@@ -92,7 +94,7 @@ function adb_pull_file -d 'ファイルを取得する'
   end
   adb pull /sdcard/$FILE_NAME $DIRECTORY/$FILE_NAME
   adb shell rm /sdcard/$FILE_NAME
-end 
+end
 
 function adb_screencap -d 'キャプチャを撮ってサイズを変更'
   set DATE_TIME (date +"%Y-%m-%dT%H-%M-%S")
@@ -102,11 +104,11 @@ function adb_screencap -d 'キャプチャを撮ってサイズを変更'
   test -z $DEST_DIR; and set DEST_DIR ~/Desktop
   set SIZE $argv[2]
   test -z $SIZE; and set SIZE 300x
-   
+
   adb shell screencap -p /sdcard/$FILE_NAME
 
   adb_pull_file $FILE_NAME $DEST_DIR
-   
+
   mogrify -resize $SIZE -unsharp 2x1.4+0.5+0 -quality 100 -verbose $DEST_DIR/$FILE_NAME
 end
 
@@ -194,6 +196,74 @@ function distinct -d "Returns a set of the distinct elements of coll."
     end
   end
 end
+
+function multissh -d "SSH multiple server and send keys synchronously"
+  set -l session
+  if test -n "$SESSION_NAME"
+    set session $SESSION_NAME
+  else
+    set session "multi-ssh-"(date +%s)
+  end
+  set window "multi-ssh"
+
+  # tmuxのセッションを作成
+  tmux new-session -d -n $window -s $session
+
+  # 各ホストにsshログイン
+  # 最初の1台はsshするだけ
+  tmux send-keys "ssh $argv[1]" C-m
+  # 残りはpaneを作成してからssh
+  for i in $argv[2..-1]
+    tmux split-window
+    tmux select-layout tiled
+    tmux send-keys "ssh $i" C-m
+  end
+
+  # 最初のpaneを選択状態にする
+  tmux select-pane -t 0
+  # paneの同期モードを設定
+  tmux set-window-option synchronize-panes on
+  # セッションにアタッチ
+  tmux attach-session -t $session
+end
+
+function toggltask -d 'start/stop toggl from todoist'
+  set current (toggl current)
+  if test "$current" != "No time entry"
+    echo "$current"
+    read -p 'echo "stop it?(y/n) >"' yn
+    if test $yn = "y"
+      toggl stop
+    else
+      echo "keep timer"
+      return 0
+    end
+  end
+
+  set selected_item_id (todoist --project-namespace --namespace list | fzf | cut -d ' ' -f 1)
+  if test -z $selected_item_id
+    return 0
+  end
+  set selected_item_content (todoist --csv show $selected_item_id | grep Content | cut -d',' -f2- | sed s/\"//g)
+
+  if test -n $selected_item_content
+    echo "start $selected_item_content"
+    toggl start "$selected_item_content"
+  end
+end
+
+function toggl_status -d 'Togglのステータスを表示'
+  if [ (toggl --cache --csv current | head -n1) = "No time entry" ]
+    echo -n "No time entry"
+    return
+  end
+
+  set -l tgc_time (toggl --cache --csv current | grep Duration | cut -d ',' -f 2)
+  set -l tgc_dsc (toggl --cache --csv current | grep Description | cut -d ',' -f 2 | cut -c 1-20)
+
+  echo -n "$tgc_time $tgc_dsc"
+end
+
 
 test -e ~/.local_functions.fish; and source ~/.local_functions.fish
 test -e ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish

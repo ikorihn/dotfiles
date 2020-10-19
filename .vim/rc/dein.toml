@@ -1,28 +1,21 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+####
+# colorscheme
+####
 [[plugins]]
 repo = 'vim-scripts/wombat256.vim'
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-    let g:lightline = {
-        \ 'colorscheme': 'wombat',
-        \ 'active': {
-        \   'left':  [ ['mode', 'paste'], ['readonly', 'myfilename', 'modified'], ],
-        \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'ale_ok', 'ale_warning', 'ale_error', 'char_code', 'fileformat', 'fileencoding', 'filetype' ], ],
-        \ },
-        \ 'component_function': {
-        \   'myfilename': 'LightlineFilename',
-        \ },
-        \ }
+repo = 'cocopon/iceberg.vim'
 
-    function! LightlineFilename()
-        return ('' != expand('%') ? expand('%') : '[No Name]')
-    endfunction
-'''
+[[plugins]]
+repo = 'joshdick/onedark.vim'
 
+####
+# Git
+####
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
@@ -32,15 +25,76 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'machakann/vim-sandwich'
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+    nmap [fugitive] <Nop>
+    map <leader>g [fugitive]
+    nnoremap <silent> [fugitive]s :Gstatus<CR><C-w>T
+    nnoremap <silent> [fugitive]a :Gwrite<CR>
+    nnoremap <silent> [fugitive]c :Gcommit-v<CR>
+    nnoremap <silent> [fugitive]b :Gblame<CR>
+    nnoremap <silent> [fugitive]d :Gdiff<CR>
+    nnoremap <silent> [fugitive]m :Gmerge<CR>
+'''
 
+####
+# View
+####
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+        \ 'colorscheme': 'onedark',
+        \ 'active': {
+        \   'left':  [ ['mode', 'paste'], ['gitbranch', 'readonly', 'myfilename', 'modified'], ],
+        \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'ale_ok', 'ale_warning', 'ale_error', 'char_code', 'fileformat', 'fileencoding', 'filetype' ], ],
+        \ },
+        \ 'component_function': {
+        \   'myfilename': 'LightlineFilename',
+        \   'gitbranch': 'FugitiveHead',
+        \ },
+        \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+        \ }
+
+    function! LightlineFilename()
+        return ('' != expand('%') ? expand('%') : '[No Name]')
+    endfunction
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+hook_add = '''
+    nmap <leader>w :<C-u>ToggleWhitespace<CR>
+'''
+
+[[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+
+####
+# Motion
+####
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+hook_add = '''
+    let g:camelcasemotion_key = '<leader>'
+'''
+
+####
+# Edit util
+####
 [[plugins]]
 repo = 'mattn/sonictemplate-vim'
 
 [[plugins]]
-repo = 'Shougo/defx.nvim'
-if = "has('nvim')"
-build = ':UpdateRemotePlugins'
-hook_add = '''
-    source ~/.vim/rc/plugins/defx.rc.vim
-'''
+repo = 'terryma/vim-multiple-cursors'
+

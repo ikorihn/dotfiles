@@ -4,12 +4,9 @@
 			{
 				"function": "powerline.segments.common.env.cwd",
 				"args": {
+					"dir_shorten_len": 1,
 					"use_path_separator": true
 				}
-			},
-			{
-				"function": "powerline.segments.common.sys.uptime",
-				"priority": 50
 			},
 			{
 				"function": "powerline.segments.common.time.date",

@@ -1,3 +1,4 @@
+set shell=bash\ -l
 
 " File encoding
 if !exists ('g:encoding_set') || !has('nvim')
@@ -14,8 +15,6 @@ set backupdir=$HOME/.vim/backup
 set noswapfile
 set undodir=$HOME/.vim/undo
 set undofile
-
-set autochdir
 
 " Show column number
 set number
@@ -100,32 +99,13 @@ elseif executable('pt')
     set grepformat=%f:%l:%c:%m
 endif
 
-" jq command
-command! -nargs=? Jq call s:Jq(<f-args>)
-function! s:Jq(...)
-    if 0 == a:0
-        let l:arg = "."
-    else
-        let l:arg = a:1
-    endif
-    execute "%! jq \"" . l:arg . "\""
-endfunction
-
-" Number of characters to apply syntax per line
-set synmaxcol=512
-
-" Disable sql omni complete
-let g:omni_sql_no_default_maps = 1
-
 " View
 set cmdheight=2
-set laststatus=2    "ステータスラインを常に表示する
+"set laststatus=2    "ステータスラインを常に表示する
 set matchpairs=(:),{:},<:>,[:]
 set matchtime=1     "showmatchの表示時間
 set ruler           "座標を表示する
 set showcmd         "入力中のコマンドを表示する
 set showmatch       "閉じ括弧の入力時に対応する括弧を表示する
-set title           "編集中のファイル名を表示する
-hi ZenkakuSpace gui=underline guibg=DarkBlue cterm=underline ctermfg=LightBlue " 全角スペースの定義
-match ZenkakuSpace /　/ " 全角スペースの色を変更
+"set title           "編集中のファイル名を表示する
 

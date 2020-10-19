@@ -1,3 +1,5 @@
+let mapleader = ","
+
 " Multi line move
 inoremap jj <ESC>
 nnoremap j gj
@@ -6,35 +8,35 @@ nnoremap gj j
 nnoremap gk k
 noremap <Down> gj
 noremap <Up> gk
-
 nnoremap Y y$
-nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
 nnoremap ts8 :<C-u>setl shiftwidth=8 softtabstop=8<CR>
-
-" Resize window
-noremap <C-w>> 10<C-w>>
-noremap <C-w>< 10<C-w><
-noremap <C-w>+ 10<C-w>+
-noremap <C-w>- 10<C-w>-
+function! ToggleExpandTab()
+    if &expandtab
+        set noexpandtab
+    else
+        set expandtab
+    endif
+endfunction
+nnoremap tst :<C-u>call ToggleExpandTab()<CR>
 
 " Tab
-nnoremap <M-n> :tabnew<CR>
-nnoremap <M-Left> :tabprevious<CR>                                                                            
-nnoremap <M-Right> :tabnext<CR>
+nnoremap tn :tabnew<CR>
 
 " Indent keybind for shutcut
 nnoremap > >>
 nnoremap < <<
 
-" Not yank is delete operation
+" Register
 vnoremap x "_x
 nnoremap x "_x
 vnoremap s "_s
 nnoremap s "_s
+vnoremap <Leader>p "0p
+nnoremap <Leader>p "0p
 
 " Jump quickfix
 nnoremap <C-p> :<C-u>cp<CR>
@@ -58,7 +60,7 @@ function! ToggleQuickfix()
         cclose
     endif
 endfunction
-nnoremap <script> <silent> <Space>q :call ToggleQuickfix()<CR>
+nnoremap <script> <silent> <Leader>q :call ToggleQuickfix()<CR>
 
 " Jump locationlist
 nnoremap [t :<C-u>lp<CR>
@@ -80,12 +82,11 @@ function! ToggleLocationlist()
         lclose
     endif
 endfunction
-nnoremap <script> <Space>t :call ToggleLocationlist()<CR>
-
+nnoremap <script> <Leader>t :call ToggleLocationlist()<CR>
 
 " Grep astarisk text
-nnoremap <Space>gg :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>'<CR>
-nnoremap <Space>gl :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>' %<CR>
+nnoremap <Leader>gg :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>'<CR>
+nnoremap <Leader>gl :<C-u>grep '<C-r>=<SID>convert_pattern(@/)<CR>' %<CR>
 function! s:convert_pattern(pat)
     let chars = split(a:pat, '\zs')
     let len = len(chars)
@@ -122,16 +123,18 @@ cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-d> <Del>
 
-
-" Rename current file
-function! RenameFile() abort
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'))
-  if new_name !=# '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
+" jq command
+command! -nargs=? Jq call s:Jq(<f-args>)
+function! s:Jq(...)
+    if 0 == a:0
+        let l:arg = "."
+    else
+        let l:arg = a:1
+    endif
+    execute "%! jq \"" . l:arg . "\""
 endfunction
-noremap <Space>R :call RenameFile()<cr>
+
+" util
+nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+command! Q quit
 
