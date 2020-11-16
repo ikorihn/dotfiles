@@ -2,7 +2,7 @@ set -U fish_user_paths /usr/local/bin /usr/bin /bin /usr/sbin /sbin
 
 # NeoVim
 set -xU XDG_CONFIG_HOME ~/.config
-set -xU EDITOR vim
+set -xU EDITOR nvim
 
 # Java
 set -U JAVA_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
@@ -29,6 +29,11 @@ end
 if command -v rbenv 1>/dev/null 2>&1
   status --is-interactive; and source (rbenv init -|psub)
   set -U fish_user_paths $HOME/.rbenv/shims $fish_user_paths
+end
+
+# direnv
+if command -v direnv 1>/dev/null 2>&1
+  eval (direnv hook fish)
 end
 
 # flutter
@@ -72,4 +77,4 @@ set -U FZF_FIND_FILE_COMMAND 'rg --files --hidden --follow --glob "!**/.git/*" $
 set -U FZF_FIND_FILE_OPTS '--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
 set -U FZF_TMUX 1
 set -U FZF_COMPLETE 3
-set -xU FZF_DEFAULT_COMMAND 'rg --hidden -g "!.git/*" -l ""'
+set -xU FZF_DEFAULT_COMMAND 'rg --hidden -g "!**/.git/*" -l ""'

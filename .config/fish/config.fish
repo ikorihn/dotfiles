@@ -24,6 +24,9 @@ alias sudo 'sudo '
 alias tl 'todoist --project-namespace --namespace --color list -f "#Work"'
 alias tge 'toggl stop'
 
+alias sourceconf 'source ~/.config/fish/config.fish'
+alias sourceenv 'source ~/.config/fish/conf.d/000-env.fish'
+
 ########################################
 # 関数
 function fbr
@@ -198,6 +201,12 @@ function distinct -d "Returns a set of the distinct elements of coll."
 end
 
 function multissh -d "SSH multiple server and send keys synchronously"
+  set servers $argv
+  while read -l line
+    set servers $servers $line
+  end
+  test -z "$servers"; and return
+
   set -l session
   if test -n "$SESSION_NAME"
     set session $SESSION_NAME
@@ -211,9 +220,9 @@ function multissh -d "SSH multiple server and send keys synchronously"
 
   # 各ホストにsshログイン
   # 最初の1台はsshするだけ
-  tmux send-keys "ssh $argv[1]" C-m
+  tmux send-keys "ssh $servers[1]" C-m
   # 残りはpaneを作成してからssh
-  for i in $argv[2..-1]
+  for i in $servers[2..-1]
     tmux split-window
     tmux select-layout tiled
     tmux send-keys "ssh $i" C-m
@@ -227,7 +236,19 @@ function multissh -d "SSH multiple server and send keys synchronously"
   tmux attach-session -t $session
 end
 
-function toggltask -d 'start/stop toggl from todoist'
+# Toggl, Todoist
+
+function todoist_close
+  set -l task (tl | fzf | awk '{ print $1 }')
+  echo $task
+  if [ -z $task ]
+    return
+  end
+  todoist close $task
+end
+
+function tt -d 'start/stop toggl from todoist'
+  todoist sync
   set current (toggl current)
   if test "$current" != "No time entry"
     echo "$current"
@@ -240,16 +261,24 @@ function toggltask -d 'start/stop toggl from todoist'
     end
   end
 
-  set selected_item_id (todoist --project-namespace --namespace list | fzf | cut -d ' ' -f 1)
-  if test -z $selected_item_id
+  set selected_item_content (todoist --project-namespace --namespace --csv list -f '#Work' | fzf | cut -d ',' -f 6)
+  if test -z $selected_item_content
     return 0
   end
-  set selected_item_content (todoist --csv show $selected_item_id | grep Content | cut -d',' -f2- | sed s/\"//g)
 
   if test -n $selected_item_content
     echo "start $selected_item_content"
-    toggl start "$selected_item_content"
+    toggl_start "$selected_item_content"
   end
+end
+
+function toggl_start
+  set -l pj (toggl projects | fzf | awk '{ print $1 }')
+  if [ -z $pj ]
+    return
+  end
+
+  toggl start -P $pj $argv[1]
 end
 
 function toggl_status -d 'Togglのステータスを表示'
