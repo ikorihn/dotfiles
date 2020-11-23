@@ -55,3 +55,4 @@
 
 [commit]
 	verbose = true
+	template = ~/.git_commit_template
