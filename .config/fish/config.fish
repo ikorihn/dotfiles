@@ -21,6 +21,7 @@ alias zfzf 'cd (z -l | fzf | awk "{ print \$2 }")'
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo 'sudo '
 
+alias ta 'todoist add -P 2227975550'
 alias tl 'todoist --project-namespace --namespace --color list -f "#Work"'
 alias tge 'toggl stop'
 
@@ -207,16 +208,16 @@ function multissh -d "SSH multiple server and send keys synchronously"
   end
   test -z "$servers"; and return
 
-  set -l session
-  if test -n "$SESSION_NAME"
-    set session $SESSION_NAME
-  else
-    set session "multi-ssh-"(date +%s)
-  end
-  set window "multi-ssh"
+  # set -l session
+  # if test -n "$SESSION_NAME"
+  #   set session $SESSION_NAME
+  # else
+  #   set session "multi-ssh-"(date +%s)
+  # end
+  # set window "multi-ssh"
 
-  # tmuxのセッションを作成
-  tmux new-session -d -n $window -s $session
+  # # tmuxのセッションを作成
+  # tmux new-session -d -n $window -s $session
 
   # 各ホストにsshログイン
   # 最初の1台はsshするだけ
@@ -233,7 +234,7 @@ function multissh -d "SSH multiple server and send keys synchronously"
   # paneの同期モードを設定
   tmux set-window-option synchronize-panes on
   # セッションにアタッチ
-  tmux attach-session -t $session
+  # tmux attach-session -t $session
 end
 
 # Toggl, Todoist
@@ -252,12 +253,12 @@ function tt -d 'start/stop toggl from todoist'
   set current (toggl current)
   if test "$current" != "No time entry"
     echo "$current"
-    read -p 'echo "stop it?(y/n) >"' yn
-    if test $yn = "y"
-      toggl stop
-    else
+    read -p 'echo "stop it?(Y/n) > "' yn
+    if test $yn = "n"
       echo "keep timer"
       return 0
+    else
+      toggl stop
     end
   end
 
@@ -282,6 +283,10 @@ function toggl_start
 end
 
 function toggl_status -d 'Togglのステータスを表示'
+  if ! type -q toggl
+    return
+  end
+
   if [ (toggl --cache --csv current | head -n1) = "No time entry" ]
     echo -n "No time entry"
     return
