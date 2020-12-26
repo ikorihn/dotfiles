@@ -37,6 +37,8 @@ nnoremap < <<
 "nnoremap s "_s
 vnoremap <Leader>p "0p
 nnoremap <Leader>p "0p
+vnoremap <Leader>P "0P
+nnoremap <Leader>P "0P
 
 " Jump quickfix
 nnoremap <C-p> :<C-u>cp<CR>
