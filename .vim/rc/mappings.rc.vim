@@ -1,4 +1,4 @@
-let mapleader = " "
+let mapleader = ","
 
 " Multi line move
 inoremap jj <ESC>

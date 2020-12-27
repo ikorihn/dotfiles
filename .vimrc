@@ -40,11 +40,18 @@ if dein#check_install()
   call dein#install()
 endif
 
-"let s:removed_plugins = dein#check_clean()
-"if len(s:removed_plugins) > 0
-"  call map(s:removed_plugins, "delete(v:val, 'rf')")
-"  call dein#recache_runtimepath()
-"endif
+" プラグインアップデート ちょっと時間かかるのでコメントアウト
+" let g:dein#install_github_api_token = expand('$GITHUB_ACCESS_TOKEN_DEIN')
+" if dein#check_update()
+"   call dein#update()
+" endif
+
+" プラグイン削除
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
 
 " Colors
 set t_Co=256

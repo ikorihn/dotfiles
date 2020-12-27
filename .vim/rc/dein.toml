@@ -92,6 +92,15 @@ hook_add = '''
     let g:camelcasemotion_key = '<leader>'
 '''
 
+[[plugins]]
+repo = 'ripxorip/aerojump.nvim'
+hook_add = '''
+    nmap <Leader>as <Plug>(AerojumpSpace)
+    nmap <Leader>ab <Plug>(AerojumpBolt)
+    nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
+    nmap <Leader>ad <Plug>(AerojumpDefault) " Boring mode
+'''
+
 ####
 # Edit util
 ####
