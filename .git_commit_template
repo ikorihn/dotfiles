@@ -1,25 +1,39 @@
 
 # ==== Prefix ====
-# fix: バグ以外の修正
-# bugfix: バグ修正
-# feat: 機能追加
-# docs: ドキュメント
-# style: フォーマット
-# refactor: 整理
-# test: ユニットテスト
-# chore: ビルドツールやライブラリで自動生成されたものをコミット
+# fix      | バグ以外の修正
+# bugfix   | バグ修正
+# feat     | 機能追加
+# docs     | ドキュメント
+# style    | フォーマット
+# refactor | 整理
+# test     | ユニットテスト
+# chore    | ビルドツールやライブラリで自動生成されたものをコミット
 
-# ==== Emojis ====
-# :bug:         バグ修正 (fix)
-# :+1:          機能改善 (fix/feat)
-# :sparkles:    部分的な機能追加 (feat)
-# :tada:        盛大に祝うべき大きな機能追加 (feat)
-# :rocket:      パフォーマンス改善 (feat)
-# :lock:        新機能の公開範囲の制限 (feat)
-# :cop:         セキュリティ関連の改善 (feat)
-# :note:        ドキュメント修正 (docs)
-# :shirt:       Lintエラーの修正やコードスタイルの修正 (style)
-# :recycle:     リファクタリング (refactor)
-# :shower:      不要な機能・使われなくなった機能の削除 (refactor)
-# :green_heart: テストやCIの修正・改善 (test)
-# :up:          依存パッケージなどのアップデート (chore)
+# === Emoji prefix ===
+# :zap:                      | ⚡ | 通常アップデート
+# :tada:                     | 🎉 | 盛大に祝うべき大きな機能追加 (feat)
+# :sparkles:                 | ✨ | 部分的な機能追加 (feat)
+# :bug:                      | 🐛 | Bugfix
+# :wrench:                   | 🔧 | 設定ファイル(config)
+# :books:                    | 📚 | ドキュメント修正 (docs)
+# :horse:                    | 🐎 | パフォーマンス改善 (feat)
+# :art:                      | 🎨 | デザイン・UI/UX(Accessibility)
+# :rotating_light:           | 🚨 | ユニットテスト
+# :green_heart:              | 💚 | CI/CD、ビルド
+# :hammer:                   | 🔨 | リファクタリング (refactor)
+# :fire:                     | 🔥 | 不要な機能・使われなくなった機能の削除 (remove)
+# :bookmark:                 | 🔖 | Version tag
+# :heavy_plus_sign:          | ➕ | 依存関係の追加
+# :heavy_minus_sign:         | ➖ | 依存関係の削除
+
+# === optional ===
+# :arrow_up:                 | ⬆️ | Upgrading dependencies
+# :arrow_down:               | ⬇️ | Downgrading dependencies
+# :shirt:                    | 👕 | Lintエラーの修正やコードスタイルの修正 (style)
+# :ambulance:                | 🚑 | Critical hotfix
+# :construction:             | 🚧 | Work in progress
+# :chart_with_upwards_trend: | 📈 | Analytics or tracking code
+# :whale:                    | 🐳 | Docker
+# :rewind:                   | ⏪ | Reverting changes
+# :boom:                     | 💥 | Breaking changes
+# :ok_hand:                  | 👌 | Code review changes
