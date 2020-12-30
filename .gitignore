@@ -9,10 +9,14 @@ _viminfo
 .config/karabiner/automatic_backups
 .config/fish/*
 !.config/fish/config.fish
+!.config/fish/fish_plugins
 !.config/fish/fishfile
 !.config/fish/conf.d
 .config/fish/conf.d/*
 !.config/fish/conf.d/000-env.fish
+!.config/fish/functions
+.config/fish/functions/*
+!.config/fish/functions/fish_prompt.fish
 
 # Asr
 Asr/Bar/
