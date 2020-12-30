@@ -1154,6 +1154,25 @@ function __bobthefish_timestamp -S -d 'Show the current timestamp'
     echo -n ' '
 end
 
+# toggl
+function __toggl_status -d 'toggl status'
+    if ! type -q toggl
+        return
+    end
+    echo -n '[ '
+    set -l current (toggl --cache --csv current)
+    if [ "$current" = "No time entry" ]
+        echo -n "$current"
+        echo -n ' ]'
+        return
+    end
+
+    set task (toggl --cache --csv current | grep Description | cut -d ',' -f 2 | cut -c 1-20)
+    echo -n "$task"
+    echo -n ' ]'
+end
+
+
 # ==============================
 # Apply theme
 # ==============================
@@ -1223,6 +1242,8 @@ function fish_prompt -d 'bobthefish, a fish theme optimized for awesome'
 
     __bobthefish_cmd_duration
     __bobthefish_timestamp
+
+    __toggl_status
 
     __bobthefish_finish_segments
 end
