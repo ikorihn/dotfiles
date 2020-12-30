@@ -65,9 +65,12 @@ set -U theme_newline_cursor yes
 set -U theme_newline_prompt '$ '
 set -U theme_display_user ssh
 set -U theme_display_hostname ssh
-set -U theme_display_vi no
-set -U theme_display_date no
+set -U theme_display_vi yes
+set -U theme_display_date yes
+set -U theme_display_date yes
+set -U theme_date_format "+%Y-%m-%dT%H:%M:%S"
 set -U theme_display_cmd_duration no
+set -U theme_color_scheme dracula
 set -U theme_title_display_process yes
 set -U theme_title_use_abbreviated_path no
 
