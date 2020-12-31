@@ -15,6 +15,7 @@ alias mv 'mv -i'
 
 alias vim 'nvim'
 alias view 'vim -R'
+alias vimdiff 'nvim -d'
 
 # zでfzf
 alias zfzf 'cd (z -l | fzf | awk "{ print \$2 }")'

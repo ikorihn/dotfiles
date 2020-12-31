@@ -1167,7 +1167,7 @@ function __toggl_status -d 'toggl status'
         return
     end
 
-    set task (toggl --cache --csv current | grep Description | cut -d ',' -f 2 | cut -c 1-20)
+    set task (toggl --cache --csv current | grep Description | cut -d ',' -f 2)
     echo -n "$task"
     echo -n ' ]'
 end
