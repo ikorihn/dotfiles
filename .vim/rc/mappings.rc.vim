@@ -10,6 +10,13 @@ noremap <Down> gj
 noremap <Up> gk
 nnoremap Y y$
 
+" Dangerous key
+nnoremap ZQ    <Nop>
+nnoremap ZZ    <Nop>
+" Ex mode
+nnoremap gQ    gq
+inoremap <C-C> <Esc>
+
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
