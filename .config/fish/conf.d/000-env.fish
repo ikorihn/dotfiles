@@ -5,7 +5,6 @@ set -xU XDG_CONFIG_HOME ~/.config
 set -xU EDITOR nvim
 
 # Java
-set -U JAVA_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
 set -U fish_user_paths $JAVA_HOME/bin $fish_user_paths
 
 # Android

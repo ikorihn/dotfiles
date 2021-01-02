@@ -1144,6 +1144,11 @@ function __bobthefish_timestamp -S -d 'Show the current timestamp'
     [ "$theme_display_date" = "no" ]
     and return
 
+    set -l segment_color $color_path
+    set -l segment_basename_color $color_path_basename
+
+    __bobthefish_start_segment $segment_color
+
     set -q theme_date_format
     or set -l theme_date_format "+%c"
 
@@ -1152,6 +1157,9 @@ function __bobthefish_timestamp -S -d 'Show the current timestamp'
         and env TZ="$theme_date_timezone" echo -n (date $theme_date_format)
         or echo -n (date $theme_date_format)
     echo -n ' '
+
+    set_color -b $segment_basename_color
+
 end
 
 # toggl
@@ -1159,6 +1167,12 @@ function __toggl_status -d 'toggl status'
     if ! type -q toggl
         return
     end
+
+    set -l segment_color $color_path
+    set -l segment_basename_color $color_path_basename
+
+    __bobthefish_start_segment $segment_color
+
     echo -n '[ '
     set -l current (toggl --cache --csv current)
     if [ "$current" = "No time entry" ]
@@ -1170,6 +1184,8 @@ function __toggl_status -d 'toggl status'
     set task (toggl --cache --csv current | grep Description | cut -d ',' -f 2)
     echo -n "$task"
     echo -n ' ]'
+
+    set_color -b $segment_basename_color
 end
 
 
