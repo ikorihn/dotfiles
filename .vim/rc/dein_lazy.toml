@@ -190,6 +190,12 @@ hook_add = '''
         \ }
     \}
 
+    let g:quickrun_config.cpp = {
+        \ 'command': 'g++',
+        \ 'input': 'input',
+        \ 'runner': 'system'
+        \ }
+
     " Close quickfix is [q]
 
     augroup MyQuickFixClose
@@ -218,7 +224,7 @@ repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['python', 'go']
+on_ft = ['python', 'go', 'cpp']
 hook_add = '''
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
@@ -243,6 +249,16 @@ hook_add = '''
         autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
     augroup END
     command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+    if executable('ccls')
+       au User lsp_setup call lsp#register_server({
+          \ 'name': 'ccls',
+          \ 'cmd': {server_info->['ccls']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+          \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+          \ })
+    endif
 
     let g:lsp_diagnostics_enabled = 1
     let g:lsp_diagnostics_echo_cursor = 1
@@ -275,13 +291,13 @@ repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go']
+on_ft = ['python', 'go', 'cpp']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
 if = "has('python3')"
-on_ft=['python', 'go']
+on_ft=['python', 'go', 'cpp']
 depends = ['asyncomplete.vim', 'ultisnips']
 hook_source = '''
     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
@@ -307,7 +323,7 @@ repo = 'honza/vim-snippets'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp']
 hook_source = '''
   autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
       \ 'name': 'buffer',
@@ -319,7 +335,7 @@ hook_source = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-file.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp']
 hook_source = '''
   autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
       \ 'name': 'file',
