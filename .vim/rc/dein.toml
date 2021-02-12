@@ -13,6 +13,9 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'joshdick/onedark.vim'
 
+[[plugins]]
+repo = 'dracula/vim'
+
 ####
 # Git
 ####
@@ -79,6 +82,9 @@ repo = 'simeji/winresizer'
 
 [[plugins]]
 repo = 'luochen1990/rainbow'
+
+[[plugins]]
+repo = 'chrisbra/csv.vim'
 
 ####
 # Motion

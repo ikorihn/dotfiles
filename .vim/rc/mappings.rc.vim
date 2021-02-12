@@ -147,3 +147,26 @@ endfunction
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 command! Q quit
 
+" URL encode/decode selection
+vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+
+" csvファイルハイライト「:Csvhl [数値]」 と打つと、csvファイルで[数値]カラム目のハイライトをしてくれる
+function! CSVH(x)
+    execute 'match Keyword /^\([^,]*,\)\{'.a:x.'}\zs[^,]*/'
+    execute 'normal ^'.a:x.'f,'
+endfunction
+command! -nargs=1 Csvhl :call CSVH(<args>)
+" 「:Csvs」と打つと、現在のカラムをハイライトしてくれる
+command! Csvs :call CSVH(strlen(substitute(getline('.')[0:col('.')-1], "[^,]", "", "g")))
+" Csv系のコマンドのハイライトを消す
+command! Csvn execute 'match none'
+
+" csvのn列目を取り出す
+function! GetCsvCol(n)
+    let linenum = 1
+    for aline in getbufline(".",1,"$")
+        call setline(linenum,split(aline,",")[a:n])
+        let linenum=linenum+1
+    endfor
+endfunction

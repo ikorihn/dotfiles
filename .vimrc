@@ -47,15 +47,15 @@ endif
 " endif
 
 " プラグイン削除
-let s:removed_plugins = dein#check_clean()
-if len(s:removed_plugins) > 0
-  call map(s:removed_plugins, "delete(v:val, 'rf')")
-  call dein#recache_runtimepath()
-endif
+"let s:removed_plugins = dein#check_clean()
+"if len(s:removed_plugins) > 0
+"  call map(s:removed_plugins, "delete(v:val, 'rf')")
+"  call dein#recache_runtimepath()
+"endif
 
 " Colors
 set t_Co=256
 set background=dark
 syntax on
 filetype plugin indent on
-colorscheme onedark
+colorscheme dracula
