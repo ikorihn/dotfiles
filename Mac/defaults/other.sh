@@ -27,3 +27,7 @@ defaults write com.apple.screencapture disable-shadow -bool true    # スクリ�
 defaults write com.apple.screencapture type -string "png"    # スクリーンショットの保存形式を PNG にする
 defaults write com.apple.terminal StringEncodings -array 4    # UTF-8 のみを使用する
 sudo nvram SystemAudioVolume=" "    # ブート時のサウンドを無効化する
+
+# スクリーンショット
+defaults write com.apple.screencapture name "screenshot"
+#defaults write com.apple.screencapture include-date -bool false
