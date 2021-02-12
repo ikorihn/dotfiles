@@ -25,7 +25,6 @@ alias sudo 'sudo '
 alias ta 'todoist add -P 2227975550'
 alias tl 'todoist --project-namespace --namespace --color list -f "#Work"'
 alias tge 'toggl stop'
-
 alias sourceconf 'source ~/.config/fish/config.fish'
 alias sourceenv 'source ~/.config/fish/conf.d/000-env.fish'
 
@@ -299,6 +298,9 @@ function toggl_status -d 'Togglのステータスを表示'
   echo -n "$tgc_time $tgc_dsc"
 end
 
+function cb -d 'クリップボード履歴を表示&fzfでコピー'
+  copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
+end
 
 test -e ~/.local_functions.fish; and source ~/.local_functions.fish
 test -e ~/.iterm2_shell_integration.fish; and source ~/.iterm2_shell_integration.fish

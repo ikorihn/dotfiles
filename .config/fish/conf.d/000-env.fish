@@ -67,7 +67,7 @@ set -U theme_display_hostname ssh
 set -U theme_display_vi yes
 set -U theme_display_date yes
 set -U theme_display_date yes
-set -U theme_date_format "+%Y-%m-%dT%H:%M:%S"
+set -U theme_date_format "+%H:%M"
 set -U theme_display_cmd_duration no
 set -U theme_color_scheme dracula
 set -U theme_title_display_process yes
