@@ -77,8 +77,18 @@ set -U theme_title_use_abbreviated_path no
 
 # https://github.com/jethrokuan/fzf#usage
 set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_FIND_FILE_COMMAND 'rg --files --hidden --follow --glob "!**/.git/*" $dir 2>/dev/null'
-set -U FZF_FIND_FILE_OPTS '--preview "bat  --color=always --style=header,grid --line-range :100 {}"'
+set -U FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
+set -U FZF_OPEN_COMMAND 'fd --type file --hidden --follow --exclude .git'
+set -U FZF_CD_COMMAND 'fd --type directory --hidden --follow --exclude .git'
+set -U FZF_CD_WITH_HIDDEN_COMMAND 'fd --type directory --hidden --follow --exclude .git'
+set -U FZF_ENABLE_OPEN_PREVIEW 1
+# set -U FZF_PREVIEW_FILE_CMD 'bat --color=always --style=header,grid --line-range :20'
+set -U FZF_PREVIEW_DIR_CMD 'ls'
 set -U FZF_TMUX 1
 set -U FZF_COMPLETE 3
-set -xU FZF_DEFAULT_COMMAND 'rg --hidden -g "!**/.git/*" -l ""'
+# https://github.com/junegunn/fzf#preview-window
+set -U FZF_DEFAULT_COMMAND 'fd --type file --hidden --follow --exclude .git'
+# set -U FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
+
+# https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
+set -xU RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"

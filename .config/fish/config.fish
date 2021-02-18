@@ -6,7 +6,7 @@ source $POWERLINE_ROOT/bindings/fish/powerline-setup.fish
 # エイリアス
 
 alias ls 'exa --group-directories-first'
-alias ll 'ls -halF --git --time-style=long-iso'
+alias ll 'ls -halF --git --time-style=long-iso --icons'
 alias la 'll -gHiS'
 
 alias rm 'rm -i'
