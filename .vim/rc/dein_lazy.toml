@@ -190,6 +190,13 @@ hook_add = '''
         \ }
     \}
 
+    " for Python
+    let g:quickrun_config.python = {
+        \ 'command': '~/.pyenv/shims/python',
+        \ 'cmdopt': '-u'
+        \ }
+
+    " for C++
     let g:quickrun_config.cpp = {
         \ 'command': 'g++',
         \ 'input': 'input',
@@ -224,7 +231,7 @@ repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['python', 'go', 'cpp']
+on_ft = ['python', 'go', 'rust', 'cpp']
 hook_add = '''
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
@@ -237,8 +244,8 @@ hook_add = '''
         nnoremap <buffer> gD   :<C-u>LspReferences<CR>
         nnoremap <buffer> gs   :<C-u>LspDocumentSymbol<CR>
         nnoremap <buffer> gS   :<C-u>LspWorkspaceSymbol<CR>
-        nnoremap <buffer> gQ   :<C-u>LspDocumentFormat<CR>
-        vnoremap <buffer> gQ   :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> gF   :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> gF   :LspDocumentRangeFormat<CR>
         nnoremap <buffer> K    :<C-u>LspHover<CR>
         nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
         nnoremap <buffer> <F2> :<C-u>LspRename<CR>
@@ -268,11 +275,22 @@ hook_add = '''
     let g:lsp_text_edit_enabled = 1
     let g:lsp_preview_float = 1
     let g:lsp_diagnostics_float_cursor = 1
+
+    " if executable('ccls')
+    " au User lsp_setup call lsp#register_server({
+    "     \ 'name': 'ccls',
+    "     \ 'cmd': {server_info->['ccls']},
+    "     \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+    "     \ 'initialization_options': {},
+    "     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+    "     \ })
+    " endif
+
 '''
 
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
-on_ft = ['python', 'go']
+on_ft = ['python', 'go', 'rust']
 hook_add = '''
     let g:lsp_settings = {}
     let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
@@ -291,13 +309,13 @@ repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go', 'cpp']
+on_ft = ['python', 'go', 'rust', 'cpp']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
 if = "has('python3')"
-on_ft=['python', 'go', 'cpp']
+on_ft=['python', 'go', 'rust', 'cpp']
 depends = ['asyncomplete.vim', 'ultisnips']
 hook_source = '''
     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
@@ -351,6 +369,16 @@ hook_source = '''
 [[plugins]]
 repo = 'mattn/vim-goimports'
 on_ft = ['go']
+
+#####################################################################
+# Rust
+#####################################################################
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = ['rust']
+hook_source = '''
+    let g:rustfmt_autosave = 1
+'''
 
 #####################################################################
 # Python
