@@ -1,4 +1,4 @@
-set -U fish_user_paths /usr/local/bin /usr/bin /bin /usr/sbin /sbin
+set -U fish_user_paths /usr/local/bin /usr/local/sbin /usr/bin /bin /usr/sbin /sbin
 
 # NeoVim
 set -xU XDG_CONFIG_HOME ~/.config
@@ -16,6 +16,8 @@ set -U fish_user_paths $HOME/.nodebrew/current/bin $fish_user_paths
 
 # Go
 set -U fish_user_paths (go env GOPATH)/bin $fish_user_paths
+# Rust
+set -U fish_user_paths $HOME/.cargo/bin $fish_user_paths
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1
