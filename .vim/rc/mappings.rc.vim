@@ -155,7 +155,7 @@ function! Xmllint(...)
 endfunction
 
 " util
-nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
+nmap <F6> <ESC>a<C-R>=strftime("%Y-%m-%dT%H:%M:%S")
 command! Q quit
 
 " URL encode/decode selection
