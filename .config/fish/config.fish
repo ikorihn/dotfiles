@@ -35,7 +35,7 @@ function fbr
 end
 
 function fbrm
-  git branch -r | grep -v 'HEAD' | fzf +m | sed "s/.* //" | sed "s#origin/##" | xargs -I{} git switch {}
+  git branch -r | fzf +m | sed 's#^ *origin/##' | xargs -I{} git switch {}
 end
 
 function fbrd

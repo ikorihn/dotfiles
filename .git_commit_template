@@ -1,14 +1,7 @@
 
-# ==== Prefix ====
-# fix      | バグ以外の修正
-# bugfix   | バグ修正
-# feat     | 機能追加
-# docs     | ドキュメント
-# style    | フォーマット
-# refactor | 整理
-# test     | ユニットテスト
-# chore    | ビルドツールやライブラリで自動生成されたものをコミット
-
+# ==== Format ====
+# チケット番号 :emoji: メッセージ
+#
 # === Emoji prefix ===
 # :zap:                      | ⚡ | 通常アップデート
 # :tada:                     | 🎉 | 盛大に祝うべき大きな機能追加 (feat)
@@ -25,10 +18,11 @@
 # :bookmark:                 | 🔖 | Version tag
 # :heavy_plus_sign:          | ➕ | 依存関係の追加
 # :heavy_minus_sign:         | ➖ | 依存関係の削除
-
+#
 # === optional ===
 # :arrow_up:                 | ⬆️ | Upgrading dependencies
 # :arrow_down:               | ⬇️ | Downgrading dependencies
+# :pencil2:                  | 📝 | コメント、メモ
 # :shirt:                    | 👕 | Lintエラーの修正やコードスタイルの修正 (style)
 # :ambulance:                | 🚑 | Critical hotfix
 # :construction:             | 🚧 | Work in progress
