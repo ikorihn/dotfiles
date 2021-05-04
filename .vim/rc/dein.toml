@@ -116,3 +116,9 @@ repo = 'mattn/sonictemplate-vim'
 [[plugins]]
 repo = 'terryma/vim-multiple-cursors'
 
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+    let g:openbrowser_browser_commands = [ {'name': 'google-chrome-stable',  'args': ['{browser}', '{uri}']} ]
+'''
+

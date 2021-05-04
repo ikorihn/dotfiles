@@ -231,7 +231,7 @@ repo = 'prabirshrestha/async.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
-on_ft = ['python', 'go', 'rust', 'cpp']
+on_ft = ['python', 'go', 'rust', 'cpp', 'sql']
 hook_add = '''
     function! s:on_lsp_buffer_enabled() abort
         setlocal omnifunc=lsp#complete
@@ -255,7 +255,8 @@ hook_add = '''
         au!
         autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
     augroup END
-    command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+    command! LspDebug let lsp_log_verbose=1 | let g:lsp_log_file = expand('~/lsp.log')
+    let g:lsp_log_file = expand('$HOME/.local/share/nvim/vim-lsp.log')
 
     if executable('ccls')
        au User lsp_setup call lsp#register_server({
@@ -302,6 +303,8 @@ hook_add = '''
         \    'usePlaceholders': v:true,
         \  },
         \}
+
+    let g:lsp_settings_filetype_sql = 'sql-language-server'
 '''
 
 [[plugins]]
@@ -309,13 +312,13 @@ repo = 'prabirshrestha/asyncomplete.vim'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
-on_ft = ['python', 'go', 'rust', 'cpp']
+on_ft = ['python', 'go', 'rust', 'cpp', 'sql']
 depends = ['asyncomplete.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
 if = "has('python3')"
-on_ft=['python', 'go', 'rust', 'cpp']
+on_ft=['python', 'go', 'rust', 'cpp', 'sql']
 depends = ['asyncomplete.vim', 'ultisnips']
 hook_source = '''
     call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
@@ -341,7 +344,7 @@ repo = 'honza/vim-snippets'
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql']
 hook_source = '''
   autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
       \ 'name': 'buffer',
@@ -353,7 +356,7 @@ hook_source = '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-file.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql']
 hook_source = '''
   autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
       \ 'name': 'file',
@@ -429,11 +432,12 @@ hook_add = '''
 # Markdown
 #####################################################################
 [[plugins]]
-repo = 'previm/previm'
-on_ft = ['markdown']
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown','plantuml']
 hook_add = '''
-    let g:previm_open_cmd = "open -a 'Google Chrome'"
+    let g:mkdp_command_for_global = 1
 '''
+build = 'sh -c "cd app && yarn install"'
 
 [[plugins]]
 repo = 'mattn/vim-maketable'
@@ -463,5 +467,16 @@ on_ft = ['json']
 hook_source = '''
     let g:vim_json_syntax_conceal = 0
     let g:indentLine_noConcealCursor = ""
+'''
+
+[[plugins]]
+repo = 'aklt/plantuml-syntax'
+on_ft = ['plantuml']
+
+[[plugins]]
+repo = 'mattn/vim-sqlfmt'
+on_ft = ['sql']
+hook_add = '''
+    let g:sqlfmt_program = "sqlformat --comma_first true -r -k lower -s -o %s -"
 '''
 

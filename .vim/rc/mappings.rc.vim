@@ -143,6 +143,17 @@ function! s:Jq(...)
     execute "%! jq \"" . l:arg . "\""
 endfunction
 
+" xmllint command
+command! -nargs=? XmlFormat call Xmllint('--format')
+function! Xmllint(...)
+    if 0 == a:0
+        let l:arg = "."
+    else
+        let l:arg = a:1
+    endif
+    execute "%! xmllint " . l:arg . " % "
+endfunction
+
 " util
 nmap <F6> <ESC>a<C-R>=strftime("%Y/%m/%d (%a) %H:%M:%S")
 command! Q quit
