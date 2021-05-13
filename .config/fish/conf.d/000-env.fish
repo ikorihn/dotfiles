@@ -5,6 +5,7 @@ set -xU XDG_CONFIG_HOME ~/.config
 set -xU EDITOR nvim
 
 # Java
+set -xU JAVA_HOME (/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
 set -U fish_user_paths $JAVA_HOME/bin $fish_user_paths
 
 # Android
@@ -76,19 +77,23 @@ set -U theme_title_display_process yes
 set -U theme_title_use_abbreviated_path no
 
 # https://github.com/jethrokuan/fzf#usage
-set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
-set -U FZF_OPEN_COMMAND 'fd --type file --hidden --follow --exclude .git'
-set -U FZF_CD_COMMAND 'fd --type directory --hidden --follow --exclude .git'
-set -U FZF_CD_WITH_HIDDEN_COMMAND 'fd --type directory --hidden --follow --exclude .git'
-set -U FZF_ENABLE_OPEN_PREVIEW 1
-# set -U FZF_PREVIEW_FILE_CMD 'bat --color=always --style=header,grid --line-range :20'
-set -U FZF_PREVIEW_DIR_CMD 'ls'
-set -U FZF_TMUX 1
-set -U FZF_COMPLETE 3
-# https://github.com/junegunn/fzf#preview-window
-set -U FZF_DEFAULT_COMMAND 'fd --type file --hidden --follow --exclude .git'
-# set -U FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
+# https://github.com/jethrokuan/fzf/issues/152 で使いづらいため終了
+# set -U FZF_LEGACY_KEYBINDINGS 0
+# set -U FZF_FIND_FILE_COMMAND 'fd --type file --hidden --follow --exclude .git'
+# set -U FZF_OPEN_COMMAND 'fd --type file --hidden --follow --exclude .git'
+# set -U FZF_CD_COMMAND 'fd --type directory --hidden --follow --exclude .git'
+# set -U FZF_CD_WITH_HIDDEN_COMMAND 'fd --type directory --hidden --follow --exclude .git'
+# set -U FZF_ENABLE_OPEN_PREVIEW 1
+## set -U FZF_PREVIEW_FILE_CMD 'bat --color=always --style=header,grid --line-range :20'
+# set -U FZF_PREVIEW_DIR_CMD 'ls'
+# set -U FZF_TMUX 1
+# set -U FZF_COMPLETE 3
+# # https://github.com/junegunn/fzf#preview-window
+# set -U FZF_DEFAULT_COMMAND 'fd --type file --hidden --follow --exclude .git'
 
 # https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
 set -xU RIPGREP_CONFIG_PATH "$HOME/.ripgreprc"
+
+# https://github.com/PatrickF1/fzf.fish
+# set -U fzf_fish_custom_keybindings
+set -U FZF_DEFAULT_OPTS '--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
