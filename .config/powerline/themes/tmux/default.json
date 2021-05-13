@@ -2,17 +2,10 @@
 	"segments": {
 		"right": [
 			{
-				"function": "powerline.segments.common.env.cwd",
-				"args": {
-					"dir_shorten_len": 1,
-					"use_path_separator": true
-				}
-			},
-			{
 				"function": "powerline.segments.common.time.date",
 				"name": "time",
 				"args": {
-					"format": "%Y/%m/%d %H:%M:%S",
+					"format": "%Y/%m/%d %H:%M",
 					"istime": true
 				}
 			}

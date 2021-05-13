@@ -23,7 +23,7 @@
 	tool = bbdiff
 [merge]
 	tool = bbdiff
-	ff = false
+	ff = true
 
 [alias]
 	difft = difftool --dir-diff
