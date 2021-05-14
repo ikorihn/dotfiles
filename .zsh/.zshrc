@@ -15,7 +15,7 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="[%~]$ "
+# PROMPT="[%~]$ "
 # autoload -Uz vcs_info
 # setopt prompt_subst
 # zstyle ':vcs_info:*' git
@@ -69,13 +69,13 @@ setopt no_beep
 setopt no_flow_control
 
 # Ctrl+Dでzshを終了しない
-setopt ignore_eof
+# setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
 
 # ディレクトリ名だけでcdする
-setopt auto_cd
+# setopt auto_cd
 
 # cd したら自動的にpushdする
 setopt auto_pushd
@@ -84,6 +84,8 @@ setopt pushd_ignore_dups
 
 # 同時に起動したzshの間でヒストリを共有する
 setopt share_history
+# ヒストリに実行時刻をつける
+setopt extended_history
 
 # 同じコマンドをヒストリに残さない
 setopt hist_ignore_all_dups
@@ -103,9 +105,9 @@ setopt extended_glob
 ########################################
 # エイリアス
 
-alias ls='ls --color=auto -h'
-alias la='ls -a'
-alias ll='ls -al'
+alias ls='exa --group-directories-first'
+alias ll='ls -halF --git --time-style=long-iso --icons'
+alias la='ll -gHiS'
 
 alias rm='rm -i'
 alias cp='cp -i -p'
@@ -115,20 +117,27 @@ alias mkdir='mkdir -p'
 
 alias vim='nvim'
 alias view='vim -R'
+alias vimdiff='nvim -d'
 
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
-alias gcd='cd $(ghq list -p | fzf)'
+# zでfzf
+alias zfzf='cd (z -l | fzf | awk "{ print \$2 }")'
 
-<< "#__CO__"
+alias ta='todoist add -P 2227975550'
+alias tl='todoist --project-namespace --namespace --color list -f "#Work"'
+alias tge='toggl stop'
+alias sourceconf='source ~/.config/fish/config.fish'
+alias sourceenv='source ~/.config/fish/conf.d/000-env.fish'
+
 ########################################
 # zplug
 ########################################
 export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-syntax-highlighting", defer:1
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search"
@@ -138,7 +147,7 @@ zplug "b4b4r07/enhancd", use:init.sh
 #zplug "yous/lime"
 zplug "mollifier/cd-gitroot"
 
-zplug "lukechilds/zsh-better-npm-completion", defer:2
+zplug "lukechilds/zsh-better-npm-completion", defer:1
 
 # 未インストール項目をインストールする
 if ! zplug check --verbose; then
@@ -150,7 +159,6 @@ fi
 
 # コマンドをリンクして、PATH に追加し、プラグインは読み込む
 zplug load --verbose
-#__CO__
 
 ########################################
 # 開発設定
@@ -161,22 +169,13 @@ zplug load --verbose
 ########################################
 # 関数
 fbr() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf +m ) &&
-  git switch $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+  git branch -vv | fzf +m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
 }
 fbrm() {
-  local branches branch
-  branches=$(git branch -r | grep -v 'HEAD') &&
-  branch=$(echo "$branches" | fzf +m ) &&
-  git switch $(echo "$branch" | sed "s/.* //" | sed "s#origin/##")
+  git branch -r | fzf +m | sed 's#^ *origin/##' | xargs -I{} git switch {}
 }
 fbrd() {
-  local branches branch
-  branches=$(git branch -vv) &&
-  branch=$(echo "$branches" | fzf -m ) &&
-  echo "$branch" | awk '{print $1}' | sed "s/.* //" | xargs -I{} git branch -D {}
+  git branch -vv | fzf -m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git branch -D {}
 }
 
 # fshow - git commit browser
@@ -190,6 +189,27 @@ fgr() {
                 {}
                 FZF-EOF"
 }
+
+# Git browse commits
+# gbr() {
+#     log_line_to_hash="echo {} | grep -o '[a-f0-9]\{7\}' | head -1"
+#     view_commit="$log_line_to_hash | xargs -I % sh -c 'git show --color=always % | diff-so-fancy | less -R'"
+#     copy_commit_hash="$log_line_to_hash | xclip"
+#     git_checkout="$log_line_to_hash | xargs -I % sh -c 'git checkout %'"
+#     open_cmd="open"
+# 
+#     if [[ $(uname) = Linux ]];
+#         set open_cmd "xdg-open"
+#     fi
+# 
+#     git log --graph --color=always --format='%C(auto)%h%d %s %C(green)%C(bold)%cr% C(blue)%an' | \
+#         fzf --no-sort --reverse --tiebreak=index --no-multi --ansi \
+#             --preview="$view_commit" \
+#             --header="ENTER to view, CTRL-Y to copy hash, CTRL-O to open on GitHub, CTRL-X to checkout, CTRL-C to exit" \
+#             --bind "enter:execute:$view_commit" \
+#             --bind "ctrl-y:execute:$copy_commit_hash" \
+#             --bind "ctrl-x:execute:$git_checkout"
+# }
 
 # worktree移動
 fwt() {
@@ -249,6 +269,18 @@ fvim() {
   nvim $file
 }
 
+
+# ghq + cd
+gcd() {
+  local repo
+  repo=$(ghq list -p | fzf)
+  if [[ -z $repo ]]; then
+    return
+  fi
+  cd $repo
+  zle reset-prompt
+}
+
 ## Android
 adb_screencap() {
   local DATE_TIME=`date +"%Y%m%d-%H%M%S"`
@@ -288,9 +320,146 @@ urlsort() {
   tr "&" "\n" | tr "?" "\n" | sort
 }
 
+# JSON整形&上書き
+jformat() {
+  local file=$1
+  local opt=$2
+  cat $file | jq '.' $opt > $file.tmp && mv $file.tmp $file
+}
+
+distinct() {
+#  set -l uniq
+#  for a in $argv
+#    if not contains $a $uniq
+#      set uniq $uniq $a
+#      echo $a
+#    end
+#  end
+}
+
+# SSH multiple server and send keys synchronously
+multissh() {
+  local servers=$*
+  # while read -l line
+  #   servers="$servers $line"
+  # end
+  test -z "$servers" && return
+
+  # set -l session
+  # if test -n "$SESSION_NAME"
+  #   set session $SESSION_NAME
+  # else
+  #   set session "multi-ssh-"(date +%s)
+  # end
+  # set window "multi-ssh"
+
+  # # tmuxのセッションを作成
+  # tmux new-session -d -n $window -s $session
+
+  # 各ホストにsshログイン
+  # 最初の1台はsshするだけ
+  tmux send-keys "ssh $servers[1]" C-m
+  # 残りはpaneを作成してからssh
+  for i in $servers[2..-1]; do
+    tmux split-window
+    tmux select-layout tiled
+    tmux send-keys "ssh $i" C-m
+  done
+
+  # 最初のpaneを選択状態にする
+  tmux select-pane -t 0
+  # paneの同期モードを設定
+  tmux set-window-option synchronize-panes on
+  # セッションにアタッチ
+  # tmux attach-session -t $session
+}
+
+# Toggl, Todoist
+
+# function todoist_close
+#   local task=$(tl | fzf | awk '{ print $1 }')
+#   echo $task
+#   if [ -z $task ]
+#     return
+#   end
+#   todoist close $task
+# end
+
+# start/stop toggl from todoist
+tt() {
+  todoist sync
+  local current=$(toggl current)
+  if [[ "$current" != "No time entry" ]]; then
+    echo "$current"
+    read -p 'echo "stop it?(Y/n) > "' yn
+    if [[ $yn = "n" ]]; then
+      echo "keep timer"
+      return 0
+    else
+      toggl stop
+    fi
+  fi
+
+  local selected_item_content=$(todoist --project-namespace --namespace --csv list -f '#Work' | fzf | cut -d ',' -f 6)
+  if test -z $selected_item_content; then
+    return 0
+  fi
+
+  if test -n $selected_item_content; then
+    echo "start $selected_item_content"
+    toggl_start "$selected_item_content"
+  fi
+}
+
+toggl_start() {
+  local pj=$(toggl projects | fzf | awk '{ print $1 }')
+  if [ -z $pj ]; then
+    return
+  fi
+
+  toggl start -P $pj $1
+}
+
+# Togglのステータスを表示
+toggl_status() {
+  # if [[ ! type -q toggl ]]; then
+  #   return
+  # fi
+
+  if [ $(toggl --cache --csv current | head -n1) = "No time entry" ]; then
+    echo -n "No time entry"
+    return
+  fi
+
+  local tgc_time=$(toggl --cache --csv current | grep Duration | cut -d ',' -f 2)
+  local tgc_dsc=$(toggl --cache --csv current | grep Description | cut -d ',' -f 2 | cut -c 1-20)
+
+  echo -n "$tgc_time $tgc_dsc"
+}
+
+# function cb -d 'クリップボード履歴を表示&fzfでコピー'
+#   copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
+# end
+
+########################################
+# Bind keys
+########################################
+# widgetとして登録
+zle -N gcd
+# バインド
+bindkey '^G^G' gcd
+zle -N fbr
+bindkey '^G^R' fbr
+zle -N fbrm
+bindkey '^G^M' fbr
+
+########################################
+# Other
+########################################
 
 source ~/.local_functions
 
+# https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # The next line updates PATH for the Google Cloud SDK.
@@ -302,3 +471,5 @@ if [ -f ~/google-cloud-sdk/completion.zsh.inc ]; then source ~/google-cloud-sdk/
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# https://starship.rs/ja-jp/
+eval "$(starship init zsh)"
