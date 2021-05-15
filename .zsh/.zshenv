@@ -1,8 +1,14 @@
+setopt no_global_rcs
+
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
-export EDITOR nvim
+export EDITOR=nvim
+# ヒストリの設定
+export HISTFILE=~/.zsh_history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
 
 # Java
 export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
@@ -66,3 +72,10 @@ manpath=(
 export fpath=(~/.zsh/completion $fpath)
 
 export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
+
+# ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
+# export FZF_DEFAULT_OPTS='--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'

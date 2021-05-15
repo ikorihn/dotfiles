@@ -1,3 +1,5 @@
+.zcompdump*
+
 _viminfo
 .cache/
 .DS_STORE
