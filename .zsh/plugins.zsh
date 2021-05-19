@@ -1,30 +1,41 @@
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
-source $ZPLUG_HOME/init.zsh
+### Added by Zinit's installer
+if [[ ! -f $ZDOTDIR/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zsh/.zinit" && command chmod g-rwX "$HOME/.zsh/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zsh/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+fi
 
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search"
+source "$ZDOTDIR/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
+
+### End of Zinit's installer chunk
+
+
+zinit ice wait'!0'; zinit load "zsh-users/zsh-syntax-highlighting"
+zinit load "zsh-users/zsh-autosuggestions"
+zinit load "zsh-users/zsh-completions"
+zinit load "zsh-users/zsh-history-substring-search"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "b4b4r07/emoji-cli"
-zplug "mollifier/cd-gitroot"
-zplug "Aloxaf/fzf-tab"
+zinit ice wait'!0' pick'init.sh'; zinit light "b4b4r07/enhancd"
 
-zplug "lukechilds/zsh-better-npm-completion", defer:1
+zinit load "b4b4r07/emoji-cli"
+zinit load "mollifier/cd-gitroot"
+zinit load "Aloxaf/fzf-tab"
 
-# 未インストール項目をインストールする
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
-
-# コマンドをリンクして、PATH に追加し、プラグインは読み込む
-zplug load --verbose
+zinit ice wait'!0'; zinit load "lukechilds/zsh-better-npm-completion"
 
 #######
 # https://github.com/Aloxaf/fzf-tab
