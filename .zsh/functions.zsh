@@ -172,10 +172,12 @@ distinct() {
 # SSH multiple server and send keys synchronously
 multissh() {
   local servers=$*
-  # while read -l line
-  #   servers="$servers $line"
-  # end
+  while read server; do
+     servers="$servers $server"
+  done
   test -z "$servers" && return
+  echo $servers
+  server_arr=(${=servers})
 
   # set -l session
   # if test -n "$SESSION_NAME"
@@ -183,16 +185,16 @@ multissh() {
   # else
   #   set session "multi-ssh-"(date +%s)
   # end
-  # set window "multi-ssh"
 
-  # # tmuxのセッションを作成
-  # tmux new-session -d -n $window -s $session
+  tmux new-window
+  tmux rename-window "multi-ssh"
 
   # 各ホストにsshログイン
   # 最初の1台はsshするだけ
-  tmux send-keys "ssh $servers[1]" C-m
+  tmux send-keys "ssh $server_arr[1]" C-m
   # 残りはpaneを作成してからssh
-  for i in $servers[2..-1]; do
+
+  for i in $server_arr[2,-1]; do
     tmux split-window
     tmux select-layout tiled
     tmux send-keys "ssh $i" C-m
@@ -223,12 +225,12 @@ tt() {
   local current=$(toggl current)
   if [[ "$current" != "No time entry" ]]; then
     echo "$current"
-    read -p 'echo "stop it?(Y/n) > "' yn
-    if [[ $yn = "n" ]]; then
+    echo "stop it?(y/N) "
+    if read -q; then
+      toggl stop
+    else
       echo "keep timer"
       return 0
-    else
-      toggl stop
     fi
   fi
 
