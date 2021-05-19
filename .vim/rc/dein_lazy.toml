@@ -226,8 +226,25 @@ build = 'make'
 #####################################################################
 # Completion
 #####################################################################
+
+##
+# asyncomplete
+#
+
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+    " let g:asyncomplete_auto_popup = 1
+    " let g:asyncomplete_auto_completeopt = 0
+    let g:asyncomplete_popup_delay = 200
+'''
+
+##
+# LSP
+#
 
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
@@ -270,9 +287,6 @@ hook_add = '''
 
     let g:lsp_diagnostics_enabled = 1
     let g:lsp_diagnostics_echo_cursor = 1
-    " let g:asyncomplete_auto_popup = 1
-    " let g:asyncomplete_auto_completeopt = 0
-    let g:asyncomplete_popup_delay = 200
     let g:lsp_text_edit_enabled = 1
     let g:lsp_preview_float = 1
     let g:lsp_diagnostics_float_cursor = 1
@@ -308,12 +322,13 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'prabirshrestha/asyncomplete.vim'
-
-[[plugins]]
 repo = 'prabirshrestha/asyncomplete-lsp.vim'
 on_ft = ['python', 'go', 'rust', 'cpp', 'sql']
 depends = ['asyncomplete.vim', 'vim-lsp']
+
+##
+# ultisnips
+#
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
@@ -342,28 +357,70 @@ hook_add = '''
 [[plugins]]
 repo = 'honza/vim-snippets'
 
+##
+# common
+#
+
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-buffer.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
 hook_source = '''
-  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
-      \ 'name': 'buffer',
-      \ 'priority': 5,
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#buffer#completor'),
-      \ }))
+    call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+        \ 'name': 'buffer',
+        \ 'allowlist': ['*'],
+        \ 'blocklist': ['go'],
+        \ 'priority': 2,
+        \ 'completor': function('asyncomplete#sources#buffer#completor'),
+        \ 'config': {
+        \    'max_buffer_size': 5000000,
+        \  },
+        \ }))
 '''
 
 [[plugins]]
 repo = 'prabirshrestha/asyncomplete-file.vim'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
 hook_source = '''
-  autocmd vimrc User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
-      \ 'name': 'file',
-      \ 'priority': 3,
-      \ 'whitelist': ['*'],
-      \ 'completor': function('asyncomplete#sources#file#completor'),
-      \ }))
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+        \ 'name': 'file',
+        \ 'allowlist': ['*'],
+        \ 'priority': 3,
+        \ 'completor': function('asyncomplete#sources#file#completor')
+        \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-emoji.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+        \ 'name': 'emoji',
+        \ 'allowlist': ['*'],
+        \ 'priority': 4,
+        \ 'completor': function('asyncomplete#sources#emoji#completor'),
+        \ }))
+'''
+
+[[plugins]]
+repo = 'wellle/tmux-complete.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    let g:tmuxcomplete#asyncomplete_source_options = {
+                \ 'name':      'tmuxcomplete',
+                \ 'whitelist': ['*'],
+                \ 'config': {
+                \     'splitmode':      'words',
+                \     'filter_prefix':   1,
+                \     'show_incomplete': 1,
+                \     'sort_candidates': 0,
+                \     'scrollback':      0,
+                \     'truncate':        0
+                \     }
+                \ }
 '''
 
 #####################################################################
