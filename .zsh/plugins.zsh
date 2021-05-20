@@ -22,7 +22,7 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 
-zinit ice wait'!0'; zinit load "zsh-users/zsh-syntax-highlighting"
+zinit load "zdharma/fast-syntax-highlighting"
 zinit load "zsh-users/zsh-autosuggestions"
 zinit load "zsh-users/zsh-completions"
 zinit load "zsh-users/zsh-history-substring-search"
@@ -30,6 +30,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 zinit ice wait'!0' pick'init.sh'; zinit light "b4b4r07/enhancd"
+zinit ice wait'!0'; zinit light "reegnz/jq-zsh-plugin"
 
 zinit load "b4b4r07/emoji-cli"
 zinit load "mollifier/cd-gitroot"
