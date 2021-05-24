@@ -172,8 +172,12 @@ distinct() {
 # SSH multiple server and send keys synchronously
 multissh() {
   local servers=$*
+  echo $servers
   while read server; do
-     servers="$servers $server"
+    if [[ "$server" = "" ]]; then
+      break
+    fi
+    servers="$servers $server"
   done
   test -z "$servers" && return
   echo $servers
@@ -271,9 +275,10 @@ toggl_status() {
   echo -n "$tgc_time $tgc_dsc"
 }
 
-# function cb -d 'クリップボード履歴を表示&fzfでコピー'
-#   copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
-# end
+# クリップボード履歴を表示&fzfでコピー
+cb() {
+  copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
+}
 
 ########################################
 # Bind keys

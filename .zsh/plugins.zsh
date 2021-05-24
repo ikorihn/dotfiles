@@ -22,21 +22,21 @@ zinit light-mode for \
 ### End of Zinit's installer chunk
 
 
-zinit load "zdharma/fast-syntax-highlighting"
-zinit load "zsh-users/zsh-autosuggestions"
-zinit load "zsh-users/zsh-completions"
-zinit load "zsh-users/zsh-history-substring-search"
+zinit ice wait'1' lucid; zinit light "zdharma/fast-syntax-highlighting"
+zinit light "zsh-users/zsh-autosuggestions"
+zinit light "zsh-users/zsh-completions"
+zinit light "zsh-users/zsh-history-substring-search"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
-zinit ice wait'!0' pick'init.sh'; zinit light "b4b4r07/enhancd"
-zinit ice wait'!0'; zinit light "reegnz/jq-zsh-plugin"
+zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
+zinit ice wait'1' lucid; zinit light "reegnz/jq-zsh-plugin"
 
-zinit load "b4b4r07/emoji-cli"
-zinit load "mollifier/cd-gitroot"
-zinit load "Aloxaf/fzf-tab"
+zinit ice wait'1' lucid; zinit light "b4b4r07/emoji-cli"
+zinit ice wait'1' lucid; zinit light "mollifier/cd-gitroot"
+zinit light "Aloxaf/fzf-tab"
 
-zinit ice wait'!0'; zinit load "lukechilds/zsh-better-npm-completion"
+zinit ice wait'1' lucid; zinit light "lukechilds/zsh-better-npm-completion"
 
 #######
 # https://github.com/Aloxaf/fzf-tab
