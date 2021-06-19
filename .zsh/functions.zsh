@@ -1,3 +1,7 @@
+########
+# Git
+########
+
 fbr() {
   git branch -vv | fzf +m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
 }
@@ -80,6 +84,7 @@ fadd() {
               git add {}
              "
 }
+
 git_count() {
   local author
   local start_date
@@ -113,22 +118,57 @@ gcd() {
   zle reset-prompt
 }
 
-## Android
+########
+# Android
+########
+
+# キャプチャを撮ってサイズを変更
 adb_screencap() {
-  local DATE_TIME=`date +"%Y%m%d-%H%M%S"`
+  local DATE_TIME=$(date +"%Y%m%d-%H%M%S")
   local FILE_NAME=${DATE_TIME}.png
 
-  adb shell screencap -p /sdcard/${FILE_NAME}
-  pushd ~/Desktop
-  adb pull /sdcard/${FILE_NAME}
-  adb shell rm /sdcard/${FILE_NAME}
+  local DEST_DIR=${1:-~/Desktop}
+  local SIZE=${2:-300x}
 
-  mogrify -resize 300x -unsharp 2x1.4+0.5+0 \
-          -colors 65 -quality 100 -verbose \
-          ~/Desktop/${FILE_NAME}
+  adb shell screencap -p /sdcard/$FILE_NAME
+  adb_pull_file $file_name $dest_dir
 
-  popd
+  mogrify -resize $SIZE -unsharp 2x1.4+0.5+0 -quality 100 -verbose $DEST_DIR/$FILE_NAME
 }
+
+adb_pull_file() {
+  file_name=$1
+  directory=$2
+  if [[ -z $file_name -o -z $directory ]]; then
+    echo 'no file'
+    return 1
+  fi
+
+  adb pull /sdcard/$file_name $directory/$file_name
+  adb shell rm /sdcard/$file_name
+}
+
+mp4_to_gif() {
+  local FILE_NAME=$1
+  local DEST_FILE_NAME=$(echo $FILE_NAME | tr -d '.mp4')
+  ffmpeg -i $FILE_NAME -an -r 15 -pix_fmt rgb24 -s 540x960 -f gif $DEST_FILE_NAME
+}
+
+# https://github.com/fish-shell/fish-shell/issues/2036
+adb_screenrecord() {
+  local DATE_TIME=$(date +"%Y-%m-%dT%H-%M-%S")
+  local FILE_NAME=$DATE_TIME.mp4
+  local DEST_DIR=${1:-~/Desktop}
+
+  trap "echo 'pull to $DEST_DIR/$FILE_NAME'; adb pull /sdcard/$FILE_NAME $DEST_DIR/$FILE_NAME; adb shell rm /sdcard/$FILE_NAME" SIGINT
+
+  echo "録画を開始しました。録画を終了する場合は、 Ctrl+C を押下してください"
+  adb shell screenrecord /sdcard/$FILE_NAME --size 540x960
+}
+
+########
+# Util
+########
 
 delete_DSStore() {
   find . -name ".DS_Store" -delete
@@ -137,6 +177,7 @@ delete_DSStore() {
 urldecode() {
   nkf -w --url-input
 }
+
 urlencode() {
   nkf -WwMQ | sed 's/=$//g' | tr "=" "%" | tr -d "\n" |
     sed -e 's/%7E/~/g' \
@@ -226,17 +267,17 @@ multissh() {
 # start/stop toggl from todoist
 tt() {
   todoist sync
-  local current=$(toggl current)
-  if [[ "$current" != "No time entry" ]]; then
-    echo "$current"
-    echo "stop it?(y/N) "
-    if read -q; then
-      toggl stop
-    else
-      echo "keep timer"
-      return 0
-    fi
-  fi
+  # local current=$(toggl current)
+  # if [[ "$current" != "No time entry" ]]; then
+  #   echo "$current"
+  #   echo "stop it?(y/N) "
+  #   if read -q; then
+  #     toggl stop
+  #   else
+  #     echo "keep timer"
+  #     return 0
+  #   fi
+  # fi
 
   local selected_item_content=$(todoist --project-namespace --namespace --csv list -f '#Work' | fzf | cut -d ',' -f 6)
   if test -z $selected_item_content; then
@@ -290,5 +331,5 @@ bindkey '^G^G' gcd
 zle -N fbr
 bindkey '^G^R' fbr
 zle -N fbrm
-bindkey '^G^M' fbr
+bindkey '^G^M' fbrm
 
