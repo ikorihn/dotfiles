@@ -31,6 +31,8 @@ if dein#load_state(s:dein_dir)
 
   call dein#load_toml('~/.vim/rc/dein.toml',          {'lazy': 0})
   call dein#load_toml('~/.vim/rc/dein_lazy.toml',     {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_complete.toml',     {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_programming.toml',     {'lazy': 1})
 
   call dein#end()
   call dein#save_state()
@@ -46,12 +48,12 @@ endif
 "   call dein#update()
 " endif
 
-" プラグイン削除
-let s:removed_plugins = dein#check_clean()
-if len(s:removed_plugins) > 0
-  call map(s:removed_plugins, "delete(v:val, 'rf')")
-  call dein#recache_runtimepath()
-endif
+" " プラグイン削除
+" let s:removed_plugins = dein#check_clean()
+" if len(s:removed_plugins) > 0
+"   call map(s:removed_plugins, "delete(v:val, 'rf')")
+"   call dein#recache_runtimepath()
+" endif
 
 " Colors
 set t_Co=256

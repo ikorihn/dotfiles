@@ -1,0 +1,200 @@
+#####################################################################
+# Completion
+#####################################################################
+
+##
+# asyncomplete
+#
+
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+hook_add = '''
+    " let g:asyncomplete_auto_popup = 1
+    " let g:asyncomplete_auto_completeopt = 0
+    let g:asyncomplete_popup_delay = 200
+'''
+
+##
+# LSP
+#
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['python', 'go', 'rust', 'cpp', 'sql']
+hook_add = '''
+    function! s:on_lsp_buffer_enabled() abort
+        setlocal omnifunc=lsp#complete
+        setlocal signcolumn=yes
+
+        nnoremap <buffer> ]l   :<C-u>LspNextDiagnostic<CR>
+        nnoremap <buffer> [l   :<C-u>LspPreviousDiagnostic<CR>
+        nnoremap <buffer> gA   :<C-u>LspCodeAction<CR>
+        nnoremap <buffer> gd   :<C-u>LspDefinition<CR>
+        nnoremap <buffer> gD   :<C-u>LspReferences<CR>
+        nnoremap <buffer> gs   :<C-u>LspDocumentSymbol<CR>
+        nnoremap <buffer> gS   :<C-u>LspWorkspaceSymbol<CR>
+        nnoremap <buffer> gF   :<C-u>LspDocumentFormat<CR>
+        vnoremap <buffer> gF   :LspDocumentRangeFormat<CR>
+        nnoremap <buffer> K    :<C-u>LspHover<CR>
+        nnoremap <buffer> <F1> :<C-u>LspImplementation<CR>
+        nnoremap <buffer> <F2> :<C-u>LspRename<CR>
+    endfunction
+
+    augroup lsp_install
+        au!
+        autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    augroup END
+    command! LspDebug let lsp_log_verbose=1 | let g:lsp_log_file = expand('~/lsp.log')
+    let g:lsp_log_file = expand('$HOME/.local/share/nvim/vim-lsp.log')
+
+    if executable('ccls')
+       au User lsp_setup call lsp#register_server({
+          \ 'name': 'ccls',
+          \ 'cmd': {server_info->['ccls']},
+          \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+          \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+          \ })
+    endif
+
+    let g:lsp_diagnostics_enabled = 1
+    let g:lsp_diagnostics_echo_cursor = 1
+    let g:lsp_text_edit_enabled = 1
+    let g:lsp_preview_float = 1
+    let g:lsp_diagnostics_float_cursor = 1
+
+    " if executable('ccls')
+    " au User lsp_setup call lsp#register_server({
+    "     \ 'name': 'ccls',
+    "     \ 'cmd': {server_info->['ccls']},
+    "     \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+    "     \ 'initialization_options': {},
+    "     \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp', 'cc'],
+    "     \ })
+    " endif
+
+'''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_ft = ['python', 'go', 'rust', 'sql']
+hook_add = '''
+    let g:lsp_settings = {}
+    let g:lsp_settings_filetype_go = ['gopls', 'golangci-lint-langserver']
+    let g:lsp_settings['gopls'] = {
+        \  'workspace_config': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \  'initialization_options': {
+        \    'usePlaceholders': v:true,
+        \  },
+        \}
+
+    let g:lsp_settings_filetype_sql = 'sql-language-server'
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+on_ft = ['python', 'go', 'rust', 'cpp', 'sql']
+depends = ['asyncomplete.vim', 'vim-lsp']
+
+##
+# ultisnips
+#
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
+if = "has('python3')"
+on_ft=['python', 'go', 'rust', 'cpp', 'sql']
+depends = ['asyncomplete.vim', 'ultisnips']
+hook_source = '''
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'whitelist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+'''
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+depends = ['vim-snippets']
+hook_add = '''
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    let g:UltiSnipsJumpForwardTrigger="<c-f>"
+    let g:UltiSnipsJumpBackwardTrigger="<c-b>"
+
+    let g:UltiSnipsEditSplit="vertical"
+'''
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+##
+# common
+#
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-buffer.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    call asyncomplete#register_source(asyncomplete#sources#buffer#get_source_options({
+        \ 'name': 'buffer',
+        \ 'allowlist': ['*'],
+        \ 'blocklist': ['go'],
+        \ 'priority': 2,
+        \ 'completor': function('asyncomplete#sources#buffer#completor'),
+        \ 'config': {
+        \    'max_buffer_size': 5000000,
+        \  },
+        \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-file.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#file#get_source_options({
+        \ 'name': 'file',
+        \ 'allowlist': ['*'],
+        \ 'priority': 3,
+        \ 'completor': function('asyncomplete#sources#file#completor')
+        \ }))
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-emoji.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    au User asyncomplete_setup call asyncomplete#register_source(asyncomplete#sources#emoji#get_source_options({
+        \ 'name': 'emoji',
+        \ 'allowlist': ['*'],
+        \ 'priority': 4,
+        \ 'completor': function('asyncomplete#sources#emoji#completor'),
+        \ }))
+'''
+
+[[plugins]]
+repo = 'wellle/tmux-complete.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+depends = ['asyncomplete.vim']
+hook_source = '''
+    let g:tmuxcomplete#asyncomplete_source_options = {
+                \ 'name':      'tmuxcomplete',
+                \ 'whitelist': ['*'],
+                \ 'config': {
+                \     'splitmode':      'words',
+                \     'filter_prefix':   1,
+                \     'show_incomplete': 1,
+                \     'sort_candidates': 0,
+                \     'scrollback':      0,
+                \     'truncate':        0
+                \     }
+                \ }
+'''
+

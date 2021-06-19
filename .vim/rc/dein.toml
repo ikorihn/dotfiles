@@ -40,6 +40,9 @@ hook_add = '''
     nnoremap <silent> [fugitive]m :Gmerge<CR>
 '''
 
+[[plugins]]
+repo = 'will133/vim-dirdiff'
+
 ####
 # View
 ####
