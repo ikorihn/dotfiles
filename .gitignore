@@ -1,4 +1,5 @@
 .zcompdump*
+.zsh/.zinit
 
 _viminfo
 .cache/

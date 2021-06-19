@@ -2,7 +2,7 @@
 # https://github.com/jonas/tig/blob/master/tigrc
 
 # main viewの左端にコミットIDを表示する
-set main-view = id date author commit-title:graph=yes,refs=yes
+set main-view = id date:local=yes author:email-user commit-title:graph=yes,refs=yes
 # Pager系の行数表示をON、intervalを1に (default: line-number:no,interval=5)
 set pager-view  = line-number:yes,interval=1 text
 set stage-view  = line-number:yes,interval=1 text
