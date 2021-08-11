@@ -37,7 +37,7 @@ bind status D ?git clean -f %(file)
 # rebase
 bind main <Ctrl-r> ?git rebase -i %(commit)
 bind refs R ?git rebase %(branch)
-
+bind status <Ctrl-r> ?git rebase --continue
 
 # . で HEAD との diff
 bind main . !sh -c "git diff %(commit) | tig"

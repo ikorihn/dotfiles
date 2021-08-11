@@ -10,3 +10,6 @@ error_symbol = '[\$](bold red)'
 command = ''' toggl --cache --csv current | grep -e Duration -e Description | sort -r | awk 'BEGIN{ RS="\n"; FS=","; ORS=","} { print substr($2, 0, 20) }' '''
 when = "true"
 shell = "zsh"
+
+[java]
+disabled = true

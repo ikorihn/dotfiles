@@ -3,6 +3,8 @@ if &compatible
     set nocompatible
 endif
 
+language en_US.UTF-8
+
 let $CACHE = expand('~/.cache')
 
 if !isdirectory(expand($CACHE))
