@@ -4,4 +4,4 @@ source $ZDOTDIR/plugins.zsh
 source $ZDOTDIR/functions.zsh
 
 # ローカルPCでだけ使いたい設定
-source ~/.local_functions
+source ~/.local_functions.zsh

@@ -1,7 +1,5 @@
 setopt no_global_rcs
 
-export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
 export EDITOR=nvim
@@ -10,9 +8,38 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 
+# Homebrew
+if [[ -e /opt/homebrew/bin/brew ]]; then
+  # M1チップ
+  eval $(/opt/homebrew/bin/brew shellenv)
+else
+  eval $(/usr/local/bin/brew shellenv)
+fi
+
+path=(
+    $(brew --prefix)/opt/coreutils/libexec/gnubin(N-/) # coreutils
+    $(brew --prefix)/opt/ed/libexec/gnubin(N-/) # ed
+    $(brew --prefix)/opt/findutils/libexec/gnubin(N-/) # findutils
+    $(brew --prefix)/opt/gnu-sed/libexec/gnubin(N-/) # sed
+    $(brew --prefix)/opt/gnu-tar/libexec/gnubin(N-/) # tar
+    $(brew --prefix)/opt/grep/libexec/gnubin(N-/) # grep
+    ${path}
+)
+manpath=(
+    $(brew --prefix)/opt/coreutils/libexec/gnuman(N-/) # coreutils
+    $(brew --prefix)/opt/ed/libexec/gnuman(N-/) # ed
+    $(brew --prefix)/opt/findutils/libexec/gnuman(N-/) # findutils
+    $(brew --prefix)/opt/gnu-sed/libexec/gnuman(N-/) # sed
+    $(brew --prefix)/opt/gnu-tar/libexec/gnuman(N-/) # tar
+    $(brew --prefix)/opt/grep/libexec/gnuman(N-/) # grep
+    ${MANPATH}
+)
+
 # Java
-export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
-export PATH=${JAVA_HOME}/bin:${PATH}
+if [[ -e /System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home ]]; then
+  export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
+  export PATH=${JAVA_HOME}/bin:${PATH}
+fi
 
 # Android
 export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
@@ -22,7 +49,6 @@ export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH # And
 export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
 
 # Go
-export GOPATH=$HOME/go
 export PATH=$(go env GOPATH)/bin:${PATH}
 
 # Python
@@ -51,29 +77,9 @@ if command -v direnv 1>/dev/null 2>&1; then
 fi
 
 # flutter
-export PATH=$HOME/flutter/bin:${PATH}
-
-path=(
-    /usr/local/opt/coreutils/libexec/gnubin(N-/) # coreutils
-    /usr/local/opt/ed/libexec/gnubin(N-/) # ed
-    /usr/local/opt/findutils/libexec/gnubin(N-/) # findutils
-    /usr/local/opt/gnu-sed/libexec/gnubin(N-/) # sed
-    /usr/local/opt/gnu-tar/libexec/gnubin(N-/) # tar
-    /usr/local/opt/grep/libexec/gnubin(N-/) # grep
-    ${path}
-)
-manpath=(
-    /usr/local/opt/coreutils/libexec/gnuman(N-/) # coreutils
-    /usr/local/opt/ed/libexec/gnuman(N-/) # ed
-    /usr/local/opt/findutils/libexec/gnuman(N-/) # findutils
-    /usr/local/opt/gnu-sed/libexec/gnuman(N-/) # sed
-    /usr/local/opt/gnu-tar/libexec/gnuman(N-/) # tar
-    /usr/local/opt/grep/libexec/gnuman(N-/) # grep
-    ${MANPATH}
-)
-
-# zplugの補完
-export fpath=(~/.zsh/completion $fpath)
+if [[ -d "$HOME/flutter/bin" ]]; then
+  export PATH=$HOME/flutter/bin:${PATH}
+fi
 
 export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
 
