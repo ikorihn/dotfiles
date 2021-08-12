@@ -1,74 +1,93 @@
 [include]
-	path = ~/.gitconfig.local
+  path = ~/.gitconfig.local
 
 [core]
-	editor = nvim
-	precomposeunicode = true
-	quotepath = false
-	ignoreCase = false
-	excludesfile = ~/.gitignore_global
-	# sparsecheckout = true
+  editor = nvim
+  precomposeunicode = true
+  quotepath = false
+  ignoreCase = false
+  excludesfile = ~/.gitignore_global
+  # sparsecheckout = true
 
 [init]
-	templatedir = ~/.git_template
+  templatedir = ~/.git_template
 
 [difftool]
-	prompt = false
-
+  prompt = false
 [difftool "bbdiff"]
-	cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
+  cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [mergetool "bbdiff"]
-	cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
+  cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [difftool "vimdirdiff"]
-	cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+  cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
 
 [diff]
-	tool = vimdirdiff
+  tool = vimdirdiff
 [merge]
-	tool = bbdiff
-	ff = true
+  tool = bbdiff
+  ff = true
 
 [alias]
-	difft = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
-	dirdiff = difftool --dir-diff
-	merget = mergetool --dir-diff
-	st = status
-	sw = switch
-	swc = switch -c
-	br = branch
-	cp = cherry-pick
-	diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
-	lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict
-	stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
-	stali = stash list
-	graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
-	find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
-	show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
-	version-tags = "tag -l --sort=-v:refname"
-	sort-tags = "tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short)'"
+  difft = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
+  dirdiff = difftool --dir-diff
+  merget = mergetool --dir-diff
+  st = status
+  sw = switch
+  swc = switch -c
+  br = branch
+  cp = cherry-pick
+  diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
+  lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict
+  stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
+  stali = stash list
+  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+  find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
+  show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
+  version-tags = "tag -l --sort=-v:refname"
+  sort-tags = "tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short)'"
 
 [fetch]
-	prune = true
+  prune = true
 
 [pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+  log = delta
+  show = delta
+  diff = delta
+  reflog = delta
+
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+
+[delta]
+  features = decorations
+
+[delta "interactive"]
+  keep-plus-minus-markers = false
+
+[delta "decorations"]
+  commit-decoration-style = blue ol
+  commit-style = raw
+  file-style = omit
+  hunk-header-decoration-style = blue box
+  hunk-header-file-style = red
+  hunk-header-line-number-style = "#067a00"
+  hunk-header-style = file line-number syntax
 
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
+
 [pull]
-	ff = only
+  ff = only
 
 [commit]
-	verbose = true
-	template = ~/.git_commit_template
+  verbose = true
+  template = ~/.git_commit_template
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge --skip -- %f
-	process = git-lfs filter-process --skip
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge --skip -- %f
+  process = git-lfs filter-process --skip
+  required = true
 
 [ghq]
-	root = ~/repos
+  root = ~/repos
