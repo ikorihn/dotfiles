@@ -1,5 +1,9 @@
 setopt no_global_rcs
 
+unset PATH
+unset MANPATH
+eval $(/usr/libexec/path_helper -s)
+
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
 export EDITOR=nvim
@@ -36,8 +40,8 @@ manpath=(
 )
 
 # Java
-if [[ -e /System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home ]]; then
-  export JAVA_HOME=$(/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home)
+if [[ -e /usr/libexec/java_home ]]; then
+  export JAVA_HOME=$(/usr/libexec/java_home)
   export PATH=${JAVA_HOME}/bin:${PATH}
 fi
 

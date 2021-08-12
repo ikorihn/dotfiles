@@ -291,12 +291,12 @@ tt() {
 }
 
 toggl_start() {
-  local pj=$(toggl projects | fzf | awk '{ print $1 }')
+  local pj=$(toggl projects ls -f name | fzf)
   if [ -z $pj ]; then
     return
   fi
 
-  toggl start -P $pj $1
+  toggl start -o $pj $1
 }
 
 # Togglのステータスを表示
@@ -305,13 +305,14 @@ toggl_status() {
   #   return
   # fi
 
-  if [ $(toggl --cache --csv current | head -n1) = "No time entry" ]; then
+  current=$(toggl now)
+  if [[ $(echo $current | wc -l) = 1 ]]; then
     echo -n "No time entry"
     return
   fi
 
-  local tgc_time=$(toggl --cache --csv current | grep Duration | cut -d ',' -f 2)
-  local tgc_dsc=$(toggl --cache --csv current | grep Description | cut -d ',' -f 2 | cut -c 1-20)
+  local tgc_time=$(echo $current | grep Duration | cut -d ':' -f 2-)
+  local tgc_dsc=$(echo $current | head -1 | cut -d ' ' -f 1 | cut -c 1-20)
 
   echo -n "$tgc_time $tgc_dsc"
 }
