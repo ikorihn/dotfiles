@@ -23,9 +23,9 @@ LATEST_PYTHON=$(pyenv install --list | rg "^\s+([0-9]+\.?){3}$" | sed 's/\s\+//'
 
 pyenv install $LATEST_PYTHON
 pyenv global $LATEST_PYTHON
-pip install neovim
 pip install powerline-gitstatus
 pip install powerline-status
+pip install togglCli
 
 # node
 nodebrew install-binary latest
