@@ -140,7 +140,7 @@ function! s:Jq(...)
     else
         let l:arg = a:1
     endif
-    execute "%! jq \"" . l:arg . "\""
+    execute "%! jq " . l:arg
 endfunction
 
 " xmllint command
