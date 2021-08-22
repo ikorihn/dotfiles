@@ -291,7 +291,7 @@ tt() {
 }
 
 toggl_start() {
-  local pj=$(toggl projects ls -f name | fzf)
+  local pj=$(toggl projects ls -f name | fzf | xargs)
   if [ -z $pj ]; then
     return
   fi
@@ -320,6 +320,16 @@ toggl_status() {
 # クリップボード履歴を表示&fzfでコピー
 cb() {
   copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
+}
+
+# 画像をクリップボードにコピー
+imgpbcopy() {
+  local FILE=$1
+  if [[ $2 = "jpg" ]]; then
+    osascript -e "set the clipboard to (read (POSIX file \"$FILE\") as JPEG picture)"
+  else
+    osascript -e "set the clipboard to (POSIX file \"$FILE\")"
+  fi
 }
 
 ########################################

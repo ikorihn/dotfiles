@@ -12,10 +12,14 @@ export HISTFILE=~/.zsh_history
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 
+path=($HOME/.local/bin(N-/) ${path})
+
 # Homebrew
 if [[ -e /opt/homebrew/bin/brew ]]; then
   # M1チップ
+  unset HOMEBREW_SHELLENV_PREFIX
   eval $(/opt/homebrew/bin/brew shellenv)
+  # export PATH=/opt/homebrew/bin:${PATH}
 else
   eval $(/usr/local/bin/brew shellenv)
 fi
@@ -36,24 +40,22 @@ manpath=(
     $(brew --prefix)/opt/gnu-sed/libexec/gnuman(N-/) # sed
     $(brew --prefix)/opt/gnu-tar/libexec/gnuman(N-/) # tar
     $(brew --prefix)/opt/grep/libexec/gnuman(N-/) # grep
-    ${MANPATH}
+    ${manpath}
 )
 
 # Java
-if [[ -e /usr/libexec/java_home ]]; then
+if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
   export JAVA_HOME=$(/usr/libexec/java_home)
   export PATH=${JAVA_HOME}/bin:${PATH}
 fi
 
-# Android
-export ANDROID_SDK_HOME="$HOME/Library/Android/sdk"
-export PATH=$ANDROID_SDK_HOME/platform-tools:$ANDROID_SDK_HOME/tools:$PATH # Android Tool
-
 # Node.js
-export PATH=$HOME/.nodebrew/current/bin:${PATH} # nodebrew
+path=($HOME/.nodebrew/current/bin(N-/) ${path})
 
 # Go
-export PATH=$(go env GOPATH)/bin:${PATH}
+if command -v go 1>/dev/null 2>&1; then
+  export PATH=$(go env GOPATH)/bin:${PATH}
+fi
 
 # Python
 if command -v pyenv 1>/dev/null 2>&1; then
@@ -81,9 +83,7 @@ if command -v direnv 1>/dev/null 2>&1; then
 fi
 
 # flutter
-if [[ -d "$HOME/flutter/bin" ]]; then
-  export PATH=$HOME/flutter/bin:${PATH}
-fi
+path=($HOME/flutter/bin(N-/) ${path})
 
 export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
 
