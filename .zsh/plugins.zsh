@@ -38,6 +38,28 @@ zinit light "Aloxaf/fzf-tab"
 
 zinit ice wait'1' lucid; zinit light "lukechilds/zsh-better-npm-completion"
 
+
+#######
+# zsh-completions
+#######
+
+# maven
+zstyle ':completion:*:*:mvn:*:matches' group 'yes'
+zstyle ':completion:*:*:mvn:*:options' description 'yes'
+zstyle ':completion:*:*:mvn:*:options' auto-description '%d'
+zstyle ':completion:*:*:mvn:*:descriptions' format $'\e[1m -- %d --\e[22m'
+zstyle ':completion:*:*:mvn:*:messages' format $'\e[1m -- %d --\e[22m'
+zstyle ':completion:*:*:mvn:*:warnings' format $'\e[1m -- No matches found --\e[22m'
+maven_plugins=(dependency versions spotless)
+zstyle ':completion:*:mvn:*' plugins $maven_plugins
+
+# docker
+zinit lucid has'docker' for \
+  as'completion' is-snippet \
+  'https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker' \
+  as'completion' is-snippet \
+  'https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose' \
+
 #######
 # https://github.com/Aloxaf/fzf-tab
 #######
@@ -66,4 +88,18 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 if command -v jira 1>/dev/null 2>&1; then
   eval "$(jira --completion-script-zsh)"
 fi
+
+#compdef toggl
+_toggl() {
+  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _TOGGL_COMPLETE=complete-zsh  toggl)
+}
+if [[ "$(basename -- ${(%):-%x})" != "_toggl" ]]; then
+  compdef _toggl toggl
+fi
+
+# # AWS CLI v2
+# autoload bashcompinit && bashcompinit
+# autoload -Uz compinit && compinit
+# compinit
+# complete -C aws_completer aws
 
