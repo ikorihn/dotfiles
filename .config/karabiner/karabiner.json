@@ -2741,6 +2741,25 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "available_since": "12.3.0",
+                        "description": "Change control + mouse motion to scroll wheel (rev 1)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command",
+                                            "right_control",
+                                            "right_shift",
+                                            "right_option"
+                                        ]
+                                    }
+                                },
+                                "type": "mouse_motion_to_scroll"
+                            }
+                        ]
                     }
                 ]
             },
@@ -2755,6 +2774,19 @@
                         "vendor_id": 1241
                     },
                     "ignore": true,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 50184,
+                        "vendor_id": 1133
+                    },
+                    "ignore": false,
                     "manipulate_caps_lock_led": false,
                     "simple_modifications": []
                 }
