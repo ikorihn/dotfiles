@@ -6,10 +6,18 @@ format = '[\[ $time \]]($style) '
 success_symbol = '[\$](bold green)'
 error_symbol = '[\$](bold red)'
 
-[custom.toggl]
-command = ''' toggl --cache --csv current | grep -e Duration -e Description | sort -r | awk 'BEGIN{ RS="\n"; FS=","; ORS=","} { print substr($2, 0, 20) }' '''
-when = "true"
-shell = "zsh"
+# [custom.toggl]
+# command = ''' toggl --cache --csv current | grep -e Duration -e Description | sort -r | awk 'BEGIN{ RS="\n"; FS=","; ORS=","} { print substr($2, 0, 20) }' '''
+# shell = "zsh"
+# disabled = true
 
 [java]
 disabled = true
+
+[custom.gittag]
+command = ''' git describe --tags --abbrev=0 '''
+description = "Show git latest tag"
+when = "git rev-parse --is-inside-work-tree"
+shell = "zsh"
+symbol = "🔖 "
+
