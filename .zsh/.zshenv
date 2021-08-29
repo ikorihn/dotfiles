@@ -49,6 +49,11 @@ if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
   export PATH=${JAVA_HOME}/bin:${PATH}
 fi
 
+# Android
+if [[ -e "$(brew --prefix)/share/android-sdk" ]]; then
+  export ANDROID_SDK_ROOT=$(brew --prefix)/share/android-sdk
+fi
+
 # Node.js
 path=($HOME/.nodebrew/current/bin(N-/) ${path})
 
