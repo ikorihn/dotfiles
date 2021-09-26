@@ -82,8 +82,6 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
   eval "$(jira --completion-script-zsh)"

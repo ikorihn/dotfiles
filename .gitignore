@@ -1,6 +1,7 @@
 .zcompdump*
 .zcompcache*
 .zsh/.zinit
+.zsh/.iterm2*
 
 _viminfo
 .cache/
