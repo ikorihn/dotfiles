@@ -2,9 +2,9 @@ alias ls='exa --group-directories-first'
 alias ll='ls -halF --git --time-style=long-iso --icons'
 alias la='ll -gHiS'
 
-alias rm='rm -i'
-alias cp='cp -i -p'
-alias mv='mv -i'
+# alias rm='rm -i'
+# alias cp='cp -i -p'
+# alias mv='mv -i'
 
 alias mkdir='mkdir -p'
 
