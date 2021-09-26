@@ -38,10 +38,10 @@ nnoremap > >>
 nnoremap < <<
 
 " Register
-"vnoremap x "_x
-"nnoremap x "_x
-"vnoremap s "_s
-"nnoremap s "_s
+vnoremap x "_x
+nnoremap x "_x
+vnoremap s "_s
+nnoremap s "_s
 vnoremap <Leader>p "0p
 nnoremap <Leader>p "0p
 vnoremap <Leader>P "0P
