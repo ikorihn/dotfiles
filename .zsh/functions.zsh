@@ -131,15 +131,15 @@ adb_screencap() {
   local SIZE=${2:-300x}
 
   adb shell screencap -p /sdcard/$FILE_NAME
-  adb_pull_file $file_name $dest_dir
+  adb_pull_file $FILE_NAME $DEST_DIR
 
   mogrify -resize $SIZE -unsharp 2x1.4+0.5+0 -quality 100 -verbose $DEST_DIR/$FILE_NAME
 }
 
 adb_pull_file() {
-  file_name=$1
-  directory=$2
-  if [[ -z $file_name -o -z $directory ]]; then
+  local file_name=$1
+  local directory=$2
+  if [[ -z $file_name || -z $directory ]]; then
     echo 'no file'
     return 1
   fi
@@ -160,7 +160,7 @@ adb_screenrecord() {
   local FILE_NAME=$DATE_TIME.mp4
   local DEST_DIR=${1:-~/Desktop}
 
-  trap "echo 'pull to $DEST_DIR/$FILE_NAME'; adb pull /sdcard/$FILE_NAME $DEST_DIR/$FILE_NAME; adb shell rm /sdcard/$FILE_NAME" SIGINT
+  trap "echo 'pull to $DEST_DIR/$FILE_NAME'; sleep 2s; adb pull /sdcard/$FILE_NAME $DEST_DIR/$FILE_NAME; adb shell rm /sdcard/$FILE_NAME" SIGINT
 
   echo "録画を開始しました。録画を終了する場合は、 Ctrl+C を押下してください"
   adb shell screenrecord /sdcard/$FILE_NAME --size 540x960
