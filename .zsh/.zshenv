@@ -54,9 +54,6 @@ if [[ -e "$(brew --prefix)/share/android-sdk" ]]; then
   export ANDROID_SDK_ROOT=$(brew --prefix)/share/android-sdk
 fi
 
-# Node.js
-path=($HOME/.nodebrew/current/bin(N-/) ${path})
-
 # Go
 if command -v go 1>/dev/null 2>&1; then
   export PATH=$(go env GOPATH)/bin:${PATH}
