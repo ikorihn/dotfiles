@@ -1,9 +1,16 @@
-format = "#### $all"
+format = "#### $all$line_break$character"
 
+[line_break]
+disabled = false
+
+[battery]
+disabled = false
+[[battery.display]]
+threshold = 80
 
 [time]
 disabled = false
-format = '[\[ $time \]]($style) '
+# format = '[\[$time\]]($style) '
 
 [character]
 success_symbol = '[\$](bold green)'
