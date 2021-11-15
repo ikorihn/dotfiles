@@ -40,14 +40,14 @@ bind refs R ?git rebase %(branch)
 bind status <Ctrl-r> ?git rebase --continue
 
 # . で HEAD との diff
-bind main . !sh -c "git diff %(commit) | tig"
-bind diff . !sh -c "git diff %(commit) | tig"
-bind refs . !sh -c "git diff %(branch) | tig"
+bind main . !sh -c "git diff --patch-with-stat %(commit) | tig"
+bind diff . !sh -c "git diff --patch-with-stat %(commit) | tig"
+bind refs . !sh -c "git diff --patch-with-stat %(branch) | tig"
 
 # Alt-. で指定 commit ID との diff
-bind main <Esc>. ?sh -c "git diff %(commit)..%(prompt Enter commit ID: ) | tig"
-bind diff <Esc>. ?sh -c "git diff %(commit)..%(prompt Enter commit ID: ) | tig"
-bind refs <Esc>. ?sh -c "git diff %(branch)..%(prompt Enter branch name: ) | tig"
+bind main <Esc>. ?sh -c "git diff --patch-with-stat %(commit)..%(prompt Enter commit ID: ) | tig"
+bind diff <Esc>. ?sh -c "git diff --patch-with-stat %(commit)..%(prompt Enter commit ID: ) | tig"
+bind refs <Esc>. ?sh -c "git diff --patch-with-stat %(branch)..%(prompt Enter branch name: ) | tig"
 
 # stash
 bind generic S ?git stash save "%(prompt Enter stash comment: )"

@@ -40,7 +40,7 @@
   lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict
   stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
   stali = stash list
-  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
+  graph = log --graph --date=iso --decorate=short --all --pretty=format:'%C(green)%h %C(reset)%ad %C(blue)%ae %C(red)%d %C(reset)%s'
   find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
   show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
   version-tags = "tag -l --sort=-v:refname"
