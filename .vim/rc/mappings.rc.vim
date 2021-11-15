@@ -2,10 +2,10 @@ let mapleader = ","
 
 " Multi line move
 inoremap jj <ESC>
-nnoremap j gj
-nnoremap k gk
-nnoremap gj j
-nnoremap gk k
+" nnoremap j gj
+" nnoremap k gk
+" nnoremap gj j
+" nnoremap gk k
 noremap <Down> gj
 noremap <Up> gk
 nnoremap Y y$
@@ -38,10 +38,10 @@ nnoremap > >>
 nnoremap < <<
 
 " Register
-vnoremap x "_x
-nnoremap x "_x
-vnoremap s "_s
-nnoremap s "_s
+"vnoremap x "_x
+"nnoremap x "_x
+"vnoremap s "_s
+"nnoremap s "_s
 vnoremap <Leader>p "0p
 nnoremap <Leader>p "0p
 vnoremap <Leader>P "0P

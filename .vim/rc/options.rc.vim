@@ -1,5 +1,3 @@
-set shell=bash\ -l
-
 " File encoding
 if !exists ('g:encoding_set') || !has('nvim')
     set encoding=utf-8
@@ -29,8 +27,8 @@ set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 
 " Highlight cursor line
-set cursorline
-set cursorcolumn
+"set cursorline
+"set cursorcolumn
 
 " Invisible stirng
 set list
