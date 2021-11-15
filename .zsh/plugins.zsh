@@ -62,28 +62,6 @@ zinit lucid has'docker' for \
   as'completion' is-snippet \
   'https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose' \
 
-#######
-# https://github.com/Aloxaf/fzf-tab
-#######
-enable-fzf-tab
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all' 'ctrl-space:toggle+down'
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
-
-# https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
   eval "$(jira --completion-script-zsh)"
@@ -102,4 +80,33 @@ fi
 # autoload -Uz compinit && compinit
 # compinit
 # complete -C aws_completer aws
+
+# https://github.com/BurntSushi/ripgrep
+zinit ice lucid as'completion' blockf has'rg'
+zinit snippet /opt/homebrew/share/zsh/site-functions/_rg
+
+# https://github.com/sharkdp/fd
+zinit ice lucid as'completion' blockf has'fd'
+zinit snippet /opt/homebrew/share/zsh/site-functions/_fd
+
+#######
+# https://github.com/Aloxaf/fzf-tab
+#######
+enable-fzf-tab
+# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all' 'ctrl-space:toggle+down'
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

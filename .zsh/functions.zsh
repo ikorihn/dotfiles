@@ -200,6 +200,18 @@ jformat() {
   cat $file | jq '.' $opt > $file.tmp && mv $file.tmp $file
 }
 
+datevarious() {
+  local d='now'
+  if [[ -n $@ ]]; then
+    d=$@
+  fi
+  date --date "$d" --iso-8601="seconds"
+  date --date "$d" +"%H:%M"
+  date --date "$d" +"%Y-%m-%d"
+  date --date "$d" +"%Y/%m/%d (%a)"
+  date --date "$d" +"%s"
+}
+
 distinct() {
 #  set -l uniq
 #  for a in $argv

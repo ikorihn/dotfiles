@@ -43,6 +43,8 @@ manpath=(
     ${manpath}
 )
 
+fpath=($(brew --prefix)/share/zsh/site-functions/(N-/) $fpath)
+
 # Java
 if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
   export JAVA_HOME=$(/usr/libexec/java_home)
@@ -67,6 +69,9 @@ if command -v pyenv 1>/dev/null 2>&1; then
 
   eval "$(pyenv init -)"
   export PIPENV_VENV_IN_PROJECT=1
+
+  # poetry
+  export PATH="$HOME/.poetry/bin:$PATH"
 fi
 
 # Ruby
@@ -95,3 +100,8 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
 # export FZF_DEFAULT_OPTS='--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
+
+# deduplicate
+typeset -U path
+typeset -U manpath
+typeset -U fpath
