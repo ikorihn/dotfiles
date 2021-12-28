@@ -4,11 +4,11 @@ repo = 'Shougo/dein.vim'
 ####
 # colorscheme
 ####
-[[plugins]]
-repo = 'vim-scripts/wombat256.vim'
-
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
+# [[plugins]]
+# repo = 'vim-scripts/wombat256.vim'
+#
+# [[plugins]]
+# repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'joshdick/onedark.vim'
@@ -99,15 +99,6 @@ repo = 'easymotion/vim-easymotion'
 repo = 'bkad/CamelCaseMotion'
 hook_add = '''
     let g:camelcasemotion_key = '<leader>'
-'''
-
-[[plugins]]
-repo = 'ripxorip/aerojump.nvim'
-hook_add = '''
-    nmap <Leader>as <Plug>(AerojumpSpace)
-    nmap <Leader>ab <Plug>(AerojumpBolt)
-    nmap <Leader>aa <Plug>(AerojumpFromCursorBolt)
-    nmap <Leader>ad <Plug>(AerojumpDefault) " Boring mode
 '''
 
 ####

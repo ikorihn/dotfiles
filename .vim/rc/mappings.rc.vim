@@ -1,7 +1,7 @@
 let mapleader = ","
 
 " Multi line move
-inoremap jj <ESC>
+inoremap jk <ESC>
 " nnoremap j gj
 " nnoremap k gk
 " nnoremap gj j
@@ -159,8 +159,8 @@ nmap <F6> <ESC>a<C-R>=strftime("%Y-%m-%dT%H:%M:%S")
 command! Q quit
 
 " URL encode/decode selection
-vnoremap <leader>en :!python -c 'import sys,urllib;print urllib.quote(sys.stdin.read().strip())'<cr>
-vnoremap <leader>de :!python -c 'import sys,urllib;print urllib.unquote(sys.stdin.read().strip())'<cr>
+vnoremap <leader>en :!python -c 'import sys; from urllib import parse; print(parse.quote(sys.stdin.read().strip()))'<cr>
+vnoremap <leader>de :!python -c 'import sys; from urllib import parse; print(parse.unquote(sys.stdin.read().strip()))'<cr>
 
 " csvファイルハイライト「:Csvhl [数値]」 と打つと、csvファイルで[数値]カラム目のハイライトをしてくれる
 function! CSVH(x)

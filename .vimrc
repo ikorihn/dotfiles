@@ -18,6 +18,18 @@ runtime! rc/options.rc.vim
 runtime! rc/filetype.rc.vim
 runtime! rc/mappings.rc.vim
 
+if exists('g:vscode')
+  call plug#begin(stdpath('data') . '/plugged')
+  Plug 'junegunn/vim-easy-align'
+  Plug 'asvetliakov/vim-easymotion'
+  call plug#end()
+
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+
+  finish
+endif
+
 " Load dein.
 let s:dein_dir = expand('$CACHE/vim/dein')
 let s:dein_repo_dir = s:dein_dir .'/repos/github.com/Shougo/dein.vim'
@@ -50,12 +62,12 @@ endif
 "   call dein#update()
 " endif
 
-" " プラグイン削除
-" let s:removed_plugins = dein#check_clean()
-" if len(s:removed_plugins) > 0
-"   call map(s:removed_plugins, "delete(v:val, 'rf')")
-"   call dein#recache_runtimepath()
-" endif
+" プラグイン削除
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+  call map(s:removed_plugins, "delete(v:val, 'rf')")
+  call dein#recache_runtimepath()
+endif
 
 " Colors
 set t_Co=256
