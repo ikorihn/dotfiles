@@ -126,7 +126,7 @@ if = "has('nvim')"
 on_cmd = 'Defx'
 depends = ['defx-icons']
 hook_add = '''
-	nnoremap <silent> <leader>f :<C-u>Defx<CR>
+    nnoremap <silent> <leader>f :<C-u>Defx<CR>
 
     autocmd FileType defx call s:defx_my_settings()
 
