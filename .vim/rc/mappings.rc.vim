@@ -17,6 +17,9 @@ nnoremap ZZ    <Nop>
 nnoremap gQ    gq
 inoremap <C-C> <Esc>
 
+" macro
+nnoremap <expr> @ reg_recording() == '' ? '@q' : ''
+
 " Change tab width
 nnoremap ts2 :<C-u>setl shiftwidth=2 softtabstop=2<CR>
 nnoremap ts4 :<C-u>setl shiftwidth=4 softtabstop=4<CR>
@@ -48,8 +51,6 @@ vnoremap <Leader>P "0P
 nnoremap <Leader>P "0P
 
 " Jump quickfix
-nnoremap <C-p> :<C-u>cp<CR>
-nnoremap <C-n> :<C-u>cn<CR>
 nnoremap [f :<C-u>cp<CR>
 nnoremap ]f :<C-u>cn<CR>
 nnoremap [F :<C-u>cfirst<CR>
