@@ -83,11 +83,11 @@ fi
 
 # https://github.com/BurntSushi/ripgrep
 zinit ice lucid as'completion' blockf has'rg'
-zinit snippet /opt/homebrew/share/zsh/site-functions/_rg
+zinit snippet $(brew --prefix)/share/zsh/site-functions/_rg
 
 # https://github.com/sharkdp/fd
 zinit ice lucid as'completion' blockf has'fd'
-zinit snippet /opt/homebrew/share/zsh/site-functions/_fd
+zinit snippet $(brew --prefix)/share/zsh/site-functions/_fd
 
 #######
 # https://github.com/Aloxaf/fzf-tab
