@@ -2,8 +2,17 @@
   "languageserver": {
     "golang": {
       "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "filetypes": [
+        "go"
+      ]
     }
+  },
+  "jedi": {
+    "enable": true,
+    "startupMessage": false,
+    "executable.command": "~/.pyenv/shims/jedi-language-server"
   }
 }
