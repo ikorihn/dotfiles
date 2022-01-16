@@ -730,6 +730,7 @@ key_bindings:
   #- { key: Home,      mods: Shift,   mode: ~Alt,        action: ScrollToTop,   }
   #- { key: End,       mods: Shift,   mode: ~Alt,        action: ScrollToBottom }
   - { key: Q, mods: Control, chars: "\x11" }
+  - { key: Space, mods: Control, chars: "\x00" }
 
   - { key: A, mods: Alt, chars: "\x1ba" }
   - { key: B, mods: Alt, chars: "\x1bb" }
