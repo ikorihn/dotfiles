@@ -2489,6 +2489,7 @@
                                     "key_code": "g",
                                     "modifiers": {
                                         "mandatory": [
+                                            "left_command",
                                             "right_command",
                                             "right_control",
                                             "right_shift",
@@ -2499,6 +2500,26 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a 'Google Chrome'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "Vivaldi",
+                                "from": {
+                                    "key_code": "g",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_command",
+                                            "right_control",
+                                            "right_shift",
+                                            "right_option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'Vivaldi'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2519,6 +2540,27 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a 'Intellij Idea'"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "description": "DBeaver",
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "right_command",
+                                            "right_control",
+                                            "right_shift",
+                                            "right_option"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a 'DBeaver'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2585,7 +2627,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "iTerm2",
+                                "description": "Alacritty",
                                 "from": {
                                     "key_code": "f",
                                     "modifiers": {
@@ -2599,7 +2641,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a iTerm"
+                                        "shell_command": "open -a Alacritty"
                                     }
                                 ],
                                 "type": "basic"
@@ -2640,48 +2682,6 @@
                                 "to": [
                                     {
                                         "shell_command": "open -a Obsidian"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Todoist",
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_command",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a Todoist"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "description": "Toggl",
-                                "from": {
-                                    "key_code": "a",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "left_option",
-                                            "right_command",
-                                            "right_control",
-                                            "right_shift",
-                                            "right_option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -a 'Toggl Track'"
                                     }
                                 ],
                                 "type": "basic"
