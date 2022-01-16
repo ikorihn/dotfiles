@@ -18,6 +18,9 @@ repo = 'dracula/vim'
 
 [[plugins]]
 repo = 'sainnhe/gruvbox-material'
+hook_add = '''
+    let g:gruvbox_material_better_performance = 1
+'''
 
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
