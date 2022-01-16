@@ -76,3 +76,4 @@ setopt hist_no_store
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
+set -o ignoreeof
