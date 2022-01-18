@@ -107,3 +107,5 @@ set showcmd         "入力中のコマンドを表示する
 set showmatch       "閉じ括弧の入力時に対応する括弧を表示する
 "set title           "編集中のファイル名を表示する
 
+" True Colorを有効にする
+set termguicolors
