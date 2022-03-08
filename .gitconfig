@@ -1,5 +1,6 @@
 [include]
   path = ~/.gitconfig.local
+  path = ~/delta.gitconfig
 
 [core]
   editor = nvim
@@ -36,8 +37,10 @@
   swc = switch -c
   br = branch
   cp = cherry-pick
+  res = restore .
+  ress = restore --staged .
   diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
-  lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict
+  lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict-local
   stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
   stali = stash list
   graph = log --graph --date=iso --decorate=short --all --pretty=format:'%C(green)%h %C(reset)%ad %C(blue)%ae %C(red)%d %C(reset)%s'
@@ -49,22 +52,25 @@
 [fetch]
   prune = true
 
-[pager]
-  log = delta
-  show = delta
-  diff = delta
-  reflog = delta
-
 [interactive]
   diffFilter = delta --color-only --features=interactive
 
+[pager]
+   # log = delta
+   # reflog = delta
+   show = delta
+   diff = delta
+
 [delta]
-  features = decorations
+  features = woolly-mammoth
+  # line-numbers = true
+  # side-by-side = true
 
 [delta "interactive"]
   keep-plus-minus-markers = false
 
 [delta "decorations"]
+  syntax-theme = OneHalfDark
   commit-decoration-style = blue ol
   commit-style = raw
   file-style = omit
@@ -72,6 +78,7 @@
   hunk-header-file-style = red
   hunk-header-line-number-style = "#067a00"
   hunk-header-style = file line-number syntax
+  plus-style = syntax "#4d733f"
 
 [credential]
   helper = osxkeychain
@@ -91,3 +98,5 @@
 
 [ghq]
   root = ~/repos
+[log]
+	date = iso-strict
