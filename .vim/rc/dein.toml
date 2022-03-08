@@ -6,9 +6,15 @@ repo = 'Shougo/dein.vim'
 ####
 # [[plugins]]
 # repo = 'vim-scripts/wombat256.vim'
-#
-# [[plugins]]
-# repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'
+
+[[plugins]]
+repo = 'whatyouhide/vim-gotham'
 
 [[plugins]]
 repo = 'joshdick/onedark.vim'
@@ -131,4 +137,7 @@ hook_add = '''
     let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
     let g:gitgutter_sign_modified_removed = emoji#for('collision')
 '''
+
+[[plugins]]
+repo = 'martinda/Jenkinsfile-vim-syntax'
 

@@ -182,3 +182,7 @@ function! GetCsvCol(n)
         let linenum=linenum+1
     endfor
 endfunction
+
+" convert to/from camel/snake
+vnoremap <leader>cs :s#\(\<\u\l\+\\|\l\+\)\(\u\)#\l\1_\l\2#g<CR>
+vnoremap <leader>sc :s/_\(.\)/\u\1/g<CR>

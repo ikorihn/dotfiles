@@ -2,7 +2,7 @@
 repo = 'neoclide/coc.nvim'
 rev = 'release'
 build = 'coc#util#install()'
-on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'html', 'css', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'Jenkinsfile', 'html', 'css', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xml', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
 hook_add = '''
 
     " https://github.com/neoclide/coc.nvim#example-vim-configuration
@@ -38,7 +38,7 @@ hook_add = '''
 
     " Use <c-space> to trigger completion.
     if has('nvim')
-        set signcolumn=number
+        "set signcolumn=number
         inoremap <silent><expr> <c-space> coc#refresh()
     else
         inoremap <silent><expr> <c-@> coc#refresh()
@@ -166,3 +166,5 @@ hook_add = '''
 
 [[plugins]]
 repo = 'wellle/tmux-complete.vim'
+on_ft = ['autohotkey', 'autoit', 'cfg', 'git', 'go', 'groovy', 'java', 'Jenkinsfile', 'html', 'css', 'javascript', 'python', 'snippet', 'toml', 'vim', 'vb', 'xml', 'xsl', 'cpp', 'sql', 'markdown', 'gitcommit']
+
