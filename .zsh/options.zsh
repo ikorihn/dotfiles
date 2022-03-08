@@ -46,7 +46,7 @@ setopt no_beep
 setopt no_flow_control
 
 # Ctrl+Dでzshを終了しない
-# setopt ignore_eof
+setopt ignore_eof
 
 # '#' 以降をコメントとして扱う
 setopt interactive_comments
@@ -75,5 +75,3 @@ setopt hist_no_store
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
-
-set -o ignoreeof

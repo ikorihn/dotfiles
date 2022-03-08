@@ -13,3 +13,4 @@ web:*.{html,css,js,ts,vue}
 --smart-case
 
 
+--no-heading
