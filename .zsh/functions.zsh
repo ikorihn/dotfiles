@@ -33,11 +33,11 @@ fgr() {
 #     copy_commit_hash="$log_line_to_hash | xclip"
 #     git_checkout="$log_line_to_hash | xargs -I % sh -c 'git checkout %'"
 #     open_cmd="open"
-# 
+#
 #     if [[ $(uname) = Linux ]];
 #         set open_cmd "xdg-open"
 #     fi
-# 
+#
 #     git log --graph --color=always --format='%C(auto)%h%d %s %C(green)%C(bold)%cr% C(blue)%an' | \
 #         fzf --no-sort --reverse --tiebreak=index --no-multi --ansi \
 #             --preview="$view_commit" \
@@ -244,7 +244,7 @@ multissh() {
   # end
 
   tmux new-window
-  tmux rename-window "multi-ssh"
+  # tmux rename-window "multi-ssh"
 
   # 各ホストにsshログイン
   # 最初の1台はsshするだけ
@@ -344,21 +344,29 @@ imgpbcopy() {
   fi
 }
 
+# sshのwrapper
 function ssh() {
   # tmux起動時
   if [[ -n $(printenv TMUX) ]] ; then
       # 現在のペインIDを記録
       local pane_id=$(tmux display -p '#{pane_id}')
       # 接続先ホスト名に応じて背景色を切り替え
-      if [[ $(echo $1 | grep -e 'btc' -e 'ap' -e 'ntj') ]] ; then
-          tmux select-pane -P 'bg=colour52,fg=white'
-      fi
+      # if [[ $(echo $1 | grep -e 'btc' -e 'ap' -e 'ntj') ]] ; then
+      #     tmux select-pane -P 'bg=colour101'
+      # elif [[ $(echo $1 | grep -e 'fox') ]] ; then
+      #     tmux select-pane -P 'bg=colour143'
+      # fi
+      tmux select-pane -P bg="#381525"
+
+      # window名にホストを表示
+      tmux rename-window "ssh $(echo -- $* | awk '{print $NF}')"
 
       # 通常通りssh続行
       command ssh $@
 
-      # デフォルトの背景色に戻す
+      # デフォルトに戻す
       tmux select-pane -t $pane_id -P 'default'
+      tmux setw automatic-rename on
   else
       command ssh $@
   fi
