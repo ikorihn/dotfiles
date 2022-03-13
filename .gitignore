@@ -11,6 +11,7 @@ _viminfo
 .vim/backup/*
 !.gitkeep
 
+# .config
 .config/karabiner/automatic_backups
 .config/fish/*
 !.config/fish/config.fish
@@ -23,6 +24,7 @@ _viminfo
 .config/fish/functions/*
 !.config/fish/functions/fish_prompt.fish
 !.config/fish/functions/fish_right_prompt.fish
+.config/git/config.local
 
 # Asr
 Asr/Bar/

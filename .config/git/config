@@ -1,17 +1,16 @@
 [include]
-  path = ~/.gitconfig.local
-  path = ~/delta.gitconfig
+  path = ~/.config/git/config.local
+  path = ~/.config/git/delta/themes.gitconfig
 
 [core]
   editor = nvim
   precomposeunicode = true
   quotepath = false
   ignoreCase = false
-  excludesfile = ~/.gitignore_global
   # sparsecheckout = true
 
 [init]
-  templatedir = ~/.git_template
+  templatedir = ~/.config/git/template
 
 [difftool]
   prompt = false
@@ -88,7 +87,7 @@
 
 [commit]
   verbose = true
-  template = ~/.git_commit_template
+  template = ~/.config/git/commit_template
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
