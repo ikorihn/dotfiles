@@ -89,6 +89,11 @@ zinit snippet $(brew --prefix)/share/zsh/site-functions/_rg
 zinit ice lucid as'completion' blockf has'fd'
 zinit snippet $(brew --prefix)/share/zsh/site-functions/_fd
 
+# https://github.com/dandavison/delta/blob/master/etc/completion/completion.zsh
+if command -v delta 1>/dev/null 2>&1; then
+  compdef _gnu_generic delta
+fi
+
 #######
 # https://github.com/Aloxaf/fzf-tab
 #######
