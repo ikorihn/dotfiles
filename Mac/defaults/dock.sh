@@ -3,7 +3,7 @@ defaults write com.apple.dock autohide-delay -float 0 # Dock が表示される�
 defaults write com.apple.dock magnification -bool false # Magnificate the Dock （Dock の拡大機能を入にする）
 defaults write com.apple.dock mineffect -string "scale" # 最小化アニメーション(scale, genie)
 defaults write com.apple.dock minimize-to-application -bool true # 最小化した際にアイコンに格納する
-defaults write com.apple.dock orientation -string left # Dockの表示場所を変更
+defaults write com.apple.dock orientation -string bottom # Dockの表示場所を変更
 defaults write com.apple.dock persistent-apps -array # Wipe all app icons from the Dock （Dock に標準で入っている全てのアプリを消す、Finder とごみ箱は消えない）
 defaults write com.apple.dock show-process-indicators -bool true # 起動中アプリのアイコンにindicatorを表示
 defaults write com.apple.dock tilesize -int 40 # Set the icon size （アイコンサイズの設定）
@@ -13,4 +13,8 @@ defaults write com.apple.dock showAppExposeGestureEnabled -bool true # アプリ
 defaults write com.apple.dock mru-spaces -bool false # 使用状況に基づいて並び替える
 defaults write com.apple.dock expose-group-apps -bool true # ウィンドウをアプリケーションごとにグループ化
 defaults write com.apple.spaces spans-displays -bool true # ディスプレイごとに個別のスペース
+
+
+defaults write com.apple.menuextra.clock ShowSeconds -bool true # 時計を秒表示する
+defaults write com.apple.menuextra.clock DateFormat -string 'EEE MMM d H:mm:ss'
 

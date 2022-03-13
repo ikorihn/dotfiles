@@ -41,8 +41,14 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCorner
 # スクロール方向
 defaults write .GlobalPreferences com.apple.swipescrolldirection -bool true
 
+defaults write .GlobalPreferences com.apple.swipescrolldirection -bool true
+
+
 # zoom
 defaults write com.apple.AppleMultitouchTrackpad TrackpadPinch -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadPinch -bool true
 defaults write com.apple.AppleMultitouchTrackpad TrackpadTwoFingerDoubleTapGesture -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadTwoFingerDoubleTapGesture -bool true
+
+# Tracking Speed
+defaults write com.apple.trackpad.scaling -int 3
