@@ -8,9 +8,9 @@
 #
 # All imports must either be absolute paths starting with `/`, or paths relative
 # to the user's home directory starting with `~/`.
-#import:
-#  - /path/to/alacritty.yml
-
+import:
+  # git clone https://github.com/eendroroy/alacritty-theme.git ~/.config/alacritty/alacritty-theme
+  - ~/.config/alacritty/alacritty-theme/themes/gruvbox_material.yml
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -30,8 +30,8 @@ window:
   # must be at least `2`, while using a value of `0` for columns and lines will
   # fall back to the window manager's recommended size.
   dimensions:
-    columns: 140
-    lines: 40
+    columns: 180
+    lines: 50
 
   # Window position (changes require restart)
   #
