@@ -44,17 +44,7 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
-hook_add = '''
-    nmap [fugitive] <Nop>
-    map <leader>g [fugitive]
-    nnoremap <silent> [fugitive]s :Gstatus<CR><C-w>T
-    nnoremap <silent> [fugitive]a :Gwrite<CR>
-    nnoremap <silent> [fugitive]c :Gcommit-v<CR>
-    nnoremap <silent> [fugitive]b :Gblame<CR>
-    nnoremap <silent> [fugitive]d :Gdiff<CR>
-    nnoremap <silent> [fugitive]m :Gmerge<CR>
-'''
+repo = 'lambdalisue/gina.vim'
 
 [[plugins]]
 repo = 'will133/vim-dirdiff'
@@ -112,6 +102,16 @@ repo = 'easymotion/vim-easymotion'
 repo = 'bkad/CamelCaseMotion'
 hook_add = '''
     let g:camelcasemotion_key = '<leader>'
+'''
+
+####
+# Search
+####
+
+[[plugins]]
+repo = 'kyoh86/vim-ripgrep'
+hook_add = '''
+    command! -nargs=* -complete=file Ripgrep :call ripgrep#search(<q-args>)
 '''
 
 ####

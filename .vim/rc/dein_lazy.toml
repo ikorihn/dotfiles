@@ -82,44 +82,44 @@ on_ft=['csv']
 repo = 'junegunn/fzf'
 build = './install --all'
 
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = ['fzf']
-on_cmd = [
-  'Files',
-  'GFiles',
-  'GFiles?',
-  'Tags',
-  'Commands',
-  'Rg',
-  'History',
-  'Buffers',
-  'Snippets',
-  'Maps',
-  'Helptags',
-]
-hook_add = '''
-    command! -bang -nargs=* Rg
-        \ call fzf#vim#grep(
-        \   'rg --column --line-number --hidden --no-heading --color=always --smart-case -g "!.git/*" -- '.shellescape(<q-args>), 1,
-        \   fzf#vim#with_preview(), <bang>0)
-
-    fun! FzfOmniFiles()
-        let is_git = system('git status')
-        if v:shell_error
-            :Files
-        else
-            :GFiles
-        endif
-    endfun
-
-    nnoremap <C-j><C-j> :Commands<CR>
-    nnoremap <C-j><C-h> :History<CR>
-    nnoremap <C-j><C-p> :call FzfOmniFiles()<CR>
-    nnoremap <C-j><C-g> :Rg<Space>
-    nnoremap <C-j><C-b> :Buffers<CR>
-    nnoremap <C-j>. :<C-u>Files ~/.dotfiles<CR>
-'''
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
+# depends = ['fzf']
+# on_cmd = [
+#   'Files',
+#   'GFiles',
+#   'GFiles?',
+#   'Tags',
+#   'Commands',
+#   'Rg',
+#   'History',
+#   'Buffers',
+#   'Snippets',
+#   'Maps',
+#   'Helptags',
+# ]
+# hook_add = '''
+#     command! -bang -nargs=* Rg
+#         \ call fzf#vim#grep(
+#         \   'rg --column --line-number --hidden --no-heading --color=always --smart-case -g "!.git/*" -- '.shellescape(<q-args>), 1,
+#         \   fzf#vim#with_preview(), <bang>0)
+# 
+#     fun! FzfOmniFiles()
+#         let is_git = system('git status')
+#         if v:shell_error
+#             :Files
+#         else
+#             :GFiles
+#         endif
+#     endfun
+# 
+#     nnoremap <C-j><C-j> :Commands<CR>
+#     nnoremap <C-j><C-h> :History<CR>
+#     nnoremap <C-j><C-p> :call FzfOmniFiles()<CR>
+#     nnoremap <C-j><C-g> :Rg<Space>
+#     nnoremap <C-j><C-b> :Buffers<CR>
+#     nnoremap <C-j>. :<C-u>Files ~/dotfiles<CR>
+# '''
 
 #####################################################################
 # Filer

@@ -44,7 +44,7 @@ if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
   call dein#load_toml('~/.vim/rc/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/.vim/rc/dein_coc.toml', {'lazy': 1})
+  call dein#load_toml('~/.vim/rc/dein_coc.toml', {'lazy': 0})
   call dein#load_toml('~/.vim/rc/dein_lazy.toml', {'lazy': 1})
   call dein#load_toml('~/.vim/rc/dein_programming.toml', {'lazy': 1})
 
@@ -56,11 +56,9 @@ if dein#check_install()
   call dein#install()
 endif
 
-" プラグインアップデート ちょっと時間かかるのでコメントアウト
+" "プラグインアップデート
 " let g:dein#install_github_api_token = expand('$GITHUB_ACCESS_TOKEN_DEIN')
-" if dein#check_update()
-"   call dein#update()
-" endif
+" call dein#check_update(v:true)
 
 " プラグイン削除
 let s:removed_plugins = dein#check_clean()
