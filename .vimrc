@@ -12,7 +12,7 @@ if !isdirectory(expand($CACHE))
 endif
 
 " Load python3
-let g:python3_host_prog = expand('$HOME/.pyenv/shims/python')
+let g:python3_host_prog = system('echo -n $(which python)')
 
 runtime! rc/options.rc.vim
 runtime! rc/filetype.rc.vim
