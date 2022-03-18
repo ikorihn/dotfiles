@@ -1,0 +1,129 @@
+####
+# general
+####
+[[snippets]]
+  description = "Start swagger-ui docker"
+  command = "docker run -v (PWD)/doc:/usr/share/nginx/html/doc -p 80:8080 -e URL=doc/swagger.yaml swaggerapi/swagger-ui"
+  tag = ["docker", "server"]
+  output = ""
+[[snippets]]
+  description = "compress PNG"
+  command = "pngquant --ext .png --force --speed 1 ./*.png"
+  tag = ["util"]
+  output = ""
+[[snippets]]
+  description = "SVGファイルをvueのcomponentに変換する"
+  command = "find . -type f -name \"*.svg\" | xargs -i bash -c \"cat {} | sed -e '/svg/d' -e '/^    <g/d' -e '/^    <\\/g>/d' | sed -e '1i<template>' -e '\\$a</template>' > {}.bk\""
+  tag = ["svg", "vue"]
+  output = ""
+[[snippets]]
+  description = "ファイル名のcamel,snake,kebab case変換"
+  command = "find . -type f -name \"*.vue\" | xargs -i rename 's/-([a-z])/\\U$1/' {}"
+  tag = ["rename", "case", "filename"]
+  output = ""
+[[snippets]]
+  description = "ffmpegでmovファイルをgifに変換 ss,tで切り取る秒数を指定 vfで大きさ,再生速度を指定"
+  command = "ffmpeg -i $FILE.mov -an -r 8 -pix_fmt rgb8 -ss 0 -t 60 -vf scale=480:-1,setpts=PTS/2.0 -f gif $FILE.gif"
+  tag = ["ffmpeg"]
+  output = ""
+[[snippets]]
+  description = "sort by nth column with delimiter tab"
+  command = "LC_ALL=C sort -t$'\\t' -k 3 -r"
+  output = ""
+[[snippets]]
+  description = "kibana filter by path regexp"
+  command = """{
+  "query": {
+    "regexp": {
+      "path": {
+        "value": ".*/<regexp>/.*"
+      }
+    }
+  }
+}"""
+  tag = ["kibana"]
+  output = ""
+[[snippets]]
+  description = "diff war"
+  command = """WAR=<war>; SUFFIX=<suffix>; diff <(unzip -l $WAR.war.$SUFFIX | awk '{print $1, $4}' | sort -k2) <(unzip -l $WAR.war | awk '{print $1, $4}' | sort -k2)"""
+  tag = ["shell"]
+  output = ""
+[[snippets]]
+  description = "ripgrep search and replace"
+  command = """rg -l '<search>' | xargs sd '<search>' '<replaceto>'"""
+  tag = ["shell"]
+
+####
+# git
+####
+[[snippets]]
+  description = "git tag sort by created date"
+  command = "git tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short) %(subject) %(creator)'"
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git count number of commits"
+  command = "git shortlog -s"
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git count lines by author"
+  command = "SINCE=YYYY-MM-DD UNTIL=YYYY-MM-DD git log --numstat --pretty='%H' --author='<author>' --since=$SINCE --until=$UNTIL --no-merges | awk 'NF==3 {plus+=$1; minus+=$2} END {printf(\"%d (+%d, -%d)\\n\", plus+minus, plus, minus)}'"
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git lfs resolve 'Encountered N file(s) that should have been pointers'"
+  command = "git status -s | cut -d' ' -f 3- | xargs git update-index --assume-unchanged"
+  tag = ["git"]
+  output = ""
+
+####
+# server
+####
+[[snippets]]
+  description = "docker exec bash in ECS"
+  command = """docker exec -it $(docker ps -f 'name=app' -q) bash
+alias ll='ls -alh --color=auto'
+cd /usr/local/tomcat"""
+  tag = ["docker", "ECS"]
+  output = ""
+[[snippets]]
+  description = "docker cp file from container"
+  command = """docker cp $(docker ps -f 'name=app' -q):/usr/local/tomcat/webapps/ ./"""
+  tag = ["docker", "ECS"]
+  output = ""
+[[snippets]]
+  description = "docker cp file to container"
+  command = """docker cp $(ls -1 *.war) $(docker ps -f 'name=app' -q):/tmp"""
+  tag = ["docker", "ECS"]
+  output = ""
+[[snippets]]
+  description = "tail access_log"
+  command = """tail -f access_log | grep --line-buffered -E '<regexp>' | awk '{ print $4,$5,$6,$7,$9; fflush() }'"""
+  tag = ["server"]
+  output = ""
+
+####
+# badge
+####
+[[snippets]]
+  description = "must"
+  command = "![badge](https://img.shields.io/badge/review-must-red.svg)"
+  tag = ["badge"]
+  output = ""
+[[snippets]]
+  description = "ask"
+  command = "![badge](https://img.shields.io/badge/review-ask-blue.svg)"
+  tag = ["badge"]
+  output = ""
+[[snippets]]
+  description = "comment"
+  command = "![badge](https://img.shields.io/badge/review-comment-green.svg)"
+  tag = ["badge"]
+  output = ""
+[[snippets]]
+  description = "suggest"
+  command = "![badge](https://img.shields.io/badge/review-suggest-orange.svg)"
+  tag = ["badge"]
+  output = ""
+

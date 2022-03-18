@@ -222,6 +222,10 @@ distinct() {
 #  end
 }
 
+########
+# ssh
+########
+
 # SSH multiple server and send keys synchronously
 multissh() {
   local servers=$*
@@ -265,7 +269,37 @@ multissh() {
   # tmux attach-session -t $session
 }
 
+# sshのwrapper
+function ssh() {
+  # tmux起動時
+  if [[ -n $(printenv TMUX) ]] ; then
+      # 現在のペインIDを記録
+      local pane_id=$(tmux display -p '#{pane_id}')
+      # 接続先ホスト名に応じて背景色を切り替え
+      # if [[ $(echo $1 | grep -e 'btc' -e 'ap' -e 'ntj') ]] ; then
+      #     tmux select-pane -P 'bg=colour101'
+      # elif [[ $(echo $1 | grep -e 'fox') ]] ; then
+      #     tmux select-pane -P 'bg=colour143'
+      # fi
+      tmux select-pane -P bg="#381525"
+
+      # window名にホストを表示
+      tmux rename-window "ssh $(echo -- $* | awk '{print $NF}')"
+
+      # 通常通りssh続行
+      command ssh $@
+
+      # デフォルトに戻す
+      tmux select-pane -t $pane_id -P 'default'
+      tmux setw automatic-rename on
+  else
+      command ssh $@
+  fi
+}
+
+########
 # Toggl, Todoist
+########
 
 # function todoist_close
 #   local task=$(tl | fzf | awk '{ print $1 }')
@@ -329,6 +363,10 @@ toggl_status() {
   echo -n "$tgc_time $tgc_dsc"
 }
 
+########
+# clipboard
+########
+
 # クリップボード履歴を表示&fzfでコピー
 cb() {
   copyq eval -- "tab('&clipboard'); for(i = 0; i < size(); i++) print(i + '\t' + str(read(i)).split('\n') + '\n');" | fzf -m | cut -f 1 | xargs -i copyq tab '&clipboard' read {} | pbcopy
@@ -344,32 +382,8 @@ imgpbcopy() {
   fi
 }
 
-# sshのwrapper
-function ssh() {
-  # tmux起動時
-  if [[ -n $(printenv TMUX) ]] ; then
-      # 現在のペインIDを記録
-      local pane_id=$(tmux display -p '#{pane_id}')
-      # 接続先ホスト名に応じて背景色を切り替え
-      # if [[ $(echo $1 | grep -e 'btc' -e 'ap' -e 'ntj') ]] ; then
-      #     tmux select-pane -P 'bg=colour101'
-      # elif [[ $(echo $1 | grep -e 'fox') ]] ; then
-      #     tmux select-pane -P 'bg=colour143'
-      # fi
-      tmux select-pane -P bg="#381525"
-
-      # window名にホストを表示
-      tmux rename-window "ssh $(echo -- $* | awk '{print $NF}')"
-
-      # 通常通りssh続行
-      command ssh $@
-
-      # デフォルトに戻す
-      tmux select-pane -t $pane_id -P 'default'
-      tmux setw automatic-rename on
-  else
-      command ssh $@
-  fi
+petcopy() {
+  pet search | pbcopy
 }
 
 ########################################
@@ -383,4 +397,6 @@ zle -N fbr
 bindkey '^G^R' fbr
 zle -N fbrm
 bindkey '^G^M' fbrm
+zle -N petcopy
+bindkey '^G^P' petcopy
 
