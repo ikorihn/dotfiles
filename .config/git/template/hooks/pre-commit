@@ -1,0 +1,14 @@
+check_conflict() {
+  local FILES="$(git diff --cached --name-only --diff-filter=AMCR | tr '\n' ' ')"
+  local FILE
+  for FILE in $FILES; do
+    conflict=`grep -3 -E '(<<<<<<<|>>>>>>>)' $FILE | grep -v '^$'`
+    if [ -n "${conflict}" ]; then
+      printf "\e[31m[Error]: ${FILE} コンフリクトの対応が残っています\e[0m\n"
+      printf "${conflict}\n"
+      exit 1
+    fi
+  done
+}
+
+check_conflict

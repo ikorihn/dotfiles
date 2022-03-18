@@ -1,0 +1,15 @@
+#!/bin/bash -u
+
+current_branch=$(git branch | grep "^\*")
+
+if [[ ! "$current_branch" =~ .*/[A-Z]+-[0-9]+.* ]]; then
+    exit 0
+fi
+
+# e.g. feature/AAA-123-xxx-hogehoge -> AAA-123
+issue_id=$(echo "$current_branch" | sed -E 's/^.*\/([A-Z]+-[0-9]+).*$/\1/')
+
+# Insert Issue ID at the beginning of the commit message if it doesn't exist
+if [[ ! $(head -n 1 $1 | grep "$issue_id") ]]; then
+  sed -i -e '1 s@\(.*\)@'"${issue_id}"' \1@' $1
+fi
