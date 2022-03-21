@@ -83,3 +83,6 @@ setopt hist_no_store
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
+
+# 明確なドットの指定なしで.から始まるファイルをマッチ
+setopt globdots
