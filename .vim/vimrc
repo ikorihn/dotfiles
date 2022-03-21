@@ -30,6 +30,10 @@ if exists('g:vscode')
   finish
 endif
 
+if !has('nvim')
+  finish
+endif
+
 " Load dein.
 let s:dein_dir = expand('$CACHE/vim/dein')
 let s:dein_repo_dir = s:dein_dir .'/repos/github.com/Shougo/dein.vim'
