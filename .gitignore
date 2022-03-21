@@ -1,15 +1,12 @@
 .zcompdump*
 .zcompcache*
-.zsh/.zinit
-.zsh/.iterm2*
 
 _viminfo
 .cache/
 .DS_STORE
 
-.vim/undo/*
-.vim/backup/*
-!.gitkeep
+.vim/*
+!.vim/rc
 
 # .config
 .config/karabiner/automatic_backups
@@ -25,6 +22,10 @@ _viminfo
 !.config/fish/functions/fish_prompt.fish
 !.config/fish/functions/fish_right_prompt.fish
 .config/git/config.local
+.config/coc
+.config/configstore
+.config/DMM
+.config/raycast
 
 # Asr
 Asr/Bar/
