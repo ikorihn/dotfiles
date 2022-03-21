@@ -115,3 +115,6 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# https://starship.rs/ja-jp/
+eval "$(starship init zsh)"
+

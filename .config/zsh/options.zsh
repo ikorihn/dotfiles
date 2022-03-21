@@ -2,6 +2,14 @@
 autoload -Uz colors
 colors
 
+# emacs 風キーバインドにする
+bindkey -e
+
+# ヒストリの設定
+export HISTFILE=$XDG_CACHE_HOME/zsh/history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
 select-word-style default
