@@ -85,11 +85,15 @@ fi
 export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
 
 # ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
 # export FZF_DEFAULT_OPTS='--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
+export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
+
+# vim
+export VIMINIT=":source $XDG_CONFIG_HOME/nvim/vimrc"
 
 # deduplicate
 typeset -U path

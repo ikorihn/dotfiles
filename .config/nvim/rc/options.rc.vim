@@ -9,10 +9,21 @@ scriptencoding utf-8
 
 " Don't create swp file
 set backup
-set backupdir=$HOME/.vim/backup
+set backupdir=$VIM_CACHE/backup
+if !isdirectory(expand('$VIM_CACHE/backup'))
+  call mkdir(expand('$VIM_CACHE/backup'), 'p')
+endif
 set noswapfile
-set undodir=$HOME/.vim/undo
+set undodir=$VIM_CACHE/undo
 set undofile
+if !isdirectory(expand('$VIM_CACHE/undo'))
+  call mkdir(expand('$VIM_CACHE/undo'), 'p')
+endif
+set viminfo+=n$VIM_CACHE/viminfo
+let g:session_path = expand('$VIM_CACHE/sessions')
+if !isdirectory(g:session_path)
+    call mkdir(g:session_path, "p")
+endif
 
 " Show column number
 set number

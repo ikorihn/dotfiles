@@ -5,10 +5,12 @@ endif
 
 language en_US.UTF-8
 
-let $CACHE = expand('~/.cache')
+let $VIM_CACHE = expand('$XDG_CACHE_HOME/vim')
+let $VIM_HOME = expand('$XDG_CONFIG_HOME/nvim')
+let $DIR_RC = expand('$VIM_HOME/rc')
 
-if !isdirectory(expand($CACHE))
-  call mkdir(expand($CACHE), 'p')
+if !isdirectory(expand($VIM_CACHE))
+  call mkdir(expand($VIM_CACHE), 'p')
 endif
 
 " Load python3
@@ -35,7 +37,7 @@ if !has('nvim')
 endif
 
 " Load dein.
-let s:dein_dir = expand('$CACHE/vim/dein')
+let s:dein_dir = expand('$VIM_CACHE/dein')
 let s:dein_repo_dir = s:dein_dir .'/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
   if !isdirectory(s:dein_repo_dir)
@@ -47,10 +49,10 @@ endif
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
 
-  call dein#load_toml('~/.vim/rc/dein.toml', {'lazy': 0})
-  call dein#load_toml('~/.vim/rc/dein_coc.toml', {'lazy': 0})
-  call dein#load_toml('~/.vim/rc/dein_lazy.toml', {'lazy': 1})
-  call dein#load_toml('~/.vim/rc/dein_programming.toml', {'lazy': 1})
+  call dein#load_toml('$DIR_RC/dein.toml', {'lazy': 0})
+  call dein#load_toml('$DIR_RC/dein_coc.toml', {'lazy': 0})
+  call dein#load_toml('$DIR_RC/dein_lazy.toml', {'lazy': 1})
+  call dein#load_toml('$DIR_RC/dein_programming.toml', {'lazy': 1})
 
   call dein#end()
   call dein#save_state()

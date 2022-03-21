@@ -5,9 +5,6 @@ _viminfo
 .cache/
 .DS_STORE
 
-.vim/*
-!.vim/rc
-
 # .config
 .config/karabiner/automatic_backups
 .config/fish/*
@@ -26,6 +23,9 @@ _viminfo
 .config/configstore
 .config/DMM
 .config/raycast
+.config/nvim/*
+!.config/nvim/rc/
+.config/tmux/plugins
 
 # Asr
 Asr/Bar/
