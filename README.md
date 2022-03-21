@@ -14,7 +14,15 @@ ln -sf ~/dotfiles/.config/alacritty ~/.config/
 ln -sf ~/dotfiles/.config/karabiner ~/.config/
 ln -sf ~/dotfiles/.config/nvim ~/.config/
 ln -sf ~/dotfiles/.config/git ~/.config/
+ln -sf ~/dotfiles/.config/zsh ~/.config/
 ln -sf ~/dotfiles/.config/starship.toml ~/.config/
+
+```
+
+`sudo vim /etc/zshenv`
+
+```
+export ZDOTDIR=$HOME/.config/zsh
 ```
 
 ## Mac

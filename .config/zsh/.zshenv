@@ -6,11 +6,10 @@ eval $(/usr/libexec/path_helper -s)
 
 export LANG=ja_JP.UTF-8
 export XDG_CONFIG_HOME=~/.config
+export XDG_CACHE_HOME=~/.cache
+export XDG_DATA_HOME=~/.local/share
+export XDG_STATE_HOME=~/.local/state
 export EDITOR=nvim
-# ヒストリの設定
-export HISTFILE=~/.zsh_history
-export HISTSIZE=1000000
-export SAVEHIST=1000000
 
 path=($HOME/.local/bin(N-/) ${path})
 

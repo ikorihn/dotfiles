@@ -1,3 +1,8 @@
+# ヒストリの設定
+export HISTFILE=$XDG_CACHE_HOME/zsh/history
+export HISTSIZE=1000000
+export SAVEHIST=1000000
+
 source $ZDOTDIR/options.zsh
 source $ZDOTDIR/prompt.zsh
 source $ZDOTDIR/plugins.zsh
