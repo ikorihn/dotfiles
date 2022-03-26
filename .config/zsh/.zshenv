@@ -58,6 +58,7 @@ fi
 # Go
 if command -v go 1>/dev/null 2>&1; then
   export PATH=$(go env GOPATH)/bin:${PATH}
+  export GOROOT=$(go env GOROOT)
 fi
 
 # Python

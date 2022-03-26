@@ -18,6 +18,8 @@ _viminfo
 .config/fish/functions/*
 !.config/fish/functions/fish_prompt.fish
 !.config/fish/functions/fish_right_prompt.fish
+.config/zsh/abbreviations
+.config/zsh/local.zsh
 .config/git/config.local
 .config/coc
 .config/configstore

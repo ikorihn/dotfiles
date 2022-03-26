@@ -29,6 +29,8 @@ zinit light "zsh-users/zsh-history-substring-search"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+zinit light "olets/zsh-abbr"
+
 zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
 #zinit ice wait'1' lucid; zinit light "reegnz/jq-zsh-plugin"
 
