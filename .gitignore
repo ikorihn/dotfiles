@@ -28,6 +28,14 @@ _viminfo
 .config/nvim/*
 !.config/nvim/rc/
 .config/tmux/plugins
+.config/copyq/
+.config/dlv/
+.config/iterm2/
+.config/ranger/
+.config/rclone/
+.config/rest-client/
+.config/vue/
+.config/yarn/
 
 # Asr
 Asr/Bar/
