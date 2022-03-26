@@ -13,6 +13,6 @@
   "jedi": {
     "enable": true,
     "startupMessage": false,
-    "executable.command": "~/.pyenv/shims/jedi-language-server"
+    "executable.command": "/opt/homebrew/bin/jedi-language-server"
   }
 }

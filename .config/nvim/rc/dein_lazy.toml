@@ -80,7 +80,7 @@ on_ft=['csv']
 
 [[plugins]]
 repo = 'junegunn/fzf'
-build = './install --all'
+#build = './install --all'
 
 # [[plugins]]
 # repo = 'junegunn/fzf.vim'

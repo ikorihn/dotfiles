@@ -70,32 +70,6 @@ hook_source = '''
 '''
 
 #####################################################################
-# Python
-#####################################################################
-[[plugins]]
-repo = 'davidhalter/jedi-vim'
-on_ft = ['python']
-hook_source = '''
-    " Disable auto init
-    let g:jedi#auto_initialization = 1
-    let g:jedi#auto_vim_configuration = 0
-
-    " Disable auto complesions
-    let g:jedi#completions_enabled = 0
-    let g:jedi#popup_on_dot = 0
-    let g:jedi#smart_auto_mappings = 0
-    let g:jedi#show_call_signatures = 0
-
-    " Custom keymap
-    let g:jedi#goto_command = "<C-]>"
-    let g:jedi#goto_assignments_command = "<Localleader>g"
-    let g:jedi#goto_definitions_command = ""
-    let g:jedi#documentation_command = "K"
-    let g:jedi#usages_command = "<Localleader>n"
-    let g:jedi#rename_command = "<Localleader>R"
-'''
-
-#####################################################################
 # Web
 #####################################################################
 [[plugins]]
@@ -166,3 +140,10 @@ hook_add = '''
     let g:sqlfmt_program = "sqlformat --comma_first true -r -k lower -s -o %s -"
 '''
 
+[[plugins]]
+repo = 'prettier/vim-prettier'
+on_ft = ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'svelte', 'yaml', 'html']
+build = 'yarn install --frozen-lockfile --production'
+hook_add = '''
+    nnoremap <Leader>p :<C-U>PrettierAsync<CR>
+'''

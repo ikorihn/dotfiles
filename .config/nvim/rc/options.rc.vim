@@ -101,7 +101,7 @@ set nofoldenable
 
 " Use extend grep
 if executable('rg')
-    let &grepprg = 'rg --vimgrep --hidden'
+    let &grepprg = 'rg --vimgrep --no-hidden'
     set grepformat=%f:%l:%c:%m
 elseif executable('pt')
     let &grepprg = 'pt --nocolor --nogroup --column'
