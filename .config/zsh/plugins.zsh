@@ -64,6 +64,11 @@ zinit lucid has'docker' for \
   as'completion' is-snippet \
   'https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose' \
 
+# https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
+if command -v kubectl 1>/dev/null 2>&1; then
+  source <(kubectl completion zsh)
+fi
+
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
   eval "$(jira --completion-script-zsh)"
