@@ -82,22 +82,22 @@ on_ft=['csv']
 repo = 'junegunn/fzf'
 #build = './install --all'
 
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
-# depends = ['fzf']
-# on_cmd = [
-#   'Files',
-#   'GFiles',
-#   'GFiles?',
-#   'Tags',
-#   'Commands',
-#   'Rg',
-#   'History',
-#   'Buffers',
-#   'Snippets',
-#   'Maps',
-#   'Helptags',
-# ]
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = ['fzf']
+on_cmd = [
+#  'Files',
+#  'GFiles',
+#  'GFiles?',
+#  'Tags',
+#  'Commands',
+#  'Rg',
+#  'History',
+#  'Buffers',
+#  'Snippets',
+  'Maps',
+  'Helptags',
+]
 # hook_add = '''
 #     command! -bang -nargs=* Rg
 #         \ call fzf#vim#grep(
