@@ -39,7 +39,7 @@ zinit ice wait'1' lucid; zinit light "mollifier/cd-gitroot"
 zinit light "Aloxaf/fzf-tab"
 
 # Node.js
-zinit ice wait'1' lucid; zinit light "lukechilds/zsh-nvm"
+# zinit ice wait'1' lucid; zinit light "lukechilds/zsh-nvm"
 zinit ice wait'1' lucid; zinit light "lukechilds/zsh-better-npm-completion"
 
 

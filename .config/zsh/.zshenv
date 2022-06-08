@@ -78,6 +78,12 @@ if [[ -e "$HOME/.cargo/env" ]]; then
   source "$HOME/.cargo/env"
 fi
 
+# Node.js(Volta)
+if [[ -e "$HOME/.volta" ]]; then
+  export VOLTA_HOME=$HOME/.volta
+  export PATH="$VOLTA_HOME/bin:$PATH"
+fi
+
 # direnv
 if command -v direnv 1>/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
