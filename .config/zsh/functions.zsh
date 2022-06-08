@@ -154,6 +154,13 @@ mp4_to_gif() {
   ffmpeg -i $FILE_NAME -an -r 15 -pix_fmt rgb24 -s 540x960 -f gif $DEST_FILE_NAME
 }
 
+resize_image() {
+  local FILE_PATH=$1
+  local SIZE=${2:-300x}
+
+  convert "$FILE_PATH" -resize $SIZE -verbose "$(dirname $FILE_PATH)/resize_$(basename $FILE_PATH)"
+}
+
 # https://github.com/fish-shell/fish-shell/issues/2036
 adb_screenrecord() {
   local DATE_TIME=$(date +"%Y-%m-%dT%H-%M-%S")
