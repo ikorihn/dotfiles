@@ -3,31 +3,52 @@
 # チケット番号 :emoji: メッセージ
 #
 # === Emoji prefix ===
+# https://gitmoji.dev
 # :zap:                      | ⚡ | 通常アップデート
-# :tada:                     | 🎉 | 盛大に祝うべき大きな機能追加 (feat)
 # :sparkles:                 | ✨ | 部分的な機能追加 (feat)
 # :bug:                      | 🐛 | Bugfix
 # :wrench:                   | 🔧 | 設定ファイル(config)
 # :books:                    | 📚 | ドキュメント修正 (docs)
-# :horse:                    | 🐎 | パフォーマンス改善 (feat)
-# :art:                      | 🎨 | デザイン・UI/UX(Accessibility)
-# :rotating_light:           | 🚨 | ユニットテスト
-# :green_heart:              | 💚 | CI/CD、ビルド
+# :bulb:                     | 💡 | コメント、メモ
+# :rotating_light:           | 🚨 | ユニットテスト(test)
+# :green_heart:              | 💚 | CI/CD、ビルド (cicd)
+# :robot:                    | 🤖 | 自動生成 (chore)
 # :hammer:                   | 🔨 | リファクタリング (refactor)
 # :fire:                     | 🔥 | 不要な機能・使われなくなった機能の削除 (remove)
+# :shirt:                    | 👕 | Lintエラーの修正やコードスタイルの修正 (style)
 # :bookmark:                 | 🔖 | Version tag
-# :heavy_plus_sign:          | ➕ | 依存関係の追加
-# :heavy_minus_sign:         | ➖ | 依存関係の削除
 #
 # === optional ===
+# :heavy_plus_sign:          | ➕ | 依存関係の追加
+# :heavy_minus_sign:         | ➖ | 依存関係の削除
 # :arrow_up:                 | ⬆️ | Upgrading dependencies
 # :arrow_down:               | ⬇️ | Downgrading dependencies
-# :pencil2:                  | 📝 | コメント、メモ
-# :shirt:                    | 👕 | Lintエラーの修正やコードスタイルの修正 (style)
+# :art:                      | 🎨 | デザイン・UI/UX(Accessibility)
+# :horse:                    | 🐎 | パフォーマンス改善 (feat)
 # :ambulance:                | 🚑 | Critical hotfix
 # :construction:             | 🚧 | Work in progress
 # :chart_with_upwards_trend: | 📈 | Analytics or tracking code
 # :whale:                    | 🐳 | Docker
 # :rewind:                   | ⏪ | Reverting changes
+# :tada:                     | 🎉 | Begin a project
 # :boom:                     | 💥 | Breaking changes
 # :ok_hand:                  | 👌 | Code review changes
+#
+# === prefix ===
+# fix      | バグ修正
+# hotfix   | クリティカルなバグ修正なら
+# feat     | 新規機能・新規ファイル追加 feat は feature の略
+# update   | バグではない機能修正
+# change   | 仕様変更による機能修正
+# refactor | 整理 (リファクタリング等)
+# disable  | 無効化 (コメントアウト等)
+# remove   | ファイル削除、コードの一部を取り除く
+# rename   | ファイル名の変更
+# move     | ファイル移動
+# upgrade  | バージョンアップ
+# revert   | 修正取り消し
+# docs     | ドキュメントのみ修正
+# style    | 空白、セミコロン、行、コーディングフォーマットなどの修正
+# perf     | 性能向上する修正 perf は perfomance の略
+# test     | テスト追加や間違っていたテストの修正
+# chore    | ビルドツールやライブラリで自動生成されたものをコミットするとき

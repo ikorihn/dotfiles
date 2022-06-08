@@ -6,7 +6,7 @@
   editor = nvim
   precomposeunicode = true
   quotepath = false
-  ignoreCase = false
+  ignorecase = false
   # sparsecheckout = true
 
 [init]
@@ -37,7 +37,6 @@
   swc = switch -c
   br = branch
   cp = cherry-pick
-  res = restore .
   ress = restore --staged .
   diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
   logn = log --name-status --oneline
