@@ -3,14 +3,17 @@ format = "#### $all$line_break$character"
 [line_break]
 disabled = false
 
-[battery]
-disabled = false
-[[battery.display]]
-threshold = 80
+# [battery]
+# disabled = false
+# [[battery.display]]
+# threshold = 80
 
 [time]
 disabled = false
 # format = '[\[$time\]]($style) '
+
+[aws]
+disabled = true
 
 [character]
 success_symbol = '[\$](bold green)'
@@ -24,12 +27,15 @@ error_symbol = '[\$](bold red)'
 [java]
 disabled = true
 
-[custom.gittag]
-command = ''' git describe --tags --abbrev=0 '''
-description = "Show git latest tag"
-when = "git rev-parse --is-inside-work-tree"
-shell = "zsh"
-symbol = "🔖 "
+# [custom.gittag]
+# command = ''' git describe --tags --abbrev=0 '''
+# description = "Show git latest tag"
+# when = "git rev-parse --is-inside-work-tree"
+# shell = "zsh"
+# symbol = "🔖 "
 
 [package]
 version_format = "${raw}"
+
+[directory]
+truncation_length = 9
