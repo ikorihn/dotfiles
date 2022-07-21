@@ -84,6 +84,11 @@ if [[ -e "$HOME/.volta" ]]; then
   export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
+if [[ -e "$HOME/.bun" ]]; then
+   export BUN_INSTALL="$HOME/.bun"
+   export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
 # direnv
 if command -v direnv 1>/dev/null 2>&1; then
   eval "$(direnv hook zsh)"

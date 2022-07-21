@@ -125,3 +125,5 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # https://starship.rs/ja-jp/
 eval "$(starship init zsh)"
 
+# bun completions
+[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
