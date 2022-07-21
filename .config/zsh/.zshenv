@@ -1,3 +1,8 @@
+# profile
+if [ "$ZSHRC_PROFILE" != "" ]; then
+  zmodload zsh/zprof && zprof > /dev/null
+fi
+
 setopt no_global_rcs
 
 unset PATH
@@ -23,36 +28,38 @@ else
   eval $(/usr/local/bin/brew shellenv)
 fi
 
+export BREW_PREFIX=$(brew --prefix)
 path=(
-    $(brew --prefix)/opt/coreutils/libexec/gnubin(N-/) # coreutils
-    $(brew --prefix)/opt/ed/libexec/gnubin(N-/) # ed
-    $(brew --prefix)/opt/findutils/libexec/gnubin(N-/) # findutils
-    $(brew --prefix)/opt/gnu-sed/libexec/gnubin(N-/) # sed
-    $(brew --prefix)/opt/gnu-tar/libexec/gnubin(N-/) # tar
-    $(brew --prefix)/opt/grep/libexec/gnubin(N-/) # grep
+    $BREW_PREFIX/opt/coreutils/libexec/gnubin(N-/) # coreutils
+    $BREW_PREFIX/opt/ed/libexec/gnubin(N-/) # ed
+    $BREW_PREFIX/opt/findutils/libexec/gnubin(N-/) # findutils
+    $BREW_PREFIX/opt/gnu-sed/libexec/gnubin(N-/) # sed
+    $BREW_PREFIX/opt/gnu-tar/libexec/gnubin(N-/) # tar
+    $BREW_PREFIX/opt/grep/libexec/gnubin(N-/) # grep
+    $BREW_PREFIX/opt/mysql-client/bin(N-/) # mysql
     ${path}
 )
 manpath=(
-    $(brew --prefix)/opt/coreutils/libexec/gnuman(N-/) # coreutils
-    $(brew --prefix)/opt/ed/libexec/gnuman(N-/) # ed
-    $(brew --prefix)/opt/findutils/libexec/gnuman(N-/) # findutils
-    $(brew --prefix)/opt/gnu-sed/libexec/gnuman(N-/) # sed
-    $(brew --prefix)/opt/gnu-tar/libexec/gnuman(N-/) # tar
-    $(brew --prefix)/opt/grep/libexec/gnuman(N-/) # grep
+    $BREW_PREFIX/opt/coreutils/libexec/gnuman(N-/) # coreutils
+    $BREW_PREFIX/opt/ed/libexec/gnuman(N-/) # ed
+    $BREW_PREFIX/opt/findutils/libexec/gnuman(N-/) # findutils
+    $BREW_PREFIX/opt/gnu-sed/libexec/gnuman(N-/) # sed
+    $BREW_PREFIX/opt/gnu-tar/libexec/gnuman(N-/) # tar
+    $BREW_PREFIX/opt/grep/libexec/gnuman(N-/) # grep
     ${manpath}
 )
 
-fpath=($(brew --prefix)/share/zsh/site-functions/(N-/) $fpath)
+fpath=($BREW_PREFIX/share/zsh/site-functions/(N-/) $fpath)
 
 # Java
 if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
-  export JAVA_HOME=$(/usr/libexec/java_home)
+  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
   export PATH=${JAVA_HOME}/bin:${PATH}
 fi
 
 # Android
-if [[ -e "$(brew --prefix)/share/android-sdk" ]]; then
-  export ANDROID_SDK_ROOT=$(brew --prefix)/share/android-sdk
+if [[ -e "$BREW_PREFIX/share/android-sdk" ]]; then
+  export ANDROID_SDK_ROOT=$BREW_PREFIX/share/android-sdk
 fi
 
 # Go
@@ -62,15 +69,10 @@ if command -v go 1>/dev/null 2>&1; then
 fi
 
 # Python
-export PATH="$(brew --prefix)/opt/python/libexec/bin:$PATH"
+export PATH="$BREW_PREFIX/opt/python/libexec/bin:$PATH"
 export PIPENV_VENV_IN_PROJECT=1
 if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
-fi
-
-# Ruby
-if command -v rbenv 1>/dev/null 2>&1; then
-  eval "$(rbenv init -)"
 fi
 
 # Rust

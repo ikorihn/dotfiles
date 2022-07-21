@@ -71,15 +71,17 @@ fi
 
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
-  eval "$(jira --completion-script-zsh)"
-fi
-
-#compdef toggl
-_toggl() {
-  eval $(env COMMANDLINE="${words[1,$CURRENT]}" _TOGGL_COMPLETE=complete-zsh  toggl)
-}
-if [[ "$(basename -- ${(%):-%x})" != "_toggl" ]]; then
-  compdef _toggl toggl
+  # eval "$(jira --completion-script-zsh)"
+  autoload -U bashcompinit && bashcompinit
+  _jira_bash_autocomplete() {
+      local cur prev opts base
+      COMPREPLY=()
+      cur="${COMP_WORDS[COMP_CWORD]}"
+      opts=$( ${COMP_WORDS[0]} --completion-bash ${COMP_WORDS[@]:1:$COMP_CWORD} )
+      COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+      return 0
+  }
+  complete -F _jira_bash_autocomplete jira
 fi
 
 # # AWS CLI v2
@@ -90,11 +92,11 @@ fi
 
 # https://github.com/BurntSushi/ripgrep
 zinit ice lucid as'completion' blockf has'rg'
-zinit snippet $(brew --prefix)/share/zsh/site-functions/_rg
+zinit snippet $BREW_PREFIX/share/zsh/site-functions/_rg
 
 # https://github.com/sharkdp/fd
 zinit ice lucid as'completion' blockf has'fd'
-zinit snippet $(brew --prefix)/share/zsh/site-functions/_fd
+zinit snippet $BREW_PREFIX/share/zsh/site-functions/_fd
 
 # https://github.com/dandavison/delta/blob/master/etc/completion/completion.zsh
 if command -v delta 1>/dev/null 2>&1; then
