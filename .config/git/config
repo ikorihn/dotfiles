@@ -100,3 +100,5 @@
   root = ~/repos
 [log]
 	date = iso-strict
+[push]
+	autoSetupRemote = true
