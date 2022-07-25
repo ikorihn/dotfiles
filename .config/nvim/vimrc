@@ -16,8 +16,6 @@ endif
 " Load python3
 let g:python3_host_prog = system('echo -n $(which python)')
 
-runtime! rc/options.rc.vim
-runtime! rc/filetype.rc.vim
 runtime! rc/mappings.rc.vim
 
 if exists('g:vscode')
@@ -29,8 +27,22 @@ if exists('g:vscode')
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
 
+  set clipboard+=unnamedplus
+  set backspace=indent,eol,start
+  set whichwrap=b,s,h,l,<,>,[,]
+  set smarttab
+  set expandtab
+  set autoindent
+  set smartindent
+  set ignorecase
+  set smartcase
+  set incsearch
+
   finish
 endif
+
+runtime! rc/options.rc.vim
+runtime! rc/filetype.rc.vim
 
 if !has('nvim')
   finish
