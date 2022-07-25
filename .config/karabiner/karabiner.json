@@ -2484,7 +2484,7 @@
                                 "type": "basic"
                             },
                             {
-                                "description": "Chrome",
+                                "description": "Firefox",
                                 "from": {
                                     "key_code": "g",
                                     "modifiers": {
@@ -2499,7 +2499,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a 'Google Chrome'"
+                                        "shell_command": "open -a 'Firefox'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2539,7 +2539,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a 'Intellij Idea'"
+                                        "shell_command": "open -a 'IntelliJ IDEA Ultimate'"
                                     }
                                 ],
                                 "type": "basic"
@@ -2642,7 +2642,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a Alacritty"
+                                        "shell_command": "open -a iTerm"
                                     }
                                 ],
                                 "type": "basic"
@@ -3253,16 +3253,6 @@
                         },
                         {
                             "from": {
-                                "key_code": "international1"
-                            },
-                            "to": [
-                                {
-                                    "apple_vendor_top_case_key_code": "keyboard_fn"
-                                }
-                            ]
-                        },
-                        {
-                            "from": {
                                 "key_code": "international3"
                             },
                             "to": [
@@ -3288,6 +3278,16 @@
                             "to": [
                                 {
                                     "key_code": "right_command"
+                                }
+                            ]
+                        },
+                        {
+                            "from": {
+                                "key_code": "right_shift"
+                            },
+                            "to": [
+                                {
+                                    "apple_vendor_top_case_key_code": "keyboard_fn"
                                 }
                             ]
                         }
