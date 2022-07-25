@@ -45,6 +45,13 @@ hook_add = '''
 repo = 'lambdalisue/gina.vim'
 
 [[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'TimUntersberger/neogit'
+depends = ['nvim-lua/plenary.nvim']
+
+[[plugins]]
 repo = 'will133/vim-dirdiff'
 
 ####
@@ -79,6 +86,11 @@ hook_add = '''
 '''
 
 [[plugins]]
+repo = 'wellle/context.vim'
+hook_add = '''
+'''
+
+[[plugins]]
 repo = 'ntpeters/vim-better-whitespace'
 hook_add = '''
     nmap <leader>w :<C-u>ToggleWhitespace<CR>
@@ -100,6 +112,20 @@ repo = 'easymotion/vim-easymotion'
 repo = 'bkad/CamelCaseMotion'
 hook_add = '''
     let g:camelcasemotion_key = '<leader>'
+'''
+
+[[plugins]]
+repo = 'haya14busa/vim-edgemotion'
+hook_add = '''
+    map <C-j> <Plug>(edgemotion-j)
+    map <C-k> <Plug>(edgemotion-k)
+'''
+
+[[plugins]]
+repo = 'jeetsukumaran/vim-indentwise'
+hook_add = '''
+    map <C-j> <Plug>(edgemotion-j)
+    map <C-k> <Plug>(edgemotion-k)
 '''
 
 ####

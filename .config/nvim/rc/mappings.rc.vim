@@ -160,8 +160,8 @@ nmap <F6> <ESC>a<C-R>=strftime("%Y-%m-%dT%H:%M:%S")
 command! Q quit
 
 " URL encode/decode selection
-vnoremap <leader>en :!python -c 'import sys; from urllib import parse; print(parse.quote(sys.stdin.read().strip()))'<cr>
-vnoremap <leader>de :!python -c 'import sys; from urllib import parse; print(parse.unquote(sys.stdin.read().strip()))'<cr>
+vnoremap <leader>en :!node -e 'const d = require("fs").readFileSync("/dev/stdin", "utf-8").split("\n").map(e => encodeURI(e)) ; d.forEach(dd => console.log(dd))'<CR>
+vnoremap <leader>de :!node -e 'const d = require("fs").readFileSync("/dev/stdin", "utf-8").split("\n").map(e => decodeURIComponent(e)) ; d.forEach(dd => console.log(dd))'<CR>
 
 " csvファイルハイライト「:Csvhl [数値]」 と打つと、csvファイルで[数値]カラム目のハイライトをしてくれる
 function! CSVH(x)
