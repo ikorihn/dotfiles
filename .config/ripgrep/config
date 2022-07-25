@@ -7,10 +7,10 @@
 web:*.{html,css,js,ts,vue}
 
 # Set the colors.
-# --colors=line:style:bold
+--colors=line:style:bold
 
 # Because who cares about case!?
 --smart-case
 
-
 --no-heading
+--hidden

@@ -49,6 +49,10 @@ bind main <Esc>. ?sh -c "git diff --patch-with-stat %(commit)..%(prompt Enter co
 bind diff <Esc>. ?sh -c "git diff --patch-with-stat %(commit)..%(prompt Enter commit ID: ) | tig"
 bind refs <Esc>. ?sh -c "git diff --patch-with-stat %(branch)..%(prompt Enter branch name: ) | tig"
 
+# difftool
+bind main D !sh -c "git dirdiff %(commit)~ %(commit)"
+bind refs D !sh -c "git dirdiff %(branch)"
+
 # stash
 bind generic S ?git stash save "%(prompt Enter stash comment: )"
 bind stash D ?git stash drop %(stash)
