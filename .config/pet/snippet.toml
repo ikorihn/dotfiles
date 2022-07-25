@@ -1,7 +1,8 @@
-####
-# general
-####
-[[snippets]]
+# vim: foldmethod=marker
+# vim: foldcolumn=2
+# vim: foldlevel=0
+
+# general {{{1 [[snippets]]
   description = "Start swagger-ui docker"
   command = "docker run -v (PWD)/doc:/usr/share/nginx/html/doc -p 80:8080 -e URL=doc/swagger.yaml swaggerapi/swagger-ui"
   tag = ["docker", "server"]
@@ -14,6 +15,11 @@
 [[snippets]]
   description = "SVGファイルをvueのcomponentに変換する"
   command = "find . -type f -name \"*.svg\" | xargs -i bash -c \"cat {} | sed -e '/svg/d' -e '/^    <g/d' -e '/^    <\\/g>/d' | sed -e '1i<template>' -e '\\$a</template>' > {}.bk\""
+  tag = ["svg", "vue"]
+  output = ""
+[[snippets]]
+  description = "vueにscriptタグを追加する"
+  command = """fd -e vue | xargs -i sed -i -e '$a<script lang="ts">\\nimport Vue from \\'vue\\'\\nexport default Vue.extend(\\{\\})\\n</script>' {}"""
   tag = ["svg", "vue"]
   output = ""
 [[snippets]]
@@ -49,13 +55,33 @@
   tag = ["shell"]
   output = ""
 [[snippets]]
-  description = "ripgrep search and replace"
-  command = """rg -l '<search>' | xargs sd '<search>' '<replaceto>'"""
+  description = "aliases"
+  command = """alias ls='ls -CF --color=auto'
+alias ll='ls -AlFh --show-control-chars'"""
   tag = ["shell"]
+  output = ""
+[[snippets]]
+  description = "ripgrep search and replace"
+  command = """SEARCH=<search>; TO=<replaceto>; rg -l "$SEARCH" | xargs sd "$SEARCH" "$TO" """
+  tag = ["shell"]
+[[snippets]]
+  description = "xml select element example"
+  command = """xmlstarlet sel -t -c '/Properties/Property[@key="<key>"]/Entity[@name="<name>"]' <filepath>"""
+  tag = ["xml"]
+  output = ""
+[[snippets]]
+  description = "xml format"
+  command = """xmlstarlet fo -s 4 <filepath>"""
+  tag = ["xml"]
+  output = ""
+[[snippets]]
+  description = "xml delete element matches xpath"
+  command = """xmlstarlet ed -P --inplace       -d '/Properties/Property[@key="trainmail"]' <filepath>"""
+  tag = ["xml"]
+  output = ""
 
-####
-# git
-####
+
+# git {{{1
 [[snippets]]
   description = "git tag sort by created date"
   command = "git tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short) %(subject) %(creator)'"
@@ -77,12 +103,37 @@
   tag = ["git"]
   output = ""
 
+
+# mvn {{{1
+[[snippets]]
+  description = "download binary, source"
+  command = "mvn dependency:resolve dependency:sources"
+  tag = ["mvn"]
+  output = ""
+[[snippets]]
+  description = "check if dependency is used"
+  command = "mvn dependency:analyze"
+  tag = ["mvn"]
+  output = ""
+[[snippets]]
+  description = "download binary, source"
+  command = "mvn dependency:resolve dependency:sources"
+  tag = ["mvn"]
+  output = ""
+[[snippets]]
+  description = "download binary, source"
+  command = "mvn dependency:resolve dependency:sources"
+  tag = ["mvn"]
+  output = ""
+
+
+
 ####
-# server
+# server {{{1
 ####
 [[snippets]]
   description = "docker exec bash in ECS"
-  command = """docker exec -it $(docker ps -f 'name=app' -q) bash
+  command = """docker exec -it $(docker ps -f 'name=<container=app>' -q) bash
 alias ll='ls -alh --color=auto'
 cd /usr/local/tomcat"""
   tag = ["docker", "ECS"]
@@ -104,7 +155,7 @@ cd /usr/local/tomcat"""
   output = ""
 
 ####
-# badge
+# badge {{{1
 ####
 [[snippets]]
   description = "must"
