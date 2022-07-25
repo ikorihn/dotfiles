@@ -7,20 +7,20 @@ repo = 'Shougo/dein.vim'
 # [[plugins]]
 # repo = 'vim-scripts/wombat256.vim'
 
-[[plugins]]
-repo = 'cocopon/iceberg.vim'
-
-[[plugins]]
-repo = 'arcticicestudio/nord-vim'
-
-[[plugins]]
-repo = 'whatyouhide/vim-gotham'
-
-[[plugins]]
-repo = 'joshdick/onedark.vim'
-
-[[plugins]]
-repo = 'dracula/vim'
+# [[plugins]]
+# repo = 'cocopon/iceberg.vim'
+# 
+# [[plugins]]
+# repo = 'arcticicestudio/nord-vim'
+# 
+# [[plugins]]
+# repo = 'whatyouhide/vim-gotham'
+# 
+# [[plugins]]
+# repo = 'joshdick/onedark.vim'
+# 
+# [[plugins]]
+# repo = 'dracula/vim'
 
 [[plugins]]
 repo = 'sainnhe/gruvbox-material'
@@ -42,7 +42,13 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'lambdalisue/gina.vim'
+repo = 'rbgrouleff/bclose.vim'
+[[plugins]]
+repo = 'iberianpig/tig-explorer.vim'
+depends = ['rbgrouleff/bclose.vim']
+hook_add = '''
+    nnoremap <F3> :TigBlame<CR>
+'''
 
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
@@ -61,7 +67,7 @@ repo = 'will133/vim-dirdiff'
 repo = 'itchyny/lightline.vim'
 hook_add = '''
     let g:lightline = {
-        \ 'colorscheme': 'onedark',
+        \ 'colorscheme': 'solarized',
         \ 'active': {
         \   'left':  [ ['mode', 'paste'], ['gitbranch', 'readonly', 'myfilename', 'modified'], ],
         \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'ale_ok', 'ale_warning', 'ale_error', 'char_code', 'fileformat', 'fileencoding', 'filetype' ], ],
@@ -92,9 +98,6 @@ hook_add = '''
 
 [[plugins]]
 repo = 'ntpeters/vim-better-whitespace'
-hook_add = '''
-    nmap <leader>w :<C-u>ToggleWhitespace<CR>
-'''
 
 [[plugins]]
 repo = 'simeji/winresizer'
