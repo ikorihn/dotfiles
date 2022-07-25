@@ -118,6 +118,16 @@ gcd() {
   zle reset-prompt
 }
 
+# cd git root directory
+gitroot() {
+  if [[ ! $(git rev-parse --is-inside-work-tree) ]]; then
+    echo 'You are not in git repository'
+    return
+  fi
+
+  cd $(git rev-parse --show-toplevel)
+}
+
 ########
 # Android
 ########

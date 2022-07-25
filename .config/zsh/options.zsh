@@ -78,8 +78,8 @@ setopt hist_ignore_space
 # ヒストリに保存するときに余分なスペースを削除する
 setopt hist_reduce_blanks
 
-# histroyコマンドは記録しない
-setopt hist_no_store
+# historyコマンドは記録しない
+# setopt hist_no_store
 
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
