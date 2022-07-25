@@ -1,47 +1,5 @@
-### Added by Zinit's installer
-if [[ ! -f $HOME/.local/share/zinit/zinit.git/zinit.zsh ]]; then
-    print -P "%F{33} %F{220}Installing %F{33}ZDHARMA-CONTINUUM%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.local/share/zinit" && command chmod g-rwX "$HOME/.local/share/zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.local/share/zinit/zinit.git" && \
-        print -P "%F{33} %F{34}Installation successful.%f%b" || \
-        print -P "%F{160} The clone has failed.%f%b"
-fi
-
-source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
-
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for \
-    zdharma-continuum/z-a-rust \
-    zdharma-continuum/z-a-as-monitor \
-    zdharma-continuum/z-a-patch-dl \
-    zdharma-continuum/z-a-bin-gem-node
-
-### End of Zinit's installer chunk
-
-
-zinit ice wait'1' lucid; zinit light "zdharma-continuum/fast-syntax-highlighting"
-zinit light "zsh-users/zsh-autosuggestions"
-zinit light "zsh-users/zsh-completions"
-zinit light "zsh-users/zsh-history-substring-search"
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-
-zinit light "olets/zsh-abbr"
-
-zinit ice wait'1' lucid pick'init.sh'; zinit light "b4b4r07/enhancd"
-#zinit ice wait'1' lucid; zinit light "reegnz/jq-zsh-plugin"
-
-zinit ice wait'1' lucid; zinit light "b4b4r07/emoji-cli"
-zinit ice wait'1' lucid; zinit light "mollifier/cd-gitroot"
-zinit light "Aloxaf/fzf-tab"
-
-# Node.js
-# zinit ice wait'1' lucid; zinit light "lukechilds/zsh-nvm"
-zinit ice wait'1' lucid; zinit light "lukechilds/zsh-better-npm-completion"
-
 
 #######
 # zsh-completions
@@ -56,13 +14,6 @@ zstyle ':completion:*:*:mvn:*:messages' format $'\e[1m -- %d --\e[22m'
 zstyle ':completion:*:*:mvn:*:warnings' format $'\e[1m -- No matches found --\e[22m'
 maven_plugins=(dependency versions spotless)
 zstyle ':completion:*:mvn:*' plugins $maven_plugins
-
-# docker
-zinit lucid has'docker' for \
-  as'completion' is-snippet \
-  'https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker' \
-  as'completion' is-snippet \
-  'https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose' \
 
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
@@ -89,19 +40,6 @@ fi
 # autoload -Uz compinit && compinit
 # compinit
 # complete -C aws_completer aws
-
-# https://github.com/BurntSushi/ripgrep
-zinit ice lucid as'completion' blockf has'rg'
-zinit snippet $BREW_PREFIX/share/zsh/site-functions/_rg
-
-# https://github.com/sharkdp/fd
-zinit ice lucid as'completion' blockf has'fd'
-zinit snippet $BREW_PREFIX/share/zsh/site-functions/_fd
-
-# https://github.com/dandavison/delta/blob/master/etc/completion/completion.zsh
-if command -v delta 1>/dev/null 2>&1; then
-  compdef _gnu_generic delta
-fi
 
 #######
 # https://github.com/Aloxaf/fzf-tab

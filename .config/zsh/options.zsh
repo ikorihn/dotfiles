@@ -24,9 +24,9 @@ autoload -U zmv
 # 補完
 ########################################
 
-# 補完機能を有効にする
-autoload -Uz compinit
-compinit
+# sheldonで補完機能を有効にしているため不要
+# autoload -Uz compinit
+# compinit
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
