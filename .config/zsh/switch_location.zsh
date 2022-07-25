@@ -62,9 +62,7 @@ main() {
 
   ssid=$(networksetup -getairportnetwork en0 | awk -F': ' '{ print $2 }')
 
-  osascript -e 'display notification "'"SSID: $ssid, Home: $SSID_HOME, Office: $SSID_OFFICE"'" with title "'"switch_location"'" '
-
-  location=Automatic
+  local location=Unknown
   case "$ssid" in
     $SSID_HOME)
       location=Home
@@ -73,11 +71,17 @@ main() {
       location=Office
       ;;
   esac
+  if [[ "$location" = "Unknown" ]]; then
+    osascript -e 'display notification "'"Location is Unknown. SSID: $ssid"'" with title "'"switch_location"'" '
+    exit
+  fi
 
   currentLocation=$(networksetup -getcurrentlocation)
   if test $currentLocation = $location; then
-    return
+    osascript -e 'display notification "'"Location is unchanged. SSID: $ssid"'" with title "'"switch_location"'" '
+    exit
   fi
+
   osascript -e 'display notification "'"Switch network location to ${location}"'" with title "'"switch_location"'" '
 
   switchNetwork $location
