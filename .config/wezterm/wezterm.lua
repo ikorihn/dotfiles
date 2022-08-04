@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local utils = require("utils")
 local keybinds = require("keybinds")
-local scheme = wezterm.get_builtin_color_schemes()["Gruvbox Dark"]
+local scheme = wezterm.get_builtin_color_schemes()["nord"]
 require("on")
 
 -- /etc/ssh/sshd_config
@@ -97,7 +97,7 @@ local config = {
 	-- enable_wayland = enable_wayland(),
 	-- https://github.com/wez/wezterm/issues/1772
 	enable_wayland = false,
-	color_scheme = "Gruvbox Dark",
+	color_scheme = "nordfox",
 	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
 	hide_tab_bar_if_only_one_tab = false,
 	adjust_window_size_when_changing_font_size = false,
@@ -120,7 +120,7 @@ local config = {
 			-- inactive_tab_hover = { bg_color = scheme.ansi[1], fg_color = "#FCE8C3" },
 		},
 	},
-	tab_max_width = 20,
+	tab_max_width = 40,
 	tab_bar_at_bottom = true,
 	-- window_background_opacity = 0.8,
 	disable_default_key_bindings = false,

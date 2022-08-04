@@ -68,22 +68,41 @@ eval "$(starship init zsh)"
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
-# tmuxのwindow名にgitリポジトリ名を表示する
+# window名にgitリポジトリ名を表示する
 autoload -Uz add-zsh-hook
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' formats '%r'
 # precmd hook
-_tmux_precmd () {
-  vcs_info
+_precmd_tmux () {
   if [[ -v TMUX ]]; then
+    vcs_info
     if [[ -n ${vcs_info_msg_0_} ]]; then
-            tmux rename-window $vcs_info_msg_0_
+      tmux rename-window $vcs_info_msg_0_
     else
-            tmux rename-window `basename $(pwd)`
+      tmux rename-window $(basename $(pwd))
     fi
   fi
 }
 
-add-zsh-hook precmd _tmux_precmd
+# wezterm
+if [[ -v WEZTERM_PANE ]]; then
+  source /Applications/WezTerm.app/Contents/Resources/wezterm.sh
+fi
+function rename_wezterm_title {
+ echo "\x1b]1337;SetUserVar=panetitle=$(echo -n $1 | base64)\x07"
+}
+_precmd_wezterm () {
+  if [[ -v WEZTERM_PANE ]]; then
+    vcs_info
+    if [[ -n ${vcs_info_msg_0_} ]]; then
+      rename_wezterm_title ${vcs_info_msg_0_}
+    else
+      rename_wezterm_title $(basename $(pwd))
+    fi
+  fi
+}
+
+add-zsh-hook precmd _precmd_tmux
+add-zsh-hook precmd _precmd_wezterm
 
