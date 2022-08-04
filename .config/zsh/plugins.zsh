@@ -67,3 +67,23 @@ eval "$(starship init zsh)"
 
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+
+# tmuxのwindow名にgitリポジトリ名を表示する
+autoload -Uz add-zsh-hook
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:*' formats '%r'
+# precmd hook
+_tmux_precmd () {
+  vcs_info
+  if [[ -v TMUX ]]; then
+    if [[ -n ${vcs_info_msg_0_} ]]; then
+            tmux rename-window $vcs_info_msg_0_
+    else
+            tmux rename-window `basename $(pwd)`
+    fi
+  fi
+}
+
+add-zsh-hook precmd _tmux_precmd
+
