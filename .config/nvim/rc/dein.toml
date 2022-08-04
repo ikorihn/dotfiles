@@ -28,10 +28,6 @@ hook_add = '''
     let g:gruvbox_material_better_performance = 1
 '''
 
-[[plugins]]
-repo = 'nvim-treesitter/nvim-treesitter'
-build = ':TSUpdate'
-
 ####
 # Git
 ####
@@ -86,9 +82,11 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
+repo = 'lukas-reineke/indent-blankline.nvim'
 hook_add = '''
-    let g:indentLine_conceallevel = 0
+    let g:indent_blankline_space_char_blankline = " "
+    let g:indent_blankline_show_current_context = v:true
+    let g:indent_blankline_show_current_context_start = v:true
 '''
 
 [[plugins]]
