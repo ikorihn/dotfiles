@@ -97,7 +97,7 @@ local config = {
 	-- enable_wayland = enable_wayland(),
 	-- https://github.com/wez/wezterm/issues/1772
 	enable_wayland = false,
-	color_scheme = "nordfox",
+	color_scheme = "nord",
 	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
 	hide_tab_bar_if_only_one_tab = false,
 	adjust_window_size_when_changing_font_size = false,
@@ -122,7 +122,9 @@ local config = {
 	},
 	tab_max_width = 40,
 	tab_bar_at_bottom = true,
-	-- window_background_opacity = 0.8,
+	initial_rows = 48,
+	initial_cols = 180,
+	-- window_background_opacity = 0.95,
 	disable_default_key_bindings = false,
 	-- visual_bell = {
 	-- 	fade_in_function = "EaseIn",
@@ -133,7 +135,7 @@ local config = {
 	-- separate <Tab> <C-i>
 	enable_csi_u_key_encoding = true,
 	leader = { key = "Space", mods = "CTRL|SHIFT" },
-	keys = keybinds.create_keybinds(),
+	keys = keybinds.default_keybinds,
 	key_tables = keybinds.key_tables,
 	mouse_bindings = keybinds.mouse_bindings,
 }

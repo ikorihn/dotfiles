@@ -101,7 +101,6 @@ local function update_ssh_status(window, pane)
 		text = ""
 	end
 	return {
-		{ Attribute = { Italic = true } },
 		{ Text = text .. " " },
 	}
 end
@@ -119,7 +118,7 @@ local function display_copy_mode(window, pane)
 	if name then
 		name = "Mode: " .. name
 	end
-	return { { Attribute = { Italic = false } }, { Text = name or "" } }
+	return { { Attribute = { Italic = false } }, { Text = (name or "") .. " " } }
 end
 
 wezterm.on("update-right-status", function(window, pane)
@@ -127,7 +126,12 @@ wezterm.on("update-right-status", function(window, pane)
 	local ssh = update_ssh_status(window, pane)
 	local copy_mode = display_copy_mode(window, pane)
 	update_window_background(window, pane)
+
+  local date = { { Text = wezterm.strftime("%Y-%m-%d(%a)%H:%M:%S") .. " " } }
+
 	local status = utils.merge_lists(ssh, copy_mode)
+	status = utils.merge_lists(status, date)
+
 	window:set_right_status(wezterm.format(status))
 end)
 

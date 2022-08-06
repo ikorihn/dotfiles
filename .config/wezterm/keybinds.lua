@@ -42,6 +42,11 @@ M.default_keybinds = {
 		}),
 	},
 
+	{ key = "Enter", mods = "SHIFT", action = wezterm.action.SendKey { key = 'Enter' } },
+	{ key = "Enter", mods = "CTRL", action = wezterm.action.SendKey { key = 'Enter' } },
+	{ key = "Backspace", mods = "SHIFT", action = wezterm.action.SendKey { key = 'Backspace' } },
+	{ key = "Backspace", mods = "CTRL", action = wezterm.action.SendKey { key = 'Backspace' } },
+	{ key = "i", mods = "CTRL", action = wezterm.action.SendKey { key = 'i' } },
 }
 
 function M.create_keybinds()
