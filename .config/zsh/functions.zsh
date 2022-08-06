@@ -485,6 +485,16 @@ function nvim-profiler() {
 }
 
 ########################################
+# WezTerm
+########################################
+function save_wezterm_tabs() {
+  wezterm cli list --format=json > $XDG_CACHE_HOME/wezterm/tabs.json
+}
+function restore_wezterm_tabs() {
+  cat ~/.cache/wezterm/tabs.json | jq -r '.[] | .cwd' | sed "s#file://$(hostname)##i" | xargs -i wezterm cli spawn --cwd {}
+}
+
+########################################
 # Bind keys
 ########################################
 # widgetとして登録

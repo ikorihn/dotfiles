@@ -1,5 +1,5 @@
 # profile
-if [ "$ZSHRC_PROFILE" != "" ]; then
+if [[ -v ZSHRC_PROFILE ]]; then
   zmodload zsh/zprof && zprof > /dev/null
 fi
 
@@ -73,6 +73,12 @@ export PATH="$BREW_PREFIX/opt/python/libexec/bin:$PATH"
 export PIPENV_VENV_IN_PROJECT=1
 if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+# Ruby
+if [[ -e $HOME/.gem ]]; then
+  export GEM_HOME=~/.gem
+  export PATH="$HOME/.gem/bin:$PATH"
 fi
 
 # Rust
