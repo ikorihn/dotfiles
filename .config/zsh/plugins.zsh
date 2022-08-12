@@ -90,7 +90,12 @@ if [[ -v WEZTERM_PANE ]]; then
   source /Applications/WezTerm.app/Contents/Resources/wezterm.sh
 fi
 function rename_wezterm_title {
- echo "\x1b]1337;SetUserVar=panetitle=$(echo -n $1 | base64)\x07"
+  # https://wezfurlong.org/wezterm/config/lua/pane/get_user_vars.html
+  # pane:get_user_vars().panetitle で取得できる
+  echo "\x1b]1337;SetUserVar=panetitle=$(echo -n $1 | base64)\x07"
+  # https://wezfurlong.org/wezterm/config/lua/pane/get_title.html
+  # pane:get_title() で取得できる
+  echo "\x1b]1;$(pwd)"
 }
 _precmd_wezterm () {
   if [[ -v WEZTERM_PANE ]]; then
