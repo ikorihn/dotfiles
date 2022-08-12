@@ -127,7 +127,7 @@ wezterm.on("update-right-status", function(window, pane)
 	local copy_mode = display_copy_mode(window, pane)
 	update_window_background(window, pane)
 
-  local date = { { Text = wezterm.strftime("%Y-%m-%d(%a)%H:%M:%S") .. " " } }
+	local date = { { Text = wezterm.strftime("%Y-%m-%d(%a)%H:%M:%S") .. " " } }
 
 	local status = utils.merge_lists(ssh, copy_mode)
 	status = utils.merge_lists(status, date)
@@ -160,7 +160,7 @@ wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
 	window:perform_action(
 		act({
 			SpawnCommandInNewTab = {
-				args = { "/opt/homebrew/bin/nvim", name },
+				args = { "/opt/homebrew/bin/nvim", "-u", "NONE", "-c", 'set clipboard+=unnamedplus backspace=indent,eol,start whichwrap=b,s,h,l,<,>,[,] smarttab expandtab autoindent smartindent ignorecase smartcase incsearch number', name },
 			},
 		}),
 		pane
