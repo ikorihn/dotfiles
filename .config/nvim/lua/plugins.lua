@@ -29,11 +29,12 @@ if not status_ok then
   return
 end
 
+local util = require("packer.util")
 -- Have packer use a popup window
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+      return util.float { border = "rounded" }
     end,
   },
 }
@@ -58,7 +59,13 @@ return packer.startup(function(use)
   use { "lewis6991/impatient.nvim" }
   use { "lukas-reineke/indent-blankline.nvim" }
   use { "RRethy/vim-illuminate" }
+  use { "ntpeters/vim-better-whitespace" }
+  use { "phaazon/hop.nvim", branch = 'v2' }
+  use { "kylechui/nvim-surround" }
   -- use { "goolord/alpha-nvim" }
+  use { "haya14busa/vim-edgemotion" }
+  use { "haya14busa/vim-asterisk" }
+  use { "junegunn/vim-easy-align" }
 
   -- Colorschemes
   use { "EdenEast/nightfox.nvim" }
@@ -90,6 +97,10 @@ return packer.startup(function(use)
 
   -- Git
   use { "lewis6991/gitsigns.nvim" }
+  use { "rbgrouleff/bclose.vim" }
+  use { "iberianpig/tig-explorer.vim",
+    requires = {{"rbgrouleff/bclose.vim", opt = true}}
+  }
 
   -- DAP
   use { "mfussenegger/nvim-dap" }

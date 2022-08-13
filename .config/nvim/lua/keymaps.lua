@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 -- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
@@ -27,23 +29,27 @@ vim.keymap.set("n", "gQ", "<Nop>")
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Quickfix
-keymap("n", "<C-S-n>", ":cnext<CR>", opts)
-keymap("n", "<C-S-p>", ":cprevious<CR>", opts)
+keymap("n", "<C-n>", ":cnext<CR>", opts)
+keymap("n", "<C-p>", ":cprevious<CR>", opts)
 
 -- Tab
-keymap("n", "te", ":tabedit ", opts)
-keymap("n", "gn", ":tabnew<Return>", opts)
+keymap("n", "te", ":tabedit ")
+keymap("n", "tn", ":tabnew<Return>")
 
 -- Change tab width
-keymap("n", "ts2", ":setl shiftwidth=2 softtabstop=2<CR>", opts)
-keymap("n", "ts4", ":setl shiftwidth=4 softtabstop=4<CR>", opts)
-keymap("n", "tst", ":setl noexpandtab<CR>", opts)
+keymap("n", "ts2", ":setl shiftwidth=2 softtabstop=2<CR>")
+keymap("n", "ts4", ":setl shiftwidth=4 softtabstop=4<CR>")
+keymap("n", "tst", ":setl noexpandtab<CR>")
 
 -- Clear highlights
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
 -- Macro
-keymap("n", "q", "reg_recording() == '' ? '@q' : ''", { expr = true })
+keymap("n", "q", function ()
+    local macro_reg = vim.fn.reg_recording() .. vim.fn.reg_executing()
+    return macro_reg == "" and "qq" or "q"
+  end, { expr = true })
+keymap("n", "@", "@q", opts)
 
 -- Indent keybind for shutcut
 keymap("n", ">", ">>", opts)
@@ -75,6 +81,10 @@ keymap("c", "<C-a>", '<Home>', opts)
 keymap("c", "<C-e>", '<End>', opts)
 keymap("c", "<C-d>", '<Del>', opts)
 
+-- Function --
+
+keymap("n", "<Leader>q", utils.ToggleQuickFix)
+
 -- Plugins --
 
 -- NvimTree
@@ -82,16 +92,18 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
 keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>fg", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
+keymap("n", "<leader>gb", ":TigBlame<CR>", opts)
 
 -- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle_current_linewise()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle_linewise_op(vim.fn.visualmode())<CR>')
+keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
+keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
 
 -- DAP
 keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
@@ -103,3 +115,22 @@ keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
 keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
+
+-- Hop
+keymap("n", '<leader>hh', "<cmd>lua require'hop'.hint_char1()<cr>", opts)
+keymap("n", '<leader>hw', "<cmd>lua require'hop'.hint_words()<cr>", opts)
+
+-- edgemotion
+keymap("n", '<C-j>', "<Plug>(edgemotion-j)", opts)
+keymap("n", '<C-k>', "<Plug>(edgemotion-k)", opts)
+
+-- asterisk
+keymap("", "*",  "<Plug>(asterisk-z*)", opts)
+keymap("", "#",  "<Plug>(asterisk-z#)", opts)
+keymap("", "g*", "<Plug>(asterisk-gz*)", opts)
+keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
+
+-- EasyAlign
+keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
+keymap("n", "ga",  "<Plug>(EasyAlign)", opts)
+

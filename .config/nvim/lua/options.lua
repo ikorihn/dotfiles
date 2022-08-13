@@ -14,7 +14,7 @@ vim.opt.backupskip = ""
 vim.opt.undofile = true
 -- vim.opt.undodir = vim.env.XDG_DATA_HOME .. "/vim/undo/"
 -- vim.fn.mkdir(vim.opt.undodir, "p")
--- vim.opt.autochdir = true
+vim.opt.autochdir = true
 vim.opt.history = 10000
 
 -- Tab
@@ -34,7 +34,7 @@ vim.opt.listchars = { space = '_', tab = '‣ ', nbsp ="+", trail='•' }
 vim.opt.number = true
 vim.opt.numberwidth = 4
 vim.opt.title = true
-vim.opt.showtabline = 0
+vim.opt.showtabline = 2
 vim.opt.signcolumn = "yes"
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
