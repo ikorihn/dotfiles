@@ -1,6 +1,12 @@
-require("options")
-require("keymaps")
-require("plugins")
-require("autocommands")
-require("colorscheme")
-require("lsp")
+local modules = {
+  "options",
+  "keymaps",
+  "plugins",
+  "autocommands",
+  "colorscheme",
+  "lsp",
+}
+for k, v in pairs(modules) do
+  package.loaded[v] = nil
+  require(v)
+end
