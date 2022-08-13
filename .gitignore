@@ -5,6 +5,9 @@ _viminfo
 .cache/
 .DS_STORE
 
+# Neovim
+packer_compiled.lua
+
 # .config
 .config/karabiner/automatic_backups
 .config/fish/*
@@ -25,8 +28,6 @@ _viminfo
 .config/configstore
 .config/DMM
 .config/raycast
-.config/nvim/*
-!.config/nvim/rc/
 .config/tmux/plugins
 .config/copyq/
 .config/dlv/

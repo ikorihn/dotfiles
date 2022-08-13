@@ -113,7 +113,7 @@ export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
 
 # vim
-export VIMINIT=":source $XDG_CONFIG_HOME/nvim/vimrc"
+# export VIMINIT=":source $XDG_CONFIG_HOME/nvim/vimrc"
 
 # deduplicate
 typeset -U path
