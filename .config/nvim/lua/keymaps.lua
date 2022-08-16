@@ -91,7 +91,37 @@ keymap("n", "<Leader>q", utils.ToggleQuickFix)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Telescope
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+function multi_select()
+  local opts_ff = { attach_mappings = function(prompt_bufnr, map)
+    local actions = require "telescope.actions"
+    actions.select_default:replace(
+      function(prompt_bufnr)
+        local actions = require "telescope.actions"
+        local state = require "telescope.actions.state"
+        local picker = state.get_current_picker(prompt_bufnr)
+        local multi = picker:get_multi_selection()
+        local single = picker:get_selection()
+        local str = ""
+        if #multi > 0 then
+          for i,j in pairs(multi) do
+            str = str.."edit "..j[1].." | "
+          end
+        end
+        str = str.."edit "..single[1]
+        -- To avoid populating qf or doing ":edit! file", close the prompt first
+        actions.close(prompt_bufnr)
+        vim.api.nvim_command(str)
+      end)
+    return true
+  end,
+  hidden = true,
+  follow = true,
+  }
+  return require("telescope.builtin").find_files(opts_ff)
+end
+keymap('n', '<leader>f,', ":Telescope ")
+keymap('n', '<leader>ff', multi_select, opts)
+keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim', '~/.config/zsh', '~/.config/karabiner', '~/.config/wezterm' }, hidden = true, follow = true })<cr>", opts)
 keymap("n", "<leader>fg", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
@@ -133,4 +163,25 @@ keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
 -- EasyAlign
 keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
 keymap("n", "ga",  "<Plug>(EasyAlign)", opts)
+
+function LspKeymaps(bufnr)
+  local lsp_opts = { noremap = true, silent = true }
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space><Space>", ":lua vim.lsp.buf.", { noremap = true })
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>f", "<cmd>lua vim.lsp.buf.formatting()<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>i", "<cmd>LspInfo<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>I", ":LspInstall", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>j", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>k", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lsp_opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", lsp_opts)
+end
+
 

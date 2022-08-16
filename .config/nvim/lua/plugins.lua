@@ -69,6 +69,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use { "EdenEast/nightfox.nvim" }
+  use { "ellisonleao/gruvbox.nvim" }
   use { "lunarvim/darkplus.nvim" }
 
   -- cmp plugins
@@ -88,7 +89,7 @@ return packer.startup(function(use)
   use { "williamboman/mason.nvim" }
   use { "williamboman/mason-lspconfig.nvim" }
   use { "jose-elias-alvarez/null-ls.nvim" } -- for formatters and linters
-  use({ "glepnir/lspsaga.nvim" }) -- LSP UIs
+  use { "glepnir/lspsaga.nvim" } -- LSP UIs
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim" }
