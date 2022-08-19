@@ -1,3 +1,22 @@
+-- Jenkinsfile as groovy
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*Jenkinsfile*",
+  callback = function()
+    vim.bo.filetype = "groovy"
+  end,
+  once = false,
+})
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "go", "Makefile" },
+  callback = function()
+    vim.opt.expandtab = false
+    vim.opt.tabstop = 4
+    vim.opt.shiftwidth = 4
+    vim.opt.softtabstop = 4
+  end,
+})
+
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
@@ -32,4 +51,22 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   callback = function()
     vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
   end,
+})
+
+-- switch relativenumber
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+	callback = function()
+		if vim.o.number and vim.fn.mode() ~= "i" then
+			vim.o.relativenumber = true
+		end
+	end,
+	once = false,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+	callback = function()
+		if vim.o.number then
+			vim.o.relativenumber = false
+		end
+	end,
+	once = false,
 })

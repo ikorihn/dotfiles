@@ -46,9 +46,27 @@ return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- Have packer manage itself
   use { "nvim-lua/plenary.nvim" } -- Useful lua functions used by lots of plugins
 
-  use { "windwp/nvim-autopairs" } -- Autopairs, integrates with both cmp and treesitter
+  use { "windwp/nvim-autopairs" }
   use { "numToStr/Comment.nvim" }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
+  use { "lewis6991/impatient.nvim" }
+  use { "phaazon/hop.nvim", branch = 'v2' }
+  use { "kylechui/nvim-surround" }
+  use { "haya14busa/vim-edgemotion" }
+  use { "haya14busa/vim-asterisk" }
+  use { "junegunn/vim-easy-align" }
+
+  -- Colorschemes
+  use { "EdenEast/nightfox.nvim" }
+  use { "folke/tokyonight.nvim" }
+  use { "ellisonleao/gruvbox.nvim" }
+  use { "lunarvim/darkplus.nvim" }
+
+  if vim.g.vscode then
+    return
+  end
+
+  -- filer, status
   use { "kyazdani42/nvim-web-devicons" }
   use { "kyazdani42/nvim-tree.lua" }
   use { "akinsho/bufferline.nvim" }
@@ -56,21 +74,13 @@ return packer.startup(function(use)
   use { "nvim-lualine/lualine.nvim" }
   use { "akinsho/toggleterm.nvim" }
   use { "ahmedkhalf/project.nvim" }
-  use { "lewis6991/impatient.nvim" }
   use { "lukas-reineke/indent-blankline.nvim" }
   use { "RRethy/vim-illuminate" }
   use { "ntpeters/vim-better-whitespace" }
-  use { "phaazon/hop.nvim", branch = 'v2' }
-  use { "kylechui/nvim-surround" }
-  -- use { "goolord/alpha-nvim" }
-  use { "haya14busa/vim-edgemotion" }
-  use { "haya14busa/vim-asterisk" }
-  use { "junegunn/vim-easy-align" }
-
-  -- Colorschemes
-  use { "EdenEast/nightfox.nvim" }
-  use { "ellisonleao/gruvbox.nvim" }
-  use { "lunarvim/darkplus.nvim" }
+  use { "goolord/alpha-nvim",
+    requires = { 'kyazdani42/nvim-web-devicons' },
+  }
+  use { "folke/which-key.nvim" }
 
   -- cmp plugins
   use { "hrsh7th/nvim-cmp" } -- The completion plugin

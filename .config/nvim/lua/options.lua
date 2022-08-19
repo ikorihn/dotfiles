@@ -21,9 +21,9 @@ vim.opt.history = 10000
 -- tabstopはTab文字を画面上で何文字分に展開するか
 -- shiftwidthはcindentやautoindent時に挿入されるインデントの幅
 -- softtabstopはTabキー押し下げ時の挿入される空白の量，0の場合はtabstopと同じ，BSにも影響する
-vim.opt.tabstop = 4
+vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.softtabstop = 2
+vim.opt.softtabstop = 0
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
