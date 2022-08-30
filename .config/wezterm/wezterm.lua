@@ -71,8 +71,7 @@ local local_config = load_local_config("local")
 --- Config
 ---------------------------------------------------------------
 local config = {
-	font = wezterm.font("HackGen35Nerd Console"),
-	font_size = 14.0,
+	font_size = 16.0,
 	-- font_rules = {
 	-- 	{
 	-- 		italic = true,
@@ -144,6 +143,23 @@ local config = {
 		'[0-9A-Za-z-]+',
 	},
 }
+
+-- daily font
+local font_list = {
+  { name = "PlemolJP", setting= wezterm.font("PlemolJP Console", { weight = "Medium" }) },
+  { name = "HackGen", setting= wezterm.font("HackGen Console NFJ"), { weight = "Medium" } },
+  { name = "Cica", setting= wezterm.font("Cica") },
+}
+
+local date = os.date("*t")["yday"]
+local today_font = font_list[(date % #font_list) + 1]
+config.font = today_font.setting
+config.launch_menu = {
+    {
+      label = "Font: " .. today_font["name"],
+      args = { "nvim", "~/.config/wezterm/wezterm.lua" },
+    },
+  }
 
 local merged_config = utils.merge_tables(config, local_config)
 -- return insert_ssh_domain_from_ssh_config(merged_config)
