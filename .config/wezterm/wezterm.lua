@@ -97,8 +97,8 @@ local config = {
 	-- enable_wayland = enable_wayland(),
 	-- https://github.com/wez/wezterm/issues/1772
 	enable_wayland = false,
-	color_scheme = "nord",
-	color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
+	color_scheme = "nightfox",
+	-- color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
 	hide_tab_bar_if_only_one_tab = false,
 	adjust_window_size_when_changing_font_size = false,
 	selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%",
@@ -124,6 +124,8 @@ local config = {
 	tab_bar_at_bottom = true,
 	initial_rows = 48,
 	initial_cols = 180,
+	scrollback_lines = 10000,
+	enable_scroll_bar = true,
 	-- window_background_opacity = 0.95,
 	disable_default_key_bindings = false,
 	-- visual_bell = {
@@ -138,6 +140,9 @@ local config = {
 	keys = keybinds.default_keybinds,
 	key_tables = keybinds.key_tables,
 	mouse_bindings = keybinds.mouse_bindings,
+	quick_select_patterns = {
+		'[0-9A-Za-z-]+',
+	},
 }
 
 local merged_config = utils.merge_tables(config, local_config)

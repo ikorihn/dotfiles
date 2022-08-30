@@ -48,7 +48,6 @@ M.default_keybinds = {
 	{ key = "Enter", mods = "CTRL", action = wezterm.action.SendKey { key = 'Enter' } },
 	{ key = "Backspace", mods = "SHIFT", action = wezterm.action.SendKey { key = 'Backspace' } },
 	{ key = "Backspace", mods = "CTRL", action = wezterm.action.SendKey { key = 'Backspace' } },
-	{ key = "i", mods = "CTRL", action = wezterm.action.SendKey { key = 'i' } },
 }
 
 function M.create_keybinds()
@@ -239,14 +238,48 @@ M.key_tables = {
 		{ key = 'DownArrow', mods = 'NONE', action = act.CopyMode 'MoveDown' },
 	},
 	search_mode = {
-		{ key = "Escape", mods = "NONE", action = act.CopyMode("Close") },
-		{ key = "Enter", mods = "NONE", action = act.ActivateCopyMode },
-		{ key = "p", mods = "CTRL", action = act.CopyMode("PriorMatch") },
-		{ key = "n", mods = "CTRL", action = act.CopyMode("NextMatch") },
-		{ key = "r", mods = "CTRL", action = act.CopyMode("CycleMatchType") },
-		{ key = "/", mods = "NONE", action = act.CopyMode("ClearPattern") },
-		-- { key = "/", mods = "NONE", action = act.Search("CurrentSelectionOrEmptyString") },
-		{ key = "u", mods = "CTRL", action = act.CopyMode("ClearPattern") },
+		{ key = 'Enter', mods = 'NONE', action = act.CopyMode 'NextMatch' },
+		{ key = 'Enter', mods = 'SHIFT', action = act.CopyMode 'PriorMatch' },
+		{ key = 'Escape', mods = 'NONE', action = act.CopyMode 'Close' },
+		{ key = 'n', mods = 'CTRL', action = act.CopyMode 'NextMatch' },
+		{ key = 'p', mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
+		{ key = 'r', mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
+		{ key = 'u', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
+		{ key = "/", mods = "NONE", action = act.Search("CurrentSelectionOrEmptyString") },
+		{
+			key = 'PageUp',
+			mods = 'NONE',
+			action = act.CopyMode 'PriorMatchPage',
+		},
+		{
+			key = 'PageDown',
+			mods = 'NONE',
+			action = act.CopyMode 'NextMatchPage',
+		},
+		{ key = 'UpArrow', mods = 'NONE', action = act.CopyMode 'PriorMatch' },
+		{
+			key = 'DownArrow',
+			mods = 'NONE',
+			action = act.CopyMode 'NextMatch',
+		},
+	},
+}
+
+M.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = act({ CompleteSelection = "ClipboardAndPrimarySelection" }),
+	},
+	{
+		event = { Up = { streak = 1, button = "Right" } },
+		mods = "NONE",
+		action = act({ PasteFrom = "Clipboard" }),
+	},
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "SUPER",
+		action = "OpenLinkAtMouseCursor",
 	},
 }
 

@@ -151,7 +151,7 @@ local io = require("io")
 local os = require("os")
 
 wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
-	local scrollback = pane:get_logical_lines_as_text(1000)
+	local scrollback = pane:get_logical_lines_as_text(10000)
 	local name = os.tmpname()
 	local f = io.open(name, "w+")
 	f:write(scrollback)
@@ -160,7 +160,7 @@ wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
 	window:perform_action(
 		act({
 			SpawnCommandInNewTab = {
-				args = { "/opt/homebrew/bin/nvim", "-u", "NONE", "-c", 'set clipboard+=unnamedplus backspace=indent,eol,start whichwrap=b,s,h,l,<,>,[,] smarttab expandtab autoindent smartindent ignorecase smartcase incsearch number', name },
+				args = { "/opt/homebrew/bin/nvim", name },
 			},
 		}),
 		pane
