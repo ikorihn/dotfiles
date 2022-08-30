@@ -25,19 +25,28 @@ alias sudo='sudo '
 
 abbr -S -q --force dc='cd' > /dev/null
 
+abbr -S -q ':q'='exit'
+
 # fzf
 abbr -S -q sel_firstcol="fzf +m | cut -d ' ' -f 1"
 
 abbr -S -q vimcon='vim ~/.config/**'
 
 # git
-abbr -S -q gis='git status'
-abbr -S -q gip='git pull'
-abbr -S -q gipu='git push -u origin HEAD'
-abbr -S -q gir='git rebase origin/master'
-abbr -S -q gisn='git show --name-status'
-abbr -S -q gista='git stash'
-abbr -S -q gistap='git stash pop'
-abbr -S -q gisw='git switch -c feature/'
-abbr -S -q gidn='git diff --name-status origin/master'
-abbr -S -q gires='git restore .'
+abbr -S -q g='git'
+abbr -S -q gca='git commit --amen'
+abbr -S -q gdn='git diff --name-status origin/master'
+abbr -S -q gp='git pull'
+abbr -S -q --force gpr='git pull --rebase'
+abbr -S -q gpu='git push'
+abbr -S -q gre='git rebase origin/master'
+abbr -S -q grh='git reset HEAD\^'
+abbr -S -q gres='git restore .'
+abbr -S -q gshn='git show --name-status'
+abbr -S -q gst='git status'
+abbr -S -q gsta='git stash'
+abbr -S -q gstap='git stash pop'
+abbr -S -q gsw='git switch -c feature/'
+abbr -S -q t='tig'
+
+

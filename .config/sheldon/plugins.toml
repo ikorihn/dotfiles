@@ -51,6 +51,9 @@ github = "b4b4r07/emoji-cli"
 remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
 [plugins.delta]
 remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completion/completion.zsh"
+[plugins.wezterm]
+local = "/Applications/WezTerm.app/Contents/Resources/"
+use = ["wezterm.sh"]
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"

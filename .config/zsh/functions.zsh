@@ -128,6 +128,10 @@ gitroot() {
   cd $(git rev-parse --show-toplevel)
 }
 
+currentbranch() {
+  git rev-parse --abbrev-ref HEAD
+}
+
 ########
 # Android
 ########
