@@ -50,9 +50,11 @@ return packer.startup(function(use)
   use { "numToStr/Comment.nvim" }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "lewis6991/impatient.nvim" }
-  use { "phaazon/hop.nvim", branch = 'v2' }
+  use { "rlane/pounce.nvim" }
+  use { "kevinhwang91/nvim-hlslens" }
+
   use { "kylechui/nvim-surround" }
-  use { "haya14busa/vim-edgemotion" }
+  use { "jeetsukumaran/vim-indentwise" }
   use { "haya14busa/vim-asterisk" }
   use { "junegunn/vim-easy-align" }
 
@@ -107,6 +109,7 @@ return packer.startup(function(use)
   -- Treesitter
   use { "nvim-treesitter/nvim-treesitter" }
   use { "nvim-treesitter/nvim-treesitter-context" }
+  use { "nvim-treesitter/nvim-treesitter-textobjects" }
 
   -- Git
   use { "lewis6991/gitsigns.nvim" }

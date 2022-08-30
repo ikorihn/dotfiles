@@ -4,6 +4,7 @@ local modules = {
   "plugins",
   "autocommands",
   "colorscheme",
+  "utils",
   "lsp",
 }
 for k, v in pairs(modules) do

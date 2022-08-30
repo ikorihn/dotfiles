@@ -52,8 +52,8 @@ keymap("n", "q", function ()
 keymap("n", "@", "@q", opts)
 
 -- Indent keybind for shutcut
-keymap("n", ">", ">>", opts)
-keymap("n", "<", "<<", opts)
+-- keymap("n", ">", ">>", opts)
+-- keymap("n", "<", "<<", opts)
 
 -- Yank
 keymap("n", "x", '"_x', opts)
@@ -146,19 +146,24 @@ keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
 keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
--- Hop
-keymap("n", '<leader>hh', "<cmd>lua require'hop'.hint_char1()<cr>", opts)
-keymap("n", '<leader>hw', "<cmd>lua require'hop'.hint_words()<cr>", opts)
-
--- edgemotion
-keymap("n", '<C-j>', "<Plug>(edgemotion-j)", opts)
-keymap("n", '<C-k>', "<Plug>(edgemotion-k)", opts)
-
 -- asterisk
 keymap("", "*",  "<Plug>(asterisk-z*)", opts)
 keymap("", "#",  "<Plug>(asterisk-z#)", opts)
 keymap("", "g*", "<Plug>(asterisk-gz*)", opts)
 keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
+
+-- IndentWise
+keymap("", "<C-k>",  "<Plug>(IndentWisePreviousEqualIndent)", opts)
+keymap("", "<C-j>",  "<Plug>(IndentWiseNextEqualIndent)", opts)
+
+-- pounce
+keymap("n", "s",  "<cmd>Pounce<CR>", opts)
+keymap("n", "S",  "<cmd>PounceRepeat<CR>", opts)
+keymap("v", "s",  "<cmd>Pounce<CR>", opts)
+
+-- hlslens
+keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
+keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
 
 -- EasyAlign
 keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
