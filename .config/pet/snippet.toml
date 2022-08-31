@@ -2,7 +2,8 @@
 # vim: foldcolumn=2
 # vim: foldlevel=0
 
-# general {{{1 [[snippets]]
+# general {{{1
+[[snippets]]
   description = "Start swagger-ui docker"
   command = "docker run -v (PWD)/doc:/usr/share/nginx/html/doc -p 80:8080 -e URL=doc/swagger.yaml swaggerapi/swagger-ui"
   tag = ["docker", "server"]
@@ -103,6 +104,25 @@ alias ll='ls -AlFh --show-control-chars'"""
   tag = ["git"]
   output = ""
 
+# awscli {{{1
+[[snippets]]
+  description = "docker login to ecr"
+  command = "aws --region ap-northeast-1 ecr get-login-password | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.region.amazonaws.com"
+  tag = ["awscli"]
+  output = ""
+
+# kubectl {{{1
+[[snippets]]
+  description = "get pending pods"
+  command = "get pods --field-selector status.phase=Pending"
+  tag = ["kubectl"]
+  output = ""
+
+[[snippets]]
+  description = "get pods and node"
+  command = "get pod -o=custom-columns=NODE:.spec.nodeName,NAME:.metadata.name --all-namespaces"
+  tag = ["kubectl"]
+  output = ""
 
 # mvn {{{1
 [[snippets]]
@@ -128,9 +148,7 @@ alias ll='ls -AlFh --show-control-chars'"""
 
 
 
-####
 # server {{{1
-####
 [[snippets]]
   description = "docker exec bash in ECS"
   command = """docker exec -it $(docker ps -f 'name=<container=app>' -q) bash
@@ -154,9 +172,7 @@ cd /usr/local/tomcat"""
   tag = ["server"]
   output = ""
 
-####
 # badge {{{1
-####
 [[snippets]]
   description = "must"
   command = "![badge](https://img.shields.io/badge/review-must-red.svg)"
