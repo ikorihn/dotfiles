@@ -33,7 +33,7 @@ keymap("n", "<C-n>", ":cnext<CR>", opts)
 keymap("n", "<C-p>", ":cprevious<CR>", opts)
 
 -- Tab
-keymap("n", "te", ":tabedit ")
+keymap("n", "te", ":tabedit %:h")
 keymap("n", "tn", ":tabnew<Return>")
 
 -- Change tab width
@@ -130,6 +130,25 @@ keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
 keymap("n", "<leader>gb", ":TigBlame<CR>", opts)
+-- Gitsigns
+keymap('n', ']c', function()
+  if vim.wo.diff then return ']c' end
+  vim.schedule(function() require('gitsigns').next_hunk() end)
+  return '<Ignore>'
+end, {expr=true})
+keymap('n', '[c', function()
+  if vim.wo.diff then return '[c' end
+  vim.schedule(function() require('gitsigns').prev_hunk() end)
+  return '<Ignore>'
+end, {expr=true})
+keymap({'n', 'v'}, '<leader>gs', require('gitsigns').stage_hunk)
+keymap({'n', 'v'}, '<leader>gr', require('gitsigns').reset_hunk)
+keymap('n', '<leader>gu', require('gitsigns').undo_stage_hunk)
+keymap('n', '<leader>gp', require('gitsigns').preview_hunk)
+keymap('n', '<leader>gB', function() require('gitsigns').blame_line{full=true} end)
+keymap('n', '<leader>gd', require('gitsigns').diffthis)
+keymap('n', '<leader>gD', function() require('gitsigns').diffthis('~') end)
+keymap('n', '<leader>td', require('gitsigns').toggle_deleted)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)

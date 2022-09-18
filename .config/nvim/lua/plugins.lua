@@ -39,6 +39,10 @@ packer.init {
   },
 }
 
+local nocode = function()
+  return vim.g.vscode == nil
+end
+
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
@@ -51,7 +55,7 @@ return packer.startup(function(use)
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "lewis6991/impatient.nvim" }
   use { "rlane/pounce.nvim" }
-  use { "kevinhwang91/nvim-hlslens" }
+  use { "kevinhwang91/nvim-hlslens", cond = { nocode }  }
 
   use { "kylechui/nvim-surround" }
   use { "jeetsukumaran/vim-indentwise" }
@@ -64,10 +68,6 @@ return packer.startup(function(use)
   use { "ellisonleao/gruvbox.nvim" }
   use { "lunarvim/darkplus.nvim" }
 
-  if vim.g.vscode then
-    return
-  end
-
   -- filer, status
   use { "kyazdani42/nvim-web-devicons" }
   use { "kyazdani42/nvim-tree.lua" }
@@ -77,11 +77,8 @@ return packer.startup(function(use)
   use { "akinsho/toggleterm.nvim" }
   use { "ahmedkhalf/project.nvim" }
   use { "lukas-reineke/indent-blankline.nvim" }
-  use { "RRethy/vim-illuminate" }
+  use { "RRethy/vim-illuminate", cond = { nocode } }
   use { "ntpeters/vim-better-whitespace" }
-  use { "goolord/alpha-nvim",
-    requires = { 'kyazdani42/nvim-web-devicons' },
-  }
   use { "folke/which-key.nvim" }
 
   -- cmp plugins

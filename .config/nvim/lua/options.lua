@@ -30,7 +30,7 @@ vim.opt.smartindent = true
 
 -- View
 vim.opt.list = true
-vim.opt.listchars = { space = '⋅', tab = '»»', nbsp = "+", eol = "↴" }
+vim.opt.listchars = { tab = '»-', nbsp = "+", extends = '»', precedes = '«', eol = "↴" }
 vim.opt.number = true
 vim.opt.numberwidth = 4
 vim.opt.title = true
@@ -70,3 +70,4 @@ vim.opt.clipboard:append({ "unnamedplus" })
 vim.opt.diffopt:append("vertical,internal,algorithm:patience,iwhite,indent-heuristic")
 vim.opt.nrformats:append("unsigned")
 
+vim.cmd('language en_US.UTF-8')
