@@ -98,12 +98,16 @@ local config = {
 	enable_wayland = false,
 	color_scheme = "nightfox",
 	-- color_scheme_dirs = { os.getenv("HOME") .. "/.config/wezterm/colors/" },
+	inactive_pane_hsb = {
+		saturation = 0.9,
+		brightness = 0.4,
+	},
 	hide_tab_bar_if_only_one_tab = false,
 	adjust_window_size_when_changing_font_size = false,
 	selection_word_boundary = " \t\n{}[]()\"'`,;:│=&!%",
 	window_padding = {
-		left = 0,
-		right = 0,
+		left = 8,
+		right = 8,
 		top = 0,
 		bottom = 0,
 	},
@@ -125,7 +129,7 @@ local config = {
 	initial_cols = 180,
 	scrollback_lines = 10000,
 	enable_scroll_bar = true,
-	-- window_background_opacity = 0.95,
+	window_background_opacity = 0.80,
 	disable_default_key_bindings = false,
 	-- visual_bell = {
 	-- 	fade_in_function = "EaseIn",
@@ -146,8 +150,8 @@ local config = {
 
 -- daily font
 local font_list = {
-  { name = "PlemolJP", setting= wezterm.font("PlemolJP Console", { weight = "Medium" }) },
-  { name = "HackGen", setting= wezterm.font("HackGen Console NFJ"), { weight = "Medium" } },
+  { name = "PlemolJP", setting= wezterm.font("PlemolJP Console NF", { weight = "Medium" }) },
+  { name = "HackGen", setting= wezterm.font("HackGen Console NF"), { weight = "Medium" } },
   { name = "Cica", setting= wezterm.font("Cica") },
 }
 
