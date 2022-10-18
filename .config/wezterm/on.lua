@@ -169,3 +169,16 @@ wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
 	os.remove(name)
 end)
 
+wezterm.on("trigger-window-opacity", function(window, pane)
+	local overrides = window:get_config_overrides() or {}
+  local opacity_default = 0.80
+  wezterm.log_info(overrides.window_background_opacity)
+  wezterm.log_info(opacity_default)
+	if overrides.window_background_opacity == opacity_default then
+		overrides.window_background_opacity = 1.0
+	else
+		overrides.window_background_opacity = opacity_default
+	end
+	window:set_config_overrides(overrides)
+end)
+
