@@ -17,6 +17,7 @@ local servers = {
   "jsonls",
   "yamlls",
   "gopls",
+  "rust_analyzer",
 }
 
 mason.setup {
@@ -56,6 +57,11 @@ for _, server in pairs(servers) do
   if server == "gopls" then
     local gopls_opts = require "lsp.settings.gopls"
     opts = vim.tbl_deep_extend("force", gopls_opts, opts)
+  end
+
+  if server == "rust_analyzer" then
+    local rust_opts = require "lsp.settings.rust"
+    opts = vim.tbl_deep_extend("force", rust_opts, opts)
   end
 
   lspconfig[server].setup(opts)

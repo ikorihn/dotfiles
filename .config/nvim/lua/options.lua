@@ -42,7 +42,7 @@ vim.opt.cursorline = true
 vim.opt.laststatus = 3
 vim.opt.showcmd = false
 vim.opt.ruler = false
-vim.opt.wrap = false
+vim.opt.wrap = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.termguicolors = true
@@ -71,3 +71,6 @@ vim.opt.diffopt:append("vertical,internal,algorithm:patience,iwhite,indent-heuri
 vim.opt.nrformats:append("unsigned")
 
 vim.cmd('language en_US.UTF-8')
+
+vim.g.gh_line_map_default = 0
+vim.g.gh_line_blame_map_default = 0

@@ -114,6 +114,10 @@ return packer.startup(function(use)
   use { "iberianpig/tig-explorer.vim",
     requires = {{"rbgrouleff/bclose.vim", opt = true}}
   }
+  use { "ruanyl/vim-gh-line",
+    config = function ()
+    end
+  }
 
   -- DAP
   use { "mfussenegger/nvim-dap" }
