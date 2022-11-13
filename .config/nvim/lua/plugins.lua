@@ -37,6 +37,7 @@ packer.init {
       return util.float { border = "rounded" }
     end,
   },
+  compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer', 'packer_compiled.lua'),
 }
 
 local nocode = function()
@@ -55,7 +56,7 @@ return packer.startup(function(use)
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "lewis6991/impatient.nvim" }
   use { "rlane/pounce.nvim" }
-  use { "kevinhwang91/nvim-hlslens", cond = { nocode }  }
+  use { "kevinhwang91/nvim-hlslens"  }
 
   use { "kylechui/nvim-surround" }
   use { "jeetsukumaran/vim-indentwise" }
@@ -77,7 +78,7 @@ return packer.startup(function(use)
   use { "akinsho/toggleterm.nvim" }
   use { "ahmedkhalf/project.nvim" }
   use { "lukas-reineke/indent-blankline.nvim" }
-  use { "RRethy/vim-illuminate", cond = { nocode } }
+  use { "RRethy/vim-illuminate" }
   use { "ntpeters/vim-better-whitespace" }
   use { "folke/which-key.nvim" }
 
