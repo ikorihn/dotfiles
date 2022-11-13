@@ -69,6 +69,7 @@ vim.opt.whichwrap:append("b,s,h,l,<,>,[,]")
 vim.opt.clipboard:append({ "unnamedplus" })
 vim.opt.diffopt:append("vertical,internal,algorithm:patience,iwhite,indent-heuristic")
 vim.opt.nrformats:append("unsigned")
+vim.opt.mouse = {}
 
 vim.cmd('language en_US.UTF-8')
 
