@@ -51,14 +51,14 @@ return packer.startup(function(use)
   use { "wbthomason/packer.nvim" } -- Have packer manage itself
   use { "nvim-lua/plenary.nvim" } -- Useful lua functions used by lots of plugins
 
-  use { "windwp/nvim-autopairs" }
-  use { "numToStr/Comment.nvim" }
+  use { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end }
+  use { "numToStr/Comment.nvim", config = function() require("pluginconfig/comment") end }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
-  use { "lewis6991/impatient.nvim" }
-  use { "rlane/pounce.nvim" }
-  use { "kevinhwang91/nvim-hlslens"  }
+  use { "lewis6991/impatient.nvim", config = function() require("pluginconfig/impatient") end }
+  use { "rlane/pounce.nvim", config = function() require("pluginconfig/pounce") end }
+  use { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end }
 
-  use { "kylechui/nvim-surround" }
+  use { "kylechui/nvim-surround", config = function() require("pluginconfig/nvim-surround") end }
   use { "jeetsukumaran/vim-indentwise" }
   use { "haya14busa/vim-asterisk" }
   use { "junegunn/vim-easy-align" }
@@ -71,19 +71,19 @@ return packer.startup(function(use)
 
   -- filer, status
   use { "kyazdani42/nvim-web-devicons" }
-  use { "kyazdani42/nvim-tree.lua" }
-  use { "akinsho/bufferline.nvim" }
+  use { "kyazdani42/nvim-tree.lua", config = function() require("pluginconfig/nvim-tree") end }
+  use { "akinsho/bufferline.nvim", config = function() require("pluginconfig/bufferline") end }
   use { "moll/vim-bbye" }
-  use { "nvim-lualine/lualine.nvim" }
-  use { "akinsho/toggleterm.nvim" }
-  use { "ahmedkhalf/project.nvim" }
-  use { "lukas-reineke/indent-blankline.nvim" }
-  use { "RRethy/vim-illuminate" }
+  use { "nvim-lualine/lualine.nvim", config = function() require("pluginconfig/lualine") end }
+  use { "akinsho/toggleterm.nvim", config = function() require("pluginconfig/toggleterm") end }
+  use { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end }
+  use { "lukas-reineke/indent-blankline.nvim", config = function() require("pluginconfig/indentline") end }
+  use { "RRethy/vim-illuminate", config = function() require("pluginconfig/illuminate") end }
   use { "ntpeters/vim-better-whitespace" }
-  use { "folke/which-key.nvim" }
+  use { "folke/which-key.nvim", config = function() require("pluginconfig/which-key") end }
 
   -- cmp plugins
-  use { "hrsh7th/nvim-cmp" } -- The completion plugin
+  use { "hrsh7th/nvim-cmp", config = function() require("pluginconfig/cmp") end } -- The completion plugin
   use { "hrsh7th/cmp-buffer" } -- buffer completions
   use { "hrsh7th/cmp-path" } -- path completions
   use { "saadparwaiz1/cmp_luasnip" } -- snippet completions
@@ -102,26 +102,21 @@ return packer.startup(function(use)
   use { "glepnir/lspsaga.nvim" } -- LSP UIs
 
   -- Telescope
-  use { "nvim-telescope/telescope.nvim" }
+  use { "nvim-telescope/telescope.nvim", config = function() require("pluginconfig/telescope") end }
 
   -- Treesitter
-  use { "nvim-treesitter/nvim-treesitter" }
+  use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function() require("pluginconfig/treesitter") end }
   use { "nvim-treesitter/nvim-treesitter-context" }
   use { "nvim-treesitter/nvim-treesitter-textobjects" }
 
   -- Git
-  use { "lewis6991/gitsigns.nvim" }
+  use { "lewis6991/gitsigns.nvim", config = function() require("pluginconfig/gitsigns") end }
   use { "rbgrouleff/bclose.vim" }
-  use { "iberianpig/tig-explorer.vim",
-    requires = {{"rbgrouleff/bclose.vim", opt = true}}
-  }
-  use { "ruanyl/vim-gh-line",
-    config = function ()
-    end
-  }
+  use { "iberianpig/tig-explorer.vim", requires = {{"rbgrouleff/bclose.vim", opt = true}} }
+  use { "ruanyl/vim-gh-line" }
 
   -- DAP
-  use { "mfussenegger/nvim-dap" }
+  use { "mfussenegger/nvim-dap", config = function() require("pluginconfig/dap") end }
   use { "rcarriga/nvim-dap-ui" }
   use { "ravenxrz/DAPInstall.nvim" }
 

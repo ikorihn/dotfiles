@@ -23,6 +23,3 @@ for k, v in pairs(modules) do
   load(v)
 end
 
-for _, file in ipairs(vim.fn.readdir(vim.fn.stdpath("config") .. "/lua/pluginconfig", [[v:val =~ '\.lua$']])) do
-  require("pluginconfig/" .. file:gsub("%.lua$", ""))
-end
