@@ -13,6 +13,7 @@ local modules = {
   "options",
   "keymaps",
   "plugins",
+  "packer_compiled",
   "autocommands",
   "colorscheme",
   "utils",

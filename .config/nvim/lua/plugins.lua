@@ -37,7 +37,7 @@ packer.init {
       return util.float { border = "rounded" }
     end,
   },
-  compile_path = util.join_paths(vim.fn.stdpath('config'), 'packer', 'packer_compiled.lua'),
+  compile_path = util.join_paths(vim.fn.stdpath('config'), 'lua', 'packer_compiled.lua'),
 }
 
 local nocode = function()

@@ -183,6 +183,10 @@ keymap("v", "s",  "<cmd>Pounce<CR>", opts)
 -- hlslens
 keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
 keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
+keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
 
 -- EasyAlign
 keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
