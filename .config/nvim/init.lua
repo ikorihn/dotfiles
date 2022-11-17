@@ -6,6 +6,7 @@ end
 if vim.g.vscode == 1 then
   load("options")
   load("vscode")
+  load("keymaps")
   return
 end
 

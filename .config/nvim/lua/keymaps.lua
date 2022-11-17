@@ -170,23 +170,20 @@ keymap("", "*",  "<Plug>(asterisk-z*)", opts)
 keymap("", "#",  "<Plug>(asterisk-z#)", opts)
 keymap("", "g*", "<Plug>(asterisk-gz*)", opts)
 keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
+-- hlslens
+keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
+keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
 
 -- IndentWise
 keymap("", "<C-k>",  "<Plug>(IndentWisePreviousEqualIndent)", opts)
 keymap("", "<C-j>",  "<Plug>(IndentWiseNextEqualIndent)", opts)
 
--- pounce
-keymap("n", "s",  "<cmd>Pounce<CR>", opts)
-keymap("n", "S",  "<cmd>PounceRepeat<CR>", opts)
-keymap("v", "s",  "<cmd>Pounce<CR>", opts)
-
--- hlslens
-keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
-keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
-keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
-keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+-- hop
+--keymap("", 'f', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
+--keymap("", 'F', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
+--keymap("", 't', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
+--keymap("", 'T', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
+keymap("", 's', "<cmd>lua require'hop'.hint_char2()<CR>", opts)
 
 -- EasyAlign
 keymap("x", "ga",  "<Plug>(EasyAlign)", opts)

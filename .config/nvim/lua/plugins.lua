@@ -12,8 +12,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
     install_path,
   }
   print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
 end
+
+vim.cmd [[packadd packer.nvim]]
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
@@ -49,19 +50,20 @@ return packer.startup(function(use)
   -- My plugins here
 
   use { "wbthomason/packer.nvim" } -- Have packer manage itself
-  use { "nvim-lua/plenary.nvim" } -- Useful lua functions used by lots of plugins
+  use { "nvim-lua/plenary.nvim"  } -- Useful lua functions used by lots of plugins
 
   use { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end }
   use { "numToStr/Comment.nvim", config = function() require("pluginconfig/comment") end }
   use { "JoosepAlviste/nvim-ts-context-commentstring" }
   use { "lewis6991/impatient.nvim", config = function() require("pluginconfig/impatient") end }
-  use { "rlane/pounce.nvim", config = function() require("pluginconfig/pounce") end }
+  use { "phaazon/hop.nvim", config = function() require("pluginconfig/hop") end }
   use { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end }
 
   use { "kylechui/nvim-surround", config = function() require("pluginconfig/nvim-surround") end }
   use { "jeetsukumaran/vim-indentwise" }
   use { "haya14busa/vim-asterisk" }
   use { "junegunn/vim-easy-align" }
+  use { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end }
 
   -- Colorschemes
   use { "EdenEast/nightfox.nvim" }
