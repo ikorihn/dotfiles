@@ -63,7 +63,7 @@ vim.opt.updatetime = 300
 
 -- Other
 vim.opt.shortmess:append("c")
-vim.opt.iskeyword:append("-")
+-- vim.opt.iskeyword:append("-")
 vim.opt.backspace:append("indent,eol,start")
 vim.opt.whichwrap:append("b,s,h,l,<,>,[,]")
 vim.opt.clipboard:append({ "unnamedplus" })

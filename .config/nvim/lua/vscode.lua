@@ -2,7 +2,7 @@
 vim.opt.packpath = {}
 
 -- Plug
-vim.cmd [[ call plug#begin(stdpath('data') . '/plugged') ]]
+vim.cmd [[ call plug#begin(stdpath('data') . '/site/pack/packer/start') ]]
 
 vim.cmd [[ Plug 'phaazon/hop.nvim' ]]
 vim.cmd [[ Plug 'junegunn/vim-easy-align' ]]
