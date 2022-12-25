@@ -17,7 +17,8 @@ zstyle ':completion:*:mvn:*' plugins $maven_plugins
 
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
-  source <(kubectl completion zsh)
+  alias k=kubectl
+  source <(kubectl completion zsh >/dev/null 2>&1)
 fi
 
 # https://github.com/go-jira/jira
