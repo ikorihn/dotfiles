@@ -30,6 +30,7 @@
   ff = true
 
 [alias]
+  pushf = push --force-with-lease --force-if-includes
   difft = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
   dirdiff = difftool --dir-diff
   st = status
@@ -84,7 +85,7 @@
   helper = osxkeychain
 
 [pull]
-  ff = only
+  rebase = true
 
 [commit]
   verbose = true
