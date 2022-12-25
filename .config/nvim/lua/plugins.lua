@@ -64,6 +64,7 @@ return packer.startup(function(use)
   use { "haya14busa/vim-asterisk" }
   use { "junegunn/vim-easy-align" }
   use { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end }
+  use { "johmsalas/text-case.nvim", config = function() require("pluginconfig/text-case") end }
 
   -- Colorschemes
   use { "EdenEast/nightfox.nvim" }
@@ -102,6 +103,10 @@ return packer.startup(function(use)
   use { "williamboman/mason-lspconfig.nvim" }
   use { "jose-elias-alvarez/null-ls.nvim" } -- for formatters and linters
   use { "glepnir/lspsaga.nvim" } -- LSP UIs
+
+  -- Testing
+  use { "klen/nvim-test", config = function() require("pluginconfig/nvim-test") end }
+  use { "yanskun/gotests.nvim", ft = "go", config = function() require('gotests').setup() end }
 
   -- Telescope
   use { "nvim-telescope/telescope.nvim", config = function() require("pluginconfig/telescope") end }
