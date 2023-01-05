@@ -760,9 +760,6 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_option"
-                                        ],
-                                        "optional": [
-                                            "any"
                                         ]
                                     }
                                 },
@@ -779,9 +776,6 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_option"
-                                        ],
-                                        "optional": [
-                                            "any"
                                         ]
                                     }
                                 },
@@ -798,9 +792,6 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_option"
-                                        ],
-                                        "optional": [
-                                            "any"
                                         ]
                                     }
                                 },
@@ -817,9 +808,6 @@
                                     "modifiers": {
                                         "mandatory": [
                                             "left_option"
-                                        ],
-                                        "optional": [
-                                            "any"
                                         ]
                                     }
                                 },
@@ -833,12 +821,24 @@
                         ]
                     },
                     {
-                        "description": "Disable Cmd+H Hide (rev 2)",
+                        "description": "Disable annoying shortcut",
                         "manipulators": [
                             {
                                 "description": "",
                                 "from": {
                                     "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "command"
+                                        ]
+                                    }
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "description": "",
+                                "from": {
+                                    "key_code": "m",
                                     "modifiers": {
                                         "mandatory": [
                                             "command"
