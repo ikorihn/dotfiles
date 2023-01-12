@@ -1,6 +1,6 @@
 [include]
   path = ~/.config/git/config.local
-  path = ~/.config/git/delta/themes.gitconfig
+  path = ~/.config/git/delta-themes.gitconfig
 
 [core]
   editor = nvim
@@ -85,7 +85,7 @@
   helper = osxkeychain
 
 [pull]
-  rebase = true
+  ff = only
 
 [commit]
   verbose = true
