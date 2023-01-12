@@ -3,7 +3,7 @@ local utils = require('utils')
 -- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
-local opts = { silent = true }
+local opts = { }
 
 -- leader key
 keymap("", ",", "<Nop>", opts)
@@ -151,6 +151,9 @@ keymap('n', '<leader>gB', "<cmd>lua require('gitsigns').blame_line{full=true}<cr
 keymap('n', '<leader>gd', "<cmd>lua require('gitsigns').diffthis()<cr>", opts)
 keymap('n', '<leader>gD', "<cmd>lua require('gitsigns').diffthis('~')<cr>", opts)
 keymap('n', '<leader>td', "<cmd>lua require('gitsigns').toggle_deleted()<cr>", opts)
+
+-- transparent
+keymap('n', '<leader>tt', ":TransparentToggle<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
