@@ -63,9 +63,6 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# https://starship.rs/ja-jp/
-eval "$(starship init zsh)"
-
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
@@ -77,9 +74,8 @@ zstyle ':vcs_info:*' formats '%r'
 # precmd hook
 _precmd_tmux () {
   if [[ -v TMUX ]]; then
-    vcs_info
-    if [[ -n ${vcs_info_msg_0_} ]]; then
-      tmux rename-window $vcs_info_msg_0_
+    if git rev-parse --is-inside-work-tree 2>/dev/null 1>/dev/null; then
+      tmux rename-window $(basename $(git rev-parse --show-toplevel))
     else
       tmux rename-window $(basename $(pwd))
     fi
@@ -97,9 +93,8 @@ function rename_wezterm_title {
 }
 _precmd_wezterm () {
   if [[ -v WEZTERM_PANE ]]; then
-    vcs_info
-    if [[ -n ${vcs_info_msg_0_} ]]; then
-      rename_wezterm_title ${vcs_info_msg_0_}
+    if git rev-parse --is-inside-work-tree 2>/dev/null 1>/dev/null; then
+      rename_wezterm_title $(basename $(git rev-parse --show-toplevel))
     else
       rename_wezterm_title $(basename $(pwd))
     fi
