@@ -116,6 +116,7 @@ gcd() {
   fi
   cd $repo
   zle reset-prompt
+  zle accept-line
 }
 
 # cd git root directory
