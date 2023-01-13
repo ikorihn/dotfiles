@@ -102,6 +102,15 @@ if command -v direnv 1>/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
+# Rancher Desktop
+if [[ -e "$HOME/.rd" ]]; then
+   export PATH="$HOME/.rd/bin:$PATH"
+fi
+
+if [[ -e "$HOME/.local/share/zsh/completions" ]]; then
+  fpath=($HOME/.local/share/zsh/completions/(N-/) $fpath)
+fi
+
 export POWERLINE_ROOT="$(python -c 'import site; print (site.getsitepackages()[0])')/powerline"
 
 # ripgrep

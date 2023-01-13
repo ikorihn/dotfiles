@@ -15,6 +15,9 @@ alias vimdiff='nvim -d'
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
+# クリップボードにコピーしつつ標準出力
+alias teee='tee >(pbcopy)'
+
 # # zでfzf
 # abbr -S -q zfzf='cd (z -l | fzf | awk "{ print \$2 }")'
 
@@ -48,5 +51,4 @@ abbr -S -q gsta='git stash'
 abbr -S -q gstap='git stash pop'
 abbr -S -q gsw='git switch -c feature/'
 abbr -S -q t='tig'
-
 
