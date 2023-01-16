@@ -53,11 +53,7 @@ zstyle ':vcs_info:*' formats '%r'
 # precmd hook
 _precmd_tmux () {
   if [[ -v TMUX ]]; then
-    if git rev-parse --is-inside-work-tree 2>/dev/null 1>/dev/null; then
-      tmux rename-window $(basename $(git rev-parse --show-toplevel))
-    else
-      tmux rename-window $(basename $(pwd))
-    fi
+    tmux rename-window $(basename $(gitroot $(pwd)))
   fi
 }
 
@@ -72,11 +68,7 @@ function rename_wezterm_title {
 }
 _precmd_wezterm () {
   if [[ -v WEZTERM_PANE ]]; then
-    if git rev-parse --is-inside-work-tree 2>/dev/null 1>/dev/null; then
-      rename_wezterm_title $(basename $(git rev-parse --show-toplevel))
-    else
-      rename_wezterm_title $(basename $(pwd))
-    fi
+    rename_wezterm_title $(basename $(gitroot $(pwd)))
   fi
 }
 

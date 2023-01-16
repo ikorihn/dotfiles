@@ -121,12 +121,16 @@ gcd() {
 
 # cd git root directory
 gitroot() {
-  if [[ ! $(git rev-parse --is-inside-work-tree) ]]; then
-    echo 'You are not in git repository'
-    return
+  local dir=${1:-$(pwd)}
+  if git -C $dir rev-parse --is-inside-work-tree 2>/dev/null 1>/dev/null; then
+    echo $(git -C $dir rev-parse --show-toplevel)
+  else
+    echo $dir
   fi
+}
 
-  cd $(git rev-parse --show-toplevel)
+groot() {
+  cd $(gitroot $(pwd))
 }
 
 currentbranch() {
