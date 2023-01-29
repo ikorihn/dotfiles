@@ -53,7 +53,7 @@ fpath=($BREW_PREFIX/share/zsh/site-functions/(N-/) $fpath)
 
 # Java
 if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
-  export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+  export JAVA_HOME=$(/usr/libexec/java_home -v 17)
   export PATH=${JAVA_HOME}/bin:${PATH}
 fi
 
