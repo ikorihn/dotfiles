@@ -117,13 +117,14 @@ function multi_select()
   hidden = true,
   follow = true,
   }
-  return require("telescope.builtin").find_files(opts_ff)
+  return opts_ff
 end
 keymap('n', '<leader>f,', ":Telescope ")
-keymap('n', '<leader>ff', multi_select, opts)
-keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim', '~/.config/zsh', '~/.config/karabiner', '~/.config/wezterm' }, hidden = true, follow = true })<cr>", opts)
-keymap("n", "<leader>fg", ":Telescope git_files<CR>", opts)
-keymap("n", "<leader>ft", ":Telescope live_grep<CR>", opts)
+keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(multi_select())<cr>", opts)
+keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim', '~/.config/zsh', '~/.config/alacritty', '~/.config/tig', '~/.config/karabiner', '~/.config/wezterm' }, hidden = true, follow = true })<cr>", opts)
+keymap("n", "<leader>ft", "<cmd>lua require('telescope.builtin').grep_string{ path_display = { 'smart' }, word_match = '-w', only_sort_text = true, search = '' }<cr>", opts)
+keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fh", ":Telescope command_history<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap('n', 'ga.', '<cmd>TextCaseOpenTelescope<CR>', { desc = "Telescope" })
