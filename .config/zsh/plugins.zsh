@@ -22,7 +22,6 @@ if command -v kubectl 1>/dev/null 2>&1; then
 fi
 
 if command -v nerdctl 1>/dev/null 2>&1; then
-  alias docker='nerdctl'
   source <(nerdctl completion zsh)
   compdef _nerdctl nerdctl
 fi
