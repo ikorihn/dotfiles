@@ -63,9 +63,9 @@ if [[ -e "$BREW_PREFIX/share/android-sdk" ]]; then
 fi
 
 # Go
+export PATH=/usr/local/go/bin:${PATH}
 if command -v go 1>/dev/null 2>&1; then
   export PATH=$(go env GOPATH)/bin:${PATH}
-  export GOROOT=$(go env GOROOT)
 fi
 
 # Python
