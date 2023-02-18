@@ -18,7 +18,12 @@ zstyle ':completion:*:mvn:*' plugins $maven_plugins
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
   alias k=kubectl
-  source <(kubectl completion zsh >/dev/null 2>&1)
+  source <(kubectl completion zsh)
+fi
+
+if command -v nerdctl 1>/dev/null 2>&1; then
+  source <(nerdctl completion zsh)
+  compdef _nerdctl nerdctl
 fi
 
 # https://github.com/go-jira/jira
@@ -42,30 +47,6 @@ fi
 # compinit
 # complete -C aws_completer aws
 
-#######
-# https://github.com/Aloxaf/fzf-tab
-#######
-enable-fzf-tab
-# zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all' 'ctrl-space:toggle+down'
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
-# https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# https://starship.rs/ja-jp/
-eval "$(starship init zsh)"
-
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
@@ -77,12 +58,7 @@ zstyle ':vcs_info:*' formats '%r'
 # precmd hook
 _precmd_tmux () {
   if [[ -v TMUX ]]; then
-    vcs_info
-    if [[ -n ${vcs_info_msg_0_} ]]; then
-      tmux rename-window $vcs_info_msg_0_
-    else
-      tmux rename-window $(basename $(pwd))
-    fi
+    tmux rename-window $(basename $(gitroot $(pwd)))
   fi
 }
 
@@ -97,12 +73,7 @@ function rename_wezterm_title {
 }
 _precmd_wezterm () {
   if [[ -v WEZTERM_PANE ]]; then
-    vcs_info
-    if [[ -n ${vcs_info_msg_0_} ]]; then
-      rename_wezterm_title ${vcs_info_msg_0_}
-    else
-      rename_wezterm_title $(basename $(pwd))
-    fi
+    rename_wezterm_title $(basename $(gitroot $(pwd)))
   fi
 }
 

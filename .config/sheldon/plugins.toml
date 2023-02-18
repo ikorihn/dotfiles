@@ -34,18 +34,18 @@ github = "zsh-users/zsh-autosuggestions"
 [plugins.zsh-history-substring-search]
 github = "zsh-users/zsh-history-substring-search"
 
+[plugins.powerlevel10k]
+github = "romkatv/powerlevel10k"
+apply = ["source"]
+
 [plugins.zsh-abbr]
 github = "olets/zsh-abbr"
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 apply = ["source"]
-[plugins.zsh-better-npm-completion]
-github = "lukechilds/zsh-better-npm-completion"
 [plugins.enhancd]
 github = "b4b4r07/enhancd"
 use = ["init.sh"]
-[plugins.emoji-cli]
-github = "b4b4r07/emoji-cli"
 
 [plugins.aws_zsh_completer]
 remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
@@ -57,8 +57,8 @@ use = ["wezterm.sh"]
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"
-use = ["{alias,local,functions}.zsh"]
+use = ["{alias,local,functions,plugins}.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["{options,plugins}.zsh"]
+use = ["{sync,options}.zsh"]
 apply = ["source"]

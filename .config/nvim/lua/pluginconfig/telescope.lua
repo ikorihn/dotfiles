@@ -18,10 +18,9 @@ telescope.setup {
       i = {
         ["<Down>"] = actions.cycle_history_next,
         ["<Up>"] = actions.cycle_history_prev,
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
         ["<esc>"] = actions.close,
         ["<C-u>"] = false,
+        ["<C-j>"] = actions.smart_send_to_qflist + actions.open_qflist,
       },
     },
   },
