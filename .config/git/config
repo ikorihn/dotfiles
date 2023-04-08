@@ -41,7 +41,7 @@
   ress = restore --staged .
   diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
   logn = log --name-status --oneline
-  lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%ae %Cred%d %Creset%s' --date=iso-strict-local
+  lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%<(20,trunc)%ae %Cred%d %Creset%s' --date=iso-strict-local
   stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
   stali = stash list
   graph = log --graph --date=iso --decorate=short --all --pretty=format:'%C(green)%h %C(reset)%ad %C(blue)%ae %C(red)%d %C(reset)%s'
