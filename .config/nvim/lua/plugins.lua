@@ -74,14 +74,14 @@ local plugins = {
   { "nvim-telescope/telescope.nvim", config = function() require("pluginconfig/telescope") end },
 
   -- Treesitter
-  { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate", config = function() require("pluginconfig/treesitter") end },
+  { "nvim-treesitter/nvim-treesitter", config = function() require("pluginconfig/treesitter") end },
   { "nvim-treesitter/nvim-treesitter-context" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
 
   -- Git
   { "lewis6991/gitsigns.nvim", config = function() require("pluginconfig/gitsigns") end },
   { "rbgrouleff/bclose.vim" },
-  { "iberianpig/tig-explorer.vim", requires = {{"rbgrouleff/bclose.vim", opt = true}} },
+  { "iberianpig/tig-explorer.vim", dependencies= {"rbgrouleff/bclose.vim"} },
   { "ruanyl/vim-gh-line" },
 
   -- DAP
