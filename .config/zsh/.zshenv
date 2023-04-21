@@ -9,7 +9,7 @@ unset PATH
 unset MANPATH
 eval $(/usr/libexec/path_helper -s)
 
-export LANG=ja_JP.UTF-8
+export LANG=en_US.UTF-8
 export XDG_CONFIG_HOME=~/.config
 export XDG_CACHE_HOME=~/.cache
 export XDG_DATA_HOME=~/.local/share
