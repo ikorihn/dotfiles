@@ -2,6 +2,19 @@
 vim.opt.packpath = {}
 
 -- Plug
+-- Automatically install plug
+local plugpath = vim.fn.stdpath("data") .. "/plugged/vim-plug"
+if not vim.loop.fs_stat(plugpath) then
+  vim.fn.system({
+    "curl",
+    "-fLo",
+    plugpath .. "/autoload/plug.vim",
+    "--create-dirs",
+    "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim",
+  })
+end
+vim.opt.rtp:prepend(plugpath)
+
 vim.cmd [[ call plug#begin() ]]
 
 vim.cmd [[ Plug 'phaazon/hop.nvim' ]]
