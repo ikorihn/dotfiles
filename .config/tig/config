@@ -27,6 +27,7 @@ bind main c ?sh -c "echo %(commit) | pbcopy"
 
 # ammend
 bind status + !git commit --amend
+bind main + !sh -c "git commit --fixup %(commit) && git rebase -i --autostash %(commit)~"
 
 # push
 bind status P ?git push -u %(remote) %(repo:head)
@@ -35,7 +36,7 @@ bind status P ?git push -u %(remote) %(repo:head)
 bind status D ?git clean -f %(file)
 
 # rebase
-bind main <Ctrl-r> ?git rebase -i %(commit)
+bind main <Ctrl-r> ?git rebase --autostash -i %(commit)
 bind refs R ?git rebase %(branch)
 bind status <Ctrl-r> ?git rebase --continue
 
