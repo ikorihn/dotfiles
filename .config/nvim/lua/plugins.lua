@@ -56,8 +56,18 @@ local plugins = {
   { "hrsh7th/cmp-nvim-lua" },
 
   -- snippets
-  { "L3MON4D3/LuaSnip" }, --snippet engine
-  { "rafamadriz/friendly-snippets" }, -- a bunch of snippets to use
+  {
+    "L3MON4D3/LuaSnip",
+    -- install jsregexp (optional!).
+    build = "make install_jsregexp",
+  },
+  {
+    "rafamadriz/friendly-snippets",
+    dependencies = {
+      "L3MON4D3/LuaSnip",
+    },
+    config = function() require("luasnip.loaders.from_vscode").lazy_load() end,
+  }, -- a bunch of snippets to use
 
   -- LSP
   { "neovim/nvim-lspconfig" }, -- enable LSP
