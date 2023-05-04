@@ -120,6 +120,7 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/config"
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
 # export FZF_DEFAULT_OPTS='--height 40% --reverse --inline-info --preview "bat --color=always --style=header,grid --line-range :20 {}"'
 export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
+export FZF_COMPLETION_TRIGGER='~~'
 
 # vim
 # export VIMINIT=":source $XDG_CONFIG_HOME/nvim/vimrc"

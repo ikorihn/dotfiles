@@ -27,3 +27,27 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
+# fzf-tabを入れいているとFZF_COMPLETION_TRIGGERによるトリガーが効かなくなるため、ワークアラウンドとしてTAB2回で発動するようにする
+# https://github.com/Aloxaf/fzf-tab/issues/65#issuecomment-1344970328
+fzf-completion-notrigger() {
+    # disable trigger just this once
+    local FZF_COMPLETION_TRIGGER=""
+    # if fzf-completion can't come up with something, call fzf-tab-complete
+    # instead of the default completion widget (expand-or-complete).
+    #
+    # FIXME: triggers an infinite recursion on an empty prompt
+    # _zsh_autosuggest_highlight_reset:3: maximum nested function level reached; increase FUNCNEST?
+    #
+    #local fzf_default_completion='fzf-tab-complete'
+    fzf-completion "$@"
+}
+zle -N fzf-completion-notrigger
+
+# Set an aggressive $KEYTIMEOUT to make usage of single <Tab> less miserable
+KEYTIMEOUT=20
+# Bind double <Tab>
+bindkey '\t\t' fzf-completion-notrigger
+# Bind Ctrl-Space in case I am unable to use double <Tab> due to a combination
+# of the aggressive $KEYTIMEOUT on a slow link.
+bindkey '^ ' fzf-completion-notrigger
+
