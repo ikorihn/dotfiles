@@ -3,23 +3,16 @@ local function load(module)
   require(module)
 end
 
+load "options"
+load "keymaps"
+
 if vim.g.vscode == 1 then
-  load("options")
-  load("vscode")
-  load("keymaps")
+  load "vscode"
   return
 end
 
-local modules = {
-  "options",
-  "keymaps",
-  "plugins",
-  "autocommands",
-  "colorscheme",
-  "utils",
-  "lsp",
-}
-for k, v in pairs(modules) do
-  load(v)
-end
-
+load "plugins"
+load "autocommands"
+load "colorscheme"
+load "utils"
+load "lsp"

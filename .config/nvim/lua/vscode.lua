@@ -1,5 +1,5 @@
--- pack/*/start を読み込ませない
-vim.opt.packpath = {}
+-- ~/.local/share/nvim/site/pack/*/start/* を読み込ませない
+vim.opt.packpath:remove(vim.fn.stdpath('data').."/site")
 
 -- Plug
 -- Automatically install plug
@@ -15,7 +15,7 @@ if not vim.loop.fs_stat(plugpath) then
 end
 vim.opt.rtp:prepend(plugpath)
 
-vim.cmd [[ call plug#begin() ]]
+vim.cmd [[ call plug#begin(stdpath('data') .. '/site/pack/packer/start') ]]
 
 vim.cmd [[ Plug 'phaazon/hop.nvim' ]]
 vim.cmd [[ Plug 'junegunn/vim-easy-align' ]]
