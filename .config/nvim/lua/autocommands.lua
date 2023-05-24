@@ -72,20 +72,20 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
   end,
 })
 
--- switch relativenumber
-vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
-	callback = function()
-		if vim.o.number and vim.fn.mode() ~= "i" then
-			vim.o.relativenumber = true
-		end
-	end,
-	once = false,
-})
-vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
-	callback = function()
-		if vim.o.number then
-			vim.o.relativenumber = false
-		end
-	end,
-	once = false,
-})
+-- -- switch relativenumber
+-- vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+-- 	callback = function()
+-- 		if vim.o.number and vim.fn.mode() ~= "i" then
+-- 			vim.o.relativenumber = true
+-- 		end
+-- 	end,
+-- 	once = false,
+-- })
+-- vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+-- 	callback = function()
+-- 		if vim.o.number then
+-- 			vim.o.relativenumber = false
+-- 		end
+-- 	end,
+-- 	once = false,
+-- })
