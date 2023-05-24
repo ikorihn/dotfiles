@@ -10,6 +10,11 @@ fi
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS='--reverse --inline-info'
+export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
+export FZF_TMUX=1
+# export FZF_TMUX_OPTS='-p 90%,80%'
 
 # https://github.com/Aloxaf/fzf-tab
 enable-fzf-tab
