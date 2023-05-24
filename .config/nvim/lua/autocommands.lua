@@ -7,6 +7,17 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   once = false,
 })
 
+-- Go template
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = { "*.tmpl" },
+  callback = function()
+    if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
+        vim.bo.filetype = "gotmpl"
+    end
+  end,
+  once = false,
+})
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "go", "Makefile" },
   callback = function()
