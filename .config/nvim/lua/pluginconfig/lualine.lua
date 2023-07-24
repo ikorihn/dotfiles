@@ -128,6 +128,16 @@ ins_left {
 
 ins_left {
   'filename',
+  file_status = true,      -- Displays file status (readonly status, modified status)
+  newfile_status = false,  -- Display new file status (new file means no write after created)
+  path = 1,                -- 0: Just the filename 1: Relative path 2: Absolute path 3: Absolute path, with tilde as the home directory
+  shorting_target = 40,    -- Shortens path to leave 40 spaces in the window for other components. (terrible name, any suggestions?)
+  symbols = {
+    modified = '[+]',      -- Text to show when the file is modified.
+    readonly = '[-]',      -- Text to show when the file is non-modifiable or readonly.
+    unnamed = '[No Name]', -- Text to show for unnamed buffers.
+    newfile = '[New]',     -- Text to show for new created file before first writting
+  },
   cond = conditions.buffer_not_empty,
   color = { fg = colors.magenta, gui = 'bold' },
 }
@@ -135,6 +145,13 @@ ins_left {
 ins_left { 'location' }
 
 ins_left { 'progress', color = { fg = colors.fg, gui = 'bold' } }
+
+ins_left {
+  -- Show codepoint at cursor
+  function()
+    return '%b(0x%B)'
+  end
+}
 
 ins_left {
   'diagnostics',
@@ -155,7 +172,13 @@ ins_left {
   end,
 }
 
-ins_left {
+-- Add components to right sections
+ins_right {
+  'searchcount',
+  color = { fg = colors.violet, gui = 'bold' },
+}
+
+ins_right {
   -- Lsp server name .
   function()
     local msg = 'No Active Lsp'
@@ -176,16 +199,9 @@ ins_left {
   color = { fg = '#ffffff', gui = 'bold' },
 }
 
--- Add components to right sections
 ins_right {
-  'searchcount',
-  color = { fg = colors.violet, gui = 'bold' },
-}
-
-ins_left {
-  function()
-    return '%=%b 0x%B'
-  end
+  'filetype',
+  icons_enabled = true,
 }
 
 ins_right {

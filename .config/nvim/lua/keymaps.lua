@@ -124,6 +124,7 @@ keymap('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files(mult
 keymap("n", "<leader>f.", "<cmd>lua require('telescope.builtin').find_files({ search_dirs = { '~/.config/nvim', '~/.config/zsh', '~/.config/alacritty', '~/.config/tig', '~/.config/karabiner', '~/.config/wezterm' }, hidden = true, follow = true })<cr>", opts)
 keymap("n", "<leader>ft", "<cmd>lua require('telescope.builtin').grep_string{ path_display = { 'smart' }, word_match = '-w', only_sort_text = true, search = '' }<cr>", opts)
 keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>fG", ":Telescope git_files<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope command_history<CR>", opts)
 keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
@@ -133,25 +134,6 @@ keymap('v', 'ga.', "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope" })
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
 keymap("n", "<leader>gb", ":TigBlame<CR>", opts)
--- Gitsigns
-keymap('n', ']c', function()
-  if vim.wo.diff then return ']c' end
-  vim.schedule(function() require('gitsigns').next_hunk() end)
-  return '<Ignore>'
-end, {expr=true})
-keymap('n', '[c', function()
-  if vim.wo.diff then return '[c' end
-  vim.schedule(function() require('gitsigns').prev_hunk() end)
-  return '<Ignore>'
-end, {expr=true})
-keymap({'n', 'v'}, '<leader>gs', "<cmd>lua require('gitsigns').stage_hunk()<cr>", opts)
-keymap({'n', 'v'}, '<leader>gr', "<cmd>lua require('gitsigns').reset_hunk()<cr>", opts)
-keymap('n', '<leader>gu', "<cmd>lua require('gitsigns').undo_stage_hunk()<cr>", opts)
-keymap('n', '<leader>gp', "<cmd>lua require('gitsigns').preview_hunk()<cr>", opts)
-keymap('n', '<leader>gB', "<cmd>lua require('gitsigns').blame_line{full=true}<cr>", opts)
-keymap('n', '<leader>gd', "<cmd>lua require('gitsigns').diffthis()<cr>", opts)
-keymap('n', '<leader>gD', "<cmd>lua require('gitsigns').diffthis('~')<cr>", opts)
-keymap('n', '<leader>td', "<cmd>lua require('gitsigns').toggle_deleted()<cr>", opts)
 
 -- transparent
 keymap('n', '<leader>tt', ":TransparentToggle<CR>", opts)

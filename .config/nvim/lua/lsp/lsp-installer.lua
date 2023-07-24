@@ -12,6 +12,7 @@ local servers = {
   "cssls",
   "html",
   "tsserver",
+  "volar",
   "pyright",
   "bashls",
   "jsonls",
