@@ -92,6 +92,11 @@ if [[ -e "$HOME/.volta" ]]; then
   export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
+# rtx (asdf rust impl)
+if command -v rtx 1>/dev/null 2>&1; then
+  eval "$(rtx activate zsh)"
+fi
+
 if [[ -e "$HOME/.bun" ]]; then
    export BUN_INSTALL="$HOME/.bun"
    export PATH="$BUN_INSTALL/bin:$PATH"

@@ -323,6 +323,15 @@ function ssh() {
   fi
 }
 
+function search_replace() {
+  SEARCH=$1
+  TO=$2
+
+  files=$(rg -l "$SEARCH")
+  echo "$files"
+  echo "$files" | xargs sd "$SEARCH" "$TO"
+}
+
 ########
 # Toggl, Todoist
 ########
