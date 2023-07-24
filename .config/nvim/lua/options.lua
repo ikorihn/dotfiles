@@ -14,7 +14,7 @@ vim.opt.backupskip = ""
 vim.opt.undofile = true
 -- vim.opt.undodir = vim.env.XDG_DATA_HOME .. "/vim/undo/"
 -- vim.fn.mkdir(vim.opt.undodir, "p")
-vim.opt.autochdir = true
+vim.opt.autochdir = false
 vim.opt.history = 10000
 
 -- Tab
@@ -55,7 +55,7 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 -- Complete
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 0
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.pumheight = 10
 vim.opt.timeoutlen = 1000

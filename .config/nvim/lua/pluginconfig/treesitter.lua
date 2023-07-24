@@ -18,8 +18,8 @@ parser_config.gotmpl = {
 }
 
 configs.setup({
-  ensure_installed = { "go", "python", "rust", "lua", "yaml", "toml", "json", "sql", "java", "html", "css", "javascript", "typescript", "dockerfile", "markdown", "gotmpl" },
-  ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
+  ensure_installed = { "go", "python", "rust", "lua", "yaml", "toml", "json", "sql", "java", "html", "css", "javascript", "typescript", "dockerfile", "gotmpl" },
+  ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = { "css" }, -- list of language that will be disabled

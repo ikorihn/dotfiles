@@ -37,11 +37,11 @@ local plugins = {
   -- filer, status
   { "nvim-tree/nvim-web-devicons" },
   { "nvim-tree/nvim-tree.lua", config = function() require("pluginconfig/nvim-tree") end },
-  { "akinsho/bufferline.nvim", version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("pluginconfig/bufferline") end },
+  -- { "akinsho/bufferline.nvim", version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("pluginconfig/bufferline") end },
   { "moll/vim-bbye" },
   { "nvim-lualine/lualine.nvim", config = function() require("pluginconfig/lualine") end },
   { "akinsho/toggleterm.nvim", config = function() require("pluginconfig/toggleterm") end },
-  { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
+  -- { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
   { "lukas-reineke/indent-blankline.nvim", config = function() require("pluginconfig/indentline") end },
   { "RRethy/vim-illuminate", config = function() require("pluginconfig/illuminate") end },
   { "ntpeters/vim-better-whitespace" },

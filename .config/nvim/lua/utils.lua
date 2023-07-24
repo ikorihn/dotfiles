@@ -11,11 +11,6 @@ vim.cmd([[command! -nargs=0 -bar ToggleQuickFix lua require('utils').ToggleQuick
 
 -- https://neovim.discourse.group/t/reload-init-lua-and-all-require-d-scripts/971/11
 M.ReloadConfig = function()
-  for name, _ in pairs(package.loaded) do
-    if name:match("^cnull") then
-      package.loaded[name] = nil
-    end
-  end
   dofile(vim.env.MYVIMRC)
   vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
