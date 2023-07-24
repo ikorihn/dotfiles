@@ -35,3 +35,4 @@ defaults write com.apple.screencapture name "screenshot" # 名前を変更
 # defaults write com.apple.screencapture include-date -bool false
 defaults write com.apple.screencapture disable-shadow -bool true # スクリーンキャプチャの影をなくす
 defaults write com.apple.screencapture type -string "png" # スクリーンショットの保存形式を PNG にする
+defaults write com.apple.screencapture location -string "~/Pictures/screenshot" # スクリーンショットの保存先
