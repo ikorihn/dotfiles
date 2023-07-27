@@ -22,9 +22,6 @@ apply = ["source"]
 [templates]
 defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
 
-[plugins.compinit]
-inline = 'autoload -Uz compinit && compinit'
-
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
 [plugins.zsh-completions]
@@ -57,7 +54,7 @@ use = ["wezterm.sh"]
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"
-use = ["{alias,local,functions,plugins}.zsh"]
+use = ["{languages,alias,local,functions,plugins}.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
 use = ["{sync,options}.zsh"]
