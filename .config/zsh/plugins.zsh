@@ -1,9 +1,3 @@
-autoload -Uz compinit
-if [ "$(find ${ZDOTDIR}/.zcompdump -mtime 1)" ] ; then
-    compinit
-fi
-compinit -C
-
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
