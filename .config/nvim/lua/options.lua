@@ -55,7 +55,7 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 -- Complete
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.pumheight = 10
 vim.opt.timeoutlen = 1000
