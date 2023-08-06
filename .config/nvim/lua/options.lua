@@ -73,3 +73,8 @@ vim.opt.mouse = {}
 
 vim.g.gh_line_map_default = 0
 vim.g.gh_line_blame_map_default = 0
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+

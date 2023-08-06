@@ -56,7 +56,9 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
-vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
+-- https://github.com/nvim-tree/nvim-tree.lua/issues/1005
+-- vim <directory> で開いたときにもすぐ終了してしまうため無効化する
+-- vim.cmd "autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif"
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
