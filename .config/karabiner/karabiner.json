@@ -79,9 +79,34 @@
                         ]
                     },
                     {
-                        "description": "コマンドキーを単体で押したときに、英数・かなキーを送信する。（左コマンドキーは英数、右コマンドキーはかな） (rev 3)",
+                        "description": "左コマンドキーを単体で押したときに英数・2回連打したときにかなキーを送信する",
                         "manipulators": [
                             {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "left_command"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "japanese_kana"
+                                    },
+                                    {
+                                        "set_variable": {
+                                            "name": "left_control_key",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "left_control_key",
+                                        "value": 1
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "basic",
                                 "from": {
                                     "key_code": "left_command",
                                     "modifiers": {
@@ -101,45 +126,51 @@
                                 ],
                                 "to_if_alone": [
                                     {
+                                        "set_variable": {
+                                            "name": "left_control_key",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
                                         "key_code": "japanese_eisuu"
                                     }
                                 ],
                                 "to_if_held_down": [
                                     {
+                                        "set_variable": {
+                                            "name": "left_control_key",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
                                         "key_code": "left_command"
                                     }
                                 ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "right_command",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
+                                "to_delayed_action": {
+                                    "to_if_invoked": [
+                                        {
+                                            "set_variable": {
+                                                "name": "left_control_key",
+                                                "value": 0
+                                            }
+                                        }
+                                    ],
+                                    "to_if_canceled": [
+                                        {
+                                            "set_variable": {
+                                                "name": "left_control_key",
+                                                "value": 0
+                                            }
+                                        }
+                                    ]
                                 },
-                                "parameters": {
-                                    "basic.to_if_held_down_threshold_milliseconds": 100
-                                },
-                                "to": [
+                                "conditions": [
                                     {
-                                        "key_code": "right_command",
-                                        "lazy": true
+                                        "type": "variable_if",
+                                        "name": "left_control_key",
+                                        "value": 0
                                     }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "japanese_kana"
-                                    }
-                                ],
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "right_command"
-                                    }
-                                ],
-                                "type": "basic"
+                                ]
                             }
                         ]
                     },
