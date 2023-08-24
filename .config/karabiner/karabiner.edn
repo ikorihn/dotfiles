@@ -1,0 +1,100 @@
+{
+;; ----------------------------------
+;; this is my goku file for karabiner
+;; ----------------------------------
+;; more info about goku: https://github.com/yqrashawn/GokuRakuJoudo
+;; more info about karabiner: https://karabiner-elements.pqrs.org/docs
+;; ----------------------------------
+;; article karabiner god mode by nikita: https://medium.com/@nikitavoloboev/karabiner-god-mode-7407a5ddc8f6
+;; examples: https://github.com/yqrashawn/GokuRakuJoudo/blob/master/examples.org#profiles-wip
+;; tutorial: https://github.com/yqrashawn/GokuRakuJoudo/blob/master/tutorial.md#basic8
+;; another article: https://blog.jkl.gg/hacking-your-keyboard/
+;; very well documented edn file by Kaushik Gopal: https://gist.github.com/kaushikgopal/ff7a92bbc887e59699c804b59074a126
+;; key names: https://github.com/yqrashawn/GokuRakuJoudo/blob/master/src/karabiner_configurator/keys_info.clj
+
+:profiles {
+    :Default {
+        :default    true
+        :sim        50      ;; if keydown event for two different keys are pressed within :sim ms, the keypresses are considered simultaneous
+        :delay      500     ;; after :delay ms, the key press is considered to be delayed (TODO WHAT IS THIS??)
+        :alone      1000    ;; if keyup event comes within :alone ms from keydown, the key is not just pressed but held
+        :held       500     ;; key is fired twice when :held ms is elapsed (otherwise seen as a hold command) (TODO WHAT IS THIS??)
+    }
+} ;; profiles
+
+;; you can create templates for running shell commands. These follow clojure string template syntax.
+:templates {
+    :echo "echo \"%s\""
+    :open "open \"%s\""
+    :open-app "open -a \"%s\""
+} ;; templates
+
+;; layers are modifier keys
+:simlayers {
+    :launch-mode { :key :o }
+    :number-mode { :key :right_command }
+} ;; layers
+
+;; with tos you can predefine 'to' keypresses to easily parse them
+:tos {
+    :repeat_space {:key :spacebar :repeat true}
+    :lazy_left_command {:key :left_command :lazy true}
+    :hold_quit {:key :!Cq :repeat false}
+}
+
+;; This is where you define the modifications
+:main [
+    {
+        :des "launch mode: quick launch applications"
+        :rules [
+            :launch-mode
+                [:t [:open-app "Alacritty"]]
+                [:f [:open-app "Finder"]]
+                [:v [:open-app "Visual Studio Code"]]
+                [:s [:open-app "Slack"]]
+                [:g [:open-app "Vivaldi"]]
+                [:a [:open-app "Obsidian"]]
+                [:x [:open-app "Authy Desktop"]]
+        ]
+    }
+
+    {
+        :des "Change spacebar to left_shift. (Post spacebar if pressed alone)"
+        :rules [
+            [:spacebar :left_shift nil {:alone :spacebar :held :repeat_space :params {:held 800}}]
+        ]
+    }
+
+    {
+        :des "Post escape if left_control is pressed alone."
+        :rules [
+            [:##left_control :left_control nil {:alone :escape}]
+        ]
+    }
+
+    {
+        :des "Press left command once to japanese_eisuu, twice to japanese_kana."
+        :rules [
+            [:left_command :lazy_left_command ["left-command-pressed-once" 0] {:alone [:japanese_eisuu ["left-command-pressed-once" 1]] :delayed {:invoked ["left-command-pressed-once" 0] :canceled ["left-command-pressed-once" 0]}}]
+            [:left_command [:japanese_kana ["left-command-pressed-once" 0]] ["left-command-pressed-once" 1]]
+        ]
+    }
+
+    {
+        :des "Right command to Enter"
+        :rules [
+            [:right_command :right_command nil {:alone :return_or_enter :held :right_command}]
+        ]
+    }
+
+    {
+        :des "Quit application by holding command-q"
+        :rules [
+            [:!Cq nil nil {:held :hold_quit}]
+        ]
+    }
+
+
+]
+}
+
