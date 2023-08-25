@@ -15,7 +15,7 @@
 :profiles {
     :Default {
         :default    true
-        :sim        50      ;; if keydown event for two different keys are pressed within :sim ms, the keypresses are considered simultaneous
+        :sim        200     ;; if keydown event for two different keys are pressed within :sim ms, the keypresses are considered simultaneous
         :delay      500     ;; after :delay ms, the key press is considered to be delayed (TODO WHAT IS THIS??)
         :alone      1000    ;; if keyup event comes within :alone ms from keydown, the key is not just pressed but held
         :held       500     ;; key is fired twice when :held ms is elapsed (otherwise seen as a hold command) (TODO WHAT IS THIS??)
@@ -24,14 +24,14 @@
 
 ;; you can create templates for running shell commands. These follow clojure string template syntax.
 :templates {
-    :echo "echo \"%s\""
-    :open "open \"%s\""
     :open-app "open -a \"%s\""
 } ;; templates
 
 ;; layers are modifier keys
+:simlayer-threshold 500
 :simlayers {
     :launch-mode { :key :o }
+    :arrow-mode { :key :f :modi {:optional [:any]}}
     :number-mode { :key :right_command }
 } ;; layers
 
@@ -59,6 +59,44 @@
     }
 
     {
+        :des "f to arrow mode"
+        :rules [
+            :arrow-mode
+                [:##h :##left_arrow]
+                [:##j :##down_arrow]
+                [:##k :##up_arrow]
+                [:##l :##right_arrow]
+        ]
+    }
+
+    {
+        :des "right_command to number mode"
+        :rules [
+            :number-mode
+                [:a :1]
+                [:s :2]
+                [:d :3]
+                [:f :4]
+                [:g :5]
+                [:h :6]
+                [:j :7]
+                [:k :8]
+                [:l :9]
+                [:semicolon :0]
+                [:q :!S1]
+                [:w :!S2]
+                [:e :!S3]
+                [:r :!S4]
+                [:t :!S5]
+                [:y :!S6]
+                [:u :!S7]
+                [:i :!S8]
+                [:o :!S9]
+                [:p :!S0]
+        ]
+    }
+
+    {
         :des "Change spacebar to left_shift. (Post spacebar if pressed alone)"
         :rules [
             [:spacebar :left_shift nil {:alone :spacebar :held :repeat_space :params {:held 800}}]
@@ -75,15 +113,15 @@
     {
         :des "Press left command once to japanese_eisuu, twice to japanese_kana."
         :rules [
-            [:left_command :lazy_left_command ["left-command-pressed-once" 0] {:alone [:japanese_eisuu ["left-command-pressed-once" 1]] :delayed {:invoked ["left-command-pressed-once" 0] :canceled ["left-command-pressed-once" 0]}}]
             [:left_command [:japanese_kana ["left-command-pressed-once" 0]] ["left-command-pressed-once" 1]]
+            [:left_command :lazy_left_command ["left-command-pressed-once" 0] {:alone [:japanese_eisuu ["left-command-pressed-once" 1]] :delayed {:invoked ["left-command-pressed-once" 0] :canceled ["left-command-pressed-once" 0]}}]
         ]
     }
 
     {
         :des "Right command to Enter"
         :rules [
-            [:right_command :right_command nil {:alone :return_or_enter :held :right_command}]
+            [:##right_command :##return_or_enter]
         ]
     }
 
@@ -94,6 +132,31 @@
         ]
     }
 
+    {
+        :des "Map fn + i, o, p  to F13, F14, F15."
+        :rules [
+            [:!Fi :f13]
+            [:!Fo :f14]
+            [:!Fp :f15]
+        ]
+    }
+
+    {
+        :des "Map fn + asd to Volume down/up/mute)"
+        :rules [
+            [:!Fa :volume_decrement]
+            [:!Fs :volume_increment]
+            [:!Fd :mute]
+        ]
+    }
+
+    {
+        :des "Disable annoying shortcut"
+        :rules [
+            [:!Ch []]
+            [:!Cm []]
+        ]
+    }
 
 ]
 }
