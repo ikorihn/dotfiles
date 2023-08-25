@@ -22,6 +22,21 @@
     }
 } ;; profiles
 
+;; Define different kinds of keyboards
+:devices {
+    :apple-us [{:vendor_id 1452 :product_id 641}]
+    :apple-jis [{:vendor_id 1452 :product_id 833}]
+    :hhkb-bt [{:vendor_id 1278 :product_id 514}]
+    :barocco [{:vendor_id 1241 }]
+
+    :all-kybs [  ;; all keyboards
+        {:vendor_id 1452}
+        {:vendor_id 1278}
+        {:vendor_id 1241}
+    ]
+
+} ;; devices
+
 ;; you can create templates for running shell commands. These follow clojure string template syntax.
 :templates {
     :open-app "open -a \"%s\""
@@ -93,6 +108,32 @@
                 [:i :!S8]
                 [:o :!S9]
                 [:p :!S0]
+        ]
+    }
+
+    {
+        :des "simple_modification"
+        :rules [
+            :all-kybs
+                [:##escape :##grave_accent_and_tilde]
+            :hhkb-bt
+                [:grave_accent_and_tilde :delete_or_backspace]
+                [:right_option :caps_lock]
+            :apple-us
+                [:caps_lock :left_control nil {:alone :escape}]
+                [:left_control :left_option]
+                [:right_option :caps_lock]
+                [:right_shift :fn]
+            :apple-jis
+                [:fn :caps_lock]
+                [:international3 :backslash]
+                [:japanese_eisuu :left_command]
+                [:japanese_kana :right_command]
+                [:right_shift :fn]
+            :barocco
+                [:right_control :caps_lock]
+                [:right_option :right_command]
+                [:up_arrow :fn]
         ]
     }
 
