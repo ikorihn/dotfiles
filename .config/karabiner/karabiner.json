@@ -63,7 +63,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -122,7 +122,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -181,7 +181,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -240,7 +240,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -299,7 +299,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -358,7 +358,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -417,7 +417,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -491,7 +491,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -560,7 +560,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -629,7 +629,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -698,7 +698,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -762,7 +762,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -821,7 +821,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -880,7 +880,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -939,7 +939,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -998,7 +998,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1057,7 +1057,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1116,7 +1116,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1175,7 +1175,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1234,7 +1234,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1293,7 +1293,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1355,7 +1355,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1420,7 +1420,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1485,7 +1485,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1550,7 +1550,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1615,7 +1615,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1680,7 +1680,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1745,7 +1745,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1810,7 +1810,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1875,7 +1875,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1940,7 +1940,7 @@
                                     }
                                 },
                                 "parameters": {
-                                    "basic.simultaneous_threshold_milliseconds": 500
+                                    "basic.simultaneous_threshold_milliseconds": 400
                                 },
                                 "to": [
                                     {
@@ -1951,6 +1951,328 @@
                                     },
                                     {
                                         "key_code": "0",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "number-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "equal_sign"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "right_command"
+                                        },
+                                        {
+                                            "key_code": "open_bracket"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "number-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "number-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "equal_sign"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "number-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "n",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "right_command"
+                                        },
+                                        {
+                                            "key_code": "n"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "number-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "number-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "open_bracket"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "number-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "m",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "right_command"
+                                        },
+                                        {
+                                            "key_code": "m"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "number-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "number-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "close_bracket"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "number-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "comma"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "right_command"
+                                        },
+                                        {
+                                            "key_code": "comma"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "number-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "number-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "open_bracket",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "number-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "period"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "close_bracket",
+                                        "modifiers": [
+                                            "left_shift"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "right_command"
+                                        },
+                                        {
+                                            "key_code": "period"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "number-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "number-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "key_code": "close_bracket",
                                         "modifiers": [
                                             "left_shift"
                                         ]
@@ -1991,6 +2313,38 @@
                                 "to": [
                                     {
                                         "key_code": "grave_accent_and_tilde"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "vendor_id": 1452
+                                            },
+                                            {
+                                                "vendor_id": 1278
+                                            },
+                                            {
+                                                "vendor_id": 1241
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "open_bracket",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "hyphen"
                                     }
                                 ],
                                 "type": "basic"

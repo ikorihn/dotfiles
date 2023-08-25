@@ -35,6 +35,12 @@
         {:vendor_id 1241}
     ]
 
+    :except-keyball [
+        {:vendor_id 1452}
+        {:vendor_id 1278}
+        {:vendor_id 1241}
+    ]
+
 } ;; devices
 
 ;; you can create templates for running shell commands. These follow clojure string template syntax.
@@ -43,7 +49,7 @@
 } ;; templates
 
 ;; layers are modifier keys
-:simlayer-threshold 500
+:simlayer-threshold 400
 :simlayers {
     :launch-mode { :key :o }
     :arrow-mode { :key :f :modi {:optional [:any]}}
@@ -108,6 +114,11 @@
                 [:i :!S8]
                 [:o :!S9]
                 [:p :!S0]
+                [:##open_bracket :##equal_sign]
+                [:##n :##open_bracket]
+                [:##m :##close_bracket]
+                [:comma :!Sopen_bracket]
+                [:period :!Sclose_bracket]
         ]
     }
 
@@ -116,6 +127,8 @@
         :rules [
             :all-kybs
                 [:##escape :##grave_accent_and_tilde]
+            :except-keyball
+                [:##open_bracket :##hyphen]
             :hhkb-bt
                 [:grave_accent_and_tilde :delete_or_backspace]
                 [:right_option :caps_lock]
