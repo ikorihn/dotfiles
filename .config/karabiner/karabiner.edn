@@ -28,11 +28,13 @@
     :apple-jis [{:vendor_id 1452 :product_id 833}]
     :hhkb-bt [{:vendor_id 1278 :product_id 514}]
     :barocco [{:vendor_id 1241 }]
+    :keyball [{:vendor_id 22871 }]
 
     :all-kybs [  ;; all keyboards
         {:vendor_id 1452}
         {:vendor_id 1278}
         {:vendor_id 1241}
+        {:vendor_id 22871}
     ]
 
     :except-keyball [
@@ -43,9 +45,14 @@
 
 } ;; devices
 
+:applications {
+    :slack ["^com.tinyspeck.slackmacgap$"]
+} ;; applications
+
 ;; you can create templates for running shell commands. These follow clojure string template syntax.
 :templates {
     :open-app "open -a \"%s\""
+    :open "open \"%s\""
 } ;; templates
 
 ;; layers are modifier keys
@@ -70,10 +77,11 @@
         :rules [
             :launch-mode
                 [:t [:open-app "Alacritty"]]
-                [:f [:open-app "Finder"]]
+                [:f [:open "$HOME/Downloads"]]
                 [:v [:open-app "Visual Studio Code"]]
                 [:s [:open-app "Slack"]]
                 [:g [:open-app "Vivaldi"]]
+                [:z [:open-app "Firefox"]]
                 [:a [:open-app "Obsidian"]]
                 [:x [:open-app "Authy Desktop"]]
         ]
@@ -135,10 +143,7 @@
                 [:right_option :caps_lock]
                 [:right_shift :fn]
             :apple-jis
-                [:fn :caps_lock]
                 [:international3 :backslash]
-                [:japanese_eisuu :left_command]
-                [:japanese_kana :right_command]
                 [:right_shift :fn]
             :barocco
                 [:right_control :caps_lock]
@@ -206,6 +211,8 @@
         :rules [
             [:!Ch []]
             [:!Cm []]
+            [:##caps_lock :escape]
+            [:!CSr [] :slack]
         ]
     }
 

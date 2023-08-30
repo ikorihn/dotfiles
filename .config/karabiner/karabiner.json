@@ -91,7 +91,7 @@
                                 },
                                 "to": [
                                     {
-                                        "shell_command": "open -a \"Finder\""
+                                        "shell_command": "open \"$HOME/Downloads\""
                                     }
                                 ],
                                 "type": "basic"
@@ -132,7 +132,7 @@
                                         }
                                     },
                                     {
-                                        "shell_command": "open -a \"Finder\""
+                                        "shell_command": "open \"$HOME/Downloads\""
                                     }
                                 ],
                                 "type": "basic"
@@ -310,6 +310,65 @@
                                     },
                                     {
                                         "shell_command": "open -a \"Vivaldi\""
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "launch-mode",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "z"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "open -a \"Firefox\""
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        {
+                                            "key_code": "o"
+                                        },
+                                        {
+                                            "key_code": "z"
+                                        }
+                                    ],
+                                    "simultaneous_options": {
+                                        "detect_key_down_uninterruptedly": true,
+                                        "key_down_order": "strict",
+                                        "key_up_order": "strict_inverse",
+                                        "key_up_when": "any",
+                                        "to_after_key_up": [
+                                            {
+                                                "set_variable": {
+                                                    "name": "launch-mode",
+                                                    "value": 0
+                                                }
+                                            }
+                                        ]
+                                    }
+                                },
+                                "parameters": {
+                                    "basic.simultaneous_threshold_milliseconds": 400
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "launch-mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "shell_command": "open -a \"Firefox\""
                                     }
                                 ],
                                 "type": "basic"
@@ -2223,6 +2282,9 @@
                                             },
                                             {
                                                 "vendor_id": 1241
+                                            },
+                                            {
+                                                "vendor_id": 22871
                                             }
                                         ],
                                         "type": "device_if"
@@ -2393,77 +2455,11 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "fn"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "caps_lock"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "product_id": 833,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
                                     "key_code": "international3"
                                 },
                                 "to": [
                                     {
                                         "key_code": "backslash"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "product_id": 833,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "japanese_eisuu"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_command"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "product_id": 833,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "japanese_kana"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_command"
                                     }
                                 ],
                                 "type": "basic"
@@ -2865,6 +2861,43 @@
                                 },
                                 "to": [],
                                 "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "^com.tinyspeck.slackmacgap$"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "r",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command",
+                                            "left_shift"
+                                        ]
+                                    }
+                                },
+                                "to": [],
+                                "type": "basic"
                             }
                         ]
                     }
@@ -3026,6 +3059,34 @@
                         "is_pointing_device": true,
                         "product_id": 641,
                         "vendor_id": 1452
+                    },
+                    "ignore": true,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": true,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 1024,
+                        "vendor_id": 22871
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": false,
+                        "is_pointing_device": true,
+                        "product_id": 1024,
+                        "vendor_id": 22871
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
