@@ -1,0 +1,42 @@
+import = [
+  "~/.config/alacritty/alacritty-theme/themes/gruvbox_material.toml",
+  "~/.config/alacritty/keybinds.toml",
+]
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "HackGen Console NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "HackGen Console NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "HackGen Console NF"
+style = "Italic"
+
+[font.normal]
+family = "HackGen Console NF"
+style = "Regular"
+
+[shell]
+args = ["-c", "tmux a -t 0 || tmux"]
+program = "zsh"
+
+[window]
+opacity = 1.0
+option_as_alt = "OnlyLeft"
+
+[window.dimensions]
+columns = 180
+lines = 50
+
+[window.padding]
+x = 8
+y = 4
