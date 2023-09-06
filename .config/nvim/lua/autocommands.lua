@@ -36,6 +36,14 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- Disable automatic indentation
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "yaml" },
+  callback = function()
+    vim.opt.indentkeys:remove("<:>")
+  end,
+})
+
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
