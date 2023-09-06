@@ -48,13 +48,10 @@ use = ["init.sh"]
 remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
 [plugins.delta]
 remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completion/completion.zsh"
-[plugins.wezterm]
-local = "/Applications/WezTerm.app/Contents/Resources/"
-use = ["wezterm.sh"]
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"
-use = ["{languages,alias,local,functions,plugins}.zsh"]
+use = ["{alias,local,functions,plugins}.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
 use = ["{sync,options}.zsh"]

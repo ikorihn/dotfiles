@@ -53,6 +53,8 @@ if [[ -e "$HOME/.local/share/zsh/completions" ]]; then
   fpath=($HOME/.local/share/zsh/completions/(N-/) $fpath)
 fi
 
+source $XDG_CONFIG_HOME/zsh/languages.zsh
+
 # deduplicate
 typeset -U path
 typeset -U manpath

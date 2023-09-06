@@ -18,6 +18,9 @@ alias sudo='sudo '
 # クリップボードにコピーしつつ標準出力
 alias teee='tee >(pbcopy)'
 
+alias pwdd='pwd | sed "s#$HOME#\$HOME#"'
+alias pbcopyy="tr -d '\n' | pbcopy"
+
 # # zでfzf
 # abbr -S -q zfzf='cd (z -l | fzf | awk "{ print \$2 }")'
 

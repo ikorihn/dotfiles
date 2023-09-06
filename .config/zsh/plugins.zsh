@@ -1,6 +1,16 @@
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+# rtx (asdf rust impl)
+if command -v rtx 1>/dev/null 2>&1; then
+  eval "$(rtx activate zsh)"
+fi
+
+# direnv
+if command -v direnv 1>/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
 #######
 # zsh-completions
 #######

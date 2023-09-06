@@ -5,7 +5,7 @@ if command -v /usr/libexec/java_home 1>/dev/null 2>&1; then
 fi
 
 # Android
-if [[ -e "$BREW_PREFIX/share/android-sdk" ]]; then
+if [[ -e "$HOMEBREW_PREFIX/share/android-sdk" ]]; then
   export ANDROID_SDK_ROOT=$BREW_PREFIX/share/android-sdk
 fi
 
@@ -16,7 +16,7 @@ if command -v go 1>/dev/null 2>&1; then
 fi
 
 # Python
-export PATH="$BREW_PREFIX/opt/python/libexec/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 export PIPENV_VENV_IN_PROJECT=1
 if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
@@ -37,16 +37,6 @@ fi
 if [[ -e "$HOME/.volta" ]]; then
   export VOLTA_HOME=$HOME/.volta
   export PATH="$VOLTA_HOME/bin:$PATH"
-fi
-
-# rtx (asdf rust impl)
-if command -v rtx 1>/dev/null 2>&1; then
-  eval "$(rtx activate zsh)"
-fi
-
-# direnv
-if command -v direnv 1>/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
 fi
 
 # Rancher Desktop
