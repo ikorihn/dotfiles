@@ -1,17 +1,11 @@
-local mason_status_ok, mason = pcall(require, "mason")
-if not mason_status_ok then
-  return
-end
-local mason_lspconfig_status_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not mason_lspconfig_status_ok then
-  return
-end
+local mason = require('mason')
+local mason_lspconfig = require('mason-lspconfig')
+local lspconfig = require('lspconfig')
 
 local servers = {
   "lua_ls",
   "cssls",
   "html",
-  "tsserver",
   "volar",
   "pyright",
   "bashls",
@@ -19,6 +13,7 @@ local servers = {
   "yamlls",
   "gopls",
   "rust_analyzer",
+  "denols",
 }
 
 mason.setup {
@@ -32,43 +27,166 @@ mason_lspconfig.setup {
   ensure_installed = servers,
 }
 
-local lspconfig_status_ok, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status_ok then
-  return
-end
+local setupFuncTbl = {
+  ['lua_ls'] = function(opts)
+    opts.settings = {
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.stdpath "config" .. "/lua"] = true,
+          },
+        },
+        telemetry = {
+          enable = false,
+        },
+      },
+    }
+    return opts
+  end,
 
-local opts = {}
+  ['pyright'] = function(opts)
+    opts.settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "off",
+        },
+      },
+    }
+    return opts
+  end,
 
-for _, server in pairs(servers) do
-  opts = {
-    on_attach = require("lsp.handlers").on_attach,
-    capabilities = require("lsp.handlers").capabilities,
+  ['gopls'] = function(opts)
+    opts.settings = {
+      gopls = {
+        staticcheck = true,
+      },
+    }
+    return opts
+  end,
+
+  ['rust_analyzer'] = function(opts)
+    function rustfmt()
+      local curpos = vim.api.nvim_win_get_cursor(0)
+      vim.cmd [[ %!rustfmt --edition "2021" ]]
+      vim.api.nvim_win_set_cursor(0, curpos)
+    end
+    vim.cmd [[
+      augroup rustfmt
+        autocmd!
+        autocmd BufWritePre *.rs lua rustfmt()
+      augroup end
+    ]]
+    return opts
+  end,
+
+  ['yamlls'] = function(opts)
+    opts.settings = {
+      yaml = {
+        schemas = {
+          ["https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.1/schema.yaml"] = "/openapi.yaml",
+        },
+      },
+    }
+    return opts
+  end,
+
+  ['tsserver'] = function(opts)
+    opts.root_dir = lspconfig.util.root_pattern("package.json")
+    return opts
+  end,
+
+  ['denols'] = function(opts)
+    opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts", "import_map.json")
+    opts.init_options = {
+      lint = true,
+      unstable = true,
+      suggest = {
+        imports = {
+          hosts = {
+            ["https://deno.land"] = true,
+            ["https://cdn.nest.land"] = true,
+            ["https://crux.land"] = true
+          }
+        }
+      }
+    }
+    return opts
+  end,
+}
+
+mason_lspconfig.setup_handlers({
+  function(server_name)
+    local opts = {
+      on_attach = function(client, bufnr)
+        LspKeymaps(bufnr)
+        require('illuminate').on_attach(client)
+      end,
+      capabilities = require('cmp_nvim_lsp').default_capabilities()
+    }
+
+    -- switch between denols and tsserver
+    local node_root_dir = lspconfig.util.root_pattern("package.json")
+    local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
+    if server_name == "tsserver" and not is_node_repo then
+      return
+    end
+    if server_name == "denols" and is_node_repo then
+      return
+    end
+
+    f = setupFuncTbl[server_name]
+    if f ~= nil then
+      f(opts)
+    end
+
+    lspconfig[server_name].setup(opts)
+  end,
+})
+
+
+local function setup()
+  local signs = {
+    { name = "DiagnosticSignError", text = "" },
+    { name = "DiagnosticSignWarn", text = "" },
+    { name = "DiagnosticSignHint", text = "" },
+    { name = "DiagnosticSignInfo", text = "" },
   }
 
-  if server == "lua_ls" then
-    local lua_opts = require "lsp.settings.lua"
-    opts = vim.tbl_deep_extend("force", lua_opts, opts)
+  for _, sign in ipairs(signs) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
   end
 
-  if server == "pyright" then
-    local pyright_opts = require "lsp.settings.pyright"
-    opts = vim.tbl_deep_extend("force", pyright_opts, opts)
-  end
+  local config = {
+    -- virtual_text = false, -- disable virtual text
+    signs = {
+      active = signs, -- show signs
+    },
+    update_in_insert = true,
+    underline = true,
+    severity_sort = true,
+    float = {
+      focusable = true,
+      style = "minimal",
+      border = "rounded",
+      source = "always",
+      header = "",
+      prefix = "",
+    },
+  }
 
-  if server == "gopls" then
-    local gopls_opts = require "lsp.settings.gopls"
-    opts = vim.tbl_deep_extend("force", gopls_opts, opts)
-  end
+  vim.diagnostic.config(config)
 
-  if server == "rust_analyzer" then
-    local rust_opts = require "lsp.settings.rust"
-    opts = vim.tbl_deep_extend("force", rust_opts, opts)
-  end
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = "rounded",
+  })
 
-  if server == "yamlls" then
-    local yaml_opts = require "lsp.settings.yamlls"
-    opts = vim.tbl_deep_extend("force", yaml_opts, opts)
-  end
-
-  lspconfig[server].setup(opts)
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = "rounded",
+  })
 end
+
+setup()
