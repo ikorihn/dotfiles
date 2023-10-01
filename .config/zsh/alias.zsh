@@ -1,4 +1,4 @@
-alias ls='exa --group-directories-first'
+alias ls='eza --group-directories-first'
 alias ll='ls -halF --git --time-style=long-iso --icons'
 alias la='ll -gHiS'
 
