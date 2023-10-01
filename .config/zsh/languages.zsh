@@ -39,6 +39,13 @@ if [[ -e "$HOME/.volta" ]]; then
   export PATH="$VOLTA_HOME/bin:$PATH"
 fi
 
+# Bun(https://bun.sh)
+if [[ -e "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+  source "$BUN_INSTALL/_bun"
+fi
+
 # Rancher Desktop
 if [[ -e "$HOME/.rd" ]]; then
    export PATH="$HOME/.rd/bin:$PATH"
