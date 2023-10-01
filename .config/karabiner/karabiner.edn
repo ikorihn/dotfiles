@@ -216,6 +216,14 @@
         ]
     }
 
+    {
+        :des "Push to talk"
+        :rules [
+            [:f5 "~/.config/karabiner/adjust_mic_volume.applescript 80" nil {:afterup "~/.config/karabiner/adjust_mic_volume.applescript 0"}]
+            [:!Cf5 "~/.config/karabiner/adjust_mic_volume.applescript 80"]
+        ]
+    }
+
 ]
 }
 

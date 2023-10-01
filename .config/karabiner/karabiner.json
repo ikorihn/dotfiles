@@ -2900,6 +2900,43 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Push to talk",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f5"
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "~/.config/karabiner/adjust_mic_volume.applescript 80"
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "shell_command": "~/.config/karabiner/adjust_mic_volume.applescript 0"
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "f5",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_command"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "shell_command": "~/.config/karabiner/adjust_mic_volume.applescript 80"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
