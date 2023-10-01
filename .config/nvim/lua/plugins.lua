@@ -75,6 +75,7 @@ local plugins = {
   { "williamboman/mason-lspconfig.nvim" },
   { "jose-elias-alvarez/null-ls.nvim" }, -- for formatters and linters
   { "glepnir/lspsaga.nvim" }, -- LSP UIs
+  { "simrat39/rust-tools.nvim" }, -- LSP UIs
 
   -- Testing
   { "klen/nvim-test", config = function() require("pluginconfig/nvim-test") end },

@@ -69,17 +69,28 @@ local setupFuncTbl = {
   end,
 
   ['rust_analyzer'] = function(opts)
-    function rustfmt()
-      local curpos = vim.api.nvim_win_get_cursor(0)
-      vim.cmd [[ %!rustfmt --edition "2021" ]]
-      vim.api.nvim_win_set_cursor(0, curpos)
-    end
-    vim.cmd [[
-      augroup rustfmt
-        autocmd!
-        autocmd BufWritePre *.rs lua rustfmt()
-      augroup end
-    ]]
+    local rt_opts = {
+      tools = {
+        runnables = {
+          use_telescope = true,
+        },
+        inlay_hints = {
+          auto = true,
+          show_parameter_hints = false,
+          parameter_hints_prefix = "",
+          other_hints_prefix = "",
+        },
+      },
+      settings = {
+        rust = {
+          checkOnSave = {
+            command = "clippy"
+          },
+        },
+      }
+    }
+    require("rust-tools").setup(rt_opts)
+
     return opts
   end,
 
