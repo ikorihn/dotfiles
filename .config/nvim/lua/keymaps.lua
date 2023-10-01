@@ -69,6 +69,10 @@ keymap("i", "jk", "<ESC>", opts)
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
 
+-- Move the selected region up or down
+keymap("v", "<C-j>", ":m '>+1<CR>gv=gv")
+keymap("v", "<C-k>", ":m '<-2<CR>gv=gv")
+
 -- Better paste
 -- keymap("v", "p", '"_dP', opts)
 
