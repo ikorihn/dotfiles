@@ -188,11 +188,23 @@ ins_right {
       return msg
     end
     for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+      if client.name == 'null-ls' then
+        -- null-lsの場合は実際に使っているソースを羅列して表示する
+        return ('null-ls(%s)'):format(table.concat(
+          vim
+            .iter(require('null-ls.sources').get_available(vim.bo.filetype))
+            :map(function(source)
+              return source.name
+            end)
+            :totable(),
+          ','
+        ))
+      else
+        -- null-ls以外の場合はサーバー名をそのまま表示する
         return client.name
       end
     end
+
     return msg
   end,
   icon = ' LSP:',
