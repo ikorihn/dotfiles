@@ -42,7 +42,7 @@ local plugins = {
   { "nvim-lualine/lualine.nvim", config = function() require("pluginconfig/lualine") end },
   { "akinsho/toggleterm.nvim", config = function() require("pluginconfig/toggleterm") end },
   -- { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
-  { "lukas-reineke/indent-blankline.nvim", config = function() require("pluginconfig/indentline") end },
+  { "lukas-reineke/indent-blankline.nvim", main = "ibl", config = function() require("pluginconfig/indentline") end },
   { "RRethy/vim-illuminate", config = function() require("pluginconfig/illuminate") end },
   { "ntpeters/vim-better-whitespace" },
   { "folke/which-key.nvim", config = function() require("pluginconfig/which-key") end },

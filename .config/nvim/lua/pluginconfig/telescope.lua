@@ -21,6 +21,11 @@ telescope.setup {
         ["<esc>"] = actions.close,
         ["<C-u>"] = false,
         ["<C-j>"] = actions.smart_send_to_qflist + actions.open_qflist,
+        ["<C-h>"] = "which_key",
+        ['<c-d>'] = require('telescope.actions').delete_buffer
+      },
+      n = {
+        ['<c-d>'] = require('telescope.actions').delete_buffer
       },
     },
   },
