@@ -10,7 +10,7 @@
 # to the user's home directory starting with `~/`.
 import:
   # git clone https://github.com/eendroroy/alacritty-theme.git ~/.config/alacritty/alacritty-theme
-  - ~/.config/alacritty/alacritty-theme/themes/gruvbox_material.yml
+  - ~/.local/share/alacritty/alacritty-theme/themes/gruvbox_material.yml
   - ~/.config/alacritty/keybinds.yml
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
