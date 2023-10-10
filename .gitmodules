@@ -1,6 +1,0 @@
-[submodule ".config/git/delta"]
-	path = .config/git/delta
-	url = https://github.com/dandavison/delta.git
-[submodule ".config/alacritty/alacritty-theme"]
-	path = .config/alacritty/alacritty-theme
-	url = https://github.com/eendroroy/alacritty-theme.git

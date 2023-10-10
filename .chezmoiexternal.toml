@@ -1,0 +1,4 @@
+[".config/alacritty/alacritty-theme"]
+    type = "git-repo"
+    url = "https://github.com/alacritty/alacritty-theme.git"
+    refreshPeriod = "168h"
