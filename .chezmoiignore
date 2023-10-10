@@ -1,7 +1,13 @@
 **/.zcomp*
 **/.DS_STORE
 
+.config/chezmoi/**
 .config/zsh/local.zsh
+.config/zsh-abbr/
+.config/nvim/lazy-lock.json
+.config/raycast/**
+.config/helm/**
+.config/rclone/**
 
 README.md
 Asr/

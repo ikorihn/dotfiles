@@ -1,5 +1,7 @@
 .DS_STORE
 
+**/nvim/lazy-lock.json
+
 # Asr
 Asr/Bar/
 Asr/Tablet/
