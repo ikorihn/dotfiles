@@ -1,6 +1,9 @@
 **/.zcomp*
 **/.DS_STORE
 
+.config/git/config.local
+.config/zsh/local.zsh
+
 README.md
 Asr/
 Chrome/

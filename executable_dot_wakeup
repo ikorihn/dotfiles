@@ -1,0 +1,7 @@
+#!/bin/zsh
+
+# make bluetooth off
+if command -v blueutil; then
+  blueutil -p 1
+fi
+
