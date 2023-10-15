@@ -3,7 +3,9 @@
 ########
 
 fbr() {
-  git branch -vv | fzf +m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
+  git branch -vv \
+    | fzf +m --preview "echo {} | sed 's/^[ *]\+//' | awk '{print \$1}' | xargs -I{} git lo {}" \
+    | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
 }
 
 fbrm() {

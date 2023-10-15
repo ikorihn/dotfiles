@@ -18,10 +18,19 @@ fi
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS='--reverse --inline-info'
+export FZF_DEFAULT_OPTS='--multi --reverse --inline-info'
+export FZF_CTRL_R_OPTS=$(cat <<'EOS'
+  --preview "echo {} | sed -r 's/^ *[^ ]* *//' | bat --color=always --language=sh --style=plain"
+  --preview-window 'down,40%,wrap'
+  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --header 'Press CTRL-Y to copy command into clipboard'
+EOS
+)
+export FZF_ALT_C_OPTS="--preview 'exa -T -L 1 {}'"
 export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
+export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header,grid --line-range :100 {}"'
 export FZF_TMUX=1
-# export FZF_TMUX_OPTS='-p 90%,80%'
+export FZF_TMUX_OPTS='-p 90%,80%'
 
 # https://github.com/Aloxaf/fzf-tab
 enable-fzf-tab
