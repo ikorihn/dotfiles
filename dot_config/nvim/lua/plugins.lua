@@ -14,7 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   { "nvim-lua/plenary.nvim"  }, -- Useful lua functions used by lots of plugins
-  { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end },
+  -- { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end },
   { "numToStr/Comment.nvim", config = function() require("pluginconfig/comment") end },
   { "JoosepAlviste/nvim-ts-context-commentstring" },
   { "lewis6991/impatient.nvim", config = function() require("pluginconfig/impatient") end },
@@ -43,7 +43,7 @@ local plugins = {
   { "moll/vim-bbye" },
   { "nvim-lualine/lualine.nvim", config = function() require("pluginconfig/lualine") end },
   { "akinsho/toggleterm.nvim", config = function() require("pluginconfig/toggleterm") end },
-  -- { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
+  { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
   { "lukas-reineke/indent-blankline.nvim", main = "ibl", config = function() require("pluginconfig/indentline") end },
   { "RRethy/vim-illuminate", config = function() require("pluginconfig/illuminate") end },
   { "ntpeters/vim-better-whitespace" },
