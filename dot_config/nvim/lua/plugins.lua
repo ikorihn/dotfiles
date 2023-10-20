@@ -22,6 +22,7 @@ local plugins = {
   { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end },
 
   { "oneubauer/jsonpath.nvim", branch ="oneubauer/add-yaml-support", ft = { "json", "yaml" }, config = function() require("pluginconfig/jsonpath") end },
+  { "iamcco/markdown-preview.nvim", cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" }, build = "cd app && yarn install", init = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" } },
 
   { "kylechui/nvim-surround", config = function() require("pluginconfig/nvim-surround") end },
   { "jeetsukumaran/vim-indentwise" },
