@@ -1,0 +1,15 @@
+#!/bin/bash
+
+url=$(git remote get-url origin | sed -e 's/.git$//')
+branch=$(git symbolic-ref HEAD | cut -d "/" -f 3-)
+
+if [[ "$url" =~ "bitbucket.org" ]]; then
+  url=$(echo $url | sed -r 's/^.*://' | awk -F "/" '{ print "https://bitbucket.org/"$(NF-1)"/"$NF }')
+  url="$url/branch/$branch"
+elif [[ "$url" =~ "github.com" ]]; then
+  url=$(echo $url | sed -r 's/^.*://' | awk -F "/" '{ print "https://github.com/"$(NF-1)"/"$NF }')
+  url="$url/tree/$branch"
+fi
+
+echo $url
+open $url
