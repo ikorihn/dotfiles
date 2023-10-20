@@ -169,8 +169,8 @@ adb_pull_file() {
 
 mp4_to_gif() {
   local FILE_NAME=$1
-  ffmpeg -i $FILE_NAME -an -r 15 -pix_fmt rgb24 -s 540x960 -f gif $DEST_FILE_NAME
   local DEST_FILE_NAME=$(echo $FILE_NAME | sed -r 's/\.(mp4|mov)/.gif/')
+  ffmpeg -i $FILE_NAME -an -r 15 -pix_fmt rgb24 -f gif $DEST_FILE_NAME
 }
 
 resize_image() {

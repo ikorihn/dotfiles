@@ -81,6 +81,7 @@
                 [:v [:open-app "Visual Studio Code"]]
                 [:s [:open-app "Slack"]]
                 [:g [:open-app "Vivaldi"]]
+                [:c [:open-app "Calendar"]]
                 [:z [:open-app "Firefox"]]
                 [:a [:open-app "Obsidian"]]
                 [:x [:open-app "Authy Desktop"]]

@@ -21,6 +21,8 @@ local plugins = {
   { "phaazon/hop.nvim", config = function() require("pluginconfig/hop") end },
   { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end },
 
+  { "oneubauer/jsonpath.nvim", branch ="oneubauer/add-yaml-support", ft = { "json", "yaml" }, config = function() require("pluginconfig/jsonpath") end },
+
   { "kylechui/nvim-surround", config = function() require("pluginconfig/nvim-surround") end },
   { "jeetsukumaran/vim-indentwise" },
   { "haya14busa/vim-asterisk" },
