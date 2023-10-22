@@ -36,6 +36,8 @@ if command -v nerdctl 1>/dev/null 2>&1; then
   compdef _nerdctl nerdctl
 fi
 
+source <(docker completion zsh)
+
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
   # eval "$(jira --completion-script-zsh)"

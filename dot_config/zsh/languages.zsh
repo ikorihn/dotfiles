@@ -49,6 +49,7 @@ fi
 # Rancher Desktop
 if [[ -e "$HOME/.rd" ]]; then
    export PATH="$HOME/.rd/bin:$PATH"
+   export DOCKER_HOST="$HOME/.rd/docker.sock"
 fi
 
 # ripgrep
