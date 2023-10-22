@@ -62,33 +62,32 @@ fi
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
-# window名にgitリポジトリ名を表示する
-autoload -Uz add-zsh-hook
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:*' formats '%r'
-# precmd hook
-_precmd_tmux () {
-  if [[ -v TMUX ]]; then
-    tmux rename-window $(basename $(gitroot $(pwd)))
-  fi
-}
-
-# wezterm
-function rename_wezterm_title {
-  # https://wezfurlong.org/wezterm/config/lua/pane/get_user_vars.html
-  # pane:get_user_vars().panetitle で取得できる
-  echo -n "\x1b]1337;SetUserVar=panetitle=$(echo -n $1 | base64)\x07"
-  # https://wezfurlong.org/wezterm/config/lua/pane/get_title.html
-  # pane:get_title() で取得できる
-  echo -n "\x1b]1;$(pwd)"
-}
-_precmd_wezterm () {
-  if [[ -v WEZTERM_PANE ]]; then
-    rename_wezterm_title $(basename $(gitroot $(pwd)))
-  fi
-}
-
-add-zsh-hook precmd _precmd_tmux
-add-zsh-hook precmd _precmd_wezterm
-
+# # window名にgitリポジトリ名を表示する
+# autoload -Uz add-zsh-hook
+# autoload -Uz vcs_info
+# zstyle ':vcs_info:*' enable git
+# zstyle ':vcs_info:*' formats '%r'
+# # precmd hook
+# _precmd_tmux () {
+#   if [[ -v TMUX ]]; then
+#     tmux rename-window $(basename $(gitroot $(pwd)))
+#   fi
+# }
+# 
+# # wezterm
+# function rename_wezterm_title {
+#   # https://wezfurlong.org/wezterm/config/lua/pane/get_user_vars.html
+#   # pane:get_user_vars().panetitle で取得できる
+#   echo -n "\x1b]1337;SetUserVar=panetitle=$(echo -n $1 | base64)\x07"
+#   # https://wezfurlong.org/wezterm/config/lua/pane/get_title.html
+#   # pane:get_title() で取得できる
+#   echo -n "\x1b]1;$(pwd)"
+# }
+# _precmd_wezterm () {
+#   if [[ -v WEZTERM_PANE ]]; then
+#     rename_wezterm_title $(basename $(gitroot $(pwd)))
+#   fi
+# }
+# 
+# add-zsh-hook precmd _precmd_tmux
+# add-zsh-hook precmd _precmd_wezterm
