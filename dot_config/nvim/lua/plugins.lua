@@ -50,17 +50,21 @@ local plugins = {
   { "ntpeters/vim-better-whitespace" },
   { "folke/which-key.nvim", config = function() require("pluginconfig/which-key") end },
 
-  -- cmp plugins
+  -- completion
   { "hrsh7th/nvim-cmp", config = function() require("pluginconfig/cmp") end }, -- The completion plugin
-  { "hrsh7th/cmp-buffer" }, -- buffer completions
-  { "hrsh7th/cmp-path" }, -- path completions
-  { "saadparwaiz1/cmp_luasnip" }, -- snippet completions
+  { "hrsh7th/cmp-buffer" },
+  { "hrsh7th/cmp-path" },
+  { "hrsh7th/cmp-cmdline" },
   { "hrsh7th/cmp-nvim-lsp" },
   { "hrsh7th/cmp-nvim-lua" },
+  { "onsails/lspkind.nvim" },
+  { "saadparwaiz1/cmp_luasnip" }, -- luasnip completions
 
   -- snippets
   {
     "L3MON4D3/LuaSnip",
+    -- follow latest release.
+    version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
   },
