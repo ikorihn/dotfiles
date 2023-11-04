@@ -59,6 +59,9 @@ local plugins = {
   { "hrsh7th/cmp-nvim-lua" },
   { "onsails/lspkind.nvim" },
   { "saadparwaiz1/cmp_luasnip" }, -- luasnip completions
+  { "hrsh7th/cmp-emoji" },
+  { "lukas-reineke/cmp-rg" },
+  { "andersevenrud/cmp-tmux" },
 
   -- snippets
   {

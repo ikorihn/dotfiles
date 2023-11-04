@@ -15,6 +15,11 @@ local has_words_before = function()
 	return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
+local lspok, lspkind = pcall(require, "lspkind")
+if not lspok then
+	return
+end
+
 cmp.setup({
 	snippet = {
 		-- REQUIRED - you must specify a snippet engine
@@ -67,11 +72,51 @@ cmp.setup({
 		-- { name = 'ultisnips' }, -- For ultisnips users.
 		-- { name = 'snippy' }, -- For snippy users.
 	}, {
-		{ name = "buffer" },
 		{ name = "path" },
+	}, {
+		{ name = "buffer" },
+		{
+			name = 'tmux',
+			option = {
+				all_panes = true,
+				label = '[tmux]',
+				trigger_characters = { '.' },
+				-- Capture full pane history
+				-- `false`: show completion suggestion from text in the visible pane (default)
+				-- `true`: show completion suggestion from text starting from the beginning of the pane history.
+				--         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
+				capture_history = false,
+			}
+		},
+		{
+			name = "rg",
+			-- Try it when you feel cmp performance is poor
+			-- keyword_length = 3
+		},
+	}, {
 		{ name = "nvim_lua" },
+	}, {
+		{ name = 'emoji' }
 	}),
 
+	formatting = {
+		expandable_indicator = true,
+		fields = { 'abbr', 'kind', 'menu' },
+		format = lspkind.cmp_format({
+			mode = 'symbol_text',
+			maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+			menu = ({
+				buffer = "[Buffer]",
+				path = "[Path]",
+				tmux = "[Tmux]",
+				nvim_lsp = "[LSP]",
+				luasnip = "[LuaSnip]",
+				nvim_lua = "[Lua]",
+				rg = "[Ripgrep]",
+			}),
+		}),
+	},
 	confirm_opts = {
 		behavior = cmp.ConfirmBehavior.Replace,
 		select = false,
