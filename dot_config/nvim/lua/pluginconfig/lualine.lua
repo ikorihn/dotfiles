@@ -178,34 +178,52 @@ ins_right {
   color = { fg = colors.violet, gui = 'bold' },
 }
 
+local lsp_names = function()
+  local clients = {}
+  for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+    if client.name == 'null-ls' then
+      local sources = {}
+      for _, source in ipairs(require('null-ls.sources').get_available(vim.bo.filetype)) do
+        table.insert(sources, source.name)
+      end
+      table.insert(clients, 'null-ls(' .. table.concat(sources, ', ') .. ')')
+    else
+      table.insert(clients, client.name)
+    end
+  end
+  return ' ' .. table.concat(clients, ', ')
+end
+
+-- local lsp_names = function()
+--   local clients = vim
+--     .iter(vim.lsp.get_active_clients { bufnr = 0 })
+--     :map(function(client)
+--       if client.name == 'null-ls' then
+--         return ('null-ls(%s)'):format(table.concat(
+--           vim
+--             .iter(require('null-ls.sources').get_available(vim.bo.filetype))
+--             :map(function(source)
+--               return source.name
+--             end)
+--             :totable(),
+--           ', '
+--         ))
+--       else
+--         return client.name
+--       end
+--     end)
+--     :totable()
+--   return ' ' .. table.concat(clients, ', ')
+-- end
+
 ins_right {
   -- Lsp server name .
   function()
-    local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
     local clients = vim.lsp.get_active_clients()
     if next(clients) == nil then
-      return msg
+      return 'No Active Lsp'
     end
-    for _, client in ipairs(clients) do
-      if client.name == 'null-ls' then
-        -- null-lsの場合は実際に使っているソースを羅列して表示する
-        return ('null-ls(%s)'):format(table.concat(
-          vim
-            .iter(require('null-ls.sources').get_available(vim.bo.filetype))
-            :map(function(source)
-              return source.name
-            end)
-            :totable(),
-          ','
-        ))
-      else
-        -- null-ls以外の場合はサーバー名をそのまま表示する
-        return client.name
-      end
-    end
-
-    return msg
+    return lsp_names()
   end,
   icon = ' LSP:',
   color = { fg = '#ffffff', gui = 'bold' },

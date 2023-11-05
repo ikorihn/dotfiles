@@ -8,7 +8,6 @@ local servers = {
   "html",
   "volar",
   "pyright",
-  "bashls",
   "jsonls",
   "yamlls",
   "gopls",

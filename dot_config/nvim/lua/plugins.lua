@@ -83,9 +83,9 @@ local plugins = {
   { "neovim/nvim-lspconfig" }, -- enable LSP
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
-  { "jose-elias-alvarez/null-ls.nvim" }, -- for formatters and linters
+  { "nvimtools/none-ls.nvim" }, -- for formatters and linters
   { "glepnir/lspsaga.nvim" }, -- LSP UIs
-  { "simrat39/rust-tools.nvim" }, -- LSP UIs
+  { "simrat39/rust-tools.nvim" },
 
   -- Testing
   { "klen/nvim-test", config = function() require("pluginconfig/nvim-test") end },
