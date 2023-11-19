@@ -17,7 +17,6 @@ local plugins = {
   -- { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end },
   { "numToStr/Comment.nvim", config = function() require("pluginconfig/comment") end },
   { "JoosepAlviste/nvim-ts-context-commentstring" },
-  { "lewis6991/impatient.nvim", config = function() require("pluginconfig/impatient") end },
   { "phaazon/hop.nvim", config = function() require("pluginconfig/hop") end },
   { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end },
 
