@@ -35,8 +35,10 @@ github = "zsh-users/zsh-history-substring-search"
 github = "romkatv/powerlevel10k"
 apply = ["source"]
 
-[plugins.zsh-abbr]
-github = "olets/zsh-abbr"
+[plugins.zeno]
+github = "yuki-yano/zeno.zsh"
+apply = ["source"]
+
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 apply = ["source"]
@@ -51,7 +53,7 @@ remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completi
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"
-use = ["{alias,local,functions,plugins}.zsh"]
+use = ["{alias,local,functions,plugins,zeno}.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
 use = ["{sync,options}.zsh"]

@@ -1,0 +1,62 @@
+snippets:
+  - name: git commit message
+    keyword: gcim
+    snippet: git commit -m '{{commit_message}}'
+  - name: git
+    keyword: g
+    snippet: "git"
+  - name: git
+    keyword: gca
+    snippet: "git commit --amen"
+  - name: git
+    keyword: gdn
+    snippet: "git diff --name-status origin/master"
+  - name: git
+    keyword: gp
+    snippet: "git pull --rebase --autostash"
+  - name: git
+    keyword: gpu
+    snippet: "git push"
+  - name: git
+    keyword: gre
+    snippet: "git rebase origin/master"
+  - name: git
+    keyword: grh
+    snippet: 'git reset HEAD\^'
+  - name: git
+    keyword: gres
+    snippet: "git restore ."
+  - name: git
+    keyword: gshn
+    snippet: "git show --name-status"
+  - name: git
+    keyword: gst
+    snippet: "git status"
+  - name: git
+    keyword: gsta
+    snippet: "git stash"
+  - name: git
+    keyword: gstap
+    snippet: "git stash pop"
+  - name: git
+    keyword: gsw
+    snippet: "git switch -c feature/{{branch}}"
+
+  - name: "null"
+    keyword: "null"
+    snippet: ">/dev/null 2>&1"
+    # auto expand condition
+    # If not defined, it is only valid at the beginning of a line.
+    context:
+      # buffer: ''
+      lbuffer: '.+\s'
+      # rbuffer: ''
+
+completions:
+  - name: docker exec
+    patterns:
+      - "^docker exec -it"
+    sourceCommand: "docker ps --format '{{.Image}}\t{{.Names}}'"
+    options:
+      --prompt: "'Container name > '"
+    callback: "cut -f 2"
