@@ -111,14 +111,15 @@ fvim() {
 
 # ghq + cd
 gcd() {
-  local repo
-  repo=$(ghq list -p | fzf)
+  local root=$(ghq root)
+  local repo=$(ghq list | fzf-tmux $FZF_TMUX_OPTS --preview="ls -AF ${root}/{1}")
   if [[ -z $repo ]]; then
     return
   fi
-  cd $repo
-  zle reset-prompt
+  local fullpath="${root}/${repo}"
+  cd $fullpath
   zle accept-line
+  zle reset-prompt
 }
 
 # cd git root directory
