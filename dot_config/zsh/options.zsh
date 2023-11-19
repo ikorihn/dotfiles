@@ -7,9 +7,9 @@ bindkey -e
 
 # ヒストリの設定
 export HISTFILE=$XDG_CACHE_HOME/zsh/history
-export HISTSIZE=100000
+export HISTSIZE=50000
 export HISTORY_IGNORE="(ls|cd|pwd|exit|cd *|ls *)"
-export SAVEHIST=100000
+export SAVEHIST=40000
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
