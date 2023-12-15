@@ -117,12 +117,13 @@ cmp.setup({
       menu = {
         buffer = "[Buffer]",
         path = "[Path]",
-        git = "[Tmux]",
+        git = "[Git]",
         tmux = "[Tmux]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
         rg = "[Ripgrep]",
+        ["vim-dadbod-completion"] = "[DB]",
       },
     }),
   },
@@ -187,8 +188,43 @@ cmp.setup.filetype("gitcommit", {
     },
   }, {
     { name = "emoji" },
-  }
-  ),
+  }),
+})
+
+cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
+  sources = cmp.config.sources({
+    { name = "vim-dadbod-completion" },
+    {
+      name = "buffer",
+      option = {
+        get_bufnrs = function()
+          local bufs = {}
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            bufs[vim.api.nvim_win_get_buf(win)] = true
+          end
+          return vim.tbl_keys(bufs)
+        end,
+      },
+    },
+    {
+      name = "tmux",
+      option = {
+        all_panes = true,
+        label = "[tmux]",
+        trigger_characters = { "." },
+        -- Capture full pane history
+        -- `false`: show completion suggestion from text in the visible pane (default)
+        -- `true`: show completion suggestion from text starting from the beginning of the pane history.
+        --         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
+        capture_history = false,
+      },
+    },
+    {
+      name = "rg",
+      -- Try it when you feel cmp performance is poor
+      -- keyword_length = 3
+    },
+  }),
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
