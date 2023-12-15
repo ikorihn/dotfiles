@@ -23,15 +23,13 @@ export ZENO_GIT_CAT="bat --color=always"
 export ZENO_GIT_TREE="eza --tree"
 
 if [[ -n $ZENO_LOADED ]]; then
-  bindkey ' '  zeno-auto-snippet
+  bindkey ' ' zeno-auto-snippet
 
   # fallback if snippet not matched (default: self-insert)
   # export ZENO_AUTO_SNIPPET_FALLBACK=self-insert
 
   # if you use zsh's incremental search
   # bindkey -M isearch ' ' self-insert
-
-  bindkey '^m' zeno-auto-snippet-and-accept-line
 
   bindkey '^i' zeno-completion
 

@@ -87,3 +87,6 @@ setopt extended_glob
 
 # 明確なドットの指定なしで.から始まるファイルをマッチ
 setopt globdots
+
+# 間違ったコマンドを補正する
+setopt correct

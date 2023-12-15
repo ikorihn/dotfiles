@@ -1,5 +1,5 @@
 alias ls='eza --group-directories-first'
-alias ll='ls -halF --git --time-style=long-iso --icons automatic'
+alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
 alias la='ll -gHiS'
 
 alias rm='trash'

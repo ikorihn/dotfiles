@@ -39,7 +39,6 @@ apply = ["source"]
 
 [plugins.zeno]
 github = "yuki-yano/zeno.zsh"
-apply = ["source"]
 
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
