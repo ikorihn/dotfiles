@@ -141,17 +141,21 @@ keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
 keymap("n", "ga",  "<Plug>(EasyAlign)", opts)
 
 function LspKeymaps(bufnr)
+  local builtin = require("telescope.builtin")
   local lsp_opts = { noremap = true, silent = true }
+
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lsp_opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", lsp_opts)
+  keymap("n", "gd", function() builtin.lsp_definitions() end, opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", lsp_opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", lsp_opts)
+  keymap("n", "gI", function() builtin.lsp_implementations() end, opts)
+  keymap("n", "gr", function() builtin.lsp_references() end, opts)
+  keymap("n", "gi", function() builtin.lsp_incoming_calls() end, opts)
+  keymap("n", "go", function() builtin.lsp_outgoing_calls() end, opts)
+  keymap("n", "gl", function() builtin.diagnostics() end, opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", lsp_opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space><Space>", ":lua vim.lsp.buf.", { noremap = true })
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>l", ":lua require('telescope.builtin').", { noremap = true })
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>f", "<cmd>lua vim.lsp.buf.format()<cr>", lsp_opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>i", "<cmd>LspInfo<cr>", lsp_opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>I", ":LspInstall", lsp_opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", "<cmd>lua vim.lsp.buf.code_action()<cr>", lsp_opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>j", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", lsp_opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>k", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", lsp_opts)
@@ -159,5 +163,3 @@ function LspKeymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lsp_opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", lsp_opts)
 end
-
-

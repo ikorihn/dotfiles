@@ -12,6 +12,7 @@ local servers = {
   "yamlls",
   "gopls",
   "rust_analyzer",
+  'tsserver',
   "denols",
 }
 

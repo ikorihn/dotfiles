@@ -9,7 +9,7 @@ local builtin = require "telescope.builtin"
 telescope.setup {
   defaults = {
     initial_mode = 'normal',
-    path_display = { "absolute" },
+    path_display = { "smart" },
     file_ignore_patterns = { ".git/", "node_modules", "package-lock.json" },
     mappings = {
       i = {
@@ -19,10 +19,11 @@ telescope.setup {
         ["<C-u>"] = false,
         ["<C-j>"] = actions.smart_send_to_qflist + actions.open_qflist,
         ["<C-i>"] = "which_key",
-        ['<C-d>'] = require('telescope.actions').delete_buffer
+        ['<C-d>'] = require('telescope.actions').delete_buffer,
       },
       n = {
-        ['<C-d>'] = require('telescope.actions').delete_buffer
+        ['<C-d>'] = require('telescope.actions').delete_buffer,
+        ["<C-j>"] = actions.smart_send_to_qflist + actions.open_qflist,
       },
     },
   },
@@ -31,6 +32,8 @@ telescope.setup {
       path_display = { "absolute" },
       wrap_results = true,
     },
+    lsp_definitions = { fname_width = 100, },
+    lsp_references = { fname_width = 100, },
   }
 }
 

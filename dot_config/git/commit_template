@@ -34,21 +34,24 @@
 # :boom:                     | 💥 | Breaking changes
 # :ok_hand:                  | 👌 | Code review changes
 #
-# === prefix ===
+# === conventional commit prefix ===
 # fix      | バグ修正
 # hotfix   | クリティカルなバグ修正なら
 # feat     | 新規機能・新規ファイル追加 feat は feature の略
 # update   | バグではない機能修正
 # change   | 仕様変更による機能修正
+# style    | 空白、セミコロン、行、コーディングフォーマットなどの修正
 # refactor | 整理 (リファクタリング等)
 # disable  | 無効化 (コメントアウト等)
 # remove   | ファイル削除、コードの一部を取り除く
 # rename   | ファイル名の変更
 # move     | ファイル移動
-# upgrade  | バージョンアップ
+# rename   | ファイル名の変更
+# config   | 設定ファイルの変更
+# deps     | 依存関係
 # revert   | 修正取り消し
 # docs     | ドキュメントのみ修正
-# style    | 空白、セミコロン、行、コーディングフォーマットなどの修正
 # perf     | 性能向上する修正 perf は perfomance の略
 # test     | テスト追加や間違っていたテストの修正
 # chore    | ビルドツールやライブラリで自動生成されたものをコミットするとき
+# ci       | CI

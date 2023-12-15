@@ -151,6 +151,7 @@ local plugins = {
   { "mfussenegger/nvim-dap",                      config = function() require("pluginconfig/dap") end },
   { "rcarriga/nvim-dap-ui" },
   { "ravenxrz/DAPInstall.nvim" },
+  { "leoluz/nvim-dap-go" },
 }
 
 require("lazy").setup(plugins, {
