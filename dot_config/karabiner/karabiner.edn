@@ -163,7 +163,7 @@
     {
         :des "Post escape if left_control is pressed alone."
         :rules [
-            [:##left_control :left_control nil {:alone :escape}]
+            [:##left_control :left_control nil {:alone [:escape :japanese_eisuu]}]
         ]
     }
 
