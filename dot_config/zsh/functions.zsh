@@ -4,7 +4,7 @@
 
 fbr() {
   git branch -vv \
-    | fzf +m --preview "echo {} | sed 's/^[ *]\+//' | awk '{print \$1}' | xargs -I{} git lo {}" \
+    | fzf +m \
     | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
 }
 

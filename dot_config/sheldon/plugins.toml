@@ -37,9 +37,8 @@ github = "marlonrichert/zsh-hist"
 github = "romkatv/powerlevel10k"
 apply = ["source"]
 
-[plugins.zeno]
-github = "yuki-yano/zeno.zsh"
-
+[plugins.zsh-abbr]
+github = "olets/zsh-abbr"
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 apply = ["source"]
@@ -54,8 +53,8 @@ remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completi
 
 [plugins.dotfiles-defer]
 local = "~/.config/zsh"
-use = ["{alias,local,functions,plugins,zeno}.zsh"]
+use = ["alias.zsh", "local.zsh", "functions.zsh", "plugins.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["{sync,options}.zsh"]
+use = ["sync.zsh", "options.zsh"]
 apply = ["source"]
