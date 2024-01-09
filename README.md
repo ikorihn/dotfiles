@@ -1,33 +1,51 @@
-# Dot Files
+# ikorihn's dotfiles
+
+## Setup on macOS
+
+### Apply dotfiles using chezmoi
 
 ```shell
-# symlink
-ln -sf ~/dotfiles/.tigrc ~/
-ln -sf ~/dotfiles/.tmux.conf ~/
-ln -sf ~/dotfiles/.vimrc ~/
-ln -sf ~/dotfiles/.zshenv ~/
-ln -sf ~/dotfiles/.zsh ~/
-ln -sf ~/dotfiles/.vim ~/
-
-mkdir -p ~/.config
-ln -sf ~/dotfiles/.config/alacritty ~/.config/
-ln -sf ~/dotfiles/.config/karabiner ~/.config/
-ln -sf ~/dotfiles/.config/nvim ~/.config/
-ln -sf ~/dotfiles/.config/git ~/.config/
-ln -sf ~/dotfiles/.config/zsh ~/.config/
-ln -sf ~/dotfiles/.config/starship.toml ~/.config/
-
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply ikorihn
 ```
 
-`sudo vim /etc/zshenv`
+### Set ZDOTDIR
 
+```shell
+sudo sh -c 'echo "export ZDOTDIR=$HOME/.config/zsh" >> /etc/zshenv'
 ```
-export ZDOTDIR=$HOME/.config/zsh
+
+### Install softwares
+
+#### [Homebrew](https://brew.sh/)
+
+After install brew, run following command.
+
+```shell
+./Mac/brew_install_home.sh
 ```
 
-## Mac
+#### [Rust](https://www.rust-lang.org/tools/install)
 
-- [Homebrew](https://brew.sh/index_ja)
-- [Rust](https://www.rust-lang.org/tools/install)
-- [zinit](https://github.com/zdharma-continuum/zinit)
+#### [Go](https://go.dev/learn/)
 
+```shell
+sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/$(curl 'https://go.dev/dl/?mode=json' | jq -r '.[0].files[] | select(.os == "darwin" and .arch == "arm64" and .kind == "archive") | .filename') | sudo tar -zx -C /usr/local/
+```
+
+#### [Alacritty](https://github.com/alacritty/alacritty)
+
+```shell
+git clone https://github.com/alacritty/alacritty.git ~/src/alacritty/
+cd ~/src/alacritty
+make app
+cp -r target/release/osx/Alacritty.app /Applications/
+```
+
+#### [Neovim](https://neovim.io)
+
+```shell
+git clone https://github.com/neovim/neovim.git ~/src/alacritty/
+cd ~/src/alacritty
+make CMAKE_BUILD_TYPE=Release
+sudo make install
+```
