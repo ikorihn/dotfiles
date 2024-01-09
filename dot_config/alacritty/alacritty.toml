@@ -1,5 +1,5 @@
 import = [
-  "~/.local/share/alacritty/alacritty-theme/themes/gruvbox_material.toml",
+  "~/.local/share/alacritty/alacritty-theme/themes/catppuccin.toml",
   "~/.config/alacritty/keybinds.toml",
 ]
 
