@@ -22,7 +22,9 @@ configs.setup({
   ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
-    disable = { "css" }, -- list of language that will be disabled
+    disable = function(lang, bufnr) -- disable in large file
+        return vim.api.nvim_buf_line_count(bufnr) > 5000
+    end,
     additional_vim_regex_highlighting = { "markdown" },
   },
   autopairs = {
