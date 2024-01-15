@@ -21,10 +21,7 @@ path=($HOME/.local/bin(N-/) ${path})
 # Homebrew
 if [[ -e /opt/homebrew/bin/brew ]]; then
   # M1チップ
-  unset HOMEBREW_SHELLENV_PREFIX
-  eval $(/opt/homebrew/bin/brew shellenv)
-else
-  eval $(/usr/local/bin/brew shellenv)
+{{ output "/opt/homebrew/bin/brew" "shellenv" | trim | indent 2 }}
 fi
 
 path=(

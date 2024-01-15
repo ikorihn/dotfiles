@@ -11,6 +11,13 @@ if command -v direnv 1>/dev/null 2>&1; then
   eval "$(direnv hook zsh)"
 fi
 
+# Bun(https://bun.sh)
+if [[ -e "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+  source "$BUN_INSTALL/_bun"
+fi
+
 #######
 # zsh-completions
 #######

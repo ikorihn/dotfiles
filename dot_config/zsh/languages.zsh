@@ -12,7 +12,7 @@ fi
 # Go
 export PATH=/usr/local/go/bin:${PATH}
 if command -v go 1>/dev/null 2>&1; then
-  export PATH=$(go env GOPATH)/bin:${PATH}
+  export PATH=$HOME/go/bin:${PATH}
 fi
 
 # Python
@@ -31,19 +31,6 @@ fi
 # Rust
 if [[ -e "$HOME/.cargo/env" ]]; then
   source "$HOME/.cargo/env"
-fi
-
-# Node.js(Volta)
-if [[ -e "$HOME/.volta" ]]; then
-  export VOLTA_HOME=$HOME/.volta
-  export PATH="$VOLTA_HOME/bin:$PATH"
-fi
-
-# Bun(https://bun.sh)
-if [[ -e "$HOME/.bun" ]]; then
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
-  source "$BUN_INSTALL/_bun"
 fi
 
 # Rancher Desktop
