@@ -50,6 +50,13 @@ local plugins = {
   -- { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end },
   { "johmsalas/text-case.nvim",    config = function() require("pluginconfig/text-case") end },
 
+  {
+    "epwalsh/obsidian.nvim",
+    ft = "markdown",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function() require("pluginconfig/obsidian") end,
+  },
+
   -- Colorschemes
   { "EdenEast/nightfox.nvim" },
   { "folke/tokyonight.nvim" },
