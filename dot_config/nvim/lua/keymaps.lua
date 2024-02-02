@@ -1,9 +1,9 @@
-local utils = require('utils')
+local utils = require("utils")
 
 -- Shorten function name
 local keymap = vim.keymap.set
 -- Silent keymap option
-local opts = { }
+local opts = {}
 
 -- leader key
 keymap("", ",", "<Nop>", opts)
@@ -45,10 +45,10 @@ keymap("n", "tst", ":setl noexpandtab<CR>")
 keymap("n", "<leader>h", "<cmd>nohlsearch<CR>", opts)
 
 -- Macro
-keymap("n", "q", function ()
-    local macro_reg = vim.fn.reg_recording() .. vim.fn.reg_executing()
-    return macro_reg == "" and "qq" or "q"
-  end, { expr = true })
+keymap("n", "q", function()
+  local macro_reg = vim.fn.reg_recording() .. vim.fn.reg_executing()
+  return macro_reg == "" and "qq" or "q"
+end, { expr = true })
 keymap("n", "@", "@q", opts)
 
 -- Indent keybind for shutcut
@@ -57,7 +57,7 @@ keymap("n", "@", "@q", opts)
 
 -- Yank
 keymap("n", "x", '"_x', opts)
-keymap("n", "Y", 'y$', opts)
+keymap("n", "Y", "y$", opts)
 keymap("v", "<C-p>", '"0p', opts)
 
 -- Insert --
@@ -79,11 +79,11 @@ keymap("v", "<C-k>", ":m '<-2<CR>gv=gv")
 -- Command --
 
 -- Command line mode mapping emacs like
-keymap("c", "<C-b>", '<Left>', opts)
-keymap("c", "<C-f>", '<Right>', opts)
-keymap("c", "<C-a>", '<Home>', opts)
-keymap("c", "<C-e>", '<End>', opts)
-keymap("c", "<C-d>", '<Del>', opts)
+keymap("c", "<C-b>", "<Left>", opts)
+keymap("c", "<C-f>", "<Right>", opts)
+keymap("c", "<C-a>", "<Home>", opts)
+keymap("c", "<C-e>", "<End>", opts)
+keymap("c", "<C-d>", "<Del>", opts)
 
 -- Function --
 
@@ -99,7 +99,7 @@ keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
 keymap("n", "<leader>gb", ":TigBlame<CR>", opts)
 
 -- transparent
-keymap('n', '<leader>tt', ":TransparentToggle<CR>", opts)
+keymap("n", "<leader>tt", ":TransparentToggle<CR>", opts)
 
 -- Comment
 keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
@@ -117,28 +117,28 @@ keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
 keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
 
 -- asterisk
-keymap("", "*",  "<Plug>(asterisk-z*)", opts)
-keymap("", "#",  "<Plug>(asterisk-z#)", opts)
+keymap("", "*", "<Plug>(asterisk-z*)", opts)
+keymap("", "#", "<Plug>(asterisk-z#)", opts)
 keymap("", "g*", "<Plug>(asterisk-gz*)", opts)
 keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
 -- hlslens
-keymap('n', 'n', [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
-keymap('n', 'N', [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
+keymap("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
+keymap("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
 
 -- IndentWise
-keymap("", "<C-k>",  "<Plug>(IndentWisePreviousEqualIndent)", opts)
-keymap("", "<C-j>",  "<Plug>(IndentWiseNextEqualIndent)", opts)
+keymap("", "<C-k>", "<Plug>(IndentWisePreviousEqualIndent)", opts)
+keymap("", "<C-j>", "<Plug>(IndentWiseNextEqualIndent)", opts)
 
 -- hop
 --keymap("", 'f', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
 --keymap("", 'F', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
 --keymap("", 't', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
 --keymap("", 'T', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
-keymap("", 's', "<cmd>lua require'hop'.hint_char2()<CR>", opts)
+keymap("", "s", "<cmd>lua require'hop'.hint_char2()<CR>", opts)
 
 -- EasyAlign
-keymap("x", "ga",  "<Plug>(EasyAlign)", opts)
-keymap("n", "ga",  "<Plug>(EasyAlign)", opts)
+keymap("x", "ga", "<Plug>(EasyAlign)", opts)
+keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 function LspKeymaps(bufnr)
   local builtin = require("telescope.builtin")

@@ -21,14 +21,6 @@ local plugins = {
   { "kevinhwang91/nvim-hlslens",                  config = function() require("pluginconfig/nvim-hlslens") end },
 
   {
-    "gen740/SmoothCursor.nvim",
-    config = function()
-      require("smoothcursor").setup({
-        type = "matrix",
-      })
-    end,
-  },
-  {
     "oneubauer/jsonpath.nvim",
     branch = "oneubauer/add-yaml-support",
     ft = {
@@ -66,12 +58,12 @@ local plugins = {
 
   -- filer, status
   { "nvim-tree/nvim-web-devicons" },
-  { "nvim-tree/nvim-tree.lua",     config = function() require("pluginconfig/nvim-tree") end },
+  { "nvim-tree/nvim-tree.lua",    config = function() require("pluginconfig/nvim-tree") end },
   -- { "akinsho/bufferline.nvim", version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("pluginconfig/bufferline") end },
   { "moll/vim-bbye" },
-  { "nvim-lualine/lualine.nvim",   config = function() require("pluginconfig/lualine") end },
-  { "akinsho/toggleterm.nvim",     config = function() require("pluginconfig/toggleterm") end },
-  { "ahmedkhalf/project.nvim",     config = function() require("pluginconfig/project") end },
+  { "nvim-lualine/lualine.nvim",  config = function() require("pluginconfig/lualine") end },
+  { "akinsho/toggleterm.nvim",    config = function() require("pluginconfig/toggleterm") end },
+  { "ahmedkhalf/project.nvim",    config = function() require("pluginconfig/project") end },
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
@@ -117,11 +109,17 @@ local plugins = {
   { "williamboman/mason.nvim" },
   { "williamboman/mason-lspconfig.nvim" },
   { "nvimtools/none-ls.nvim" }, -- for formatters and linters
-  { "glepnir/lspsaga.nvim" },   -- LSP UIs
+  {
+    "nvimdev/lspsaga.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+  }, -- LSP UIs
   { "simrat39/rust-tools.nvim" },
 
   -- Testing
-  { "klen/nvim-test",                   config = function() require("pluginconfig/nvim-test") end },
+  { "klen/nvim-test",          config = function() require("pluginconfig/nvim-test") end },
   {
     "yanskun/gotests.nvim",
     ft = "go",
