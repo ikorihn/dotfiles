@@ -56,6 +56,11 @@ local plugins = {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function() require("pluginconfig/obsidian") end,
   },
+  {
+    "xvzc/chezmoi.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function() require("pluginconfig/chezmoi") end,
+  },
 
   -- Colorschemes
   { "EdenEast/nightfox.nvim" },

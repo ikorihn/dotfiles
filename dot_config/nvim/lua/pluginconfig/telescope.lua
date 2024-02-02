@@ -73,7 +73,6 @@ end
 
 keymap('n', '<leader>f,', ":Telescope ")
 keymap('n', '<leader>ff', function() builtin.find_files(multi_select()) end, opts)
-keymap("n", "<leader>f.", function() builtin.find_files({ search_dirs = { '~/.config/nvim', '~/.config/zsh', '~/.config/alacritty', '~/.config/tig', '~/.config/karabiner', '~/.config/wezterm' }, hidden = true, follow = true }) end, opts)
 keymap("n", "<leader>ft", function() builtin.grep_string{ path_display = { 'smart' }, word_match = '-w', only_sort_text = true, search = '' } end, opts)
 keymap("n", "<leader>fg", builtin.live_grep, opts)
 keymap("n", "<leader>fG", builtin.git_files, opts)
@@ -82,3 +81,6 @@ keymap("n", "<leader>fp", ":Telescope projects<CR>", opts)
 keymap("n", "<leader>fb", builtin.buffers, opts)
 keymap('n', 'ga.', '<cmd>TextCaseOpenTelescope<CR>', { desc = "Telescope" })
 keymap('v', 'ga.', "<cmd>TextCaseOpenTelescope<CR>", { desc = "Telescope" })
+
+telescope.load_extension("chezmoi")
+vim.keymap.set("n", "<leader>f.", telescope.extensions.chezmoi.find_files, {})
