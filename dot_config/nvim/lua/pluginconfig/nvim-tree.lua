@@ -138,4 +138,11 @@ nvim_tree.setup({
     },
     width = function() return math.floor(vim.opt.columns:get() * WIDTH_RATIO) end,
   },
+  ui = {
+    confirm = {
+      remove = true,
+      trash = false,
+      default_yes = true,
+    },
+  },
 })

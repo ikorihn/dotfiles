@@ -19,4 +19,7 @@ obsidian.setup({
     -- Optional, if you want to automatically insert a template from your template directory like 'daily.md'
     template = nil,
   },
+  completion = {
+    nvim_cmp = true,
+  },
 })

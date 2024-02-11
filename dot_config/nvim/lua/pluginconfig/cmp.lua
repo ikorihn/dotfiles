@@ -71,6 +71,8 @@ cmp.setup({
   }, {
     { name = "path" },
   }, {
+    { name = "obsidian" },
+  }, {
     {
       name = "buffer",
       option = {
@@ -124,6 +126,7 @@ cmp.setup({
         nvim_lua = "[Lua]",
         rg = "[Ripgrep]",
         ["vim-dadbod-completion"] = "[DB]",
+        obsidian = "[Obsidian]",
       },
     }),
   },

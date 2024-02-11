@@ -32,6 +32,7 @@ vim.opt.smartindent = true
 vim.opt.list = true
 vim.opt.listchars = { tab = '»-', nbsp = "+", extends = '»', precedes = '«' }
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.numberwidth = 4
 vim.opt.title = true
 vim.opt.showtabline = 2
