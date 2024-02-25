@@ -16,7 +16,7 @@ null_ls.setup {
       extra_filetypes = { "toml" },
     },
     formatting.black.with { extra_args = { "--fast" } },
-    formatting.stylua.with { extra_args = { "--indent-type", "Spaces", "--indent-width", "2" , "--column-width", "120", "--collapse-simple-statement", "Always" } },
+    formatting.stylua.with { extra_args = { "--indent-type", "Spaces", "--indent-width", "2", "--column-width", "120", "--collapse-simple-statement", "Always" } },
     formatting.google_java_format,
     formatting.goimports,
     formatting.rustfmt,
@@ -24,5 +24,6 @@ null_ls.setup {
     null_ls.builtins.code_actions.gitsigns,
     formatting.shfmt.with { extra_args = { "-i", "2", "-sr", "-ci", "-bn" } },
     null_ls.builtins.code_actions.shellcheck,
+    formatting.biome,
   },
 }
