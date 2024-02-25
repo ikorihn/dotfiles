@@ -21,6 +21,22 @@ local plugins = {
   { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end },
 
   {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- add any options here
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      "MunifTanjim/nui.nvim",
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      "rcarriga/nvim-notify",
+    },
+  },
+
+  {
     "oneubauer/jsonpath.nvim",
     branch = "oneubauer/add-yaml-support",
     ft = {
@@ -67,6 +83,7 @@ local plugins = {
   { "folke/tokyonight.nvim" },
   { "ellisonleao/gruvbox.nvim" },
   { "lunarvim/darkplus.nvim" },
+  { "rebelot/kanagawa.nvim" },
 
   -- filer, status
   { "nvim-tree/nvim-web-devicons" },
