@@ -15,10 +15,10 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   { "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
   -- { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end },
-  { "numToStr/Comment.nvim",                      config = function() require("pluginconfig/comment") end },
+  { "numToStr/Comment.nvim", config = function() require("pluginconfig/comment") end },
   { "JoosepAlviste/nvim-ts-context-commentstring" },
-  { "phaazon/hop.nvim",                           config = function() require("pluginconfig/hop") end },
-  { "kevinhwang91/nvim-hlslens",                  config = function() require("pluginconfig/nvim-hlslens") end },
+  { "phaazon/hop.nvim", config = function() require("pluginconfig/hop") end },
+  { "kevinhwang91/nvim-hlslens", config = function() require("pluginconfig/nvim-hlslens") end },
 
   {
     "oneubauer/jsonpath.nvim",
@@ -43,12 +43,12 @@ local plugins = {
     },
   },
 
-  { "kylechui/nvim-surround",      config = function() require("pluginconfig/nvim-surround") end },
+  { "kylechui/nvim-surround", config = function() require("pluginconfig/nvim-surround") end },
   { "jeetsukumaran/vim-indentwise" },
   { "haya14busa/vim-asterisk" },
   { "junegunn/vim-easy-align" },
   -- { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end },
-  { "johmsalas/text-case.nvim",    config = function() require("pluginconfig/text-case") end },
+  { "johmsalas/text-case.nvim", config = function() require("pluginconfig/text-case") end },
 
   {
     "epwalsh/obsidian.nvim",
@@ -70,23 +70,23 @@ local plugins = {
 
   -- filer, status
   { "nvim-tree/nvim-web-devicons" },
-  { "nvim-tree/nvim-tree.lua",    config = function() require("pluginconfig/nvim-tree") end },
+  { "nvim-tree/nvim-tree.lua", config = function() require("pluginconfig/nvim-tree") end },
   -- { "akinsho/bufferline.nvim", version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("pluginconfig/bufferline") end },
   { "moll/vim-bbye" },
-  { "nvim-lualine/lualine.nvim",  config = function() require("pluginconfig/lualine") end },
-  { "akinsho/toggleterm.nvim",    config = function() require("pluginconfig/toggleterm") end },
-  { "ahmedkhalf/project.nvim",    config = function() require("pluginconfig/project") end },
+  { "nvim-lualine/lualine.nvim", config = function() require("pluginconfig/lualine") end },
+  { "akinsho/toggleterm.nvim", config = function() require("pluginconfig/toggleterm") end },
+  { "ahmedkhalf/project.nvim", config = function() require("pluginconfig/project") end },
   {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function() require("pluginconfig/indentline") end,
   },
-  { "RRethy/vim-illuminate",         config = function() require("pluginconfig/illuminate") end },
+  { "RRethy/vim-illuminate", config = function() require("pluginconfig/illuminate") end },
   { "ntpeters/vim-better-whitespace" },
-  { "folke/which-key.nvim",          config = function() require("pluginconfig/which-key") end },
+  { "folke/which-key.nvim", config = function() require("pluginconfig/which-key") end },
 
   -- completion
-  { "hrsh7th/nvim-cmp",              config = function() require("pluginconfig/cmp") end }, -- The completion plugin
+  { "hrsh7th/nvim-cmp", config = function() require("pluginconfig/cmp") end }, -- The completion plugin
   { "hrsh7th/cmp-buffer" },
   { "hrsh7th/cmp-path" },
   { "hrsh7th/cmp-cmdline" },
@@ -131,7 +131,7 @@ local plugins = {
   { "simrat39/rust-tools.nvim" },
 
   -- Testing
-  { "klen/nvim-test",          config = function() require("pluginconfig/nvim-test") end },
+  { "klen/nvim-test", config = function() require("pluginconfig/nvim-test") end },
   {
     "yanskun/gotests.nvim",
     ft = "go",
@@ -139,7 +139,7 @@ local plugins = {
   },
 
   -- Telescope
-  { "nvim-telescope/telescope.nvim",              config = function() require("pluginconfig/telescope") end },
+  { "nvim-telescope/telescope.nvim", config = function() require("pluginconfig/telescope") end },
   -- {
   --   "ibhagwan/fzf-lua",
   --   -- optional for icon support
@@ -148,18 +148,18 @@ local plugins = {
   -- },
 
   -- Treesitter
-  { "nvim-treesitter/nvim-treesitter",            config = function() require("pluginconfig/treesitter") end },
+  { "nvim-treesitter/nvim-treesitter", config = function() require("pluginconfig/treesitter") end },
   { "nvim-treesitter/nvim-treesitter-context" },
   { "nvim-treesitter/nvim-treesitter-textobjects" },
 
   -- Git
-  { "lewis6991/gitsigns.nvim",                    config = function() require("pluginconfig/gitsigns") end },
+  { "lewis6991/gitsigns.nvim", config = function() require("pluginconfig/gitsigns") end },
   { "rbgrouleff/bclose.vim" },
-  { "iberianpig/tig-explorer.vim",                dependencies = { "rbgrouleff/bclose.vim" } },
+  { "iberianpig/tig-explorer.vim", dependencies = { "rbgrouleff/bclose.vim" } },
   { "ruanyl/vim-gh-line" },
 
   -- DAP
-  { "mfussenegger/nvim-dap",                      config = function() require("pluginconfig/dap") end },
+  { "mfussenegger/nvim-dap", config = function() require("pluginconfig/dap") end },
   { "rcarriga/nvim-dap-ui" },
   { "ravenxrz/DAPInstall.nvim" },
   { "leoluz/nvim-dap-go" },
@@ -169,7 +169,7 @@ local plugins = {
   {
     "kristijanhusak/vim-dadbod-ui",
     dependencies = {
-      { "tpope/vim-dadbod",                     lazy = true },
+      { "tpope/vim-dadbod", lazy = true },
       { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
     },
     -- cmd = {

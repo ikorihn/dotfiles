@@ -1,6 +1,6 @@
-local mason = require('mason')
-local mason_lspconfig = require('mason-lspconfig')
-local lspconfig = require('lspconfig')
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
+local lspconfig = require("lspconfig")
 
 local servers = {
   "lua_ls",
@@ -12,23 +12,25 @@ local servers = {
   "yamlls",
   "gopls",
   "rust_analyzer",
-  'tsserver',
+  "tsserver",
   "denols",
+  "biome",
+  "jsonnet_ls",
 }
 
-mason.setup {
+mason.setup({
   ui = {
     icons = {
-      package_installed = "✓"
-    }
-  }
-}
-mason_lspconfig.setup {
+      package_installed = "✓",
+    },
+  },
+})
+mason_lspconfig.setup({
   ensure_installed = servers,
-}
+})
 
 local setupFuncTbl = {
-  ['lua_ls'] = function(opts)
+  ["lua_ls"] = function(opts)
     opts.settings = {
       Lua = {
         diagnostics = {
@@ -36,8 +38,8 @@ local setupFuncTbl = {
         },
         workspace = {
           library = {
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.stdpath "config" .. "/lua"] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.stdpath("config") .. "/lua"] = true,
           },
         },
         telemetry = {
@@ -48,7 +50,7 @@ local setupFuncTbl = {
     return opts
   end,
 
-  ['pyright'] = function(opts)
+  ["pyright"] = function(opts)
     opts.settings = {
       python = {
         analysis = {
@@ -59,7 +61,7 @@ local setupFuncTbl = {
     return opts
   end,
 
-  ['gopls'] = function(opts)
+  ["gopls"] = function(opts)
     opts.settings = {
       gopls = {
         staticcheck = true,
@@ -68,7 +70,7 @@ local setupFuncTbl = {
     return opts
   end,
 
-  ['rust_analyzer'] = function(opts)
+  ["rust_analyzer"] = function(opts)
     local rt_opts = {
       tools = {
         runnables = {
@@ -84,17 +86,17 @@ local setupFuncTbl = {
       settings = {
         rust = {
           checkOnSave = {
-            command = "clippy"
+            command = "clippy",
           },
         },
-      }
+      },
     }
     require("rust-tools").setup(rt_opts)
 
     return opts
   end,
 
-  ['yamlls'] = function(opts)
+  ["yamlls"] = function(opts)
     opts.settings = {
       yaml = {
         schemas = {
@@ -105,12 +107,16 @@ local setupFuncTbl = {
     return opts
   end,
 
-  ['tsserver'] = function(opts)
+  ["tsserver"] = function(opts)
     opts.root_dir = lspconfig.util.root_pattern("package.json")
+    opts.on_attach = function(client)
+      -- this is important, otherwise tsserver will format ts/js files which we *really* don't want.
+      client.server_capabilities.documentFormattingProvider = false
+    end
     return opts
   end,
 
-  ['denols'] = function(opts)
+  ["denols"] = function(opts)
     opts.root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc", "deps.ts", "import_map.json")
     opts.init_options = {
       lint = true,
@@ -120,10 +126,10 @@ local setupFuncTbl = {
           hosts = {
             ["https://deno.land"] = true,
             ["https://cdn.nest.land"] = true,
-            ["https://crux.land"] = true
-          }
-        }
-      }
+            ["https://crux.land"] = true,
+          },
+        },
+      },
     }
     return opts
   end,
@@ -134,30 +140,23 @@ mason_lspconfig.setup_handlers({
     local opts = {
       on_attach = function(client, bufnr)
         LspKeymaps(bufnr)
-        require('illuminate').on_attach(client)
+        require("illuminate").on_attach(client)
       end,
-      capabilities = require('cmp_nvim_lsp').default_capabilities()
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
     }
 
     -- switch between denols and tsserver
     local node_root_dir = lspconfig.util.root_pattern("package.json")
     local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
-    if server_name == "tsserver" and not is_node_repo then
-      return
-    end
-    if server_name == "denols" and is_node_repo then
-      return
-    end
+    if server_name == "tsserver" and not is_node_repo then return end
+    if server_name == "denols" and is_node_repo then return end
 
     f = setupFuncTbl[server_name]
-    if f ~= nil then
-      f(opts)
-    end
+    if f ~= nil then f(opts) end
 
     lspconfig[server_name].setup(opts)
   end,
 })
-
 
 local function setup()
   local signs = {
@@ -174,7 +173,7 @@ local function setup()
   local config = {
     virtual_text = false, -- disable virtual text
     signs = {
-      active = signs, -- show signs
+      active = signs,     -- show signs
     },
     update_in_insert = true,
     underline = true,
