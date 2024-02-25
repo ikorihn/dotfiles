@@ -10,7 +10,8 @@ alias rm='trash'
 # abbr mkdir='mkdir -p'
 
 alias vi='nvim'
-alias vim='nvim'
+# alias vim='/usr/local/bin/nvim'
+alias vim='TERM=alacritty nvim'
 alias view='vim -R'
 alias vimdiff='nvim -d'
 
