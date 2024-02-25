@@ -8,8 +8,16 @@ bindkey -e
 # ヒストリの設定
 export HISTFILE=$XDG_CACHE_HOME/zsh/history
 export HISTSIZE=50000
-export HISTORY_IGNORE="(ls|cd|pwd|exit|cd *|ls *)"
+export HISTORY_IGNORE="(ls|ll|cd|pwd|exit|cd *|ls *|ll *)"
 export SAVEHIST=40000
+
+# zsh historyに保存するときのhook
+# https://superuser.com/questions/902241/how-to-make-zsh-not-store-failed-command
+# ${(z)} は、zsh の配列を扱うための拡張機能の一つで、指定された文字列を特定の方法で分割して配列に格納するパラメータ展開 (parameter expansion)
+zshaddhistory() {
+  # 存在しないコマンドを保存しない
+  whence ${${(z)1}[1]} >| /dev/null || return 1
+}
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
