@@ -174,6 +174,8 @@ local plugins = {
   { "rbgrouleff/bclose.vim" },
   { "iberianpig/tig-explorer.vim", dependencies = { "rbgrouleff/bclose.vim" } },
   { "ruanyl/vim-gh-line" },
+  { "sindrets/diffview.nvim" },
+  { "rhysd/git-messenger.vim" },
 
   -- DAP
   { "mfussenegger/nvim-dap", config = function() require("pluginconfig/dap") end },
