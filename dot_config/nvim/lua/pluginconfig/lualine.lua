@@ -132,6 +132,19 @@ ins_left({
 
 ins_left({ "location" })
 
+-- wordcount
+ins_left({
+  function()
+    local starts = vim.fn.line("v")
+    local ends = vim.fn.line(".")
+    local count = starts <= ends and ends - starts + 1 or starts - ends + 1
+    local wc = vim.fn.wordcount()
+    return count .. "L:" .. wc["visual_chars"] .. "C"
+  end,
+  cond = function() return vim.fn.mode():find("[Vv]") ~= nil end,
+  color = { fg = colors.green },
+})
+
 ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
 ins_left({
