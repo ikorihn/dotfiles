@@ -23,9 +23,7 @@ local plugins = {
   {
     "folke/noice.nvim",
     event = "VeryLazy",
-    opts = {
-      -- add any options here
-    },
+    config = function() require("pluginconfig/noice") end,
     dependencies = {
       -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
       "MunifTanjim/nui.nvim",
@@ -34,6 +32,10 @@ local plugins = {
       --   If not available, we use `mini` as the fallback
       "rcarriga/nvim-notify",
     },
+  },
+  {
+    "j-hui/fidget.nvim",
+    config = function() require("fidget").setup() end,
   },
 
   {
@@ -179,6 +181,7 @@ local plugins = {
   --   dependencies = { "nvim-tree/nvim-web-devicons" },
   --   config = function() require("pluginconfig/fzf-lua") end,
   -- },
+  { "jvgrootveld/telescope-zoxide" },
 
   -- Treesitter
   { "nvim-treesitter/nvim-treesitter", config = function() require("pluginconfig/treesitter") end },
@@ -191,7 +194,6 @@ local plugins = {
   { "iberianpig/tig-explorer.vim", dependencies = { "rbgrouleff/bclose.vim" } },
   { "ruanyl/vim-gh-line" },
   { "sindrets/diffview.nvim" },
-  { "rhysd/git-messenger.vim" },
 
   -- DAP
   { "mfussenegger/nvim-dap", config = function() require("pluginconfig/dap") end },

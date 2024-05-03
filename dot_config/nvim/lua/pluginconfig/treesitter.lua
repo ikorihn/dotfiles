@@ -1,29 +1,45 @@
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then
-	return
-end
+if not status_ok then return end
 
 local status_ok, parser = pcall(require, "nvim-treesitter.parsers")
-if not status_ok then
-	return
-end
+if not status_ok then return end
 local parser_config = parser.get_parser_configs()
 parser_config.gotmpl = {
   install_info = {
     url = "https://github.com/ngalaiko/tree-sitter-go-template",
-    files = {"src/parser.c"}
+    files = { "src/parser.c" },
   },
   filetype = "gotmpl",
-  used_by = {"gohtmltmpl", "gotexttmpl", "gotmpl", "yaml"}
+  used_by = { "gohtmltmpl", "gotexttmpl", "gotmpl", "yaml" },
 }
 
 configs.setup({
-  ensure_installed = { "go", "python", "rust", "lua", "yaml", "toml", "json", "sql", "java", "html", "css", "javascript", "typescript", "dockerfile", "gotmpl" },
+  ensure_installed = {
+    "bash",
+    "css",
+    "dockerfile",
+    "go",
+    "gotmpl",
+    "html",
+    "java",
+    "javascript",
+    "json",
+    "jsonnet",
+    "lua",
+    "markdown_inline",
+    "python",
+    "regex",
+    "rust",
+    "sql",
+    "toml",
+    "typescript",
+    "yaml",
+  },
   ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing
   highlight = {
     enable = true, -- false will disable the whole extension
     disable = function(lang, bufnr) -- disable in large file
-        return vim.api.nvim_buf_line_count(bufnr) > 5000
+      return vim.api.nvim_buf_line_count(bufnr) > 5000
     end,
     additional_vim_regex_highlighting = { "markdown" },
   },
@@ -47,9 +63,9 @@ configs.setup({
       },
       -- You can choose the select mode (default is charwise 'v')
       selection_modes = {
-        ['@parameter.outer'] = 'v', -- charwise
-        ['@function.outer'] = 'V', -- linewise
-        ['@class.outer'] = '<c-v>', -- blockwise
+        ["@parameter.outer"] = "v", -- charwise
+        ["@function.outer"] = "V", -- linewise
+        ["@class.outer"] = "<c-v>", -- blockwise
       },
       -- If you set this to `true` (default is `false`) then any textobject is
       -- extended to include preceding xor succeeding whitespace. Succeeding
@@ -93,7 +109,7 @@ configs.setup({
       },
       goto_previous = {
         ["[d"] = "@conditional.outer",
-      }
+      },
     },
   },
 })

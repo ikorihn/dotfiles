@@ -141,7 +141,7 @@ nvim_tree.setup({
   },
   ui = {
     confirm = {
-      remove = true,
+      remove = false,
       trash = false,
       default_yes = true,
     },

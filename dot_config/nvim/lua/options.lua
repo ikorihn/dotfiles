@@ -1,18 +1,15 @@
 -- File
 vim.opt.autoread = true
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 vim.opt.hidden = true
 vim.opt.writebackup = true
 vim.opt.backup = true
--- vim.opt.backupdir = vim.env.XDG_DATA_HOME .. "/vim/backup/"
 -- vim.fn.mkdir(vim.env.XDG_DATA_HOME .. "/vim/backup/", "p")
 vim.opt.backupdir:remove('.')
 -- vim.opt.backupext = string.gsub(vim.opt.backupext, "[vimbackup]", "")
 vim.opt.backupskip = ""
--- vim.opt.directory = vim.env.XDG_DATA_HOME .. "/vim/swap/"
 -- vim.fn.mkdir(vim.opt.directory, "p")
 vim.opt.undofile = true
--- vim.opt.undodir = vim.env.XDG_DATA_HOME .. "/vim/undo/"
 -- vim.fn.mkdir(vim.opt.undodir, "p")
 vim.opt.autochdir = false
 vim.opt.history = 10000

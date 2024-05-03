@@ -13,7 +13,9 @@ if vim.g.vscode == 1 then
   return
 end
 
-load "plugins"
+if vim.g.disable_plugin ~= 1 then
+  load "plugins"
+end
 load "autocommands"
 load "colorscheme"
 load "utils"
