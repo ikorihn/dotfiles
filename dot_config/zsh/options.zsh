@@ -8,7 +8,7 @@ bindkey -e
 # ヒストリの設定
 export HISTFILE=$XDG_CACHE_HOME/zsh/history
 export HISTSIZE=50000
-export HISTORY_IGNORE="(ls|ll|cd|pwd|exit|cd *|ls *|ll *)"
+# export HISTORY_IGNORE="(ls|ll|cd|pwd|exit|cd *|ls *|ll *)"
 export SAVEHIST=40000
 
 # zsh historyに保存するときのhook
@@ -16,8 +16,35 @@ export SAVEHIST=40000
 # ${(z)} は、zsh の配列を扱うための拡張機能の一つで、指定された文字列を特定の方法で分割して配列に格納するパラメータ展開 (parameter expansion)
 zshaddhistory() {
   # 存在しないコマンドを保存しない
-  whence ${${(z)1}[1]} >| /dev/null || return 1
+  local j=1
+  while ([[ ${${(z)1}[$j]} == *=* ]]) {
+    ((j++))
+  }
+  whence ${${(z)1}[$j]} >| /dev/null || return 1
 }
+
+#function zshaddhistory() {
+#  # 存在しないコマンドを保存しない
+#  local j=1
+#  echo "----"
+#  echo "original=${(z)1}"
+#  local only_define=1
+#  for in in "${(z)1}"; do
+#    echo "in=${in}"
+#    if [[ ${in} == *=* || ${in} == ";" ]]; then
+#      ((j++))
+#    else
+#      only_define=0
+#    fi
+#  done
+#  if [[ ${only_define} -eq 1 ]]; then
+#    echo "only_define"
+#    return 0
+#  fi
+#  echo "command=${${(z)1}[$j]}"
+#  echo "----"
+#  whence ${${(z)1}[$j]} >| /dev/null || return 1
+#}
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
