@@ -139,6 +139,13 @@ local plugins = {
   { "williamboman/mason-lspconfig.nvim" },
   { "nvimtools/none-ls.nvim" }, -- for formatters and linters
   {
+    "jay-babu/mason-null-ls.nvim",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "nvimtools/none-ls.nvim",
+    },
+  },
+  {
     "nvimdev/lspsaga.nvim",
     dependencies = {
       "nvim-treesitter/nvim-treesitter",
@@ -146,6 +153,15 @@ local plugins = {
     },
   }, -- LSP UIs
   { "simrat39/rust-tools.nvim" },
+  {
+    "nvim-java/nvim-java",
+    dependencies = {
+      "nvim-java/lua-async-await",
+      "nvim-java/nvim-java-core",
+      "nvim-java/nvim-java-test",
+      "nvim-java/nvim-java-dap",
+    },
+  },
 
   -- Testing
   { "klen/nvim-test", config = function() require("pluginconfig/nvim-test") end },

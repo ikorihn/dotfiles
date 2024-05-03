@@ -79,3 +79,5 @@ vim.g.gh_line_blame_map_default = 0
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-- disable lsp log
+vim.lsp.set_log_level("off")

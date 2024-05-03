@@ -1,5 +1,6 @@
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
+local mason_null_ls = require("mason-null-ls")
 local lspconfig = require("lspconfig")
 
 local servers = {
@@ -16,6 +17,8 @@ local servers = {
   "denols",
   "biome",
   "jsonnet_ls",
+  "jdtls",
+  "groovyls",
 }
 
 mason.setup({
@@ -24,10 +27,15 @@ mason.setup({
       package_installed = "✓",
     },
   },
+  registries = {
+    "github:nvim-java/mason-registry",
+    "github:mason-org/mason-registry",
+  },
 })
 mason_lspconfig.setup({
   ensure_installed = servers,
 })
+mason_null_ls.setup({})
 
 local setupFuncTbl = {
   ["lua_ls"] = function(opts)
@@ -109,10 +117,6 @@ local setupFuncTbl = {
 
   ["tsserver"] = function(opts)
     opts.root_dir = lspconfig.util.root_pattern("package.json")
-    opts.on_attach = function(client)
-      -- this is important, otherwise tsserver will format ts/js files which we *really* don't want.
-      client.server_capabilities.documentFormattingProvider = false
-    end
     return opts
   end,
 
@@ -141,6 +145,11 @@ mason_lspconfig.setup_handlers({
       on_attach = function(client, bufnr)
         LspKeymaps(bufnr)
         require("illuminate").on_attach(client)
+
+        if server_name == "tsserver" then
+          -- this is important, otherwise tsserver will format ts/js files which we *really* don't want.
+          client.server_capabilities.documentFormattingProvider = false
+        end
       end,
       capabilities = require("cmp_nvim_lsp").default_capabilities(),
     }
@@ -151,7 +160,7 @@ mason_lspconfig.setup_handlers({
     if server_name == "tsserver" and not is_node_repo then return end
     if server_name == "denols" and is_node_repo then return end
 
-    f = setupFuncTbl[server_name]
+    local f = setupFuncTbl[server_name]
     if f ~= nil then f(opts) end
 
     lspconfig[server_name].setup(opts)
@@ -200,3 +209,49 @@ local function setup()
 end
 
 setup()
+
+-- none-ls
+local null_ls_status_ok, null_ls = pcall(require, "null-ls")
+if not null_ls_status_ok then return end
+
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+local formatting = null_ls.builtins.formatting
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+local diagnostics = null_ls.builtins.diagnostics
+
+local sources = {
+  formatting.prettierd.with({
+    extra_filetypes = { "toml" },
+  }),
+  formatting.black.with({ extra_args = { "--fast" } }),
+  formatting.isort,
+  formatting.stylua.with({
+    extra_args = {
+      "--indent-type",
+      "Spaces",
+      "--indent-width",
+      "2",
+      "--column-width",
+      "120",
+      "--collapse-simple-statement",
+      "Always",
+    },
+  }),
+  formatting.google_java_format,
+  formatting.goimports,
+  -- formatting.rustfmt,
+  -- diagnostics.flake8,
+  null_ls.builtins.code_actions.gitsigns,
+  formatting.shfmt.with({ extra_args = { "-i", "2", "-sr", "-ci", "-bn" } }),
+  -- null_ls.builtins.code_actions.shellcheck,
+  formatting.sql_formatter,
+}
+
+local node_root_dir = lspconfig.util.root_pattern("biome.json")
+local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
+if is_node_repo then table.insert(sources, formatting.biome) end
+
+null_ls.setup({
+  debug = false,
+  sources = sources,
+})
