@@ -40,9 +40,6 @@ github = "olets/zsh-abbr"
 [plugins.fzf-tab]
 github = "Aloxaf/fzf-tab"
 apply = ["source"]
-[plugins.enhancd]
-github = "b4b4r07/enhancd"
-use = ["init.sh"]
 
 [plugins.aws_zsh_completer]
 remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"

@@ -84,7 +84,7 @@
                 [:c [:open-app "Calendar"]]
                 [:z [:open-app "Firefox"]]
                 [:a [:open-app "Obsidian"]]
-                [:x [:open-app "Authy Desktop"]]
+                [:x [:open-app "KeepassXC"]]
         ]
     }
 

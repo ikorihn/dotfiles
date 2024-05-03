@@ -26,6 +26,7 @@ alias pbcopyy="tr -d '\n' | pbcopy"
 
 abbr -S -q --force dc='cd' > /dev/null
 abbr -S -q ':q'='exit'
+abbr -S -q -f 'ex'='exit'
 abbr -S -q sel_firstcol="fzf +m | cut -d ' ' -f 1"
 abbr -g -q null='>/dev/null 2>&1'
 abbr -g -q pc='| pbcopy'

@@ -18,6 +18,10 @@ fi
 # Python
 export PATH="$HOMEBREW_PREFIX/opt/python/libexec/bin:$PATH"
 export PIPENV_VENV_IN_PROJECT=1
+export PIPX_HOME=$XDG_DATA_HOME/pipx
+export POETRY_HOME=$XDG_DATA_HOME/pypoetry
+export POETRY_CONFIG_DIR=$XDG_CONFIG_HOME/pypoetry
+export POETRY_CACHE_DIR=$XDG_CACHE_HOME/pypoetry
 if [[ -e $HOME/.poetry/bin ]]; then
   export PATH="$HOME/.poetry/bin:$PATH"
 fi

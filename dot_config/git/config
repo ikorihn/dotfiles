@@ -28,6 +28,8 @@
 [merge]
   tool = vimdiff
   ff = true
+[rebase]
+  instructionFormat = (%ae) %s
 
 [alias]
   pushf = push --force-with-lease --force-if-includes
@@ -103,3 +105,5 @@
   date = iso-strict-local
 [push]
   autoSetupRemote = true
+[rerere]
+  enabled = true

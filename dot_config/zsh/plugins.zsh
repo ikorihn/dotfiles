@@ -18,6 +18,13 @@ if [[ -e "$HOME/.bun" ]]; then
   source "$BUN_INSTALL/_bun"
 fi
 
+# zoxide
+if command -v zoxide 1>/dev/null 2>&1; then
+  export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+  export _ZO_ECHO=1
+  eval "$(zoxide init --cmd j zsh)"
+fi
+
 #######
 # zsh-completions
 #######
