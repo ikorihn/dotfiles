@@ -31,4 +31,14 @@ M.Jq = function(...)
 end
 vim.cmd([[command! -nargs=? -bar Jq lua require('utils').Jq(<f-args>)]])
 
+M.OpenUrlOrFile = function()
+  local cfile = vim.fn.expand("<cfile>")
+  if cfile:match("^https?://") then
+    vim.fn.system({"open", cfile})
+  else
+    vim.cmd("normal! gF")
+  end
+end
+vim.cmd([[command! -nargs=0 -bar OpenUrlOrFile lua require('utils').OpenUrlOrFile()]])
+
 return M

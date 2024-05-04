@@ -88,6 +88,7 @@ keymap("c", "<C-d>", "<Del>", opts)
 -- Function --
 
 keymap("n", "<Leader>q", utils.ToggleQuickFix)
+keymap("n", "gf", utils.OpenUrlOrFile)
 
 -- Plugins --
 
