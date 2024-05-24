@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env zsh
 
 #
 # for this to work you must configure sudo such that
@@ -11,12 +11,25 @@
 # sudo yabai --load-sa
 #
 
+LEFT_HALF=16:10:0:0:5:16
+RIGHT_HALF=16:10:5:0:5:16
+TOP_RIGHT=16:10:5:0:5:8
+BOTTOM_RIGHT=16:10:5:8:5:8
+
+LEFT_70=16:10:0:0:7:16
+RIGHT_70=16:10:3:0:7:16
+FULL=1:1:0:0:1:1
+
 # float apps
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Karabiner.*$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Bitwarden$" manage=off
+yabai -m rule --add app="^KeePassXC$" manage=off
+yabai -m rule --add app="^Activity Monitor$" manage=off
+yabai -m rule --add app="カレンダー" manage=off
+yabai -m rule --add app="^Calendar.*$" manage=off
 yabai -m rule --apply
 
 # global settings
@@ -24,7 +37,7 @@ yabai -m config \
   external_bar off:40:0 \
   menubar_opacity 1.0 \
   mouse_follows_focus on \
-  focus_follows_mouse on \
+  focus_follows_mouse off \
   display_arrangement_order default \
   window_origin_display default \
   window_placement second_child \
@@ -46,7 +59,7 @@ yabai -m config \
   right_padding 12 \
   window_gap 8 \
   layout bsp \
-  mouse_modifier fn \
+  mouse_modifier alt \
   mouse_action1 move \
   mouse_action2 resize \
   mouse_drop_action swap
