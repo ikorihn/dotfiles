@@ -1,4 +1,4 @@
-#!zsh
+#!/usr/bin/env zsh
 
 LEFT_HALF=16:10:0:0:5:16
 RIGHT_HALF=16:10:5:0:5:16

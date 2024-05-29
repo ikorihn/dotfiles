@@ -24,6 +24,7 @@ FULL=1:1:0:0:1:1
 yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add app="^Karabiner.*$" manage=off
 yabai -m rule --add app="^Finder$" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
 yabai -m rule --add app="^Preview$" manage=off
 yabai -m rule --add app="^Bitwarden$" manage=off
 yabai -m rule --add app="^KeePassXC$" manage=off
@@ -63,5 +64,7 @@ yabai -m config \
   mouse_action1 move \
   mouse_action2 resize \
   mouse_drop_action swap
+
+yabai -m signal --add event=display_changed action="~/.config/yabai/display_changed.sh"
 
 echo "yabai configuration loaded.."

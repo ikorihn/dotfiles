@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env zsh
 
 win=$(yabai -m query --windows --window last | jq '.id')
 
