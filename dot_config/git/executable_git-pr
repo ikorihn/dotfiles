@@ -20,9 +20,9 @@ fi
 branch=$(git symbolic-ref HEAD | cut -d "/" -f 3-)
 
 if [[ $remote_url =~ bitbucket.org ]]; then
-  url="https://bitbucket.org/${org_name}/${repo_name}/branch/$branch"
+  url="https://bitbucket.org/${org_name}/${repo_name}/pull-requests/new?source=${branch}&t=1"
 elif [[ $remote_url =~ github.com ]]; then
-  url="https://github.com/${org_name}/${repo_name}/tree/$branch"
+  url="https://github.com/${org_name}/${repo_name}/pull/new/${branch}"
 fi
 
 echo $url
