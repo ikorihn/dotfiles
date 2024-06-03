@@ -17,34 +17,30 @@ export SAVEHIST=40000
 zshaddhistory() {
   # 存在しないコマンドを保存しない
   local j=1
-  while ([[ ${${(z)1}[$j]} == *=* ]]) {
-    ((j++))
-  }
-  whence ${${(z)1}[$j]} >| /dev/null || return 1
-}
+  local only_define=1
+  for in in "${${(z)1}[@]}"; do
+    whence ${${(z)1}[$j]} >| /dev/null && return 0
+    if [[ ${in} == *=* || ${in} == "export" ]]; then
+      ((j++))
+    elif [[ ${in} == ";" ]]; then
+      # ignore
+    else
+      only_define=0
+    fi
+  done
+  if [[ ${only_define} -eq 1 ]]; then
+    return 0
+  fi
 
-#function zshaddhistory() {
-#  # 存在しないコマンドを保存しない
-#  local j=1
-#  echo "----"
-#  echo "original=${(z)1}"
-#  local only_define=1
-#  for in in "${(z)1}"; do
-#    echo "in=${in}"
-#    if [[ ${in} == *=* || ${in} == ";" ]]; then
-#      ((j++))
-#    else
-#      only_define=0
-#    fi
-#  done
-#  if [[ ${only_define} -eq 1 ]]; then
-#    echo "only_define"
-#    return 0
-#  fi
-#  echo "command=${${(z)1}[$j]}"
-#  echo "----"
-#  whence ${${(z)1}[$j]} >| /dev/null || return 1
-#}
+  command="${${(z)1}[$j]}"
+  if [[ $command == \~* ]]; then
+    command=${command//\~/${HOME}}
+  fi
+  if [[ -f ${command} ]]; then
+    return 0
+  fi
+  whence ${command} >| /dev/null || return 1
+}
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
