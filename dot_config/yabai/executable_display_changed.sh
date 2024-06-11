@@ -7,5 +7,7 @@ if [[ ${width} -lt 2000 ]]; then
 elif [[ ${width} -gt 3000 ]]; then
   yabai -m config left_padding 192 right_padding 192
 else
-  yabai -m config left_padding 32 right_padding 32
+  yabai -m config left_padding 8 right_padding 8
 fi
+
+$HOME/.bun/bin/bun run $HOME/.config/yabai/arrange.ts

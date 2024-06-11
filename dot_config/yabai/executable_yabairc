@@ -65,6 +65,8 @@ yabai -m config \
   mouse_action2 resize \
   mouse_drop_action swap
 
-yabai -m signal --add event=display_changed action="~/.config/yabai/display_changed.sh"
+yabai -m signal --add event=display_changed action="$HOME/.config/yabai/display_changed.sh"
+yabai -m space 1 --layout float
+$HOME/.config/yabai/display_changed.sh
 
 echo "yabai configuration loaded.."
