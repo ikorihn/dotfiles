@@ -10,6 +10,10 @@ const LEFT_70 = "16:10:0:0:7:16";
 const RIGHT_70 = "16:10:3:0:7:16";
 const FULL = "1:1:0:0:1:1";
 
+function split(leftPercent: number, overwrap: number = 0) {
+  return [`16:100:0:0:${leftPercent+overwrap}:16`, `16:100:${leftPercent-overwrap}:0:${100-leftPercent+overwrap}:16`];
+}
+
 interface Window {
   id: number;
   app: string;
@@ -22,6 +26,11 @@ async function arrange_float() {
   const width =
     await $`yabai -m query --displays --display | jq '.frame.w | floor'`.text();
   const windows = (await $`yabai -m query --windows`.json()) as Window[];
+
+  const percent = split(50);
+  const left = percent[0];
+  const right = percent[1];
+  console.log(left, right);
 
   let i = 0;
   const gridmap = new Map();
@@ -36,24 +45,24 @@ async function arrange_float() {
     }
 
     if (parseInt(width) < 2000) {
-      $`yabai -m window $id --grid ${FULL}`;
+      await $`yabai -m window ${window.id} --grid ${FULL}`;
       continue;
     }
 
     switch (window.app) {
       case "Alacritty":
-        gridmap.set(window.app, RIGHT_HALF);
+        gridmap.set(window.app, right);
         break;
       case "Vivaldi":
-        gridmap.set(window.app, LEFT_HALF);
+        gridmap.set(window.app, left);
         break;
       default:
         let grid = gridmap.get(window.app);
         if (grid == null) {
           if (i % 2 === 0) {
-            grid = LEFT_HALF;
+            grid = left;
           } else {
-            grid = RIGHT_HALF;
+            grid = right;
           }
           i++;
           gridmap.set(window.app, grid);
