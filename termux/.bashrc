@@ -1,4 +1,9 @@
 export MEMO_DIR=~/storage/shared/memo
+export EDITOR=vim
+
+export SVDIR=$PREFIX/var/service
+export LOGDIR=$PREFIX/var/log
+service-daemon start
 
 alias ll='ls -al'
 alias bashrc='vim ~/.bashrc'
@@ -26,6 +31,14 @@ allpush() {
     git add -A
     gic
     git push
+}
+
+recreaterepo() {
+    rm -rf .git
+    git init
+    git remote add origin git@github.com:ikorihn/memo.git
+    git fetch origin
+    git switch -f master
 }
 
 alias ap=allpush
