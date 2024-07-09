@@ -24,28 +24,29 @@ After install brew, run following command.
 ./Mac/brew_install_home.sh
 ```
 
-#### [Rust](https://www.rust-lang.org/tools/install)
-
-#### [Go](https://go.dev/learn/)
-
-```shell
-sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/$(curl 'https://go.dev/dl/?mode=json' | jq -r '.[0].files[] | select(.os == "darwin" and .arch == "arm64" and .kind == "archive") | .filename') | sudo tar -zx -C /usr/local/
-```
-
 #### [Alacritty](https://github.com/alacritty/alacritty)
 
 ```shell
 git clone https://github.com/alacritty/alacritty.git ~/src/alacritty/
 cd ~/src/alacritty
-make app
-cp -r target/release/osx/Alacritty.app /Applications/
+
+# https://github.com/alacritty/alacritty/blob/master/INSTALL.md#terminfo
+infocmp alacritty
+sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
+
+make app && rm -rf /Applications/Alacritty.app && cp -r target/release/osx/Alacritty.app /Applications
 ```
 
 #### [Neovim](https://neovim.io)
 
 ```shell
-git clone https://github.com/neovim/neovim.git ~/src/alacritty/
-cd ~/src/alacritty
+# Install from binary
+rm -r ~/src/nvim-macos-arm64 && curl -L -o - https://github.com/neovim/neovim/releases/latest/download/nvim-macos-arm64.tar.gz | tar -zxf - -C ~/src/
+sudo ln -sf ~/src/nvim-macos-arm64/bin/nvim /usr/local/bin/nvim
+
+# Install from source
+git clone https://github.com/neovim/neovim.git ~/src/neovim/
+cd ~/src/neovim
 make CMAKE_BUILD_TYPE=Release
 sudo make install
 ```
