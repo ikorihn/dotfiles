@@ -14,11 +14,11 @@ family = "HackGen Console NF"
 style = "Bold"
 
 [font.bold_italic]
-family = "HackGen Console NF"
+family = "Cica"
 style = "Bold Italic"
 
 [font.italic]
-family = "HackGen Console NF"
+family = "Cica"
 style = "Italic"
 
 [font.normal]
