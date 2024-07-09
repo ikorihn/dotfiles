@@ -14,19 +14,21 @@
 
 [difftool]
   prompt = false
+[mergetool]
+  keepBackup = false
 [difftool "bbdiff"]
   cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [mergetool "bbdiff"]
   cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
 [difftool "vimdirdiff"]
   cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [diff]
   tool = vimdirdiff
 [merge]
-  tool = vimdiff
+  tool = nvimdiff
   ff = true
 [rebase]
   instructionFormat = (%ae) %s
@@ -50,7 +52,7 @@
   find-merge = "!sh -c 'commit=$0 && branch=${1:-HEAD} && (git rev-list $commit..$branch --ancestry-path | cat -n; git rev-list $commit..$branch --first-parent | cat -n) | sort -k2 | uniq -f1 -d | sort -n | tail -1 | cut -f2'"
   show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
   version-tags = "tag -l --sort=-v:refname"
-  sort-tags = "tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short) %(subject) %(creator)'"
+  tagl = "tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short) %(subject) %(creator)'"
 
 [fetch]
   prune = true
