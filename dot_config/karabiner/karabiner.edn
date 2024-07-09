@@ -82,13 +82,14 @@
             :launch-mode
                 [:t [:open-app "Alacritty"]]
                 [:f [:open "$HOME/Downloads"]]
-                [:v [:open-app "Visual Studio Code"]]
                 [:s [:open-app "Slack"]]
                 [:g [:open-app "Vivaldi"]]
                 [:c [:open-app "Calendar"]]
                 [:z [:open-app "Firefox"]]
                 [:a [:open-app "Obsidian"]]
                 [:x [:open-app "KeepassXC"]]
+
+                [:q [:open-app "ChatGPT"]]
         ]
     }
 
@@ -214,10 +215,10 @@
     {
         :des "Disable annoying shortcut"
         :rules [
-            [:!Ch []]
-            [:!Cm []]
+            [:!Ch []] ;; Hide other applications
+            [:!Cm []] ;; Minimize window
             [:##caps_lock :escape]
-            [:!CSr [] :slack]
+            [:!CSr [] :slack] ;; Reload
         ]
     }
 
@@ -237,6 +238,7 @@
                 [:r [:shell "$HOME/.config/yabai/cycle_clockwise.sh"]]
                 [:f [:shell "yabai -m window --toggle float && yabai -m window --grid 10:10:2:1:6:7"]]
                 [:z [:yabai "-m window --toggle zoom-fullscreen"]]
+                [:a [:shell "$HOME/.bun/bin/bun run $HOME/.config/yabai/arrange.ts"]]
                 [:1 [:yabai "-m window --space 1 --focus"]]
                 [:2 [:yabai "-m window --space 2 --focus"]]
                 [:3 [:yabai "-m window --space 3 --focus"]]
@@ -247,10 +249,10 @@
                 [:j [:yabai "-m window --resize bottom:0:20"]]
                 [:k [:yabai "-m window --resize top:0:-20"]]
                 [:l [:yabai "-m window --resize right:20:0"]]
-                [:left_arrow [:yabai "-m window --warp west"]]
+                [:left_arrow [:shell "$HOME/.bun/bin/bun run $HOME/.config/yabai/arrange.ts --position left"]]
                 [:down_arrow [:yabai "-m window --warp south"]]
                 [:up_arrow [:yabai "-m window --warp north"]]
-                [:right_arrow [:yabai "-m window --warp east"]]
+                [:right_arrow [:shell "$HOME/.bun/bin/bun run $HOME/.config/yabai/arrange.ts --position right"]]
         ]
     }
 
