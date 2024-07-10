@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-bufferline.setup {
+bufferline.setup({
   options = {
     numbers = "both",
     -- NOTE: this plugin is designed with this icon in mind,
@@ -20,9 +20,7 @@ bufferline.setup {
     -- tab_size = 18,
     diagnostics = "nvim_lsp",
 
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "(" .. count .. ")"
-    end,
+    diagnostics_indicator = function(count, level, diagnostics_dict, context) return "(" .. count .. ")" end,
     -- NOTE: this will be called a lot so don't do any heavy processing here
     custom_filter = function(buf_number)
       -- filter out filetypes you don't want to see
@@ -67,4 +65,4 @@ bufferline.setup {
       return buffer_a.ordinal < buffer_b.ordinal
     end,
   },
-}
+})

@@ -166,6 +166,4 @@ function LspKeymaps(bufnr)
   buf_set_keymap(bufnr, "n", "<Space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", lsp_opts)
 end
 
-function NoiceKeymaps()
-  keymap("n", "<leader>nd", "<cmd>Noice dismiss<CR>", opts)
-end
+function NoiceKeymaps() keymap("n", "<leader>nd", "<cmd>Noice dismiss<CR>", opts) end

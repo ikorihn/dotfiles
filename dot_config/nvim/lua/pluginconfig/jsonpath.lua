@@ -9,6 +9,9 @@ if vim.fn.exists("+winbar") == 1 then
 end
 
 -- send json path to clipboard
-vim.keymap.set("n", "y<C-p>", function()
-  vim.fn.setreg("+", jsonpath.get())
-end, { desc = "copy json path", buffer = true })
+vim.keymap.set(
+  "n",
+  "y<C-p>",
+  function() vim.fn.setreg("+", jsonpath.get()) end,
+  { desc = "copy json path", buffer = true }
+)

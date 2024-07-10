@@ -5,7 +5,7 @@ vim.opt.hidden = true
 vim.opt.writebackup = true
 vim.opt.backup = true
 -- vim.fn.mkdir(vim.env.XDG_DATA_HOME .. "/vim/backup/", "p")
-vim.opt.backupdir:remove('.')
+vim.opt.backupdir:remove(".")
 -- vim.opt.backupext = string.gsub(vim.opt.backupext, "[vimbackup]", "")
 vim.opt.backupskip = ""
 -- vim.fn.mkdir(vim.opt.directory, "p")
@@ -27,7 +27,7 @@ vim.opt.smartindent = true
 
 -- View
 vim.opt.list = true
-vim.opt.listchars = { tab = '»-', nbsp = "+", extends = '»', precedes = '«' }
+vim.opt.listchars = { tab = "»-", nbsp = "+", extends = "»", precedes = "«" }
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.numberwidth = 4

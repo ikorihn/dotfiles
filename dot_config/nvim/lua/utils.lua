@@ -18,14 +18,14 @@ vim.cmd([[command! -nargs=0 -bar ReloadConfig lua require('utils').ReloadConfig(
 
 M.Jq = function(...)
   local arg = ""
-  for _, v in pairs({...}) do
+  for _, v in pairs({ ... }) do
     arg = arg .. v .. " "
   end
 
   if arg == "" then
     arg = "."
   end
-  vim.notify("jq ".. arg,  vim.log.levels.INFO)
+  vim.notify("jq " .. arg, vim.log.levels.INFO)
 
   vim.cmd("%! jq " .. arg)
 end
@@ -34,7 +34,7 @@ vim.cmd([[command! -nargs=? -bar Jq lua require('utils').Jq(<f-args>)]])
 M.OpenUrlOrFile = function()
   local cfile = vim.fn.expand("<cfile>")
   if cfile:match("^https?://") then
-    vim.fn.system({"open", cfile})
+    vim.fn.system({ "open", cfile })
   else
     vim.cmd("normal! gF")
   end

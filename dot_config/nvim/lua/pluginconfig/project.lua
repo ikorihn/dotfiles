@@ -1,6 +1,6 @@
 local status_ok, project = pcall(require, "project_nvim")
 if not status_ok then
-	return
+  return
 end
 project.setup({
   -- Manual mode doesn't automatically change your root directory, so you have
@@ -36,17 +36,16 @@ project.setup({
   -- * global (default)
   -- * tab
   -- * win
-  scope_chdir = 'global',
+  scope_chdir = "global",
 
   -- Path where project.nvim will store the project history for use in
   -- telescope
   datapath = vim.fn.stdpath("data"),
-
 })
 
 local tele_status_ok, telescope = pcall(require, "telescope")
 if not tele_status_ok then
-	return
+  return
 end
 
-telescope.load_extension('projects')
+telescope.load_extension("projects")

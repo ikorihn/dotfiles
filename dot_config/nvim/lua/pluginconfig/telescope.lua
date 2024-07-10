@@ -1,12 +1,16 @@
 local status_ok, telescope = pcall(require, "telescope")
-if not status_ok then return end
+if not status_ok then
+  return
+end
 
 local actions = require("telescope.actions")
 local builtin = require("telescope.builtin")
 
 -- zoxide
 local z_ok, z_utils = pcall(require, "telescope._extensions.zoxide.utils")
-if not z_ok then return end
+if not z_ok then
+  return
+end
 
 telescope.setup({
   defaults = {

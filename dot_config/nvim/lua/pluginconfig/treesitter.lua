@@ -1,8 +1,12 @@
 local status_ok, configs = pcall(require, "nvim-treesitter.configs")
-if not status_ok then return end
+if not status_ok then
+  return
+end
 
 local status_ok, parser = pcall(require, "nvim-treesitter.parsers")
-if not status_ok then return end
+if not status_ok then
+  return
+end
 local parser_config = parser.get_parser_configs()
 parser_config.gotmpl = {
   install_info = {

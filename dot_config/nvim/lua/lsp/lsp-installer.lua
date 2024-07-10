@@ -141,12 +141,11 @@ local setupFuncTbl = {
 
   ["typos_lsp"] = function(opts)
     opts.init_options = {
-        config = '~/.config/nvim/spell/.typos.toml',
+      config = "~/.config/nvim/spell/.typos.toml",
     }
 
     return opts
   end,
-
 }
 
 mason_lspconfig.setup_handlers({
@@ -167,11 +166,17 @@ mason_lspconfig.setup_handlers({
     -- switch between denols and tsserver
     local node_root_dir = lspconfig.util.root_pattern("package.json")
     local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
-    if server_name == "tsserver" and not is_node_repo then return end
-    if server_name == "denols" and is_node_repo then return end
+    if server_name == "tsserver" and not is_node_repo then
+      return
+    end
+    if server_name == "denols" and is_node_repo then
+      return
+    end
 
     local f = setupFuncTbl[server_name]
-    if f ~= nil then f(opts) end
+    if f ~= nil then
+      f(opts)
+    end
 
     lspconfig[server_name].setup(opts)
   end,
@@ -192,7 +197,7 @@ local function setup()
   local config = {
     virtual_text = false, -- disable virtual text
     signs = {
-      active = signs,     -- show signs
+      active = signs, -- show signs
     },
     update_in_insert = true,
     underline = true,
@@ -222,7 +227,9 @@ setup()
 
 -- none-ls
 local null_ls_status_ok, null_ls = pcall(require, "null-ls")
-if not null_ls_status_ok then return end
+if not null_ls_status_ok then
+  return
+end
 
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
 local formatting = null_ls.builtins.formatting
@@ -259,7 +266,9 @@ local sources = {
 
 local node_root_dir = lspconfig.util.root_pattern("biome.json")
 local is_node_repo = node_root_dir(vim.api.nvim_buf_get_name(0)) ~= nil
-if is_node_repo then table.insert(sources, formatting.biome) end
+if is_node_repo then
+  table.insert(sources, formatting.biome)
+end
 
 null_ls.setup({
   debug = false,

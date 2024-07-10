@@ -5,18 +5,18 @@ local function load(module)
   require(module)
 end
 
-load "options"
-load "keymaps"
+load("options")
+load("keymaps")
 
 if vim.g.vscode == 1 then
-  load "vscode"
+  load("vscode")
   return
 end
 
 if vim.g.disable_plugin ~= 1 then
-  load "plugins"
+  load("plugins")
 end
-load "autocommands"
-load "colorscheme"
-load "utils"
-load "lsp"
+load("autocommands")
+load("colorscheme")
+load("utils")
+load("lsp")

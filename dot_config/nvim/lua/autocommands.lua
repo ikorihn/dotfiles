@@ -1,9 +1,7 @@
 -- Jenkinsfile as groovy
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = "*Jenkinsfile*",
-  callback = function()
-    vim.bo.filetype = "groovy"
-  end,
+  callback = function() vim.bo.filetype = "groovy" end,
   once = false,
 })
 
@@ -12,7 +10,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.tmpl" },
   callback = function()
     if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
-        vim.bo.filetype = "gotmpl"
+      vim.bo.filetype = "gotmpl"
     end
   end,
   once = false,
@@ -39,19 +37,17 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 -- Disable automatic indentation
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "yaml" },
-  callback = function()
-    vim.opt.indentkeys:remove("<:>")
-  end,
+  callback = function() vim.opt.indentkeys:remove("<:>") end,
 })
 
 -- Use 'q' to quit from common plugins
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "qf", "help", "man", "lspinfo", "spectre_panel", "lir" },
   callback = function()
-    vim.cmd [[
+    vim.cmd([[
       nnoremap <silent> <buffer> q :close<CR>
       set nobuflisted
-    ]]
+    ]])
   end,
 })
 
@@ -70,16 +66,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 -- Fixes Autocomment
 vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-  callback = function()
-    vim.cmd "set formatoptions-=cro"
-  end,
+  callback = function() vim.cmd("set formatoptions-=cro") end,
 })
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function()
-    vim.highlight.on_yank { higroup = "Visual", timeout = 200 }
-  end,
+  callback = function() vim.highlight.on_yank({ higroup = "Visual", timeout = 200 }) end,
 })
 
 -- -- switch relativenumber

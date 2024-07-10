@@ -18,44 +18,38 @@ if not go_status_ok then
   return
 end
 
-dap_install.setup {}
+dap_install.setup({})
 
 dap_install.config("python", {})
 -- add other configs here
 
-dapui.setup {
+dapui.setup({
   layouts = {
     {
       elements = {
-        'scopes',
-        'breakpoints',
-        'stacks',
-        'watches',
+        "scopes",
+        "breakpoints",
+        "stacks",
+        "watches",
       },
       size = 40,
-      position = 'left',
+      position = "left",
     },
     {
       elements = {
-        'repl',
-        'console',
+        "repl",
+        "console",
       },
       size = 10,
-      position = 'bottom',
+      position = "bottom",
     },
   },
-}
+})
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 
-dap.listeners.after.event_initialized["dapui_config"] = function()
-  dapui.open()
-end
+dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
 
-dap.listeners.before.event_terminated["dapui_config"] = function()
-  dapui.close()
-end
+dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
 
-dap.listeners.before.event_exited["dapui_config"] = function()
-  dapui.close()
-end
+dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end

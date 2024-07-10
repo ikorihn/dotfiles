@@ -1,8 +1,12 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then return end
+if not cmp_status_ok then
+  return
+end
 
 local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then return end
+if not snip_status_ok then
+  return
+end
 
 require("luasnip/loaders/from_vscode").lazy_load()
 local has_words_before = function()
@@ -12,10 +16,14 @@ local has_words_before = function()
 end
 
 local lspok, lspkind = pcall(require, "lspkind")
-if not lspok then return end
+if not lspok then
+  return
+end
 
 local gitok, git = pcall(require, "cmp_git")
-if not gitok then return end
+if not gitok then
+  return
+end
 
 cmp.setup({
   snippet = {
@@ -114,7 +122,7 @@ cmp.setup({
     fields = { "abbr", "kind", "menu" },
     format = lspkind.cmp_format({
       mode = "symbol_text",
-      maxwidth = 50,         -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
       ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
       menu = {
         buffer = "[Buffer]",

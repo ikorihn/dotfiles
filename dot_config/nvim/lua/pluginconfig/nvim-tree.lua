@@ -1,8 +1,12 @@
 local status_ok, nvim_tree = pcall(require, "nvim-tree")
-if not status_ok then return end
+if not status_ok then
+  return
+end
 
 local api_status_ok, api = pcall(require, "nvim-tree.api")
-if not api_status_ok then return end
+if not api_status_ok then
+  return
+end
 
 local treeutils = require("pluginconfig/nvim-tree-utils")
 
@@ -24,7 +28,9 @@ local function bulk_operation(bufnr)
   -- marked files operation
   local mark_trash = function()
     local marks = api.marks.list()
-    if #marks == 0 then table.insert(marks, api.tree.get_node_under_cursor()) end
+    if #marks == 0 then
+      table.insert(marks, api.tree.get_node_under_cursor())
+    end
     vim.ui.input({ prompt = string.format("Trash %s files? [y/n] ", #marks) }, function(input)
       if input == "y" then
         for _, node in ipairs(marks) do
@@ -37,7 +43,9 @@ local function bulk_operation(bufnr)
   end
   local mark_remove = function()
     local marks = api.marks.list()
-    if #marks == 0 then table.insert(marks, api.tree.get_node_under_cursor()) end
+    if #marks == 0 then
+      table.insert(marks, api.tree.get_node_under_cursor())
+    end
     vim.ui.input({ prompt = string.format("Remove/Delete %s files? [y/n] ", #marks) }, function(input)
       if input == "y" then
         for _, node in ipairs(marks) do
@@ -51,7 +59,9 @@ local function bulk_operation(bufnr)
 
   local mark_copy = function()
     local marks = api.marks.list()
-    if #marks == 0 then table.insert(marks, api.tree.get_node_under_cursor()) end
+    if #marks == 0 then
+      table.insert(marks, api.tree.get_node_under_cursor())
+    end
     for _, node in pairs(marks) do
       api.fs.copy.node(node)
     end
@@ -60,7 +70,9 @@ local function bulk_operation(bufnr)
   end
   local mark_cut = function()
     local marks = api.marks.list()
-    if #marks == 0 then table.insert(marks, api.tree.get_node_under_cursor()) end
+    if #marks == 0 then
+      table.insert(marks, api.tree.get_node_under_cursor())
+    end
     for _, node in pairs(marks) do
       api.fs.cut(node)
     end

@@ -226,7 +226,9 @@ ins_right({
   -- Lsp server name .
   function()
     local clients = vim.lsp.get_active_clients()
-    if next(clients) == nil then return "No Active Lsp" end
+    if next(clients) == nil then
+      return "No Active Lsp"
+    end
     return lsp_names()
   end,
   icon = " LSP:",
