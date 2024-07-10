@@ -15,8 +15,14 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
 
+# https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+# The plugin will auto execute this zvm_after_init function
+function zvm_after_init() {
+
 # https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# 読み込みタイミングによってfzf-tabからファイルを選択するとshellが終了してしまうので早めにロードする
+# 例) shell起動 -> vim <tabでファイル選択> -> ファイルを選んでエンターするとshellが落ちる
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type file --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS='--multi --reverse --inline-info'
 export FZF_CTRL_R_OPTS=$(cat <<'EOS'
@@ -72,3 +78,4 @@ bindkey '\t\t' fzf-completion-notrigger
 # of the aggressive $KEYTIMEOUT on a slow link.
 bindkey '^ ' fzf-completion-notrigger
 
+}

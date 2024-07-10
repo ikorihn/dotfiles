@@ -518,6 +518,7 @@ function restore_wezterm_tabs() {
 ########################################
 # Bind keys
 ########################################
+bindkey -r '^G'
 # widgetとして登録
 zle -N gcd
 # バインド
