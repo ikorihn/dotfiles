@@ -46,6 +46,7 @@ local plugins = {
     "j-hui/fidget.nvim",
     config = function() require("fidget").setup() end,
   },
+  { "4513ECHO/nvim-keycastr" },
 
   {
     "oneubauer/jsonpath.nvim",
@@ -69,6 +70,14 @@ local plugins = {
       "markdown",
     },
   },
+  {
+    "ellisonleao/glow.nvim",
+    cmd = "Glow",
+    config = function() require("glow").setup() end,
+    ft = {
+      "markdown",
+    },
+  },
 
   {
     "kylechui/nvim-surround",
@@ -76,7 +85,9 @@ local plugins = {
   },
   { "jeetsukumaran/vim-indentwise" },
   { "haya14busa/vim-asterisk" },
-  { "junegunn/vim-easy-align" },
+  --{ "junegunn/vim-easy-align" },
+  { "echasnovski/mini.nvim", version = "*" },
+  { "echasnovski/mini.align", config = function() require("mini.align").setup() end },
   -- { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end },
   {
     "johmsalas/text-case.nvim",
