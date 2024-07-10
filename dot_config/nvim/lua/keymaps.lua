@@ -137,9 +137,9 @@ keymap("", "<C-j>", "<Plug>(IndentWiseNextEqualIndent)", opts)
 --keymap("", 'T', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
 keymap("", "s", "<cmd>lua require'hop'.hint_char2()<CR>", opts)
 
--- EasyAlign
-keymap("x", "ga", "<Plug>(EasyAlign)", opts)
-keymap("n", "ga", "<Plug>(EasyAlign)", opts)
+-- -- EasyAlign
+-- keymap("x", "ga", "<Plug>(EasyAlign)", opts)
+-- keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 function LspKeymaps(bufnr)
   local builtin = require("telescope.builtin")

@@ -19,6 +19,7 @@ local servers = {
   "jsonnet_ls",
   "jdtls",
   "groovyls",
+  "typos_lsp",
 }
 
 mason.setup({
@@ -137,6 +138,15 @@ local setupFuncTbl = {
     }
     return opts
   end,
+
+  ["typos_lsp"] = function(opts)
+    opts.init_options = {
+        config = '~/.config/nvim/spell/.typos.toml',
+    }
+
+    return opts
+  end,
+
 }
 
 mason_lspconfig.setup_handlers({
