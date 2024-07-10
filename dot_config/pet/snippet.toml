@@ -66,6 +66,27 @@ alias ll='ls -AlFh --show-control-chars'"""
   command = """SEARCH=<search>; TO=<replaceto>; rg -l "$SEARCH" | xargs sd "$SEARCH" "$TO" """
   tag = ["shell"]
 [[snippets]]
+  description = "npm list without dependencies"
+  command = """npm list -g --depth 0"""
+  tag = ["npm"]
+  output = ""
+[[snippets]]
+  description = "apply karabiner.edn"
+  command = """GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn goku && jq --sort-keys --indent 4 '.' $XDG_CONFIG_HOME/karabiner/karabiner.json > /tmp/karabiner.json && mv /tmp/karabiner.json $XDG_CONFIG_HOME/karabiner/karabiner.json"""
+  tag = ["npm"]
+  output = ""
+[[snippets]]
+  description = "change slackapp font"
+  command = """/slackfont "HackGen Console NF""""
+  tag = ["slack"]
+  output = ""
+[[snippets]]
+  description = "go build cross platform"
+  command = """CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags '-s -w' -trimpath"""
+  tag = ["go"]
+  output = ""
+
+[[snippets]]
   description = "xml select element example"
   command = """xmlstarlet sel -t -c '/Properties/Property[@key="<key>"]/Entity[@name="<name>"]' <filepath>"""
   tag = ["xml"]
@@ -103,6 +124,42 @@ alias ll='ls -AlFh --show-control-chars'"""
   command = "git status -s | cut -d' ' -f 3- | xargs git update-index --assume-unchanged"
   tag = ["git"]
   output = ""
+[[snippets]]
+  description = "git diff side by side"
+  command = "git -c delta.side-by-side=true diff ."
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git diff context 0"
+  command = "git -c diff.context=0 -c diff.interHunkContext=0 diff ."
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git pager less"
+  command = "git -c pager.diff=less diff ."
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git shallow clone"
+  command = "git clone --depth=1 -b main "
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git diff with origin"
+  command = "git diff --name-status @{u}..HEAD"
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git get branch name"
+  command = "git rev-parse --abbrev-ref HEAD"
+  tag = ["git"]
+  output = ""
+[[snippets]]
+  description = "git diff with origin"
+  command = "git diff --name-status @{u}..HEAD"
+  tag = ["git"]
+  output = ""
+
 
 # awscli {{{1
 [[snippets]]
