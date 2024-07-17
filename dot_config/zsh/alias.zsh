@@ -2,12 +2,11 @@ alias ls='eza --group-directories-first'
 alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
 alias la='ll -gHiS'
 
-alias rm='trash'
+abbr -S -q -f rm='trash -F'
 
-# abbr rm='rm -i'
 # abbr cp='cp -i -p'
 # abbr mv='mv -i'
-# abbr mkdir='mkdir -p'
+abbr -S -q -f mkdir='mkdir -p'
 
 alias vi='nvim'
 # alias vim='/usr/local/bin/nvim'

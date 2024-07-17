@@ -21,7 +21,7 @@ local plugins = {
   },
   { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
-    "phaazon/hop.nvim",
+    "hadronized/hop.nvim",
     config = function() require("pluginconfig/hop") end,
   },
   {
@@ -29,6 +29,7 @@ local plugins = {
     config = function() require("pluginconfig/nvim-hlslens") end,
   },
 
+  -- Notification
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -46,7 +47,11 @@ local plugins = {
     "j-hui/fidget.nvim",
     config = function() require("fidget").setup() end,
   },
-  { "4513ECHO/nvim-keycastr" },
+  {
+    "NStefan002/screenkey.nvim",
+    lazy = false,
+    version = "*",
+  },
 
   {
     "oneubauer/jsonpath.nvim",
@@ -78,6 +83,7 @@ local plugins = {
       "markdown",
     },
   },
+  { "dhruvasagar/vim-table-mode" },
 
   {
     "kylechui/nvim-surround",
@@ -201,6 +207,16 @@ local plugins = {
       "nvim-tree/nvim-web-devicons",
     },
   }, -- LSP UIs
+
+  {
+    "ray-x/go.nvim",
+    dependencies = {
+      "ray-x/guihua.lua",
+    },
+    config = function() require("go").setup() end,
+    event = { "CmdlineEnter" },
+    ft = { "go", "gomod" },
+  },
   { "simrat39/rust-tools.nvim" },
   {
     "nvim-java/nvim-java",
