@@ -33,7 +33,7 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 162 "<di
 # Quick Note
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 190 "<dict><key>enabled</key><false/></dict>"
 
-# Turn Do Not Disturb On/Off
+# Turn Do Not Disturb On/Off (Cmd + F11)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 175 "
   <dict>
     <key>enabled</key><true/>
@@ -49,7 +49,7 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 175 "
   </dict>
 "
 
-# Move focus to next window
+# Move focus to next window (Alt + Tab)
 defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "
   <dict>
     <key>enabled</key><true/>
@@ -67,3 +67,6 @@ defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add 27 "
 
 # Press Global(fn) to
 defaults write com.apple.HIToolbox AppleFnUsageType 0
+
+# Do not show character accents menu when key held down for a long time.
+defaults write NSGlobalDomain "ApplePressAndHoldEnabled" -bool "false"

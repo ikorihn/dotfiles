@@ -6,6 +6,7 @@ defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 # 3本指のLook up & data detectors
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerTapGesture -bool false
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerTapGesture -bool false
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -bool false
 
 # ドラッグロック
 defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
