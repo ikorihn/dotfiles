@@ -77,7 +77,7 @@ alias ll='ls -AlFh --show-control-chars'"""
   output = ""
 [[snippets]]
   description = "change slackapp font"
-  command = """/slackfont "HackGen Console NF""""
+  command = """/slackfont 'HackGen Console NF'"""
   tag = ["slack"]
   output = ""
 [[snippets]]
