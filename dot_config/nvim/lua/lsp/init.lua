@@ -5,3 +5,5 @@ end
 
 require("lsp.lsp-installer")
 require("lsp.lspsaga")
+
+require("aerial").setup()

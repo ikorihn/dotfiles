@@ -37,6 +37,7 @@ configs.setup({
     "sql",
     "toml",
     "typescript",
+    "vimdoc",
     "yaml",
   },
   ignore_install = { "markdown", "phpdoc" }, -- List of parsers to ignore installing

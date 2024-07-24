@@ -125,8 +125,12 @@ local plugins = {
     "nvim-tree/nvim-tree.lua",
     config = function() require("pluginconfig/nvim-tree") end,
   },
-  -- { "akinsho/bufferline.nvim", version = "v3.*", dependencies = 'nvim-tree/nvim-web-devicons', config = function() require("pluginconfig/bufferline") end },
-  { "moll/vim-bbye" },
+  {
+    "akinsho/bufferline.nvim",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function() require("pluginconfig/bufferline") end,
+  },
+  { "ojroques/nvim-bufdel" },
   {
     "nvim-lualine/lualine.nvim",
     config = function() require("pluginconfig/lualine") end,
@@ -206,7 +210,25 @@ local plugins = {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-  }, -- LSP UIs
+  },
+  {
+    "ray-x/lsp_signature.nvim",
+    event = "VeryLazy",
+  },
+  {
+    "folke/trouble.nvim",
+    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    cmd = "Trouble",
+  },
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+  },
 
   {
     "ray-x/go.nvim",
@@ -255,6 +277,7 @@ local plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
     config = function() require("pluginconfig/treesitter") end,
   },
   { "nvim-treesitter/nvim-treesitter-context" },
@@ -265,7 +288,6 @@ local plugins = {
     "lewis6991/gitsigns.nvim",
     config = function() require("pluginconfig/gitsigns") end,
   },
-  { "rbgrouleff/bclose.vim" },
   { "iberianpig/tig-explorer.vim", dependencies = { "rbgrouleff/bclose.vim" } },
   { "ruanyl/vim-gh-line" },
   { "sindrets/diffview.nvim" },

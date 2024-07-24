@@ -154,6 +154,7 @@ mason_lspconfig.setup_handlers({
       on_attach = function(client, bufnr)
         LspKeymaps(bufnr)
         require("illuminate").on_attach(client)
+        require("lsp_signature").on_attach({}, bufnr)
 
         if server_name == "tsserver" then
           -- this is important, otherwise tsserver will format ts/js files which we *really* don't want.

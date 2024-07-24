@@ -25,9 +25,6 @@ vim.keymap.set("n", "gQ", "<Nop>")
 
 -- Normal --
 
--- Navigate buffers
-keymap("n", "<S-l>", ":bnext<CR>", opts)
-keymap("n", "<S-h>", ":bprevious<CR>", opts)
 -- Quickfix
 keymap("n", "<C-n>", ":cnext<CR>", opts)
 keymap("n", "<C-p>", ":cprevious<CR>", opts)
@@ -164,6 +161,33 @@ function LspKeymaps(bufnr)
   buf_set_keymap(bufnr, "n", "<Space>r", "<cmd>lua vim.lsp.buf.rename()<cr>", lsp_opts)
   buf_set_keymap(bufnr, "n", "<Space>s", "<cmd>lua vim.lsp.buf.signature_help()<CR>", lsp_opts)
   buf_set_keymap(bufnr, "n", "<Space>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", lsp_opts)
+
+  buf_set_keymap(bufnr, "n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>xs", "<cmd>Trouble symbols toggle focus=false<cr>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>xl", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", lsp_opts)
+
+  buf_set_keymap(bufnr, "n", "<leader>{", "<cmd>AerialPrev<CR>", lsp_opts)
+  buf_set_keymap(bufnr, "n", "<leader>}", "<cmd>AerialNext<CR>", lsp_opts)
+  keymap("n", "<leader>a", "<cmd>AerialToggle!<CR>", opts)
 end
 
 function NoiceKeymaps() keymap("n", "<leader>nd", "<cmd>Noice dismiss<CR>", opts) end
+
+-- Bufferline
+
+-- Navigate buffers
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprevious<CR>", opts)
+
+vim.keymap.set('n', '<leader>wl', '<CMD>BufferLineCloseRight<CR>')
+vim.keymap.set('n', '<leader>wh', '<CMD>BufferLineCloseLeft<CR>')
+vim.keymap.set('n', '<leader>wall', '<CMD>BufferLineCloseOthers<CR>')
+vim.keymap.set('n', '<leader>ws', '<CMD>BufferLineSortByDirectory<CR>')
+
+vim.keymap.set('n', '<S-l>', '<CMD>BufferLineCycleNext<CR>')
+vim.keymap.set('n', '<S-h>', '<CMD>BufferLineCyclePrev<CR>')
+vim.keymap.set('n', '<S-M-l>', '<CMD>BufferLineMoveNext<CR>')
+vim.keymap.set('n', '<S-M-h>', '<CMD>BufferLineMovePrev<CR>')
