@@ -34,9 +34,6 @@ github = "zsh-users/zsh-history-substring-search"
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
 apply = ["source"]
-[plugins.zsh-vi-mode]
-github = "jeffreytse/zsh-vi-mode"
-apply = ["source"]
 
 [plugins.zsh-abbr]
 github = "olets/zsh-abbr"
@@ -55,4 +52,8 @@ use = ["alias.zsh", "local.zsh", "functions.zsh", "plugins.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
 use = ["sync.zsh", "options.zsh"]
+apply = ["source"]
+
+[plugins.zsh-vi-mode]
+github = "jeffreytse/zsh-vi-mode"
 apply = ["source"]
