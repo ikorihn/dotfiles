@@ -42,13 +42,13 @@ zstyle ':completion:*:mvn:*' plugins $maven_plugins
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
   alias k=kubectl
-  source <(kubectl completion zsh)
+  # source <(kubectl completion zsh)
 fi
 
-if command -v nerdctl 1>/dev/null 2>&1; then
-  source <(nerdctl completion zsh)
-  compdef _nerdctl nerdctl
-fi
+# if command -v nerdctl 1>/dev/null 2>&1; then
+#   source <(nerdctl completion zsh)
+#   compdef _nerdctl nerdctl
+# fi
 
 source <(docker completion zsh)
 
