@@ -80,11 +80,6 @@ alias ll='ls -AlFh --show-control-chars'"""
   command = """/slackfont 'HackGen Console NF'"""
   tag = ["slack"]
   output = ""
-[[snippets]]
-  description = "go build cross platform"
-  command = """CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags '-s -w' -trimpath"""
-  tag = ["go"]
-  output = ""
 
 [[snippets]]
   description = "xml select element example"
@@ -101,7 +96,6 @@ alias ll='ls -AlFh --show-control-chars'"""
   command = """xmlstarlet ed -P --inplace       -d '/Properties/Property[@key="trainmail"]' <filepath>"""
   tag = ["xml"]
   output = ""
-
 
 # git {{{1
 [[snippets]]
@@ -160,6 +154,17 @@ alias ll='ls -AlFh --show-control-chars'"""
   tag = ["git"]
   output = ""
 
+# Go {{{1
+[[snippets]]
+  description = "go build cross platform"
+  command = """CGO_ENABLED=0 GOOS=<os=linux> GOARCH=<arch=arm64> go build -ldflags '-s -w' -trimpath -o <output=bin> ./cmd"""
+  tag = ["go"]
+  output = ""
+[[snippets]]
+  description = "go update all"
+  command = "go get -u all ./..."
+  tag = ["go"]
+  output = ""
 
 # awscli {{{1
 [[snippets]]
