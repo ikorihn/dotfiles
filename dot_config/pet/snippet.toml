@@ -165,6 +165,11 @@ alias ll='ls -AlFh --show-control-chars'"""
   command = "go get -u all ./..."
   tag = ["go"]
   output = ""
+[[snippets]]
+  description = "install/update Go runtime"
+  command = """sudo rm -rf /usr/local/go && curl -L https://go.dev/dl/$(curl 'https://go.dev/dl/?mode=json' | jq -r '.[0].files[] | select(.os == "darwin" and .arch == "arm64" and .kind == "archive") | .filename') | sudo tar -zx -C /usr/local/"""
+  tag = ["go"]
+  output = ""
 
 # awscli {{{1
 [[snippets]]
