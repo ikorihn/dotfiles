@@ -288,7 +288,21 @@ local plugins = {
     "lewis6991/gitsigns.nvim",
     config = function() require("pluginconfig/gitsigns") end,
   },
-  { "iberianpig/tig-explorer.vim", dependencies = { "rbgrouleff/bclose.vim" } },
+  {
+    "FabijanZulj/blame.nvim",
+    config = function()
+      require("blame").setup({
+        date_format = "%Y-%m-%d %H:%M:%S",
+        mappings = {
+          commit_info = "i",
+          stack_push = "<TAB>",
+          stack_pop = "<BS>",
+          show_commit = "<CR>",
+          close = { "<esc>", "q" },
+        },
+      })
+    end,
+  },
   { "ruanyl/vim-gh-line" },
   { "sindrets/diffview.nvim" },
 

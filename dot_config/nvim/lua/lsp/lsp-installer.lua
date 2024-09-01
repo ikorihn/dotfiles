@@ -18,7 +18,6 @@ local servers = {
   "biome",
   "jsonnet_ls",
   "jdtls",
-  "groovyls",
   "typos_lsp",
 }
 

@@ -251,6 +251,12 @@ distinct() {
 #  end
 }
 
+relpath() {
+  target=${1}
+  source=${2-$PWD}
+  realpath --relative-to=${source} $target
+}
+
 ########
 # ssh
 ########
