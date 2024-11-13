@@ -1,3 +1,4 @@
+[general]
 import = [
   "~/.local/share/alacritty/alacritty-theme/themes/catppuccin.toml",
   "~/.config/alacritty/keybinds.toml",
@@ -25,7 +26,7 @@ style = "Italic"
 family = "HackGen Console NF"
 style = "Regular"
 
-[shell]
+[terminal.shell]
 args = ["-c", "tmux a -t 0 || tmux"]
 program = "zsh"
 
