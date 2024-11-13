@@ -13,12 +13,13 @@ local servers = {
   "yamlls",
   "gopls",
   "rust_analyzer",
-  "tsserver",
+  "ts_ls",
   "denols",
   "biome",
   "jsonnet_ls",
-  "jdtls",
   "typos_lsp",
+  "terraformls",
+  "bashls",
 }
 
 mason.setup({
@@ -262,6 +263,7 @@ local sources = {
   formatting.shfmt.with({ extra_args = { "-i", "2", "-sr", "-ci", "-bn" } }),
   -- null_ls.builtins.code_actions.shellcheck,
   formatting.sql_formatter,
+  formatting.terraform_fmt,
 }
 
 local node_root_dir = lspconfig.util.root_pattern("biome.json")

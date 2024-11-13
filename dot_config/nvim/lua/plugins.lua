@@ -295,8 +295,8 @@ local plugins = {
         date_format = "%Y-%m-%d %H:%M:%S",
         mappings = {
           commit_info = "i",
-          stack_push = "<TAB>",
-          stack_pop = "<BS>",
+          stack_push = "-",
+          stack_pop = "_",
           show_commit = "<CR>",
           close = { "<esc>", "q" },
         },

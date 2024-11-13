@@ -6,8 +6,8 @@ end
 bufferline.setup({
   options = {
     numbers = "both",
-    max_name_length = 20,
-    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+    max_name_length = 30,
+    max_prefix_length = 20, -- prefix used when a buffer is de-duplicated
     truncate_names = true, -- whether or not tab names should be truncated
     diagnostics = "nvim_lsp",
     custom_filter = function(buf_number)
@@ -37,7 +37,6 @@ bufferline.setup({
         separator = true,
       },
     },
-    enforce_regular_tabs = true,
     sort_by = "insert_after_current", -- 'insert_after_current' |'insert_at_end' | 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
   },
 })

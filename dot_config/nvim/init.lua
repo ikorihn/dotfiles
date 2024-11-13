@@ -9,7 +9,7 @@ load("options")
 load("keymaps")
 
 if vim.g.vscode == 1 then
-  load("vscode")
+  load("vscode-config")
   return
 end
 
