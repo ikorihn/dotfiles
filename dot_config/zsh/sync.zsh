@@ -57,7 +57,7 @@ function zvm_after_init() {
     --header 'Press CTRL-Y to copy command into clipboard'
 EOS
   )
-  export FZF_ALT_C_OPTS="--preview 'exa -T -L 1 {}'"
+  export FZF_ALT_C_OPTS="--preview 'eza -T -L 1 {}'"
   export FZF_CTRL_T_COMMAND='fd --type file --hidden --follow --exclude .git'
   export FZF_CTRL_T_OPTS='--preview "bat --color=always --style=header,grid --line-range :100 {}"'
   export FZF_TMUX=1
@@ -66,7 +66,7 @@ EOS
   # https://github.com/Aloxaf/fzf-tab
   enable-fzf-tab
   # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
-  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+  zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
   zstyle ':fzf-tab:*' fzf-bindings 'ctrl-j:accept' 'ctrl-a:toggle-all' 'ctrl-space:toggle+down'
   # disable sort when completing `git checkout`
   zstyle ':completion:*:git-checkout:*' sort false

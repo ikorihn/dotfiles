@@ -1,16 +1,42 @@
 # Don't let ripgrep vomit really long lines to my terminal, and show a preview.
-#--max-columns=150
-#--max-columns-preview
+--max-columns=200
+--max-columns-preview
 
 # Add my 'web' type.
 --type-add
 web:*.{html,css,js,ts,vue}
 
-# Set the colors.
---colors=line:style:bold
-
 # Because who cares about case!?
 --smart-case
 
 --no-heading
-#--hidden
+
+# Search hidden files and directories.
+--hidden
+
+# Follow symbolic links.
+--follow
+
+# Don't respect ignore files (.gitignore, .ignore, etc.).
+--no-ignore
+
+# Exclude directories.
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor,dist}
+
+# Exclude file types.
+--glob=!*.{lock}
+
+# Exclude files.
+--glob=!{package-lock.json}
+
+# Sort by file path.
+--sort=path
+
+# Configure color settings and styles.
+# --colors=path:bg:0x3b,0x3b,0x3b
+# --colors=path:fg:white
+# --colors=line:style:bold
+# --colors=line:fg:0xf2,0xc2,0x60
+# --colors=match:bg:0x2b,0x83,0xa6
+# --colors=match:fg:0xff,0xff,0xff
+# --colors=match:style:nobold
