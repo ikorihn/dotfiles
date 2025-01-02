@@ -39,6 +39,16 @@ zstyle ':completion:*:*:mvn:*:warnings' format $'\e[1m -- No matches found --\e[
 maven_plugins=(dependency versions spotless)
 zstyle ':completion:*:mvn:*' plugins $maven_plugins
 
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${HOME}/src/google-cloud-sdk/path.zsh.inc" ]; then
+  source "${HOME}/src/google-cloud-sdk/path.zsh.inc"
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f "${HOME}/src/google-cloud-sdk/completion.zsh.inc" ]; then
+  source "${HOME}/src/google-cloud-sdk/completion.zsh.inc"
+fi
+
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
   alias k=kubectl
