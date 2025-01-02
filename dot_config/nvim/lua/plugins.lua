@@ -140,10 +140,6 @@ local plugins = {
     config = function() require("pluginconfig/toggleterm") end,
   },
   {
-    "ahmedkhalf/project.nvim",
-    config = function() require("pluginconfig/project") end,
-  },
-  {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     config = function() require("pluginconfig/indentline") end,
@@ -273,6 +269,24 @@ local plugins = {
   --   config = function() require("pluginconfig/fzf-lua") end,
   -- },
   { "jvgrootveld/telescope-zoxide" },
+  { "nvim-telescope/telescope-live-grep-args.nvim" },
+  {
+    "nvim-telescope/telescope-project.nvim",
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+  },
+  {
+    "imNel/monorepo.nvim",
+    config = function()
+      require("monorepo").setup({
+        autoload_telescope = false, -- Automatically loads the telescope extension at setup
+      })
+    end,
+  },
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+  },
 
   -- Treesitter
   {

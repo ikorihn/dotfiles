@@ -87,6 +87,9 @@ keymap("c", "<C-d>", "<Del>", opts)
 keymap("n", "<Leader>q", utils.ToggleQuickFix)
 keymap("n", "gf", utils.OpenUrlOrFile)
 
+keymap("", "<C-g><C-g>", ":echo expand('%:p:h')", opts)
+keymap("", "<leader>vs", ":vert sb#<CR>", opts)
+
 -- Plugins --
 
 -- NvimTree
