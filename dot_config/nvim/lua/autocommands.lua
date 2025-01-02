@@ -91,3 +91,27 @@ vim.api.nvim_create_autocmd({ "TextYankPost" }, {
 -- 	end,
 -- 	once = false,
 -- })
+
+
+local function do_not_open_large_file()
+    local max_size = 10 * 1024 * 1024 -- 10 MB
+    local file = vim.fn.expand('%:p')
+    if vim.fn.getfsize(file) > max_size then
+        vim.api.nvim_err_writeln("File too large to open!")
+        vim.cmd("bdelete") -- Close the buffer
+    end
+end
+local function optimize_for_large_files()
+    local max_size = 5 * 1024 * 1024 -- 5 MB
+    local file = vim.fn.expand('%:p')
+    if vim.fn.getfsize(file) > max_size then
+        vim.cmd("setlocal noswapfile noundofile nowrap")
+        vim.cmd("syntax off")
+        vim.api.nvim_err_writeln("Large file detected: Disabling certain features for performance.")
+    end
+end
+
+vim.api.nvim_create_autocmd("BufReadPre", {
+    pattern = "*",
+    callback = do_not_open_large_file,
+})
