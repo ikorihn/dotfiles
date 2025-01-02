@@ -21,7 +21,7 @@ web:*.{html,css,js,ts,vue}
 --no-ignore
 
 # Exclude directories.
---glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor,dist}
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor,dist,.yarn,.npm,.cache}
 
 # Exclude file types.
 --glob=!*.{lock}
