@@ -36,6 +36,7 @@
 [alias]
   pushf = push --force-with-lease --force-if-includes
   difft = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
+  diffmain =  -c delta.features=mantis-shrimp diff origin/main...HEAD
   dirdiff = difftool --dir-diff
   st = status
   sw = switch
@@ -61,13 +62,13 @@
   diffFilter = delta --color-only --features=interactive
 
 [pager]
-   # log = delta
+   log = delta
    # reflog = delta
    show = delta
    diff = delta
 
 [delta]
-  features = woolly-mammoth
+  features = weeping-willow # mantis-shrimp, colibri
   # line-numbers = true
   # side-by-side = true
 
