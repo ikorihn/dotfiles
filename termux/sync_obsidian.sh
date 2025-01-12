@@ -1,5 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
-    
+
 cd $HOME/storage/shared/memo
 
 git pull --autostash --rebase
