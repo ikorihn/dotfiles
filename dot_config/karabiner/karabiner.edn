@@ -172,11 +172,19 @@
         ]
     }
 
+    ; {
+    ;     :des "Press left command once to japanese_eisuu, twice to japanese_kana."
+    ;     :rules [
+    ;         [:left_command [:japanese_kana ["left-command-pressed-once" 0]] ["left-command-pressed-once" 1]]
+    ;         [:left_command :lazy_left_command ["left-command-pressed-once" 0] {:alone [:japanese_eisuu ["left-command-pressed-once" 1]] :delayed {:invoked ["left-command-pressed-once" 0] :canceled ["left-command-pressed-once" 0]}}]
+    ;     ]
+    ; }
+
     {
-        :des "Press left command once to japanese_eisuu, twice to japanese_kana."
+        :des "Press left command to japanese_eisuu, left opt to japanese_kana."
         :rules [
-            [:left_command [:japanese_kana ["left-command-pressed-once" 0]] ["left-command-pressed-once" 1]]
-            [:left_command :lazy_left_command ["left-command-pressed-once" 0] {:alone [:japanese_eisuu ["left-command-pressed-once" 1]] :delayed {:invoked ["left-command-pressed-once" 0] :canceled ["left-command-pressed-once" 0]}}]
+            [:left_command :left_command nil {:alone [:japanese_eisuu]}]
+            [:left_option :left_option nil {:alone [:japanese_kana]}]
         ]
     }
 
