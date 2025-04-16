@@ -1,22 +1,25 @@
-#!/bin/zsh -u
+#!/bin/bash
 
-# https://qiita.com/koara-local/items/eae7942131e53cb8031a
+current_branch=$(git rev-parse --abbrev-ref HEAD)
 
-current_branch=$(git branch | grep "^\*")
+# e.g.
+## AAA-123-xxx-hogehoge -> AAA-123
+## AAA-xxx-hogehoge -> AAA
+## feat/AAA-123 -> AAA-123
+function projectid_or_issueid() {
+  if [[ $1 =~ ^([a-z]+/)?([A-Z]+(-[0-9]+)?).*$ ]]; then
+    echo "${BASH_REMATCH[2]}"
+    return
+  fi
+}
 
-if [[ ! "$current_branch" =~ .*/[A-Z]+-[0-9]+.* ]]; then
-    exit 0
-fi
+id=$(projectid_or_issueid "$current_branch")
 
-# e.g. feature/AAA-123-xxx-hogehoge -> AAA-123
-issue_id=$(echo "$current_branch" | sed -E 's@^.*/([A-Z]+-[0-9]+).*$@\1@')
+message_first_line=$(head -n 1 "$1")
 
-commit_message=$(head -n 1 $1)
-
-if [[ "$commit_message" =~ '^[A-Z]+-[0-9]+ .*$' ]]; then
-  # issue idがすでにある場合置き換える
-  sed -i -E "1 s@^[A-Z]+-[0-9]+ (.*)\$@${issue_id} \1@" $1
-elif [[ ! $(head -n 1 $1 | grep "$issue_id") ]]; then
-  # 頭にissue idをつける
-  sed -i -E "1 s@(.*)@${issue_id} \1@" $1
+if [[ "${message_first_line}" =~ ^[A-Z]+(-[0-9]+)?.*$ ]]; then
+  # コミットメッセージにすでに含まれる場合は置き換える
+  sed -i -E "1 s@^[A-Z]+(-[0-9]+)?@${id}@" "$1"
+elif [[ ! "${message_first_line}" =~ ${id} ]]; then
+  sed -i -E "1 s@^@${id} @" "$1"
 fi

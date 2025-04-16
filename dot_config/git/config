@@ -2,15 +2,24 @@
   path = ~/.config/git/config.local
   path = ~/.config/git/delta-themes.gitconfig
 
+[help]
+  autocorrect = prompt
+
 [core]
-  editor = nvim
+  editor = nvim --noplugin
   precomposeunicode = true
   quotepath = false
   ignorecase = false
   # sparsecheckout = true
 
 [init]
+  defaultBranch = main
   templatedir = ~/.config/git/template
+
+[branch]
+  sort = -committerdate
+[tag]
+  sort = version:refname
 
 [difftool]
   prompt = false
@@ -27,11 +36,17 @@
 
 [diff]
   tool = vimdirdiff
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
 [merge]
   tool = nvimdiff
   ff = true
 [rebase]
   instructionFormat = (%ae) %s
+  autoSquash = true
+  autoStash = true
 
 [alias]
   pushf = push --force-with-lease --force-if-includes
@@ -57,6 +72,7 @@
 
 [fetch]
   prune = true
+  pruneTags = true
 
 [interactive]
   diffFilter = delta --color-only --features=interactive
@@ -110,3 +126,4 @@
   autoSetupRemote = true
 [rerere]
   enabled = true
+  autoupdate = true

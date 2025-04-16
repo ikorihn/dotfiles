@@ -86,6 +86,8 @@ fi
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
+export TIG_EDITOR=nvim
+
 # # window名にgitリポジトリ名を表示する
 # autoload -Uz add-zsh-hook
 # autoload -Uz vcs_info
