@@ -30,7 +30,7 @@ keymap("n", "<C-n>", ":cnext<CR>", opts)
 keymap("n", "<C-p>", ":cprevious<CR>", opts)
 
 -- Tab
-keymap("n", "te", ":tabedit %:h")
+keymap("n", "te", ":tabedit")
 keymap("n", "tn", ":tabnew<Return>")
 
 -- Change tab width
@@ -97,7 +97,7 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Git
 keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
-keymap("n", "<leader>gb", ":BlameToggle<CR>", opts)
+keymap("n", "<leader>gb", ":Gitsigns blame<CR>", opts)
 
 -- transparent
 keymap("n", "<leader>tt", ":TransparentToggle<CR>", opts)

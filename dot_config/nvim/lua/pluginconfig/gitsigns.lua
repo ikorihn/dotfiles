@@ -32,7 +32,6 @@ gitsigns.setup({
     delay = 200,
   },
   current_line_blame_formatter = "<author>, <author_time:%R> - <summary>",
-  show_deleted = false,
   attach_to_untracked = false,
 
   on_attach = function(bufnr)

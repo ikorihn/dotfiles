@@ -302,21 +302,6 @@ local plugins = {
     "lewis6991/gitsigns.nvim",
     config = function() require("pluginconfig/gitsigns") end,
   },
-  {
-    "FabijanZulj/blame.nvim",
-    config = function()
-      require("blame").setup({
-        date_format = "%Y-%m-%d %H:%M:%S",
-        mappings = {
-          commit_info = "i",
-          stack_push = "-",
-          stack_pop = "_",
-          show_commit = "<CR>",
-          close = { "<esc>", "q" },
-        },
-      })
-    end,
-  },
   { "ruanyl/vim-gh-line" },
   { "sindrets/diffview.nvim" },
 

@@ -17,7 +17,7 @@ telescope.setup({
   defaults = {
     initial_mode = "normal",
     path_display = { "smart" },
-    file_ignore_patterns = { "%.git/", "node_modules", "package-lock.json", ".cache", ".data" },
+    file_ignore_patterns = { "%.git/", "node_modules", "package-lock.json", "%.cache", "%.data" },
     mappings = {
       i = {
         ["<Down>"] = actions.cycle_history_next,
