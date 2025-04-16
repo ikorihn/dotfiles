@@ -2,7 +2,8 @@ alias ls='eza --group-directories-first'
 alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
 alias la='ll -gHiS'
 
-abbr -S -q -f rm='trash -F'
+#abbr -S -q -f rm='trash -F'
+#abbr -S -q rmr='rm -r'
 
 # abbr cp='cp -i -p'
 # abbr mv='mv -i'
@@ -29,6 +30,7 @@ abbr -g -q devnull='>/dev/null 2>&1'
 abbr -g -q pc='| pbcopy'
 abbr -g -q L='| less'
 abbr -S -q vimcon='vim ~/.config/**'
+abbr -g -q xn='| xargs nvim'
 
 # クリップボードにコピーしつつ標準出力
 abbr -S -q teee='tee >(pbcopy)'

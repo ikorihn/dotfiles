@@ -5,6 +5,10 @@ bindkey '^[[B' history-substring-search-down
 if command -v mise 1>/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
+if command -v aqua 1>/dev/null 2>&1; then
+  export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+  source <(aqua completion zsh)
+fi
 
 # direnv
 if command -v direnv 1>/dev/null 2>&1; then
@@ -59,7 +63,6 @@ fi
 #   source <(nerdctl completion zsh)
 #   compdef _nerdctl nerdctl
 # fi
-
 source <(docker completion zsh)
 
 # https://github.com/go-jira/jira
@@ -85,6 +88,11 @@ fi
 
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+
+# uv
+if command -v uv 1>/dev/null 2>&1; then
+  eval "$(uv generate-shell-completion zsh)"
+fi
 
 export TIG_EDITOR=nvim
 

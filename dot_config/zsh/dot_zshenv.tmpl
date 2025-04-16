@@ -20,7 +20,7 @@ path=($HOME/.local/bin(N-/) ${path})
 # Homebrew
 if [[ -e /opt/homebrew/bin/brew ]]; then
   # M1チップ
-{{ output "/opt/homebrew/bin/brew" "shellenv" | trim | indent 2 }}
+{{ output "/opt/homebrew/bin/brew" "shellenv" "zsh" | trim | indent 2 }}
 fi
 
 path=(
@@ -42,8 +42,6 @@ manpath=(
     $HOMEBREW_PREFIX/opt/grep/libexec/gnuman(N-/) # grep
     ${manpath}
 )
-
-fpath=($HOMEBREW_PREFIX/share/zsh/site-functions/(N-/) $fpath)
 
 if [[ -e "$HOME/.local/share/zsh/completions" ]]; then
   fpath=($HOME/.local/share/zsh/completions/(N-/) $fpath)

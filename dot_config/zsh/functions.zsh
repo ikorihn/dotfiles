@@ -3,13 +3,22 @@
 ########
 
 fbr() {
+  res=$(git stash)
   git branch -vv \
     | fzf +m \
     | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
+
+  if [[ ! $res =~ "No local changes" ]]; then
+    git stash pop
+  fi
 }
 
 fbrm() {
+  res=$(git stash)
   git branch -r | fzf +m | sed 's#^ *origin/##' | xargs -I{} git switch {}
+  if [[ ! $res =~ "No local changes" ]]; then
+    git stash pop
+  fi
 }
 
 fbrd() {
