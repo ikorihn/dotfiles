@@ -287,6 +287,9 @@ local plugins = {
   {
     "nvim-telescope/telescope-frecency.nvim",
   },
+  {
+    "nvim-telescope/telescope-ui-select.nvim",
+  },
 
   -- Treesitter
   {
@@ -334,6 +337,26 @@ local plugins = {
     end,
   },
   { "kristijanhusak/vim-dadbod-completion" },
+
+  -- Copilot
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    config = function() require("pluginconfig/copilot") end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+  },
+  {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" },
+      { "nvim-lua/plenary.nvim" },
+    },
+    build = "make tiktoken", -- Only on MacOS or Linux
+    opts = {},
+  },
 }
 
 require("lazy").setup(plugins, {
