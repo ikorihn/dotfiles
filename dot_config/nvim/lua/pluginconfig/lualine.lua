@@ -186,7 +186,7 @@ ins_right({
 
 local lsp_names = function()
   local clients = {}
-  for _, client in ipairs(vim.lsp.get_active_clients({ bufnr = 0 })) do
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
     if client.name == "null-ls" then
       local sources = {}
       for _, source in ipairs(require("null-ls.sources").get_available(vim.bo.filetype)) do
@@ -225,7 +225,7 @@ end
 ins_right({
   -- Lsp server name .
   function()
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return "No Active Lsp"
     end
