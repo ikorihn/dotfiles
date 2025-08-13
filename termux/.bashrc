@@ -5,7 +5,7 @@ export SVDIR=$PREFIX/var/service
 export LOGDIR=$PREFIX/var/log
 service-daemon start
 
-alias ll='ls -al'
+alias ll='ls -alh --group-directories-first --color=auto'
 alias bashrc='vim ~/.bashrc'
 alias sbashrc='source ~/.bashrc'
 alias cdm="cd $MEMO_DIR"
@@ -36,6 +36,7 @@ allpush() {
 recreaterepo() {
     rm -rf .git
     git init
+    git sparse-checkout set --no-cone '/*' '!/*/' '/.obsidian' '/_scripts/' '/_templates/' '/daily/*' '!/daily/*/' '!/daily/2025/' '/media/' '/private/'
     git remote add origin git@github.com:ikorihn/memo.git
     git fetch origin
     git switch -f master
