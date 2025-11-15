@@ -1,7 +1,5 @@
 local status_ok, gitsigns = pcall(require, "gitsigns")
-if not status_ok then
-  return
-end
+if not status_ok then return end
 
 gitsigns.setup({
   signs = {
@@ -26,7 +24,7 @@ gitsigns.setup({
   linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
   word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 
-  current_line_blame = true,
+  current_line_blame = false,
   current_line_blame_opts = {
     virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
     delay = 200,
@@ -35,6 +33,34 @@ gitsigns.setup({
   attach_to_untracked = false,
 
   on_attach = function(bufnr)
+    -- gitsigns.nvim の diffthis モードで 'q' を使えるようにする autocmd
+    vim.api.nvim_create_autocmd("OptionSet", {
+      pattern = "diff",
+      desc = "Map q to exit gitsigns diff mode",
+      callback = function(e)
+        vim.keymap.set("n", "q", function()
+          local has_diff = vim.wo.diff
+          local target_win
+          if not has_diff then return "q" end
+
+          for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+            local buf = vim.api.nvim_win_get_buf(win)
+            local bufname = vim.api.nvim_buf_get_name(buf)
+            if bufname:find("^gitsigns://") then
+              target_win = win
+              break
+            end
+          end
+          if target_win then
+            vim.schedule(function() vim.api.nvim_win_close(target_win, true) end)
+            return ""
+          end
+
+          return "q"
+        end, { expr = true, buffer = e.buf })
+      end,
+    })
+
     -- keymaps
     local function map(mode, l, r, opts)
       opts = opts or {}

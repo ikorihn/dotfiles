@@ -54,11 +54,9 @@ local plugins = {
   },
 
   {
-    "oneubauer/jsonpath.nvim",
-    branch = "oneubauer/add-yaml-support",
+    "phelipetls/jsonpath.nvim",
     ft = {
       "json",
-      "yaml",
     },
     config = function() require("pluginconfig/jsonpath") end,
   },
@@ -93,7 +91,10 @@ local plugins = {
   { "haya14busa/vim-asterisk" },
   --{ "junegunn/vim-easy-align" },
   { "echasnovski/mini.nvim", version = "*" },
-  { "echasnovski/mini.align", config = function() require("mini.align").setup() end },
+  {
+    "echasnovski/mini.align",
+    config = function() require("mini.align").setup() end,
+  },
   -- { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end },
   {
     "johmsalas/text-case.nvim",
@@ -190,13 +191,19 @@ local plugins = {
 
   -- LSP
   { "neovim/nvim-lspconfig" }, -- enable LSP
-  { "williamboman/mason.nvim" },
-  { "williamboman/mason-lspconfig.nvim" },
+  { "mason-org/mason.nvim" },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    dependencies = {
+      "mason-org/mason.nvim",
+      "neovim/nvim-lspconfig",
+    },
+  },
   { "nvimtools/none-ls.nvim" }, -- for formatters and linters
   {
     "jay-babu/mason-null-ls.nvim",
     dependencies = {
-      "williamboman/mason.nvim",
+      "mason-org/mason.nvim",
       "nvimtools/none-ls.nvim",
     },
   },
@@ -231,11 +238,19 @@ local plugins = {
     dependencies = {
       "ray-x/guihua.lua",
     },
-    config = function() require("go").setup() end,
+    config = function(lp, opts)
+      require("go").setup(opts)
+      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function() require("go.format").goimports() end,
+        group = format_sync_grp,
+      })
+    end,
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
   },
-  { "simrat39/rust-tools.nvim" },
+  { "mrcjkb/rustaceanvim", version = "^6" },
   {
     "nvim-java/nvim-java",
     dependencies = {
@@ -277,7 +292,7 @@ local plugins = {
     "nvim-telescope/telescope-file-browser.nvim",
   },
   {
-    "imNel/monorepo.nvim",
+    "ikorihn/monorepo.nvim",
     config = function()
       require("monorepo").setup({
         autoload_telescope = false, -- Automatically loads the telescope extension at setup
@@ -307,6 +322,35 @@ local plugins = {
   },
   { "ruanyl/vim-gh-line" },
   { "sindrets/diffview.nvim" },
+  {
+    "FabijanZulj/blame.nvim",
+    lazy = false,
+    config = function()
+      require("blame").setup({
+        date_format = "%Y-%m-%d",
+        virtual_style = "float",
+        focus_blame = true,
+        merge_consecutive = false,
+        max_summary_width = 30,
+        blame_options = { "-w" },
+        mappings = {
+          commit_info = "i",
+          stack_push = "<TAB>",
+          stack_pop = "<BS>",
+          show_commit = "<CR>",
+          close = { "<esc>", "q" },
+        },
+      })
+    end,
+  },
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
 
   -- DAP
   {

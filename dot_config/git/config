@@ -25,17 +25,18 @@
   prompt = false
 [mergetool]
   keepBackup = false
-[difftool "bbdiff"]
-  cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
-[mergetool "bbdiff"]
-  cmd = bbdiff --wait --resume \"$LOCAL\" \"$REMOTE\"
+[difftool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE
+[difftool "nvimdiffview"]
+  cmd = nvim -f -c "DiffviewOpen"
+
 [difftool "vimdirdiff"]
   cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
 [mergetool "nvimdiff"]
   layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [diff]
-  tool = vimdirdiff
+  tool = nvimdiffview
   algorithm = histogram
   colorMoved = plain
   mnemonicPrefix = true
@@ -50,7 +51,7 @@
 
 [alias]
   pushf = push --force-with-lease --force-if-includes
-  difft = difftool --ignore-submodules --dir-diff --no-symlinks --tool=vimdirdiff
+  difft = difftool --ignore-submodules --dir-diff --no-symlinks
   diffmain =  -c delta.features=mantis-shrimp diff origin/main...HEAD
   dirdiff = difftool --dir-diff
   st = status
