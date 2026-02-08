@@ -3,26 +3,66 @@
 ########
 
 fbr() {
-  res=$(git stash)
-  git branch -vv \
-    | fzf +m \
-    | awk '{print $1}' | sed "s/.* //" | xargs -I{} git switch {}
+  branch_line=$(git branch -vv | fzf +m)
+  branch=$(echo "$branch_line" | awk '{print $1}')
+  if [[ "$branch" == "" || "$branch" == "*" ]]; then
+    return
+  fi
 
+  if [[ "$branch" == "+" ]]; then
+    # If the branch is a worktree, change dir to it
+    branch=$(echo "$branch_line" | awk '{print $2}')
+    worktree="$(git worktree list | rg -F "[${branch}]" | awk '{print $1}')"
+    cd "${worktree}"
+    zle accept-line
+    return
+  fi
+
+  res=$(git stash)
+  git switch $branch
   if [[ ! $res =~ "No local changes" ]]; then
     git stash pop
   fi
 }
 
 fbrm() {
+  branch=$(git branch -r | fzf +m | sed 's#^ *origin/##')
+  if [[ "$branch" == "" || "$branch" == "*" ]]; then
+    return
+  fi
+
   res=$(git stash)
-  git branch -r | fzf +m | sed 's#^ *origin/##' | xargs -I{} git switch {}
+  git switch $branch
   if [[ ! $res =~ "No local changes" ]]; then
     git stash pop
   fi
 }
 
 fbrd() {
-  git branch -vv | fzf -m | awk '{print $1}' | sed "s/.* //" | xargs -I{} git branch -D {}
+  local force
+  while getopts "f" opt; do
+    case $opt in
+      f)
+        force="-f"
+        ;;
+    esac
+  done
+
+  git branch -vv | fzf -m | while read -r branch_line; do
+    branch=$(echo "$branch_line" | awk '{print $1}')
+    if [[ "$branch" == "" || "$branch" == "*" ]]; then
+      return
+    fi
+
+    if [[ "$branch" == "+" ]]; then
+      # If the branch is a worktree, remove worktree before deleting branch
+      branch=$(echo "$branch_line" | awk '{print $2}')
+      worktree="$(git worktree list | rg -F "[${branch}]" | awk '{print $1}')"
+      git worktree remove ${force:-} "${worktree}"
+    fi
+
+    git branch -D "$branch"
+  done
 }
 
 # fshow - git commit browser
@@ -143,6 +183,10 @@ gitroot() {
 
 groot() {
   cd $(gitroot $(pwd))
+}
+
+gwroot() {
+  cd $(dirname $(git rev-parse --git-common-dir))
 }
 
 currentbranch() {

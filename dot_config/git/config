@@ -6,7 +6,8 @@
   autocorrect = prompt
 
 [core]
-  editor = nvim --noplugin
+  # commit messageを入れるのに起動が遅いため
+  editor = nvim -u NONE
   precomposeunicode = true
   quotepath = false
   ignorecase = false
@@ -30,8 +31,6 @@
 [difftool "nvimdiffview"]
   cmd = nvim -f -c "DiffviewOpen"
 
-[difftool "vimdirdiff"]
-  cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
 [mergetool "nvimdiff"]
   layout = "LOCAL,BASE,REMOTE / MERGED"
 
@@ -51,16 +50,17 @@
 
 [alias]
   pushf = push --force-with-lease --force-if-includes
+  diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
   difft = difftool --ignore-submodules --dir-diff --no-symlinks
   diffmain =  -c delta.features=mantis-shrimp diff origin/main...HEAD
   dirdiff = difftool --dir-diff
+  dv = "!f() { nvim -c \"DiffviewOpen $*\"; }; f"
   st = status
   sw = switch
   swc = switch -c
   br = branch
   cp = cherry-pick
   ress = restore --staged .
-  diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
   logn = log --name-status --oneline
   lo = log --color=always --pretty=format:'%Cgreen%h %Creset%ad %Cblue%<(20,trunc)%ae %Cred%d %Creset%s' --date=iso-strict-local
   stu = status -uno # Untracked filesを表示せず，not stagedと，stagedだけの状態を出力する
@@ -70,6 +70,8 @@
   show-merge = "!sh -c 'merge=$(git find-merge $0 $1) && [ -n \"$merge\" ] && git show $merge'"
   version-tags = "tag -l --sort=-v:refname"
   tagl = "tag -l --sort=-creatordate --format='%(creatordate:iso-strict) %(refname:short) %(subject) %(creator)'"
+  wtbase = "rev-parse --git-common-dir"
+  wtdir = "rev-parse --show-toplevel"
 
 [fetch]
   prune = true
