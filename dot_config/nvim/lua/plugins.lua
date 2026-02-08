@@ -321,7 +321,10 @@ local plugins = {
     config = function() require("pluginconfig/gitsigns") end,
   },
   { "ruanyl/vim-gh-line" },
-  { "sindrets/diffview.nvim" },
+  {
+    "sindrets/diffview.nvim",
+    config = function() require("pluginconfig/diffview") end,
+  },
   {
     "FabijanZulj/blame.nvim",
     lazy = false,
@@ -335,8 +338,8 @@ local plugins = {
         blame_options = { "-w" },
         mappings = {
           commit_info = "i",
-          stack_push = "<TAB>",
-          stack_pop = "<BS>",
+          stack_push = "[",
+          stack_pop = "]",
           show_commit = "<CR>",
           close = { "<esc>", "q" },
         },

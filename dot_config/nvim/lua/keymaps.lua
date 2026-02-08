@@ -149,8 +149,26 @@ function LspKeymaps(bufnr)
   buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", lsp_opts)
   keymap("n", "gd", function() builtin.lsp_definitions() end, opts)
   buf_set_keymap(bufnr, "n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", lsp_opts)
-  keymap("n", "gI", function() builtin.lsp_implementations() end, opts)
-  keymap("n", "gr", function() builtin.lsp_references() end, opts)
+  keymap("n", "gI", function()
+    builtin.lsp_implementations({
+      file_ignore_patterns = {
+        "_test%.go", -- _test.go を無視
+        "/mock/", -- パスに mock が含まれるものを無視
+        "mock_.*%.go", -- mock_で始まるファイルを無視
+      },
+      -- プレビューなど他の設定はお好みで
+    })()
+  end, opts)
+  keymap("n", "gr", function()
+    builtin.lsp_references({
+      file_ignore_patterns = {
+        "_test.go", -- _test.go を無視
+        "/mock/", -- パスに mock が含まれるものを無視
+        "mock_.*%.go", -- mock_で始まるファイルを無視
+      },
+      -- プレビューなど他の設定はお好みで
+    })
+  end, opts)
   keymap("n", "gi", function() builtin.lsp_incoming_calls() end, opts)
   keymap("n", "go", function() builtin.lsp_outgoing_calls() end, opts)
   keymap("n", "gl", function() builtin.diagnostics() end, opts)
@@ -185,12 +203,17 @@ function NoiceKeymaps() keymap("n", "<leader>nd", "<cmd>Noice dismiss<CR>", opts
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 
-vim.keymap.set('n', '<leader>wl', '<CMD>BufferLineCloseRight<CR>')
-vim.keymap.set('n', '<leader>wh', '<CMD>BufferLineCloseLeft<CR>')
-vim.keymap.set('n', '<leader>wall', '<CMD>BufferLineCloseOthers<CR>')
-vim.keymap.set('n', '<leader>ws', '<CMD>BufferLineSortByDirectory<CR>')
+vim.keymap.set("n", "<leader>wl", "<CMD>BufferLineCloseRight<CR>")
+vim.keymap.set("n", "<leader>wh", "<CMD>BufferLineCloseLeft<CR>")
+vim.keymap.set("n", "<leader>wall", "<CMD>BufferLineCloseOthers<CR>")
+vim.keymap.set("n", "<leader>ws", "<CMD>BufferLineSortByDirectory<CR>")
 
-vim.keymap.set('n', '<S-l>', '<CMD>BufferLineCycleNext<CR>')
-vim.keymap.set('n', '<S-h>', '<CMD>BufferLineCyclePrev<CR>')
-vim.keymap.set('n', '<S-M-l>', '<CMD>BufferLineMoveNext<CR>')
-vim.keymap.set('n', '<S-M-h>', '<CMD>BufferLineMovePrev<CR>')
+vim.keymap.set("n", "<S-l>", "<CMD>BufferLineCycleNext<CR>")
+vim.keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>")
+vim.keymap.set("n", "<S-M-l>", "<CMD>BufferLineMoveNext<CR>")
+vim.keymap.set("n", "<S-M-h>", "<CMD>BufferLineMovePrev<CR>")
+
+-- Diffview
+keymap("n", "<leader>dd", ":DiffviewOpen ")
+keymap("n", "<leader>dm", ":DiffviewOpen main..HEAD")
+keymap("n", "<leader>df", "<CMD>DiffviewFileHistory %<CR>", opts)
