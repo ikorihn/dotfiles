@@ -11,8 +11,11 @@ local function create_tab_title(tab, tabs, panes, config, hover, max_width)
   -- pane:get_foreground_process_info().status
 
   local title = wezterm.truncate_right(
-  utils.basename(tab.active_pane.current_working_dir) .. ":" .. utils.basename(tab.active_pane.foreground_process_name),
-    max_width)
+    utils.basename(tab.active_pane.current_working_dir)
+      .. ":"
+      .. utils.basename(tab.active_pane.foreground_process_name),
+    max_width
+  )
   if title == "" then
     local dir = string.gsub(tab.active_pane.title, "(.*[: ])(.*)]", "%2")
     dir = utils.convert_useful_path(dir)
@@ -64,7 +67,11 @@ local process_icons = {
 -- Return the Tab's current working directory
 local function get_cwd(tab)
   -- Note, returns URL Object: https://wezfurlong.org/wezterm/config/lua/pane/get_current_working_dir.html
-  return tab.active_pane.current_working_dir.file_path or ""
+  if tab.active_pane.current_working_dir ~= nil then
+    return tab.active_pane.current_working_dir.file_path
+  else
+    return ""
+  end
 end
 
 -- Remove all path components and return only the last value
@@ -143,12 +150,12 @@ local function select_contrasting_fg_color(hex_color)
     return 0.2126 * red / 255 + 0.7152 * green / 255 + 0.0722 * blue / 255
   end
 
-  local color = hex_color:gsub("#", "")   -- Remove leading '#'
+  local color = hex_color:gsub("#", "") -- Remove leading '#'
   local luminance = calculate_luminance(color)
   if luminance > 0.5 then
-    return "#000000"     -- Black has higher contrast with colors perceived to be "bright"
+    return "#000000" -- Black has higher contrast with colors perceived to be "bright"
   end
-  return "#FFFFFF"       -- White has higher contrast
+  return "#FFFFFF" -- White has higher contrast
 end
 
 -- Inline tests
@@ -163,7 +170,8 @@ assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher con
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
 wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-  local title = get_tab_title(tab)
+  local title = tab.active_pane.title
+  if title == "" then title = "-" end
   local color = string_to_color(get_cwd(tab))
 
   if tab.is_active then
@@ -174,12 +182,10 @@ wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _ma
       { Text = title },
     }
   end
-  if has_unseen_output(tab) then
-    return {
-      { Foreground = { Color = "#EBD168" } },
-      { Text = title },
-    }
-  end
+  if has_unseen_output(tab) then return {
+    { Foreground = { Color = "#EBD168" } },
+    { Text = title },
+  } end
   return title
 end)
 
@@ -196,12 +202,8 @@ local function update_window_background(window, pane)
   -- 	overrides.color_scheme = "Red Alert"
   -- end
 
-  if overrides.color_scheme == nil then
-    return
-  end
-  if pane:get_user_vars().production == "1" then
-    overrides.color_scheme = "OneHalfDark"
-  end
+  if overrides.color_scheme == nil then return end
+  if pane:get_user_vars().production == "1" then overrides.color_scheme = "OneHalfDark" end
   window:set_config_overrides(overrides)
 end
 
@@ -217,9 +219,7 @@ end
 
 local function update_ssh_status(window, pane)
   local text = pane:get_domain_name()
-  if text == "local" then
-    text = ""
-  end
+  if text == "local" then text = "" end
   return {
     { Text = text .. " " },
   }
@@ -227,17 +227,13 @@ end
 
 local function display_ime_on_right_status(window, pane)
   local compose = window:composition_status()
-  if compose then
-    compose = "COMPOSING: " .. compose
-  end
+  if compose then compose = "COMPOSING: " .. compose end
   window:set_right_status(compose)
 end
 
 local function display_copy_mode(window, pane)
   local name = window:active_key_table()
-  if name then
-    name = "Mode: " .. name
-  end
+  if name then name = "Mode: " .. name end
   return { { Attribute = { Italic = false } }, { Text = (name or "") .. " " } }
 end
 
@@ -253,6 +249,43 @@ wezterm.on("update-right-status", function(window, pane)
   status = utils.merge_lists(status, date)
 
   window:set_right_status(wezterm.format(status))
+end)
+
+-- 直前の出力結果を取得する
+wezterm.on("save-output", function(window, pane)
+  local zones = pane:get_semantic_zones()
+  local last_input_index = nil
+  local last_output_index = nil
+  for i = 1, #zones do
+    if zones[i].semantic_type == "Input" then last_input_index = i end
+    if zones[i].semantic_type == "Output" then last_output_index = i end
+    i = i - 1
+  end
+
+  if not last_output_index then return nil end
+  local latest_input_zone = zones[last_input_index]
+  local latest_output_zone = zones[last_output_index]
+  local text = "$ "
+    .. pane:get_text_from_semantic_zone(latest_input_zone)
+    .. "\n"
+    .. pane:get_text_from_semantic_zone(latest_output_zone)
+
+  if text == nil then return nil end
+
+  local name = os.tmpname()
+  local f = io.open(name, "w+")
+  if f == nil then return end
+  f:write(text)
+  f:flush()
+  f:close()
+  window:perform_action(
+    act.SpawnCommandInNewWindow({
+      args = { "nvim", name },
+    }),
+    pane
+  )
+  wezterm.sleep_ms(1000)
+  os.remove(name)
 end)
 
 wezterm.on("toggle-tmux-keybinds", function(window, pane)
@@ -271,24 +304,21 @@ local io = require("io")
 local os = require("os")
 
 wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
-  local scrollback = pane:get_logical_lines_as_text(10000)
+  local scrollback =
+    pane:get_text_from_region(0, 0, pane:get_dimensions().scrollback_rows, pane:get_dimensions().scrollback_rows)
   local name = os.tmpname()
   local f = io.open(name, "w+")
-  if f == nil then
-    return
-  end
+  if f == nil then return end
   f:write(scrollback)
   f:flush()
   f:close()
   window:perform_action(
-    act({
-      SpawnCommandInNewTab = {
-        args = { "nvim", name },
-      },
+    act.SpawnCommandInNewWindow({
+      args = { "nvim", name },
     }),
     pane
   )
-  wezterm.sleep_ms(5000)
+  wezterm.sleep_ms(1000)
   os.remove(name)
 end)
 
