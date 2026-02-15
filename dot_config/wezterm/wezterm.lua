@@ -16,6 +16,7 @@ config.scrollback_lines = 10000
 -- Ensure supported font
 config.font = wezterm.font_with_fallback({
   "HackGen Console NF",
+  "Cica",
 })
 config.font_size = 16.0
 
@@ -23,6 +24,10 @@ config.font_size = 16.0
 -- Note that "color_scheme" overrides "colors"
 config.color_scheme = "tokyonight"
 config.window_background_opacity = 0.9
+
+config.set_environment_variables = {
+  PATH = "/opt/homebrew/bin:/usr/local/bin:" .. os.getenv("PATH"),
+}
 
 -- Stylize the Window
 config.hide_tab_bar_if_only_one_tab = false
@@ -47,5 +52,11 @@ config.mouse_bindings = keybinds.mouse_bindings
 config.quick_select_patterns = {
   "[0-9A-Za-z-]+",
 }
+
+config.selection_word_boundary = " \t\n{}[]()\"'`+;:,<>|=-"
+
+-- IMEがONのときのShiftやCtrlキーの挙動を制御(Ctrl+mで変換確定など)
+config.use_ime = true
+config.macos_forward_to_ime_modifier_mask = "SHIFT|CTRL"
 
 return config
