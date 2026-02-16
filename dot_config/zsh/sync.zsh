@@ -88,8 +88,8 @@ EOS
   # Bind Ctrl-Space in case I am unable to use double <Tab> due to a combination
   # of the aggressive $KEYTIMEOUT on a slow link.
   bindkey '^ ' fzf-completion-notrigger
-
 }
+zvm_after_init
 
 # wezterm tab title
 function _wezterm_tab_title() {

@@ -52,6 +52,11 @@ zstyle ':zle:*' word-style unspecified
 
 autoload -U zmv
 
+# コマンドラインをEDITORで編集する
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey "^O" edit-command-line
+
 ########################################
 # 補完
 ########################################

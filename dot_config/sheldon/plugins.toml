@@ -55,7 +55,3 @@ use = ["alias.zsh", "local.zsh", "functions.zsh", "plugins.zsh"]
 local = "~/.config/zsh"
 use = ["sync.zsh", "options.zsh"]
 apply = ["source"]
-
-[plugins.zsh-vi-mode]
-github = "jeffreytse/zsh-vi-mode"
-apply = ["source"]
