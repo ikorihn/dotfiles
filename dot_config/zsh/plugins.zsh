@@ -96,6 +96,10 @@ fi
 
 export TIG_EDITOR=nvim
 
+if [[ -v WEZTERM_PANE ]]; then
+  eval "$(wezterm shell-completion --shell zsh)"
+fi
+
 # # window名にgitリポジトリ名を表示する
 # autoload -Uz add-zsh-hook
 # autoload -Uz vcs_info

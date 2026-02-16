@@ -53,5 +53,5 @@ local = "~/.config/zsh"
 use = ["alias.zsh", "local.zsh", "functions.zsh", "plugins.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["sync.zsh", "options.zsh"]
+use = ["sync.zsh", "options.zsh", "wezterm.sh"]
 apply = ["source"]
