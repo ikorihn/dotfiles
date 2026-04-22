@@ -1,6 +1,10 @@
+-- PATH
+local mise_data = vim.fn.expand(os.getenv("MISE_DATA_DIR") or "~/.local/share/mise")
+vim.env.PATH = mise_data .. "/shims:" .. vim.env.PATH
+
 -- File
 vim.opt.autoread = true
-vim.opt.swapfile = true
+vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.opt.writebackup = true
 vim.opt.backup = true

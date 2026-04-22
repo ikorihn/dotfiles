@@ -12,8 +12,8 @@ if not lspok then return end
 local gitok, git = pcall(require, "cmp_git")
 if not gitok then return end
 
--- Copilot
-require("copilot_cmp").setup()
+-- -- Copilot
+-- require("copilot_cmp").setup()
 
 -- https://github.com/zbirenbaum/copilot-cmp#tab-completion-configuration-highly-recommended
 local has_words_before = function()
@@ -104,7 +104,6 @@ cmp.setup({
     },
     { name = "nvim_lua" },
     { name = "emoji" },
-  }, {
     -- Obsidian (例: [[ や # の後など)
     { name = "obsidian", keyword_length = 2 },
   }),

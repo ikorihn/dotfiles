@@ -96,7 +96,7 @@ keymap("", "<leader>vs", ":vert sb#<CR>", opts)
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
 -- Git
-keymap("n", "<leader>gg", "<cmd>lua _TIG()<CR>", opts)
+keymap("n", "<leader>gg", ":Neogit<CR>", opts)
 keymap("n", "<leader>gb", ":BlameToggle<CR>", opts)
 
 -- transparent

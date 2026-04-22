@@ -14,12 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   { "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
-  -- { "windwp/nvim-autopairs", config = function() require("pluginconfig/autopairs") end },
-  {
-    "numToStr/Comment.nvim",
-    config = function() require("pluginconfig/comment") end,
-  },
-  { "JoosepAlviste/nvim-ts-context-commentstring" },
   {
     "hadronized/hop.nvim",
     config = function() require("pluginconfig/hop") end,
@@ -29,6 +23,9 @@ local plugins = {
     config = function() require("pluginconfig/nvim-hlslens") end,
   },
 
+  {
+    "MunifTanjim/nui.nvim",
+  },
   -- Notification
   {
     "folke/noice.nvim",
@@ -57,31 +54,10 @@ local plugins = {
     "phelipetls/jsonpath.nvim",
     ft = {
       "json",
+      "yaml",
     },
     config = function() require("pluginconfig/jsonpath") end,
   },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && yarn install",
-    init = function()
-      vim.g.mkdp_filetypes = {
-        "markdown",
-      }
-    end,
-    ft = {
-      "markdown",
-    },
-  },
-  {
-    "ellisonleao/glow.nvim",
-    cmd = "Glow",
-    config = function() require("glow").setup() end,
-    ft = {
-      "markdown",
-    },
-  },
-  { "dhruvasagar/vim-table-mode" },
 
   {
     "kylechui/nvim-surround",
@@ -89,13 +65,11 @@ local plugins = {
   },
   { "jeetsukumaran/vim-indentwise" },
   { "haya14busa/vim-asterisk" },
-  --{ "junegunn/vim-easy-align" },
   { "echasnovski/mini.nvim", version = "*" },
   {
     "echasnovski/mini.align",
     config = function() require("mini.align").setup() end,
   },
-  -- { "xiyaowong/nvim-transparent", config = function() require("pluginconfig/transparent") end },
   {
     "johmsalas/text-case.nvim",
     config = function() require("pluginconfig/text-case") end,
@@ -114,10 +88,7 @@ local plugins = {
   },
 
   -- Colorschemes
-  { "EdenEast/nightfox.nvim" },
   { "folke/tokyonight.nvim" },
-  { "ellisonleao/gruvbox.nvim" },
-  { "lunarvim/darkplus.nvim" },
   { "rebelot/kanagawa.nvim" },
 
   -- filer, status
@@ -135,10 +106,6 @@ local plugins = {
   {
     "nvim-lualine/lualine.nvim",
     config = function() require("pluginconfig/lualine") end,
-  },
-  {
-    "akinsho/toggleterm.nvim",
-    config = function() require("pluginconfig/toggleterm") end,
   },
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -250,15 +217,9 @@ local plugins = {
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
   },
-  { "mrcjkb/rustaceanvim", version = "^6" },
   {
-    "nvim-java/nvim-java",
-    dependencies = {
-      "nvim-java/lua-async-await",
-      "nvim-java/nvim-java-core",
-      "nvim-java/nvim-java-test",
-      "nvim-java/nvim-java-dap",
-    },
+    "DrKJeff16/wezterm-types",
+    version = false, -- Get the latest version
   },
 
   -- Testing
@@ -277,12 +238,6 @@ local plugins = {
     "nvim-telescope/telescope.nvim",
     config = function() require("pluginconfig/telescope") end,
   },
-  -- {
-  --   "ibhagwan/fzf-lua",
-  --   -- optional for icon support
-  --   dependencies = { "nvim-tree/nvim-web-devicons" },
-  --   config = function() require("pluginconfig/fzf-lua") end,
-  -- },
   { "jvgrootveld/telescope-zoxide" },
   { "nvim-telescope/telescope-live-grep-args.nvim" },
   {
@@ -384,26 +339,6 @@ local plugins = {
     end,
   },
   { "kristijanhusak/vim-dadbod-completion" },
-
-  -- Copilot
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function() require("pluginconfig/copilot") end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-  },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" },
-      { "nvim-lua/plenary.nvim" },
-    },
-    build = "make tiktoken", -- Only on MacOS or Linux
-    opts = {},
-  },
 }
 
 require("lazy").setup(plugins, {

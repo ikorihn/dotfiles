@@ -42,15 +42,13 @@ local sources = {
   -- formatting.rustfmt,
   -- diagnostics.flake8,
   null_ls.builtins.code_actions.gitsigns,
-  formatting.shfmt.with({ extra_args = { "-i", "2", "-sr", "-ci", "-bn" } }),
+  formatting.shfmt.with({ extra_args = { "-i", "2", "-sr", "-ci", "-bn" }, extra_filetypes = { "zsh" } }),
   -- null_ls.builtins.code_actions.shellcheck,
   formatting.sql_formatter,
   formatting.terraform_fmt,
   formatting.biome.with({
     only_local = "node_modules/.bin",
-    condition = function(utils)
-      return utils.root_has_file({ "biome.json" })
-    end,
+    condition = function(utils) return utils.root_has_file({ "biome.json" }) end,
   }),
 }
 
