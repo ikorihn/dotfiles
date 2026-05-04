@@ -94,8 +94,10 @@ end
 
 M.ReplaceSmartToBytes = function()
   -- 選択範囲の開始位置と終了位置を取得
-  local _, srow, scol, _ = table.unpack(vim.fn.getpos("'<"))
-  local _, erow, ecol, _ = table.unpack(vim.fn.getpos("'>"))
+  local pos_s = vim.fn.getpos("'<")
+  local pos_e = vim.fn.getpos("'>")
+  local srow, scol = pos_s[2], pos_s[3]
+  local erow, ecol = pos_e[2], pos_e[3]
 
   -- 矩形選択の場合、列番号が前後することがあるので整列
   local start_col = math.min(scol, ecol)
@@ -117,42 +119,48 @@ M.ReplaceSmartToBytes = function()
     end
   end
 end
-vim.cmd([[command! -nargs=0 -bar ReplaceSmartToBytes lua require('utils').ReplaceSmartToBytes()]])
-
+vim.cmd([[command! -nargs=0 -range -bar ReplaceSmartToBytes lua require('utils').ReplaceSmartToBytes()]])
 
 -- Get file path
 local function get_range_str(opts)
-  if opts.range ~= 2 then
-    return ''
-  end
-  if opts.line1 == opts.line2 then
-    return '#L' .. opts.line1
-  end
-  return '#L' .. opts.line1 .. '-L' .. opts.line2
+  if opts.range ~= 2 then return "" end
+  if opts.line1 == opts.line2 then return "#L" .. opts.line1 end
+  return "#L" .. opts.line1 .. "-L" .. opts.line2
 end
 local function copy_path(opts, target)
-  local expr = '%'
-  if target == 'full path' then
-    expr = '%:p'
-  elseif target == 'file name' then
-    expr = '%:t'
+  local expr = "%"
+  if target == "absolute" then
+    expr = "%:p"
+  elseif target == "dirname" then
+    expr = "%:h"
+  elseif target == "filename" then
+    expr = "%:t"
   end
 
   local path = vim.fn.expand(expr) .. get_range_str(opts)
-  vim.fn.setreg('*', path)
-  vim.notify('Copied ' .. target .. ': ' .. path)
+  vim.fn.setreg("*", path)
+  vim.notify("Copied " .. target .. ": " .. path)
 end
 
-vim.api.nvim_create_user_command('CopyFullPath', function(opts)
-  copy_path(opts, 'full path')
-end, { range = true, desc = 'Copy the full path of the current file to the clipboard' })
-
-vim.api.nvim_create_user_command('CopyRelativePath', function(opts)
-  copy_path(opts, 'relative path')
-end, { range = true, desc = 'Copy the relative path of the current file to the clipboard' })
-
-vim.api.nvim_create_user_command('CopyFileName', function(opts)
-  copy_path(opts, 'file name')
-end, { range = true, desc = 'Copy the file name of the current file to the clipboard' })
+vim.api.nvim_create_user_command(
+  "CopyFilePathAbsolute",
+  function(opts) copy_path(opts, "absolute") end,
+  { range = true, desc = "Copy the full path of the current file to the clipboard" }
+)
+vim.api.nvim_create_user_command(
+  "CopyFilePathRelative",
+  function(opts) copy_path(opts, "relative path") end,
+  { range = true, desc = "Copy the relative path of the current file to the clipboard" }
+)
+vim.api.nvim_create_user_command(
+  "CopyFilePathName",
+  function(opts) copy_path(opts, "filename") end,
+  { range = true, desc = "Copy the file name of the current file to the clipboard" }
+)
+vim.api.nvim_create_user_command(
+  "CopyFilePathDir",
+  function(opts) copy_path(opts, "dirname") end,
+  { range = true, desc = "Copy the file name of the current file to the clipboard" }
+)
 
 return M
