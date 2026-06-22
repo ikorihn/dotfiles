@@ -93,11 +93,11 @@ zvm_after_init
 
 # wezterm tab title
 function _wezterm_tab_title() {
-  local title=$(basename $(pwd))
+  local title=$(basename "$(pwd)")
   if git remote get-url origin >/dev/null 2>&1; then
-    local git_root=$(basename -s ".git" $(git remote get-url origin))
+    local git_root=$(basename -s ".git" "$(git remote get-url origin)")
     local git_branch=$(git branch --show-current)
-    title="$(basename ${git_root}):${git_branch}"
+    title="$(basename "${git_root}"):${git_branch}"
   fi
 
   printf '\033]2;%s\033\\' "$title"

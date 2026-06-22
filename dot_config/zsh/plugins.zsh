@@ -1,12 +1,20 @@
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+
+export LESS='-R -i'
+
 # mise (asdf rust impl)
 if command -v mise 1>/dev/null 2>&1; then
   eval "$(mise activate zsh)"
+elif [[ -f "$HOME/.local/bin/mise" ]]; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
 fi
+
 if command -v aqua 1>/dev/null 2>&1; then
   export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+  export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
   source <(aqua completion zsh)
 fi
 
@@ -28,6 +36,10 @@ if command -v zoxide 1>/dev/null 2>&1; then
   export _ZO_ECHO=1
   eval "$(zoxide init --cmd j zsh)"
 fi
+
+# Coding agent
+export CLAUDE_CONFIG_DIR=$HOME/.config/claude
+export CODEX_HOME=$HOME/.config/codex
 
 #######
 # zsh-completions
@@ -65,10 +77,11 @@ fi
 # fi
 source <(docker completion zsh)
 
+autoload -U bashcompinit && bashcompinit
+
 # https://github.com/go-jira/jira
 if command -v jira 1>/dev/null 2>&1; then
   # eval "$(jira --completion-script-zsh)"
-  autoload -U bashcompinit && bashcompinit
   _jira_bash_autocomplete() {
       local cur prev opts base
       COMPREPLY=()
@@ -80,6 +93,10 @@ if command -v jira 1>/dev/null 2>&1; then
   complete -F _jira_bash_autocomplete jira
 fi
 
+if [[ -f /opt/homebrew/bin/terraform ]]; then
+  complete -o nospace -C /opt/homebrew/bin/terraform terraform
+fi
+
 # # AWS CLI v2
 # autoload bashcompinit && bashcompinit
 # autoload -Uz compinit && compinit
@@ -89,12 +106,20 @@ fi
 # bun completions
 [ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
 
+# pnpm
+if command -v pnpm 1>/dev/null 2>&1; then
+  source <(pnpm completion zsh)
+fi
+
 # uv
 if command -v uv 1>/dev/null 2>&1; then
   eval "$(uv generate-shell-completion zsh)"
 fi
 
 export TIG_EDITOR=nvim
+
+# https://github.com/k1LoW/git-wt
+eval "$(git wt --init zsh)"
 
 if [[ -v WEZTERM_PANE ]]; then
   eval "$(wezterm shell-completion --shell zsh)"

@@ -189,6 +189,15 @@ gwroot() {
   cd $(dirname $(git rev-parse --git-common-dir))
 }
 
+gitdir() {
+  wtfile=$(git rev-parse --show-toplevel)/.git
+  if [[ -f "${wtfile}" ]]; then
+    cat "${wtfile}" | awk '{ print $2 }'
+  elif [[ -d "${wtfile}" ]]; then
+    echo "${wtfile}"
+  fi
+}
+
 currentbranch() {
   git rev-parse --abbrev-ref HEAD
 }
@@ -385,11 +394,19 @@ function ssh() {
   fi
 }
 
-function search_replace() {
+# 文字列置換
+# 使い方: searplace '検索文字列' '置換後文字列' [対象ディレクトリ]
+function searplace() { # rg + sd + preview
+  if [ "$#" -lt 2 ]; then
+    echo "使い方: searplace '検索文字列' '置換後文字列' [対象ディレクトリ or ファイル]"
+    return 1
+  fi
+
   SEARCH=$1
   TO=$2
+  DIR=${3:-.}
 
-  files=$(rg -l "$SEARCH")
+  files=$(rg -l "$SEARCH" "$DIR" )
   echo "$files"
   echo "$files" | xargs sd "$SEARCH" "$TO"
 }

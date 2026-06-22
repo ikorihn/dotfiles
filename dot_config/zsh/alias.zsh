@@ -32,6 +32,10 @@ abbr -g -q L='| less'
 abbr -S -q vimcon='vim ~/.config/**'
 abbr -g -q xn='| xargs nvim'
 
+abbr -S -q lll='ll $(which'
+
+abbr -S -q tcap="tmux capture-pane -p -S -32768 | nvim + -"
+
 # クリップボードにコピーしつつ標準出力
 abbr -S -q teee='tee >(pbcopy)'
 
@@ -40,7 +44,7 @@ abbr -S -q g='git'
 abbr -S -q gca='git commit --amend'
 abbr -S -q gcim='git commit -m'
 abbr -S -q gdn='git diff --name-status origin/master'
-abbr -S -q gp='git pull --rebase --autostash'
+abbr -S -q gp='git pull --rebase --autostash --force'
 abbr -S -q gpu='git push'
 abbr -S -q gre='git rebase origin/master --autostash'
 abbr -S -q gres='git restore .'
@@ -53,3 +57,6 @@ abbr -S -q gsw='git switch -c feature/'
 abbr -S -q t='tig'
 abbr -S -q lg='lazygit'
 
+# ripgrep,fd
+# `!` はescapeされるためescape sequenceで定義 https://github.com/olets/zsh-abbr/issues/84#issuecomment-1475075037
+abbr -S -q rgg="rg --glob='\041*{.pb.go,_test.go,mock_*.go,_gen.go}'"
