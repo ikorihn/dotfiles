@@ -290,6 +290,16 @@ end)
 local io = require("io")
 local os = require("os")
 
+wezterm.on("open-git-tui", function(window, pane)
+  window:perform_action(
+    act.SpawnCommandInNewWindow({
+      args = { "tig" },
+    }),
+    pane
+  )
+  wezterm.sleep_ms(1000)
+end)
+
 wezterm.on("trigger-nvim-with-scrollback", function(window, pane)
   local scrollback =
     pane:get_text_from_region(0, 0, pane:get_dimensions().scrollback_rows, pane:get_dimensions().scrollback_rows)
@@ -318,4 +328,23 @@ wezterm.on("trigger-window-opacity", function(window, pane)
     overrides.window_background_opacity = opacity_default
   end
   window:set_config_overrides(overrides)
+end)
+
+local function is_claude(pane)
+  local process = pane:get_foreground_process_info()
+  if not process or not process.argv then return false end
+  -- 引数に"claude"が含まれているかチェック
+  for _, arg in ipairs(process.argv) do
+    if arg:find("claude") then return true end
+  end
+  return false
+end
+wezterm.on("bell", function(window, pane)
+  if is_claude(pane) then
+    local tab_title = pane:get_title()
+    local tab_index = get_tab_index(window, pane) or "?"
+
+    window:toast_notification("Claude Code", "Tab " .. tab_index .. ": " .. tab_title, nil, 10000)
+    wezterm.background_child_process({ "afplay", "/System/Library/Sounds/Submarine.aiff" })
+  end
 end)
