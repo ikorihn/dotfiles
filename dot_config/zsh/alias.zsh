@@ -1,26 +1,9 @@
-alias ls='eza --group-directories-first'
-alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
-alias la='ll -gHiS'
-
 #abbr -S -q -f rm='trash -F'
 #abbr -S -q rmr='rm -r'
 
 # abbr cp='cp -i -p'
 # abbr mv='mv -i'
 abbr -S -q -f mkdir='mkdir -p'
-
-alias vi='nvim'
-# alias vim='/usr/local/bin/nvim'
-alias vim='TERM=alacritty nvim'
-alias view='vim -R'
-alias vimdiff='nvim -d'
-
-# sudo の後のコマンドでエイリアスを有効にする
-alias sudo='sudo '
-
-
-alias pwdd='pwd | sed "s#$HOME#\$HOME#"'
-alias pbcopyy="tr -d '\n' | pbcopy"
 
 abbr -S -q --force dc='cd' > /dev/null
 abbr -S -q ':q'='exit'

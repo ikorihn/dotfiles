@@ -1,45 +1,6 @@
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
-
-export LESS='-R -i'
-
-# mise (asdf rust impl)
-if command -v mise 1>/dev/null 2>&1; then
-  eval "$(mise activate zsh)"
-elif [[ -f "$HOME/.local/bin/mise" ]]; then
-  eval "$($HOME/.local/bin/mise activate zsh)"
-fi
-
 if command -v aqua 1>/dev/null 2>&1; then
-  export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
-  export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
   source <(aqua completion zsh)
 fi
-
-# direnv
-if command -v direnv 1>/dev/null 2>&1; then
-  eval "$(direnv hook zsh)"
-fi
-
-# Bun(https://bun.sh)
-if [[ -e "$HOME/.bun" ]]; then
-  export BUN_INSTALL="$HOME/.bun"
-  export PATH="$BUN_INSTALL/bin:$PATH"
-  source "$BUN_INSTALL/_bun"
-fi
-
-# zoxide
-if command -v zoxide 1>/dev/null 2>&1; then
-  export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
-  export _ZO_ECHO=1
-  eval "$(zoxide init --cmd j zsh)"
-fi
-
-# Coding agent
-export CLAUDE_CONFIG_DIR=$HOME/.config/claude
-export CODEX_HOME=$HOME/.config/codex
 
 #######
 # zsh-completions
@@ -55,11 +16,6 @@ zstyle ':completion:*:*:mvn:*:warnings' format $'\e[1m -- No matches found --\e[
 maven_plugins=(dependency versions spotless)
 zstyle ':completion:*:mvn:*' plugins $maven_plugins
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f "${HOME}/src/google-cloud-sdk/path.zsh.inc" ]; then
-  source "${HOME}/src/google-cloud-sdk/path.zsh.inc"
-fi
-
 # The next line enables shell command completion for gcloud.
 if [ -f "${HOME}/src/google-cloud-sdk/completion.zsh.inc" ]; then
   source "${HOME}/src/google-cloud-sdk/completion.zsh.inc"
@@ -67,7 +23,6 @@ fi
 
 # https://kubernetes.io/docs/tasks/tools/included/optional-kubectl-configs-zsh/
 if command -v kubectl 1>/dev/null 2>&1; then
-  alias k=kubectl
   # source <(kubectl completion zsh)
 fi
 
@@ -104,7 +59,7 @@ fi
 # complete -C aws_completer aws
 
 # bun completions
-[ -s "~/.bun/_bun" ] && source "~/.bun/_bun"
+[[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # pnpm
 if command -v pnpm 1>/dev/null 2>&1; then
@@ -115,11 +70,6 @@ fi
 if command -v uv 1>/dev/null 2>&1; then
   eval "$(uv generate-shell-completion zsh)"
 fi
-
-export TIG_EDITOR=nvim
-
-# https://github.com/k1LoW/git-wt
-eval "$(git wt --init zsh)"
 
 if [[ -v WEZTERM_PANE ]]; then
   eval "$(wezterm shell-completion --shell zsh)"

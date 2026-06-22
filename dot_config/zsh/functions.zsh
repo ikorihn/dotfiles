@@ -2,6 +2,32 @@
 # Git
 ########
 
+# PR番号を渡してbaseとheadの差分をDiffviewで表示
+pr-diff() {
+  local pr_number=$1
+  if [ -z "$pr_number" ]; then
+    echo "使い方: pr-diff <PR番号>" >&2
+    return 1
+  fi
+
+  local pr_json=$(gh pr view "$pr_number" --json baseRefName,headRefName,isCrossRepository)
+  local base_ref=$(echo "$pr_json" | jq -r '.baseRefName')
+  local head_ref=$(echo "$pr_json" | jq -r '.headRefName')
+  local is_cross=$(echo "$pr_json" | jq -r '.isCrossRepository')
+
+  # baseブランチを最新化
+  git fetch origin "$base_ref"
+
+  if [ "$is_cross" = "true" ]; then
+    # フォークPRはGitHubの仮想refからfetch
+    git fetch origin "pull/$pr_number/head:pr/$pr_number"
+    nvim -f -c "DiffviewOpen origin/$base_ref...pr/$pr_number"
+  else
+    git fetch origin "$head_ref"
+    nvim -f -c "DiffviewOpen origin/$base_ref...origin/$head_ref"
+  fi
+}
+
 fbr() {
   branch_line=$(git branch -vv | fzf +m)
   branch=$(echo "$branch_line" | awk '{print $1}')
@@ -592,8 +618,40 @@ function restore_wezterm_tabs() {
 }
 
 ########################################
-# Bind keys
+# Lazy shell hooks
 ########################################
+# 入力開始後でよい hook 類。PATH や即時 alias は sync.zsh 側に置く。
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# direnv
+if command -v direnv 1>/dev/null 2>&1; then
+  eval "$(direnv hook zsh)"
+fi
+
+# mise shims are added to PATH in .zshenv. The shell hook can wait until zle is idle.
+if command -v mise 1>/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+elif [[ -f "$HOME/.local/bin/mise" ]]; then
+  eval "$($HOME/.local/bin/mise activate zsh)"
+fi
+
+# zoxide
+if command -v zoxide 1>/dev/null 2>&1; then
+  export _ZO_DATA_DIR="${XDG_DATA_HOME}/zoxide"
+  export _ZO_ECHO=1
+  eval "$(zoxide init --cmd j zsh)"
+fi
+
+# https://github.com/k1LoW/git-wt
+if command -v git-wt 1>/dev/null 2>&1; then
+  eval "$(git wt --init zsh)"
+fi
+
+########################################
+# Lazy widgets
+########################################
+# ^G^G の gcd は sync.zsh で先に登録済み。ここでは残りの widget を登録する。
 bindkey -r '^G'
 # widgetとして登録
 zle -N gcd
@@ -605,5 +663,3 @@ zle -N fbrm
 bindkey '^G^M' fbrm
 zle -N petcopy
 bindkey '^G^P' petcopy
-
-

@@ -1,15 +1,88 @@
+########################################
+# Sync aliases
+########################################
+# 起動直後の入力で使う基本 alias は defer しない。
+alias ls='eza --group-directories-first'
+alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
+alias la='ll -gHiS'
+
+alias vi='nvim'
+# alias vim='/usr/local/bin/nvim'
+alias vim='TERM=alacritty nvim'
+alias view='vim -R'
+alias vimdiff='nvim -d'
+
+# sudo の後のコマンドでエイリアスを有効にする
+alias sudo='sudo '
+
+alias pwdd='pwd | sed "s#$HOME#\$HOME#"'
+alias pbcopyy="tr -d '\n' | pbcopy"
+
+########################################
+# Sync environment and PATH
+########################################
+# PATH やツールの基本環境は最初のコマンド実行前に必要。
+export PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+export LESS='-R -i'
+
+if command -v aqua 1>/dev/null 2>&1; then
+  export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH"
+  export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
+fi
+
+# Bun(https://bun.sh)
+if [[ -e "$HOME/.bun" ]]; then
+  export BUN_INSTALL="$HOME/.bun"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+fi
+
+# Coding agent
+export CLAUDE_CONFIG_DIR=$HOME/.config/claude
+export CODEX_HOME=$HOME/.config/codex
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f "${HOME}/src/google-cloud-sdk/path.zsh.inc" ]; then
+  source "${HOME}/src/google-cloud-sdk/path.zsh.inc"
+fi
+
+if command -v kubectl 1>/dev/null 2>&1; then
+  alias k=kubectl
+fi
+
+export TIG_EDITOR=nvim
+
+########################################
+# Sync widgets
+########################################
+# ^G^G は起動直後に使いたいので gcd だけ先に登録する。
+# ghq + cd
+gcd() {
+  local root=$(ghq root)
+  local repo=$(ghq list | fzf-tmux $FZF_TMUX_OPTS --preview="ls -AF ${root}/{1}")
+  if [[ -z $repo ]]; then
+    return
+  fi
+  local fullpath="${root}/${repo}"
+  cd $fullpath
+  zle accept-line
+  zle reset-prompt
+}
+
+export FZF_TMUX=1
+export FZF_TMUX_OPTS='-p 90%,80%'
+
+bindkey -r '^G'
+zle -N gcd
+bindkey '^G^G' gcd
+
+########################################
+# Completion and prompt baseline
+########################################
 autoload -Uz compinit
 if [[ -n $(find ${ZDOTDIR}/.zcompdump -mtime +1) ]] ; then
   compinit
 else
   compinit -C
-fi
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
@@ -89,7 +162,11 @@ EOS
   # of the aggressive $KEYTIMEOUT on a slow link.
   bindkey '^ ' fzf-completion-notrigger
 }
-zvm_after_init
+if (( $+functions[zsh-defer] )); then
+  zsh-defer -t 5 zvm_after_init
+else
+  zvm_after_init
+fi
 
 # wezterm tab title
 function _wezterm_tab_title() {
@@ -103,4 +180,3 @@ function _wezterm_tab_title() {
   printf '\033]2;%s\033\\' "$title"
 }
 precmd_functions+=(_wezterm_tab_title)
-_wezterm_tab_title # 初回実行
