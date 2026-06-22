@@ -1,18 +1,7 @@
 local M = {}
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
 local act = wezterm.action
-
-local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
-resurrect.state_manager.periodic_save({
-  interval_seconds = 15 * 60,
-  save_workspaces = true,
-  save_windows = true,
-  save_tabs = true,
-})
-wezterm.on("resurrect.error", function(err)
-  wezterm.log_error("ERROR!")
-  wezterm.gui.gui_windows()[1]:toast_notification("resurrect", err, nil, 3000)
-end)
+local session_manager = require("session-manager")
 
 ---------------------------------------------------------------
 --- keybinds
@@ -23,70 +12,141 @@ M.default_keybinds = {
   {
     key = "e",
     mods = "ALT",
-    action = wezterm.action({ EmitEvent = "trigger-nvim-with-scrollback" }),
+    action = act({ EmitEvent = "trigger-nvim-with-scrollback" }),
   },
-  { key = "o", mods = "ALT", action = wezterm.action({ EmitEvent = "save-output" }) },
+  { key = "o", mods = "ALT", action = act({ EmitEvent = "save-output" }) },
 
-  { key = "UpArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(-1) },
-  { key = "DownArrow", mods = "SHIFT", action = wezterm.action.ScrollToPrompt(1) },
+  { key = "UpArrow", mods = "SHIFT", action = act.ScrollToPrompt(-1) },
+  { key = "DownArrow", mods = "SHIFT", action = act.ScrollToPrompt(1) },
   { key = "Enter", mods = "ALT", action = "QuickSelect" },
-  { key = "Enter", mods = "CTRL", action = wezterm.action.SendKey({ key = "Enter" }) },
-  { key = "o", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+  { key = "Enter", mods = "CTRL", action = act.SendKey({ key = "Enter" }) },
+  { key = "o", mods = "CTRL", action = act.DisableDefaultAssignment },
 
   { key = "l", mods = "SUPER", action = "ShowLauncher" },
 
   { key = "w", mods = "SUPER", action = act.CloseCurrentPane({ confirm = true }) },
-  -- { key = "L",                   mods = "SUPER|SHIFT", action = wezterm.action.ShowTabNavigator },
+
+  -- Workspace
   {
     key = "L",
     mods = "SUPER|SHIFT",
-    action = wezterm.action({ ShowLauncherArgs = { flags = "FUZZY|TABS|LAUNCH_MENU_ITEMS" } }),
+    action = act({ ShowLauncherArgs = { flags = "FUZZY|TABS|WORKSPACES|LAUNCH_MENU_ITEMS" } }),
   },
-  { key = "r", mods = "CMD", action = wezterm.action.ReloadConfiguration },
+  {
+    key = "W",
+    mods = "SUPER|SHIFT",
+    action = act.PromptInputLine({
+      description = "(wezterm) Create new workspace:",
+      action = wezterm.action_callback(function(window, pane, line)
+        if line then
+          window:perform_action(
+            act.SwitchToWorkspace({
+              name = line,
+            }),
+            pane
+          )
+        end
+      end),
+    }),
+  },
+  {
+    key = "r",
+    mods = "ALT",
+    action = act.PromptInputLine({
+      description = "(wezterm) Set workspace title:",
+      action = wezterm.action_callback(function(win, pane, line)
+        if line then wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line) end
+      end),
+    }),
+  },
+  {
+    key = "w",
+    mods = "ALT",
+    action = wezterm.action_callback(function(win, pane)
+      -- workspace のリストを作成
+      local workspaces = {}
+      for i, name in ipairs(wezterm.mux.get_workspace_names()) do
+        table.insert(workspaces, {
+          id = name,
+          label = string.format("%d. %s", i, name),
+        })
+      end
+      local current = wezterm.mux.get_active_workspace()
+      -- 選択メニューを起動
+      win:perform_action(
+        act.InputSelector({
+          action = wezterm.action_callback(function(_, _, id, label)
+            if not id and not label then
+              wezterm.log_info("Workspace selection canceled") -- 入力が空ならキャンセル
+            else
+              win:perform_action(act.SwitchToWorkspace({ name = id }), pane) -- workspace を移動
+            end
+          end),
+          title = "Select workspace",
+          choices = workspaces,
+          fuzzy = true,
+          -- fuzzy_description = string.format("Select workspace: %s -> ", current), -- requires nightly build
+        }),
+        pane
+      )
+    end),
+  },
+  {
+    key = "s",
+    mods = "LEADER",
+    action = wezterm.action_callback(function(window, pane) session_manager.save_state(window) end),
+  },
+  {
+    key = "r",
+    mods = "LEADER",
+    action = wezterm.action_callback(function(win, pane) session_manager.restore_state(win) end),
+  },
+
+  { key = "r", mods = "CMD", action = act.ReloadConfiguration },
 
   -- Window, Tab, Pane
-  { key = ";", mods = "ALT", action = wezterm.action({ MoveTabRelative = -1 }) },
-  { key = "'", mods = "ALT", action = wezterm.action({ MoveTabRelative = 1 }) },
+  { key = ";", mods = "ALT", action = act({ MoveTabRelative = -1 }) },
+  { key = "'", mods = "ALT", action = act({ MoveTabRelative = 1 }) },
   {
     key = "s",
     mods = "ALT",
-    action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }),
+    action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = "v",
     mods = "ALT",
-    action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+    action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }),
   },
   {
     key = "h",
     mods = "LEADER|SHIFT",
-    action = wezterm.action.Multiple({
-      wezterm.action.AdjustPaneSize({ "Left", 5 }),
-      wezterm.action.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
+    action = act.Multiple({
+      act.AdjustPaneSize({ "Left", 5 }),
+      act.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
     }),
   },
   {
     key = "j",
     mods = "LEADER|SHIFT",
-    action = wezterm.action.Multiple({
-      wezterm.action.AdjustPaneSize({ "Down", 5 }),
-      wezterm.action.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
+    action = act.Multiple({
+      act.AdjustPaneSize({ "Down", 5 }),
+      act.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
     }),
   },
   {
     key = "k",
     mods = "LEADER|SHIFT",
-    action = wezterm.action.Multiple({
-      wezterm.action.AdjustPaneSize({ "Up", 5 }),
-      wezterm.action.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
+    action = act.Multiple({
+      act.AdjustPaneSize({ "Up", 5 }),
+      act.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
     }),
   },
   {
     key = "l",
     mods = "LEADER|SHIFT",
-    action = wezterm.action.Multiple({
-      wezterm.action.AdjustPaneSize({ "Right", 5 }),
-      wezterm.action.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
+    action = act.Multiple({
+      act.AdjustPaneSize({ "Right", 5 }),
+      act.ActivateKeyTable({ name = "resize_pane", one_shot = false, until_unknown = true }),
     }),
   },
   { key = "h", mods = "LEADER", action = act.ActivatePaneDirection("Left") },
@@ -98,43 +158,24 @@ M.default_keybinds = {
 
   -- CopyMode
   { key = "[", mods = "LEADER", action = act.ActivateCopyMode },
-  { key = "Enter", mods = "SHIFT", action = act.ActivateCopyMode },
   {
     key = "/",
     mods = "LEADER",
     action = act.Search("CurrentSelectionOrEmptyString"),
   },
 
-  -- resurrect
+  { key = "g", mods = "LEADER", action = act({ EmitEvent = "open-git-tui" }) },
   {
-    key = "s",
+    key = "t",
     mods = "LEADER",
-    action = resurrect.tab_state.save_tab_action(),
-  },
-  {
-    key = "r",
-    mods = "LEADER",
-    action = wezterm.action_callback(function(win, pane)
-      resurrect.fuzzy_loader.fuzzy_load(win, pane, function(id, label)
-        local type = string.match(id, "^([^/]+)") -- match before '/'
-        id = string.match(id, "([^/]+)$") -- match after '/'
-        id = string.match(id, "(.+)%..+$") -- remove file extention
-        local opts = {
-          relative = true,
-          restore_text = true,
-          on_pane_restore = resurrect.tab_state.default_on_pane_restore,
-        }
-        if type == "workspace" then
-          local state = resurrect.state_manager.load_state(id, "workspace")
-          resurrect.workspace_state.restore_workspace(state, opts)
-        elseif type == "window" then
-          local state = resurrect.state_manager.load_state(id, "window")
-          resurrect.window_state.restore_window(pane:window(), state, opts)
-        elseif type == "tab" then
-          local state = resurrect.state_manager.load_state(id, "tab")
-          resurrect.tab_state.restore_tab(pane:tab(), state, opts)
-        end
-      end)
+    action = wezterm.action_callback(function(window, pane)
+      window:perform_action(
+        act.SpawnCommandInNewWindow({
+          args = { "bash", "-c", "fd --hidden -t f | fzf -m --bind 'tab:toggle-up' | sed \"s/.*/'&'/\" | tr '\n' ' ' | pbcopy" },
+        }),
+        pane
+      )
+      wezterm.sleep_ms(1000)
     end),
   },
 }
@@ -145,10 +186,10 @@ table.insert(default_copy_mode, { key = "}", action = act.CopyMode("MoveForwardS
 
 M.key_tables = {
   resize_pane = {
-    { key = "h", mods = "SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
-    { key = "j", mods = "SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
-    { key = "k", mods = "SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
-    { key = "l", mods = "SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
+    { key = "h", mods = "SHIFT", action = act.AdjustPaneSize({ "Left", 5 }) },
+    { key = "j", mods = "SHIFT", action = act.AdjustPaneSize({ "Down", 5 }) },
+    { key = "k", mods = "SHIFT", action = act.AdjustPaneSize({ "Up", 5 }) },
+    { key = "l", mods = "SHIFT", action = act.AdjustPaneSize({ "Right", 5 }) },
     -- Cancel the mode by pressing escape
     { key = "Escape", action = "PopKeyTable" },
     { key = "q", action = "PopKeyTable" },
@@ -196,7 +237,7 @@ for _, key in ipairs(keys_to_fix) do
   table.insert(M.default_keybinds, {
     key = key,
     mods = "CTRL",
-    action = wezterm.action.SendString(key),
+    action = act.SendString(key),
   })
 end
 

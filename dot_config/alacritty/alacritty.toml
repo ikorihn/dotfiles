@@ -11,19 +11,19 @@ TERM = "alacritty"
 size = 16.0
 
 [font.bold]
-family = "HackGen Console NF"
+family = "Moralerspace Argon HWJPDOC"
 style = "Bold"
 
 [font.bold_italic]
-family = "Cica"
+family = "Moralerspace Argon HWJPDOC"
 style = "Bold Italic"
 
 [font.italic]
-family = "Cica"
+family = "Moralerspace Argon HWJPDOC"
 style = "Italic"
 
 [font.normal]
-family = "HackGen Console NF"
+family = "Moralerspace Argon HWJPDOC"
 style = "Regular"
 
 [terminal.shell]

@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
 local utils = require("utils")
 local keybinds = require("keybinds")
 local act = wezterm.action
@@ -31,38 +31,14 @@ local function create_tab_title(tab, tabs, panes, config, hover, max_width)
   return copy_mode .. tab.tab_index + 1 .. ":" .. title
 end
 
--- ============================================================================
--- Configuration for Tab Color
-
--- Based on: https://github.com/protiumx/.dotfiles/blob/854d4b159a0a0512dc24cbc840af467ac84085f8/stow/wezterm/.config/wezterm/wezterm.lua#L291-L319
-local process_icons = {
-  ["bash"] = wezterm.nerdfonts.cod_terminal_bash,
-  ["btm"] = wezterm.nerdfonts.mdi_chart_donut_variant,
-  ["cargo"] = wezterm.nerdfonts.dev_rust,
-  ["curl"] = wezterm.nerdfonts.mdi_flattr,
-  ["docker"] = wezterm.nerdfonts.linux_docker,
-  ["docker-compose"] = wezterm.nerdfonts.linux_docker,
-  ["gh"] = wezterm.nerdfonts.dev_github_badge,
-  ["git"] = wezterm.nerdfonts.fa_git,
-  ["go"] = wezterm.nerdfonts.seti_go,
-  ["htop"] = wezterm.nerdfonts.mdi_chart_donut_variant,
-  ["kubectl"] = wezterm.nerdfonts.linux_docker,
-  ["kuberlr"] = wezterm.nerdfonts.linux_docker,
-  ["lazydocker"] = wezterm.nerdfonts.linux_docker,
-  ["lazygit"] = wezterm.nerdfonts.oct_git_compare,
-  ["lua"] = wezterm.nerdfonts.seti_lua,
-  ["make"] = wezterm.nerdfonts.seti_makefile,
-  ["node"] = wezterm.nerdfonts.mdi_hexagon,
-  ["nvim"] = wezterm.nerdfonts.custom_vim,
-  ["psql"] = "󱤢",
-  ["ruby"] = wezterm.nerdfonts.cod_ruby,
-  ["stern"] = wezterm.nerdfonts.linux_docker,
-  ["sudo"] = wezterm.nerdfonts.fa_hashtag,
-  ["usql"] = "󱤢",
-  ["vim"] = wezterm.nerdfonts.dev_vim,
-  ["wget"] = wezterm.nerdfonts.mdi_arrow_down_box,
-  ["zsh"] = wezterm.nerdfonts.dev_terminal,
-}
+local function get_tab_index(window, pane)
+  local mux_window = window:mux_window()
+  for i, tab_info in ipairs(mux_window:tabs_with_info()) do
+    for _, p in ipairs(tab_info.tab:panes()) do
+      if p:pane_id() == pane:pane_id() then return i end
+    end
+  end
+end
 
 -- Return the Tab's current working directory
 local function get_cwd(tab)
@@ -89,9 +65,8 @@ local function get_process(tab)
   if not tab.active_pane or tab.active_pane.foreground_process_name == "" then return "[?]" end
 
   local process_name = remove_abs_path(tab.active_pane.foreground_process_name)
-  if process_name:find("kubectl") then process_name = "kubectl" end
 
-  return process_icons[process_name] or string.format("[%s]", process_name)
+  return string.format("[%s]", process_name)
 end
 
 -- Pretty format the tab title
@@ -166,27 +141,35 @@ assert(select_contrasting_fg_color("#128b26") == "#FFFFFF", "Expected higher con
 assert(select_contrasting_fg_color("#58f5a6") == "#000000", "Expected higher contrast with black")
 assert(select_contrasting_fg_color("#EBD168") == "#000000", "Expected higher contrast with black")
 
+local SOLID_LEFT_ARROW = wezterm.nerdfonts.ple_lower_right_triangle
+local SOLID_RIGHT_ARROW = wezterm.nerdfonts.ple_upper_left_triangle
 -- On format tab title events, override the default handling to return a custom title
 -- Docs: https://wezfurlong.org/wezterm/config/lua/window-events/format-tab-title.html
 ---@diagnostic disable-next-line: unused-local
-wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, _max_width)
-  local title = tab.active_pane.title
+wezterm.on("format-tab-title", function(tab, _tabs, _panes, _config, _hover, max_width)
+  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 1) .. "   "
   if title == "" then title = "-" end
-  local color = string_to_color(get_cwd(tab))
-
-  if tab.is_active then
-    return {
-      { Attribute = { Intensity = "Bold" } },
-      { Background = { Color = color } },
-      { Foreground = { Color = select_contrasting_fg_color(color) } },
-      { Text = title },
-    }
+  local background = string_to_color(get_cwd(tab))
+  local foreground = select_contrasting_fg_color(background)
+  local edge_background = "none"
+  if not tab.is_active then
+    background = "none"
+    foreground = "#FFFFFF"
   end
-  if has_unseen_output(tab) then return {
-    { Foreground = { Color = "#EBD168" } },
+  if has_unseen_output(tab) then foreground = "#EBD168" end
+  local edge_foreground = background
+
+  return {
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = SOLID_LEFT_ARROW },
+    { Background = { Color = background } },
+    { Foreground = { Color = foreground } },
     { Text = title },
-  } end
-  return title
+    { Background = { Color = edge_background } },
+    { Foreground = { Color = edge_foreground } },
+    { Text = SOLID_RIGHT_ARROW },
+  }
 end)
 
 ---------------------------------------------------------------
@@ -256,10 +239,14 @@ wezterm.on("save-output", function(window, pane)
   local zones = pane:get_semantic_zones()
   local last_input_index = nil
   local last_output_index = nil
-  for i = 1, #zones do
-    if zones[i].semantic_type == "Input" then last_input_index = i end
-    if zones[i].semantic_type == "Output" then last_output_index = i end
-    i = i - 1
+
+  -- 後ろから探索して最後の "Output" ゾーンを探す
+  for i = #zones, 1, -1 do
+    if zones[i].semantic_type == "Output" then
+      last_output_index = i
+      last_input_index = last_output_index - 1
+      break
+    end
   end
 
   if not last_output_index then return nil end

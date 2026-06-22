@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") ---@type Wezterm
 local act = wezterm.action
 local utils = require("utils")
 local keybinds = require("keybinds")
@@ -15,24 +15,42 @@ config.scrollback_lines = 10000
 
 -- Ensure supported font
 config.font = wezterm.font_with_fallback({
-  "HackGen Console NF",
-  "Cica",
+  "Moralerspace Argon HWJPDOC",
 })
-config.font_size = 16.0
+config.font_size = 13.0
+config.warn_about_missing_glyphs = false
 
 -- Colors: https://wezfurlong.org/wezterm/config/appearance.html
 -- Note that "color_scheme" overrides "colors"
 config.color_scheme = "tokyonight"
-config.window_background_opacity = 0.9
+config.colors = {
+  tab_bar = {
+    inactive_tab_edge = "none",
+  },
+}
+config.window_background_opacity = 0.8
+config.macos_window_background_blur = 10
 
 config.set_environment_variables = {
   PATH = "/opt/homebrew/bin:/usr/local/bin:" .. os.getenv("PATH"),
 }
 
+----------------------------------------------------
 -- Stylize the Window
+----------------------------------------------------
 config.hide_tab_bar_if_only_one_tab = false
+config.show_tabs_in_tab_bar = true
 config.show_tab_index_in_tab_bar = true
 config.show_new_tab_button_in_tab_bar = false
+config.show_close_tab_button_in_tabs = false
+
+config.window_frame = {
+  inactive_titlebar_bg = "none",
+  active_titlebar_bg = "none",
+}
+config.window_background_gradient = {
+  colors = { "#000000" },
+}
 config.window_padding = {
   left = 8,
   right = 8,
@@ -44,6 +62,7 @@ config.tab_max_width = 40
 config.tab_bar_at_bottom = true
 config.enable_scroll_bar = true
 
+-- Keybinds
 config.enable_csi_u_key_encoding = true
 config.leader = keybinds.leader
 config.keys = keybinds.default_keybinds
