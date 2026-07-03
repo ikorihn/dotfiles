@@ -10,6 +10,21 @@ colors
 # emacs 風キーバインドにする
 bindkey -e
 
+_zsh_register_custom_widgets() {
+  (( $+functions[gcd] )) || return
+
+  bindkey -r '^G'
+  zle -N gcd
+  bindkey '^G^G' gcd
+  zle -N fbr
+  bindkey '^G^R' fbr
+  zle -N fbrm
+  bindkey '^G^M' fbrm
+  zle -N petcopy
+  bindkey '^G^P' petcopy
+}
+_zsh_register_custom_widgets
+
 # ヒストリの設定
 export HISTFILE=$XDG_CACHE_HOME/zsh/history
 export HISTSIZE=50000
@@ -169,30 +184,6 @@ if command -v kubectl 1>/dev/null 2>&1; then
 fi
 
 export TIG_EDITOR=nvim
-
-########################################
-# Sync widgets
-########################################
-# ^G^G は起動直後に使いたいので gcd だけ先に登録する。
-# ghq + cd
-gcd() {
-  local root=$(ghq root)
-  local repo=$(ghq list | fzf-tmux $FZF_TMUX_OPTS --preview="ls -AF ${root}/{1}")
-  if [[ -z $repo ]]; then
-    return
-  fi
-  local fullpath="${root}/${repo}"
-  cd $fullpath
-  zle accept-line
-  zle reset-prompt
-}
-
-export FZF_TMUX=1
-export FZF_TMUX_OPTS='-p 90%,80%'
-
-bindkey -r '^G'
-zle -N gcd
-bindkey '^G^G' gcd
 
 ########################################
 # Completion and prompt baseline
