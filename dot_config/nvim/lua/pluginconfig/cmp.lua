@@ -9,7 +9,6 @@ require("luasnip/loaders/from_vscode").lazy_load()
 local lspok, lspkind = pcall(require, "lspkind")
 if not lspok then return end
 
--- https://github.com/zbirenbaum/copilot-cmp#tab-completion-configuration-highly-recommended
 local has_words_before = function()
   if vim.api.nvim_get_option_value("buftype", {}) == "prompt" then return false end
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -62,13 +61,8 @@ cmp.setup({
   }),
 
   sources = cmp.config.sources({
-    -- GitHub Copilot
-    { name = "copilot" },
     { name = "nvim_lsp" },
-    -- { name = 'vsnip' }, -- For vsnip users.
-    { name = "luasnip" }, -- For luasnip users.
-    -- { name = 'ultisnips' }, -- For ultisnips users.
-    -- { name = 'snippy' }, -- For snippy users.
+    { name = "luasnip" },
   }, {
     {
       name = "buffer",
@@ -97,7 +91,6 @@ cmp.setup({
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
-        ["vim-dadbod-completion"] = "[DB]",
         obsidian = "[Obsidian]",
       },
       symbol_map = {
@@ -122,24 +115,6 @@ cmp.setup.filetype("gitcommit", {
     --   }, {
     { name = "path" },
   }, {
-    {
-      name = "buffer",
-      option = {
-        get_bufnrs = function()
-          local bufs = {}
-          for _, win in ipairs(vim.api.nvim_list_wins()) do
-            bufs[vim.api.nvim_win_get_buf(win)] = true
-          end
-          return vim.tbl_keys(bufs)
-        end,
-      },
-    },
-  }),
-})
-
-cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
-  sources = cmp.config.sources({
-    { name = "vim-dadbod-completion" },
     {
       name = "buffer",
       option = {

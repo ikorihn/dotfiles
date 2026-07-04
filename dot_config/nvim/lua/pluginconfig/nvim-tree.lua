@@ -8,7 +8,7 @@ if not api_status_ok then
   return
 end
 
-local treeutils = require("pluginconfig/nvim-tree-utils")
+local treeutils = require("pluginconfig.nvim-tree-utils")
 
 local function opts(bufnr, desc)
   return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }

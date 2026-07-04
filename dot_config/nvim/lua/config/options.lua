@@ -8,13 +8,9 @@ vim.opt.swapfile = false
 vim.opt.hidden = true
 vim.opt.writebackup = true
 vim.opt.backup = true
--- vim.fn.mkdir(vim.env.XDG_DATA_HOME .. "/vim/backup/", "p")
 vim.opt.backupdir:remove(".")
--- vim.opt.backupext = string.gsub(vim.opt.backupext, "[vimbackup]", "")
 vim.opt.backupskip = ""
--- vim.fn.mkdir(vim.opt.directory, "p")
 vim.opt.undofile = true
--- vim.fn.mkdir(vim.opt.undodir, "p")
 vim.opt.autochdir = false
 vim.opt.history = 10000
 
@@ -65,7 +61,6 @@ vim.opt.updatetime = 300
 
 -- Other
 vim.opt.shortmess:append("c")
--- vim.opt.iskeyword:append("-")
 vim.opt.backspace:append("indent,eol,start")
 vim.opt.whichwrap:append("b,s,h,l,<,>,[,]")
 vim.opt.clipboard:append({ "unnamedplus" })

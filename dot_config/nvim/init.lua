@@ -1,22 +1,21 @@
 vim.loader.enable()
 
+-- :ReloadConfig で再読み込みできるよう、requireキャッシュを消してから読み込む
 local function load(module)
   package.loaded[module] = nil
   require(module)
 end
 
-load("options")
-load("keymaps")
+load("config.options")
+load("config.keymaps")
 
 if vim.g.vscode == 1 then
-  load("vscode-config")
+  load("config.vscode")
   return
 end
 
 if vim.g.disable_plugin ~= 1 then
-  load("plugins")
+  load("config.lazy")
 end
-load("autocommands")
-load("colorscheme")
+load("config.autocommands")
 load("utils")
-load("lsp")

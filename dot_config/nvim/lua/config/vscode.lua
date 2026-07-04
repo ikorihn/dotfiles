@@ -1,4 +1,6 @@
--- Plug
+-- VSCode Neovim 拡張から起動されたときの設定
+-- lazy.nvimは使わず、vim-plugで最小限のプラグインだけ入れる
+
 -- Automatically install plug
 local plugpath = vim.fn.stdpath("data") .. "/plugged/vim-plug"
 if not vim.loop.fs_stat(plugpath) then
@@ -23,6 +25,6 @@ vim.cmd([[ Plug 'kylechui/nvim-surround' ]])
 
 vim.cmd([[ call plug#end() ]])
 
-require("pluginconfig/hop")
-require("pluginconfig/nvim-surround")
-require("pluginconfig/nvim-hlslens")
+require("pluginconfig.hop")
+require("nvim-surround").setup({})
+require("hlslens").setup()
