@@ -9,12 +9,6 @@ require("luasnip/loaders/from_vscode").lazy_load()
 local lspok, lspkind = pcall(require, "lspkind")
 if not lspok then return end
 
-local gitok, git = pcall(require, "cmp_git")
-if not gitok then return end
-
--- -- Copilot
--- require("copilot_cmp").setup()
-
 -- https://github.com/zbirenbaum/copilot-cmp#tab-completion-configuration-highly-recommended
 local has_words_before = function()
   if vim.api.nvim_get_option_value("buftype", {}) == "prompt" then return false end
@@ -85,25 +79,7 @@ cmp.setup({
     },
     { name = "path" },
   }, {
-    {
-      name = "tmux",
-      option = {
-        all_panes = true,
-        label = "[tmux]",
-        trigger_characters = { "." },
-        -- Capture full pane history
-        -- `false`: show completion suggestion from text in the visible pane (default)
-        -- `true`: show completion suggestion from text starting from the beginning of the pane history.
-        --         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
-        capture_history = false,
-      },
-    },
-    {
-      name = "rg",
-      keyword_length = 3,
-    },
     { name = "nvim_lua" },
-    { name = "emoji" },
     -- Obsidian (例: [[ や # の後など)
     { name = "obsidian", keyword_length = 2 },
   }),
@@ -118,12 +94,9 @@ cmp.setup({
       menu = {
         buffer = "[Buffer]",
         path = "[Path]",
-        git = "[Git]",
-        tmux = "[Tmux]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
         nvim_lua = "[Lua]",
-        rg = "[Ripgrep]",
         ["vim-dadbod-completion"] = "[DB]",
         obsidian = "[Obsidian]",
       },
@@ -138,19 +111,6 @@ cmp.setup({
   },
   experimental = {
     ghost_text = true,
-  },
-})
-
--- cmp-git
-git.setup({
-  trigger_actions = {
-    {
-      debug_name = "git_commits",
-      trigger_character = ":",
-      action = function(sources, trigger_char, callback, params, git_info)
-        return sources.git:get_commits(callback, params, trigger_char)
-      end,
-    },
   },
 })
 
@@ -174,26 +134,6 @@ cmp.setup.filetype("gitcommit", {
         end,
       },
     },
-    {
-      name = "tmux",
-      option = {
-        all_panes = true,
-        label = "[tmux]",
-        trigger_characters = { "." },
-        -- Capture full pane history
-        -- `false`: show completion suggestion from text in the visible pane (default)
-        -- `true`: show completion suggestion from text starting from the beginning of the pane history.
-        --         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
-        capture_history = false,
-      },
-    },
-    {
-      name = "rg",
-      -- Try it when you feel cmp performance is poor
-      keyword_length = 3,
-    },
-  }, {
-    { name = "emoji" },
   }),
 })
 
@@ -211,24 +151,6 @@ cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
           return vim.tbl_keys(bufs)
         end,
       },
-    },
-    {
-      name = "tmux",
-      option = {
-        all_panes = true,
-        label = "[tmux]",
-        trigger_characters = { "." },
-        -- Capture full pane history
-        -- `false`: show completion suggestion from text in the visible pane (default)
-        -- `true`: show completion suggestion from text starting from the beginning of the pane history.
-        --         This works by passing `-S -` flag to `tmux capture-pane` command. See `man tmux` for details.
-        capture_history = false,
-      },
-    },
-    {
-      name = "rg",
-      -- Try it when you feel cmp performance is poor
-      -- keyword_length = 3
     },
   }),
 })

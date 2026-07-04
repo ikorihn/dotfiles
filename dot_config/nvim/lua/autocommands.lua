@@ -9,10 +9,19 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = { "*.tmpl" },
   callback = function()
-    if vim.fn.search("{{.\\+}}", "nw") ~= 0 then
-      vim.bo.filetype = "gotmpl"
-    end
+    if vim.fn.search("{{.\\+}}", "nw") ~= 0 then vim.bo.filetype = "gotmpl" end
   end,
+  once = false,
+})
+
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*Tiltfile",
+  callback = function() vim.bo.filetype = "tiltfile" end,
+  once = false,
+})
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*Dockerfile*",
+  callback = function() vim.bo.filetype = "dockerfile" end,
   once = false,
 })
 
@@ -71,7 +80,7 @@ vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
 
 -- Highlight Yanked Text
 vim.api.nvim_create_autocmd({ "TextYankPost" }, {
-  callback = function() vim.highlight.on_yank({ higroup = "Visual", timeout = 200 }) end,
+  callback = function() vim.hl.on_yank({ higroup = "Visual", timeout = 200 }) end,
 })
 
 -- -- switch relativenumber

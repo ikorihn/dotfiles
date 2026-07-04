@@ -81,4 +81,4 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- disable lsp log
-vim.lsp.set_log_level("off")
+vim.lsp.log.set_level(vim.log.levels.INFO)

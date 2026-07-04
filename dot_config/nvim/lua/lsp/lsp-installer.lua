@@ -33,11 +33,14 @@ mason_lspconfig.setup({
 
 vim.lsp.enable(servers)
 vim.lsp.enable("stylua", false)
-vim.lsp.enable("terraformls", false)
 
 for _, server in ipairs(servers) do
   vim.lsp.config(server, {
     on_attach = function(client, bufnr)
+      if server == "terraformls" then
+        client.server_capabilities.semanticTokensProvider = nil
+      end
+
       LspKeymaps(bufnr)
       require("illuminate").on_attach(client)
       require("lsp_signature").on_attach({}, bufnr)

@@ -11,6 +11,8 @@ if not z_ok then return end
 local project_actions_ok, project_actions = pcall(require, "telescope._extensions.project.actions")
 if not project_actions_ok then return end
 
+local lga_actions = require("telescope-live-grep-args.actions")
+
 local action_state = require("telescope.actions.state")
 
 telescope.setup({

@@ -15,10 +15,6 @@ vim.opt.rtp:prepend(lazypath)
 local plugins = {
   { "nvim-lua/plenary.nvim" }, -- Useful lua functions used by lots of plugins
   {
-    "hadronized/hop.nvim",
-    config = function() require("pluginconfig/hop") end,
-  },
-  {
     "kevinhwang91/nvim-hlslens",
     config = function() require("pluginconfig/nvim-hlslens") end,
   },
@@ -44,11 +40,6 @@ local plugins = {
     "j-hui/fidget.nvim",
     config = function() require("fidget").setup() end,
   },
-  {
-    "NStefan002/screenkey.nvim",
-    lazy = false,
-    version = "*",
-  },
 
   {
     "phelipetls/jsonpath.nvim",
@@ -63,7 +54,6 @@ local plugins = {
     "kylechui/nvim-surround",
     config = function() require("pluginconfig/nvim-surround") end,
   },
-  { "jeetsukumaran/vim-indentwise" },
   { "haya14busa/vim-asterisk" },
   { "echasnovski/mini.nvim", version = "*" },
   {
@@ -134,10 +124,6 @@ local plugins = {
   { "hrsh7th/cmp-nvim-lua" },
   { "onsails/lspkind.nvim" },
   { "saadparwaiz1/cmp_luasnip" }, -- luasnip completions
-  { "hrsh7th/cmp-emoji" },
-  { "lukas-reineke/cmp-rg" },
-  { "andersevenrud/cmp-tmux" },
-  { "petertriho/cmp-git" },
 
   -- snippets
   {
@@ -217,10 +203,6 @@ local plugins = {
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
   },
-  {
-    "DrKJeff16/wezterm-types",
-    version = false, -- Get the latest version
-  },
 
   -- Testing
   {
@@ -264,11 +246,27 @@ local plugins = {
   -- Treesitter
   {
     "nvim-treesitter/nvim-treesitter",
+    lazy = false,
     build = ":TSUpdate",
+    branch = "main",
     config = function() require("pluginconfig/treesitter") end,
   },
   { "nvim-treesitter/nvim-treesitter-context" },
-  { "nvim-treesitter/nvim-treesitter-textobjects" },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
+    init = function()
+      -- Disable entire built-in ftplugin mappings to avoid conflicts.
+      -- See https://github.com/neovim/neovim/tree/master/runtime/ftplugin for built-in ftplugins.
+      vim.g.no_plugin_maps = true
+
+      -- Or, disable per filetype (add as you like)
+      -- vim.g.no_python_maps = true
+      -- vim.g.no_ruby_maps = true
+      -- vim.g.no_rust_maps = true
+      -- vim.g.no_go_maps = true
+    end,
+  },
 
   -- Git
   {
@@ -309,36 +307,6 @@ local plugins = {
       "nvim-telescope/telescope.nvim",
     },
   },
-
-  -- DAP
-  {
-    "mfussenegger/nvim-dap",
-    config = function() require("pluginconfig/dap") end,
-  },
-  { "rcarriga/nvim-dap-ui" },
-  { "ravenxrz/DAPInstall.nvim" },
-  { "leoluz/nvim-dap-go" },
-
-  -- DB
-  { "tpope/vim-dadbod" },
-  {
-    "kristijanhusak/vim-dadbod-ui",
-    dependencies = {
-      { "tpope/vim-dadbod", lazy = true },
-      { "kristijanhusak/vim-dadbod-completion", ft = { "sql", "mysql", "plsql" }, lazy = true },
-    },
-    -- cmd = {
-    --   "DBUI",
-    --   "DBUIToggle",
-    --   "DBUIAddConnection",
-    --   "DBUIFindBuffer",
-    -- },
-    config = function()
-      -- Your DBUI configuration
-      vim.g.db_ui_use_nerd_fonts = 1
-    end,
-  },
-  { "kristijanhusak/vim-dadbod-completion" },
 }
 
 require("lazy").setup(plugins, {

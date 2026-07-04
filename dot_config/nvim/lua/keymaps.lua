@@ -102,21 +102,6 @@ keymap("n", "<leader>gb", ":BlameToggle<CR>", opts)
 -- transparent
 keymap("n", "<leader>tt", ":TransparentToggle<CR>", opts)
 
--- Comment
-keymap("n", "<leader>/", "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>", opts)
-keymap("x", "<leader>/", '<ESC><CMD>lua require("Comment.api").toggle.linewise(vim.fn.visualmode())<CR>')
-
--- DAP
-keymap("n", "<leader>db", "<cmd>lua require'dap'.toggle_breakpoint()<cr>", opts)
-keymap("n", "<leader>dc", "<cmd>lua require'dap'.continue()<cr>", opts)
-keymap("n", "<leader>di", "<cmd>lua require'dap'.step_into()<cr>", opts)
-keymap("n", "<leader>do", "<cmd>lua require'dap'.step_over()<cr>", opts)
-keymap("n", "<leader>dO", "<cmd>lua require'dap'.step_out()<cr>", opts)
-keymap("n", "<leader>dr", "<cmd>lua require'dap'.repl.toggle()<cr>", opts)
-keymap("n", "<leader>dl", "<cmd>lua require'dap'.run_last()<cr>", opts)
-keymap("n", "<leader>du", "<cmd>lua require'dapui'.toggle()<cr>", opts)
-keymap("n", "<leader>dt", "<cmd>lua require'dap'.terminate()<cr>", opts)
-
 -- asterisk
 keymap("", "*", "<Plug>(asterisk-z*)", opts)
 keymap("", "#", "<Plug>(asterisk-z#)", opts)
@@ -125,21 +110,6 @@ keymap("", "g#", "<Plug>(asterisk-gz#)", opts)
 -- hlslens
 keymap("n", "n", [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
 keymap("n", "N", [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]], opts)
-
--- IndentWise
-keymap("", "<C-k>", "<Plug>(IndentWisePreviousEqualIndent)", opts)
-keymap("", "<C-j>", "<Plug>(IndentWiseNextEqualIndent)", opts)
-
--- hop
---keymap("", 'f', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true })<CR>", opts)
---keymap("", 'F', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>", opts)
---keymap("", 't', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true, hint_offset = -1 })<CR>", opts)
---keymap("", 'T', "<cmd>lua require'hop'.hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true, hint_offset = 1 })<CR>", opts)
-keymap("", "s", "<cmd>lua require'hop'.hint_char2()<CR>", opts)
-
--- -- EasyAlign
--- keymap("x", "ga", "<Plug>(EasyAlign)", opts)
--- keymap("n", "ga", "<Plug>(EasyAlign)", opts)
 
 function LspKeymaps(bufnr)
   local builtin = require("telescope.builtin")

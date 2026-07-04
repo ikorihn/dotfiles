@@ -21,7 +21,7 @@ local diagnostics = null_ls.builtins.diagnostics
 
 local sources = {
   formatting.prettierd.with({
-    extra_filetypes = { "toml" },
+    extra_filetypes = { "json5", "toml" },
   }),
   formatting.black.with({ extra_args = { "--fast" } }),
   formatting.isort,
@@ -34,7 +34,7 @@ local sources = {
       "--column-width",
       "120",
       "--collapse-simple-statement",
-      "Always",
+      "None",
     },
   }),
   formatting.google_java_format,

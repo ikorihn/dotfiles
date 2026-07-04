@@ -87,6 +87,8 @@ gitsigns.setup({
 
     -- Actions
     map("n", "<leader>gs", gitsigns.stage_hunk)
+    vim.keymap.set('n', '<leader>gs', ':Gitsigns stage_hunk<CR>', { buffer = true, desc = 'Stage hunk' })
+    vim.keymap.set('v', '<leader>gs', ':<C-U>Gitsigns stage_hunk<CR>', { buffer = true, desc = 'Stage part of hunk' })
     map("n", "<leader>gr", gitsigns.reset_hunk)
     map("v", "<leader>gs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
     map("v", "<leader>gr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end)
