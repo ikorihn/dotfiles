@@ -55,7 +55,6 @@ local plugins = {
     config = function() require("pluginconfig/nvim-surround") end,
   },
   { "haya14busa/vim-asterisk" },
-  { "echasnovski/mini.nvim", version = "*" },
   {
     "echasnovski/mini.align",
     config = function() require("mini.align").setup() end,

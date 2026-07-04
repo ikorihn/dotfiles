@@ -99,9 +99,6 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<leader>gg", ":Neogit<CR>", opts)
 keymap("n", "<leader>gb", ":BlameToggle<CR>", opts)
 
--- transparent
-keymap("n", "<leader>tt", ":TransparentToggle<CR>", opts)
-
 -- asterisk
 keymap("", "*", "<Plug>(asterisk-z*)", opts)
 keymap("", "#", "<Plug>(asterisk-z#)", opts)
