@@ -2,6 +2,10 @@
 
 **/nvim/lazy-lock.json
 
+# マシン固有設定 (コミットしない)
+dot_config/nvim/lua/config/local.lua
+dot_config/nvim/spell/dot_typos-local.toml
+
 # Asr
 Asr/Bar/
 Asr/Tablet/

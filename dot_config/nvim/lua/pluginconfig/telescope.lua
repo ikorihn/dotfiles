@@ -15,6 +15,10 @@ local lga_actions = require("telescope-live-grep-args.actions")
 
 local action_state = require("telescope.actions.state")
 
+-- マシン固有の設定 (project base_dirsなど) は config/local.lua から読む
+local local_ok, local_config = pcall(require, "config.local")
+if not local_ok then local_config = {} end
+
 telescope.setup({
   defaults = {
     initial_mode = "normal",
@@ -61,7 +65,7 @@ telescope.setup({
     },
 
     project = {
-      base_dirs = {
+      base_dirs = local_config.telescope_project_base_dirs or {
         { path = "~/repos/github.com/ikorihn/" },
       },
       hidden_files = true, -- default: false
