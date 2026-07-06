@@ -13,9 +13,7 @@ lua/
     autocommands.lua  -- autocmd
     lazy.lua          -- lazy.nvimのブートストラップ
     vscode.lua        -- VSCode Neovim拡張用の最小構成 (vim-plug)
-  plugins/            -- lazy.nvimのプラグイン定義 (カテゴリ別、自動読み込み)
-    colorscheme.lua / ui.lua / editor.lua / coding.lua / lsp.lua
-    treesitter.lua / telescope.lua / git.lua / lang.lua / tools.lua
+  plugins.lua         -- lazy.nvimのプラグイン定義 (カテゴリごとにコメント見出し)
   pluginconfig/       -- 長い設定 (目安50行超) だけをここに分離
   utils.lua           -- 自作コマンド (:Jq, :CopyFilePath* など)
 after/lsp/            -- LSPサーバー個別の設定 (vim.lsp.config形式)
@@ -25,7 +23,7 @@ spell/                -- typos-lspの設定
 
 ## ルール
 
-- プラグインの追加は `lua/plugins/` の該当カテゴリファイルにspecを追記する
+- プラグインの追加は `lua/plugins.lua` の該当カテゴリセクションにspecを追記する
 - 設定が短いうちはspecの `opts` / `config` にインラインで書き、長くなったら
   `lua/pluginconfig/<plugin>.lua` に切り出して `require("pluginconfig.xxx")` で読む
 - プラグイン固有のキーマップは各spec・pluginconfigに、汎用キーマップは

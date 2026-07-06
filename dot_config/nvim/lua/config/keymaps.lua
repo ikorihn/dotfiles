@@ -1,5 +1,5 @@
 -- 汎用のキーマップ定義
--- プラグイン固有のキーマップは lua/plugins/ の各spec、または lua/pluginconfig/ に置く
+-- プラグイン固有のキーマップは lua/plugins.lua の各spec、または lua/pluginconfig/ に置く
 local utils = require("utils")
 
 -- Shorten function name
