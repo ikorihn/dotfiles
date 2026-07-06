@@ -14,7 +14,4 @@ return {
       vim.cmd.colorscheme("kanagawa")
     end,
   },
-
-  -- 予備のカラースキーム
-  { "folke/tokyonight.nvim" },
 }

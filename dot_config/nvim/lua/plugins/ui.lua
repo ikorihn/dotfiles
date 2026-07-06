@@ -40,8 +40,6 @@ return {
       })
     end,
   },
-  { "ojroques/nvim-bufdel" },
-
   -- ステータスライン
   {
     "nvim-lualine/lualine.nvim",
@@ -113,11 +111,5 @@ return {
       })
       vim.keymap.set("n", "<leader>nd", "<cmd>Noice dismiss<CR>")
     end,
-  },
-
-  -- LSPの進捗表示
-  {
-    "j-hui/fidget.nvim",
-    opts = {},
   },
 }

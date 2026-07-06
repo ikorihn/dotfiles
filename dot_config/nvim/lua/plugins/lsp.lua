@@ -24,36 +24,6 @@ return {
     config = function() require("pluginconfig.null-ls") end,
   },
 
-  -- LSPのUI強化 (finderなど)
-  {
-    "nvimdev/lspsaga.nvim",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      lightbulb = {
-        enable = false,
-      },
-      finder = {
-        max_height = 0.6,
-        default = "tyd+ref+imp+def",
-        keys = {
-          toggle_or_open = "<CR>",
-          vsplit = "v",
-          split = "s",
-          tabnew = "t",
-          tab = "T",
-          quit = "q",
-          close = "<Esc>",
-        },
-        methods = {
-          tyd = "textDocument/typeDefinition",
-        },
-      },
-    },
-  },
-
   -- 引数のシグネチャ表示
   {
     "ray-x/lsp_signature.nvim",

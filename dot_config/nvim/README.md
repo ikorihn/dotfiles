@@ -38,8 +38,8 @@ spell/                -- typos-lspの設定
 以下のファイルは `.gitignore` 済み。chezmoi source に置くので `chezmoi apply` で配備されるが、
 gitには入らない。存在しないマシンでは各設定のフォールバック値が使われる。
 
-- `lua/config/local.lua` … Luaからの参照値。obsidianのworkspaces、
-  telescope-projectのbase_dirsなど。`pcall(require, "config.local")` で読む
+- `lua/config/local.lua` … Luaからの参照値。obsidianのworkspacesなど。
+  `pcall(require, "config.local")` で読む
 - `spell/dot_typos-local.toml` … typosのマシン固有除外語。存在すれば
   `.typos.toml` の代わりに読まれる (typosは1ファイルしか読めないため、
   ベースの内容もこちらに含めること)

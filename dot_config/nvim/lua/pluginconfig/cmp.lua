@@ -73,7 +73,6 @@ cmp.setup({
     },
     { name = "path" },
   }, {
-    { name = "nvim_lua" },
     -- Obsidian (例: [[ や # の後など)
     { name = "obsidian", keyword_length = 2 },
   }),
@@ -90,7 +89,6 @@ cmp.setup({
         path = "[Path]",
         nvim_lsp = "[LSP]",
         luasnip = "[LuaSnip]",
-        nvim_lua = "[Lua]",
         obsidian = "[Obsidian]",
       },
       symbol_map = {
