@@ -1,0 +1,168 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+####
+# colorscheme
+####
+# [[plugins]]
+# repo = 'vim-scripts/wombat256.vim'
+
+# [[plugins]]
+# repo = 'cocopon/iceberg.vim'
+# 
+# [[plugins]]
+# repo = 'arcticicestudio/nord-vim'
+# 
+# [[plugins]]
+# repo = 'whatyouhide/vim-gotham'
+# 
+# [[plugins]]
+# repo = 'joshdick/onedark.vim'
+# 
+# [[plugins]]
+# repo = 'dracula/vim'
+
+[[plugins]]
+repo = 'sainnhe/gruvbox-material'
+hook_add = '''
+    let g:gruvbox_material_better_performance = 1
+'''
+
+####
+# Git
+####
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+    "let g:gitgutter_map_keys = 0
+'''
+
+[[plugins]]
+repo = 'rbgrouleff/bclose.vim'
+[[plugins]]
+repo = 'iberianpig/tig-explorer.vim'
+depends = ['rbgrouleff/bclose.vim']
+hook_add = '''
+    nnoremap <F3> :TigBlame<CR>
+'''
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'TimUntersberger/neogit'
+depends = ['nvim-lua/plenary.nvim']
+
+[[plugins]]
+repo = 'will133/vim-dirdiff'
+
+####
+# View
+####
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+    let g:lightline = {
+        \ 'colorscheme': 'solarized',
+        \ 'active': {
+        \   'left':  [ ['mode', 'paste'], ['gitbranch', 'readonly', 'myfilename', 'modified'], ],
+        \   'right': [ [ 'lineinfo' ], [ 'percent' ], [ 'ale_ok', 'ale_warning', 'ale_error', 'char_code', 'fileformat', 'fileencoding', 'filetype' ], ],
+        \ },
+        \ 'component_function': {
+        \   'myfilename': 'LightlineFilename',
+        \   'gitbranch': 'gina#component#repo#branch',
+        \ },
+        \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
+        \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
+        \ }
+
+    function! LightlineFilename()
+        return ('' != expand('%') ? expand('%') : '[No Name]')
+    endfunction
+'''
+
+[[plugins]]
+repo = 'lukas-reineke/indent-blankline.nvim'
+hook_add = '''
+    let g:indent_blankline_space_char_blankline = " "
+    let g:indent_blankline_show_current_context = v:true
+    let g:indent_blankline_show_current_context_start = v:true
+'''
+
+[[plugins]]
+repo = 'wellle/context.vim'
+hook_add = '''
+'''
+
+[[plugins]]
+repo = 'ntpeters/vim-better-whitespace'
+
+[[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo = 'luochen1990/rainbow'
+
+####
+# Motion
+####
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+
+[[plugins]]
+repo = 'bkad/CamelCaseMotion'
+hook_add = '''
+    let g:camelcasemotion_key = '<leader>'
+'''
+
+[[plugins]]
+repo = 'haya14busa/vim-edgemotion'
+hook_add = '''
+    map <C-j> <Plug>(edgemotion-j)
+    map <C-k> <Plug>(edgemotion-k)
+'''
+
+[[plugins]]
+repo = 'jeetsukumaran/vim-indentwise'
+hook_add = '''
+    map <C-j> <Plug>(edgemotion-j)
+    map <C-k> <Plug>(edgemotion-k)
+'''
+
+####
+# Search
+####
+
+[[plugins]]
+repo = 'kyoh86/vim-ripgrep'
+hook_add = '''
+    command! -nargs=* -complete=file Ripgrep :call ripgrep#search(<q-args>)
+'''
+
+####
+# Edit util
+####
+[[plugins]]
+repo = 'mattn/sonictemplate-vim'
+
+[[plugins]]
+repo = 'terryma/vim-multiple-cursors'
+
+[[plugins]]
+repo = 'tyru/open-browser.vim'
+hook_add = '''
+    let g:openbrowser_browser_commands = [ {'name': 'google-chrome-stable',  'args': ['{browser}', '{uri}']} ]
+'''
+
+[[plugins]]
+repo = 'junegunn/vim-emoji'
+hook_add = '''
+    let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+    let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+    let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+    let g:gitgutter_sign_modified_removed = emoji#for('collision')
+'''
+
+[[plugins]]
+repo = 'martinda/Jenkinsfile-vim-syntax'
+

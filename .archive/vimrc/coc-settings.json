@@ -1,0 +1,18 @@
+{
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod"
+      ],
+      "filetypes": [
+        "go"
+      ]
+    }
+  },
+  "jedi": {
+    "enable": true,
+    "startupMessage": false,
+    "executable.command": "/opt/homebrew/bin/jedi-language-server"
+  }
+}
