@@ -1,4 +1,9 @@
+**/.git/
+**/.gitignore
+
 **/.zcomp*
+**/.zsh_sessions/
+
 **/.DS_STORE
 
 .config/chezmoi/**
@@ -8,6 +13,8 @@
 .config/raycast/**
 .config/helm/**
 .config/rclone/**
+.config/herdr/*
+!.config/herdr/config.toml
 
 README.md
 Chrome/
