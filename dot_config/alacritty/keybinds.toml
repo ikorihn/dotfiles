@@ -1,5 +1,8 @@
 [keyboard]
 bindings = [
+  # Command + <key>
+  { action = "ReceiveChar", key = "W", mods = "Command" },
+
   # Control + <key>
   { chars = "\u001B[27;5;9~", key = "Tab",    mods = "Control" },
   { chars = "\u001B[27;6;9~", key = "Tab",    mods = "Control|Shift" },
