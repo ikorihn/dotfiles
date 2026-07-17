@@ -1,9 +1,16 @@
 [keyboard]
 bindings = [
-  # Command + <key>
+  # tmuxやherdrに流す
   { action = "ReceiveChar", key = "W", mods = "Command" },
+  { action = "ReceiveChar", key = "T", mods = "Command" },
 
   # Control + <key>
+  { chars = ";",              key = ";",      mods = "Control" },
+  { chars = ",",              key = ",",      mods = "Control" },
+  { chars = ".",              key = ".",      mods = "Control" },
+  { chars = "/",              key = "/",      mods = "Control" },
+  { chars = "'",              key = "'",      mods = "Control" },
+  { chars = "\r",             key = "Enter",  mods = "Control" },
   { chars = "\u001B[27;5;9~", key = "Tab",    mods = "Control" },
   { chars = "\u001B[27;6;9~", key = "Tab",    mods = "Control|Shift" },
 ]

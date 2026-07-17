@@ -11,24 +11,20 @@ TERM = "alacritty"
 size = 16.0
 
 [font.bold]
-family = "Moralerspace Argon HWJPDOC"
+family = "Moralerspace Neon HW"
 style = "Bold"
 
 [font.bold_italic]
-family = "Moralerspace Argon HWJPDOC"
+family = "Moralerspace Neon HW"
 style = "Bold Italic"
 
 [font.italic]
-family = "Moralerspace Argon HWJPDOC"
+family = "Moralerspace Neon HW"
 style = "Italic"
 
 [font.normal]
-family = "Moralerspace Argon HWJPDOC"
+family = "Moralerspace Neon HW"
 style = "Regular"
-
-[terminal.shell]
-args = ["-c", "tmux a -t 0 || tmux"]
-program = "zsh"
 
 [window]
 opacity = 1.0
@@ -40,4 +36,4 @@ lines = 50
 
 [window.padding]
 x = 8
-y = 4
+y = 32
