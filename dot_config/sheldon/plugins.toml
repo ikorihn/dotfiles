@@ -20,18 +20,16 @@ github = "romkatv/zsh-defer"
 apply = ["source"]
 
 [templates]
-lazy = "{% for file in files %}zsh-defer -mpr source \"{{ file }}\"\n{% endfor %}"
-very_lazy = "{% for file in files %}zsh-defer -t 5 -mpr source \"{{ file }}\"\n{% endfor %}"
+lazy = '''
+{{ hooks?.pre | nl }}{% for file in files %}zsh-defer source "{{ file }}"
+{% endfor %}{{ hooks?.post | nl }}
+'''
 
 [plugins.fast-syntax-highlighting]
 github = "zdharma-continuum/fast-syntax-highlighting"
 [plugins.zsh-completions]
 github = "zsh-users/zsh-completions"
 apply = ["source"]
-[plugins.zsh-autosuggestions]
-github = "zsh-users/zsh-autosuggestions"
-[plugins.zsh-history-substring-search]
-github = "zsh-users/zsh-history-substring-search"
 
 [plugins.powerlevel10k]
 github = "romkatv/powerlevel10k"
@@ -39,28 +37,32 @@ apply = ["source"]
 
 [plugins.zsh-abbr]
 github = "olets/zsh-abbr"
-[plugins.fzf-tab]
-github = "Aloxaf/fzf-tab"
-apply = ["lazy"]
-[plugins.git-open]
-github = "paulirish/git-open"
-apply = ["very_lazy"]
-
-[plugins.aws_zsh_completer]
-remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
-apply = ["very_lazy"]
-[plugins.delta]
-remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completion/completion.zsh"
-apply = ["very_lazy"]
 
 [plugins.dotfiles-lazy]
 local = "~/.config/zsh"
-use = ["local.zsh", "functions.zsh", "alias.zsh"]
+use = ["local.zsh", "lazy.zsh"]
 [plugins.dotfiles-sync]
 local = "~/.config/zsh"
-use = ["options.zsh", "sync.zsh", "wezterm.sh"]
+use = ["sync.zsh", "functions.zsh", "wezterm.sh"]
 apply = ["source"]
-[plugins.dotfiles-very-lazy]
-local = "~/.config/zsh"
-use = ["plugins.zsh"]
-apply = ["very_lazy"]
+
+# fzf-tab は compinit 後に読みたい補完拡張
+[plugins.fzf-tab]
+github = "Aloxaf/fzf-tab"
+apply = ["source"]
+
+####
+# very_lazy
+####
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+[plugins.zsh-history-substring-search]
+github = "zsh-users/zsh-history-substring-search"
+[plugins.git-open]
+github = "paulirish/git-open"
+[plugins.aws_zsh_completer]
+remote = "https://raw.githubusercontent.com/aws/aws-cli/v2/bin/aws_zsh_completer.sh"
+[plugins.delta]
+remote = "https://raw.githubusercontent.com/dandavison/delta/master/etc/completion/completion.zsh"
+

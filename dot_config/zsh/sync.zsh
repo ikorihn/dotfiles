@@ -137,7 +137,7 @@ setopt globdots
 ########################################
 # 起動直後の入力で使う基本 alias は defer しない。
 alias ls='eza --group-directories-first'
-alias ll='ls -halF --git --time-style=long-iso --icons=automatic'
+alias ll='ls -halF --git --time-style=long-iso --icons=auto'
 alias la='ll -gHiS'
 
 alias vi='nvim'
@@ -184,6 +184,17 @@ if command -v kubectl 1>/dev/null 2>&1; then
 fi
 
 export TIG_EDITOR=nvim
+
+########################################
+# Shared SSH agent
+########################################
+export SSH_AUTH_SOCK="$HOME/.ssh/agent/shared.sock"
+
+ssh-add -l >/dev/null 2>&1
+if [[ $? -eq 2 ]]; then
+  command rm -f -- "$SSH_AUTH_SOCK"
+  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+fi
 
 ########################################
 # Completion and prompt baseline

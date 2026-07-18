@@ -28,6 +28,12 @@ pr-diff() {
   fi
 }
 
+nvimdiff() {
+  local base=$1
+  local head=${2:-HEAD}
+  nvim -f -c "DiffviewOpen ${base}...${head}"
+}
+
 fbr() {
   branch_line=$(git branch -vv | fzf +m)
   branch=$(echo "$branch_line" | awk '{print $1}')

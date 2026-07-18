@@ -34,6 +34,9 @@ if command -v aqua 1>/dev/null 2>&1; then
   source <(aqua completion zsh)
 fi
 
+if command -v herdr 1>/dev/null 2>&1; then
+  source <(herdr completion zsh)
+fi
 
 ########################################
 # Abbreviations
