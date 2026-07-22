@@ -9,12 +9,6 @@ require("luasnip/loaders/from_vscode").lazy_load()
 local lspok, lspkind = pcall(require, "lspkind")
 if not lspok then return end
 
-local has_words_before = function()
-  if vim.api.nvim_get_option_value("buftype", {}) == "prompt" then return false end
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
-end
-
 cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
@@ -30,35 +24,7 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
-  mapping = cmp.mapping.preset.insert({
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and has_words_before() then
-        cmp.confirm({ select = true })
-        -- cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-
-        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-        -- that way you will only jump inside the snippet region
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
-  }),
+  mapping = require("config.keymaps").cmp(cmp, luasnip),
 
   sources = cmp.config.sources({
     { name = "nvim_lsp" },

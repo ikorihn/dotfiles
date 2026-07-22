@@ -9,7 +9,7 @@ init.lua              -- エントリポイント (読み込み順のみ)
 lua/
   config/             -- プラグインに依存しない基本設定
     options.lua       -- vim.opt / vim.g
-    keymaps.lua       -- 汎用キーマップ
+    keymaps.lua       -- キーマップ
     autocommands.lua  -- autocmd
     lazy.lua          -- lazy.nvimのブートストラップ
     vscode.lua        -- VSCode Neovim拡張用の最小構成 (vim-plug)
@@ -26,8 +26,7 @@ spell/                -- typos-lspの設定
 - プラグインの追加は `lua/plugins.lua` の該当カテゴリセクションにspecを追記する
 - 設定が短いうちはspecの `opts` / `config` にインラインで書き、長くなったら
   `lua/pluginconfig/<plugin>.lua` に切り出して `require("pluginconfig.xxx")` で読む
-- プラグイン固有のキーマップは各spec・pluginconfigに、汎用キーマップは
-  `config/keymaps.lua` に書く
+- キーマップは `config/keymaps.lua` に書き、プラグイン設定からセットアップ関数を呼ぶ
 - LSPサーバーの追加: `pluginconfig/lsp.lua` の `servers` に追加し、
   個別設定が必要なら `after/lsp/<server>.lua` を作る
 

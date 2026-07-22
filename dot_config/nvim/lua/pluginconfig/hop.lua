@@ -60,9 +60,7 @@ end
 
 M.setup = function()
   hop.setup({})
-
-  -- fixme: change to a real module
-  vim.api.nvim_set_keymap("n", [[f]], [[<cmd>lua require'my.local.hop'.hint_char1()<cr>]], { noremap = true })
+  require("config.keymaps").setup_hop()
 end
 
 return M

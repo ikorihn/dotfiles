@@ -92,8 +92,7 @@ return {
     "RRethy/vim-illuminate",
     config = function()
       vim.g.Illuminate_ftblacklist = { "alpha", "NvimTree" }
-      vim.keymap.set("n", "<a-n>", function() require("illuminate").next_reference({ wrap = true }) end)
-      vim.keymap.set("n", "<a-p>", function() require("illuminate").next_reference({ reverse = true, wrap = true }) end)
+      require("config.keymaps").setup_illuminate()
     end,
   },
 
@@ -137,7 +136,7 @@ return {
           },
         },
       })
-      vim.keymap.set("n", "<leader>nd", "<cmd>Noice dismiss<CR>")
+      require("config.keymaps").setup_noice()
     end,
   },
 
@@ -179,12 +178,7 @@ return {
       if vim.fn.exists("+winbar") == 1 then
         vim.opt_local.winbar = "%{%v:lua.require'jsonpath'.get()%}"
       end
-      vim.keymap.set(
-        "n",
-        "y<C-p>",
-        function() vim.fn.setreg("+", require("jsonpath").get()) end,
-        { desc = "copy json path", buffer = true }
-      )
+      require("config.keymaps").setup_jsonpath()
     end,
   },
 
@@ -320,7 +314,7 @@ return {
   ---------------------------------------------------------------------------
   -- Git
   ---------------------------------------------------------------------------
-  -- 変更行の表示・hunk操作 (キーマップは pluginconfig/gitsigns.lua の on_attach)
+  -- 変更行の表示・hunk操作
   {
     "lewis6991/gitsigns.nvim",
     config = function() require("pluginconfig.gitsigns") end,
@@ -348,17 +342,7 @@ return {
             layout = "diff2_horizontal",
           },
         },
-        keymaps = {
-          view = {
-            { "n", "q", actions.close, { desc = "Close" } },
-          },
-          file_panel = {
-            { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close" } },
-          },
-          file_history_panel = {
-            { "n", "q", "<cmd>DiffviewClose<cr>", { desc = "Close" } },
-          },
-        },
+        keymaps = require("config.keymaps").diffview(actions),
       })
     end,
   },
@@ -373,13 +357,7 @@ return {
       merge_consecutive = false,
       max_summary_width = 30,
       blame_options = { "-w" },
-      mappings = {
-        commit_info = "i",
-        stack_push = "[",
-        stack_pop = "]",
-        show_commit = "<CR>",
-        close = { "<esc>", "q" },
-      },
+      mappings = require("config.keymaps").blame(),
     },
   },
 
