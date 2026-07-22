@@ -29,6 +29,93 @@ M.Jq = function(...)
 end
 vim.cmd([[command! -nargs=? -bar Jq lua require('utils').Jq(<f-args>)]])
 
+local json5_buffers = {}
+local json5_converting = {}
+
+local function restore_json5(bufnr)
+  local state = json5_buffers[bufnr]
+  if not state then return false end
+
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = bufnr, name = "jsonls" })) do
+    vim.lsp.buf_detach_client(bufnr, client.id)
+  end
+
+  vim.bo[bufnr].modifiable = true
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, state.lines)
+  vim.bo[bufnr].filetype = state.filetype
+  vim.bo[bufnr].endofline = state.endofline
+  vim.bo[bufnr].readonly = state.readonly
+  vim.bo[bufnr].modifiable = state.modifiable
+  vim.bo[bufnr].modified = state.modified
+  vim.api.nvim_win_set_cursor(0, state.cursor)
+  json5_buffers[bufnr] = nil
+  vim.notify("Restored the original JSON5 content", vim.log.levels.INFO)
+  return true
+end
+
+M.ToggleJson5Jsonc = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  if restore_json5(bufnr) then return end
+  if json5_converting[bufnr] then
+    vim.notify("JSON5 conversion is already in progress", vim.log.levels.WARN)
+    return
+  end
+
+  if vim.bo[bufnr].filetype ~= "json5" then
+    vim.notify("Run this command in a JSON5 buffer", vim.log.levels.ERROR)
+    return
+  end
+  if not vim.bo[bufnr].modifiable then
+    vim.notify("Cannot convert a non-modifiable buffer", vim.log.levels.ERROR)
+    return
+  end
+  if vim.fn.executable("bunx") ~= 1 then
+    vim.notify("bunx is required to convert JSON5", vim.log.levels.ERROR)
+    return
+  end
+
+  local state = {
+    lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false),
+    cursor = vim.api.nvim_win_get_cursor(0),
+    filetype = vim.bo[bufnr].filetype,
+    endofline = vim.bo[bufnr].endofline,
+    readonly = vim.bo[bufnr].readonly,
+    modifiable = vim.bo[bufnr].modifiable,
+    modified = vim.bo[bufnr].modified,
+    changedtick = vim.api.nvim_buf_get_changedtick(bufnr),
+  }
+  local input = table.concat(state.lines, "\n")
+
+  json5_converting[bufnr] = true
+  vim.notify("Converting JSON5 to JSONC", vim.log.levels.INFO)
+  vim.system({ "bunx", "json5", "--space", "2" }, { stdin = input, text = true }, function(result)
+    vim.schedule(function()
+      json5_converting[bufnr] = nil
+      if not vim.api.nvim_buf_is_valid(bufnr) then return end
+      if vim.api.nvim_buf_get_changedtick(bufnr) ~= state.changedtick then
+        vim.notify("Conversion aborted because the buffer changed", vim.log.levels.ERROR)
+        return
+      end
+      if result.code ~= 0 then
+        local message = vim.trim(result.stderr or "")
+        vim.notify("Failed to convert JSON5: " .. message, vim.log.levels.ERROR)
+        return
+      end
+
+      local lines = vim.split(result.stdout or "", "\n", { plain = true })
+      if lines[#lines] == "" then table.remove(lines) end
+      json5_buffers[bufnr] = state
+      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, lines)
+      vim.bo[bufnr].filetype = "jsonc"
+      vim.bo[bufnr].modifiable = false
+      vim.notify("Temporarily converted to JSONC; run the command again to restore JSON5", vim.log.levels.INFO)
+    end)
+  end)
+end
+vim.api.nvim_create_user_command("Json5ToggleJsonc", M.ToggleJson5Jsonc, {
+  desc = "Temporarily convert JSON5 to JSONC and restore it on the next run",
+})
+
 M.OpenUrlOrFile = function()
   local cfile = vim.fn.expand("<cfile>")
   if cfile:match("^https?://") then
