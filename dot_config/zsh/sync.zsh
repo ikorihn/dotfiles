@@ -142,7 +142,7 @@ alias la='ll -gHiS'
 
 alias vi='nvim'
 # alias vim='/usr/local/bin/nvim'
-alias vim='TERM=alacritty nvim'
+alias vim='nvim'
 alias view='vim -R'
 alias vimdiff='nvim -d'
 
@@ -206,8 +206,8 @@ else
   compinit -C
 fi
 
-# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
-[[ ! -f ~/.config/zsh/.p10k.zsh ]] || source ~/.config/zsh/.p10k.zsh
+# プロンプトは starship (~/.config/starship.toml)
+eval "$(starship init zsh)"
 
 # fzf-tabを入れいているとFZF_COMPLETION_TRIGGERによるトリガーが効かなくなるため、ワークアラウンドとしてTAB2回で発動するようにする
 # https://github.com/Aloxaf/fzf-tab/issues/65#issuecomment-1344970328

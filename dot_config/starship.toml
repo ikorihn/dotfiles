@@ -1,41 +1,45 @@
-format = "#### $all$line_break$character"
+"$schema" = 'https://starship.rs/config-schema.json'
 
-[line_break]
+# 1行目: 左に os/dir/git、$fill で右端に寄せて status 系。2行目: プロンプト記号
+format = """
+$os$directory$git_branch$git_status$fill$status$cmd_duration$jobs$direnv$python$kubernetes$terraform$aws$time$line_break$character"""
+
+add_newline = true
+
+[os]
+disabled = false
+format = '[$symbol]($style) '
+
+[directory]
+truncation_length = 9
+
+[fill]
+symbol = ' '
+
+[status]
 disabled = false
 
-# [battery]
-# disabled = false
-# [[battery.display]]
-# threshold = 80
+[jobs]
+symbol = '✦'
 
-[time]
+[direnv]
 disabled = false
-# format = '[\[$time\]]($style) '
+
+[kubernetes]
+disabled = false
 
 [aws]
 disabled = true
+
+[time]
+disabled = false
 
 [character]
 success_symbol = '[\$](bold green)'
 error_symbol = '[\$](bold red)'
 
-# [custom.toggl]
-# command = ''' toggl --cache --csv current | grep -e Duration -e Description | sort -r | awk 'BEGIN{ RS="\n"; FS=","; ORS=","} { print substr($2, 0, 20) }' '''
-# shell = "zsh"
-# disabled = true
-
 [java]
 disabled = true
 
-# [custom.gittag]
-# command = ''' git describe --tags --abbrev=0 '''
-# description = "Show git latest tag"
-# when = "git rev-parse --is-inside-work-tree"
-# shell = "zsh"
-# symbol = "🔖 "
-
 [package]
 version_format = "${raw}"
-
-[directory]
-truncation_length = 9

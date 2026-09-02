@@ -31,10 +31,6 @@ github = "zdharma-continuum/fast-syntax-highlighting"
 github = "zsh-users/zsh-completions"
 apply = ["source"]
 
-[plugins.powerlevel10k]
-github = "romkatv/powerlevel10k"
-apply = ["source"]
-
 [plugins.zsh-abbr]
 github = "olets/zsh-abbr"
 
