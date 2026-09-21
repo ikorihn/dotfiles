@@ -17,11 +17,11 @@ web:*.{html,css,js,ts,vue}
 # Follow symbolic links.
 --follow
 
-# Don't respect ignore files (.gitignore, .ignore, etc.).
---no-ignore
+# Respect ignore files (.gitignore, .ignore, etc.).
+--ignore
 
 # Exclude directories.
---glob=!{.git,.svn,node_modules,tealdeer,Trash,vendor,dist,.yarn,.npm,.cache,go.sum}
+--glob=!{.git,.svn,node_modules,tealdeer,Trash,.trash,vendor,dist,.yarn,.npm,.cache,.work,.venv}
 
 # Exclude file types.
 --glob=!*.{lock}

@@ -6,20 +6,31 @@ current_branch=$(git rev-parse --abbrev-ref HEAD)
 ## AAA-123-xxx-hogehoge -> AAA-123
 ## AAA-xxx-hogehoge -> AAA
 ## feat/AAA-123 -> AAA-123
+## 123-xxx-hogehoge -> #123
 function projectid_or_issueid() {
   if [[ $1 =~ ^([a-z]+/)?([A-Z]+(-[0-9]+)?).*$ ]]; then
     echo "${BASH_REMATCH[2]}"
+    return
+  elif [[ $1 =~ ^([a-z]+/)?([0-9]+).*$ ]]; then
+    echo "#${BASH_REMATCH[2]}"
     return
   fi
 }
 
 id=$(projectid_or_issueid "$current_branch")
 
+# HEADブランチの場合は何もしない
+if [[ -z ${id} || "${id}" = "HEAD" ]]; then
+  exit 0
+fi
+
 message_first_line=$(head -n 1 "$1")
 
-if [[ "${message_first_line}" =~ ^[A-Z]+(-[0-9]+)?.*$ ]]; then
+REGEX_PATTERN="^\[[A-Z]+(-[0-9]+)?\]"
+
+if [[ "${message_first_line}" =~ ${REGEX_PATTERN}.*$ ]]; then
   # コミットメッセージにすでに含まれる場合は置き換える
-  sed -i -E "1 s@^[A-Z]+(-[0-9]+)?@${id}@" "$1"
+  sed -i -E "1 s@${REGEX_PATTERN}@\[${id}\]@" "$1"
 elif [[ ! "${message_first_line}" =~ ${id} ]]; then
-  sed -i -E "1 s@^@${id} @" "$1"
+  sed -i -E "1 s@^@\[${id}\] @" "$1"
 fi

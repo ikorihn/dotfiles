@@ -1,3 +1,4 @@
+onboarding = false
 [theme]
 name = "catppuccin"
 auto_switch = false
@@ -6,7 +7,7 @@ auto_switch = false
 prefix = "ctrl+q"
 
 # tmux の prefix キーバインド
-new_tab = ["prefix+c", "alt+n"]
+new_tab = ["super+t", "alt+n"]
 previous_tab = ["alt+left", "alt+h"]
 next_tab = ["alt+right", "alt+l"]
 focus_pane_left = "prefix+h"
@@ -19,11 +20,15 @@ copy_mode = "prefix+["
 edit_scrollback = "alt+e"
 previous_workspace = "ctrl+shift+tab"
 next_workspace = "ctrl+tab"
+close_pane = "super+w"
+next_agent = "super+]"
+previous_agent = "super+["
+last_pane = "alt+["
 
 [[keys.command]]
 key = "alt+o"
 type = "pane"
-command = "$HERDR_BIN_PATH pane read \"$HERDR_ACTIVE_PANE_ID\" --source recent-unwrapped --lines 200 | nvim -"
+command = "$HERDR_BIN_PATH pane read \"$HERDR_ACTIVE_PANE_ID\" --source recent-unwrapped --lines 10000 | nvim -"
 description = "直近の出力をnvimで開く"
 
 [[keys.command]]
@@ -38,8 +43,18 @@ type = "pane"
 command = "fzf | tr -d '\\n' | pbcopy"
 description = "fzfの選択内容をコピー"
 
+[[keys.command]]
+key = "prefix+alt+t"
+type = "shell"
+command = "herdr pane move $HERDR_ACTIVE_PANE_ID --new-tab --focus"
+
 [ui]
 show_agent_labels_on_pane_borders = true
 
+agent_panel_sort = "spaces"
 [experimental]
 pane_history = true
+switch_ascii_input_source_in_prefix = true
+
+[ui.toast]
+delivery = "system"

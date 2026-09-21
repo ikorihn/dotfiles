@@ -52,7 +52,7 @@
   pushf = push --force-with-lease --force-if-includes
   diffw = diff --word-diff # 行ごとの差分じゃなくて，単語レベルでの差分を色付きで表示する
   difft = difftool --ignore-submodules --dir-diff --no-symlinks
-  diffmain =  -c delta.features=mantis-shrimp diff origin/main...HEAD
+  diffmain =  -c delta.features=mantis-shrimp diff origin/HEAD...HEAD
   dirdiff = difftool --dir-diff
   dv = "!f() { nvim -c \"DiffviewOpen $*\"; }; f"
   st = status
@@ -85,6 +85,7 @@
    # reflog = delta
    show = delta
    diff = delta
+   branch = false
 
 [delta]
   features = weeping-willow # mantis-shrimp, colibri
@@ -117,8 +118,8 @@
 
 [filter "lfs"]
   clean = git-lfs clean -- %f
-  smudge = git-lfs smudge --skip -- %f
-  process = git-lfs filter-process --skip
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
   required = true
 
 [ghq]
