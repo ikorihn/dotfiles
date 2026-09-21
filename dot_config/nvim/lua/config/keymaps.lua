@@ -90,6 +90,9 @@ keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 -- Git
 keymap("n", "<leader>gg", ":Neogit<CR>", opts)
 keymap("n", "<leader>gb", ":BlameToggle<CR>", opts)
+keymap("n", "<leader>dd", ":DiffviewOpen ")
+keymap("n", "<leader>dm", ":DiffviewOpen main..HEAD")
+keymap("n", "<leader>df", "<CMD>DiffviewFileHistory %<CR>", opts)
 
 -- asterisk
 keymap("", "*", "<Plug>(asterisk-z*)", opts)
@@ -115,11 +118,6 @@ vim.keymap.set("n", "<S-l>", "<CMD>BufferLineCycleNext<CR>")
 vim.keymap.set("n", "<S-h>", "<CMD>BufferLineCyclePrev<CR>")
 vim.keymap.set("n", "<S-M-l>", "<CMD>BufferLineMoveNext<CR>")
 vim.keymap.set("n", "<S-M-h>", "<CMD>BufferLineMovePrev<CR>")
-
--- Diffview
-keymap("n", "<leader>dd", ":DiffviewOpen ")
-keymap("n", "<leader>dm", ":DiffviewOpen main..HEAD")
-keymap("n", "<leader>df", "<CMD>DiffviewFileHistory %<CR>", opts)
 
 function M.setup_illuminate()
   keymap("n", "<a-n>", function()
@@ -312,9 +310,7 @@ function M.setup_gitsigns(bufnr, gitsigns)
     gitsigns.blame_line({ full = true })
   end)
   buffer_keymap("n", "<leader>gd", gitsigns.diffthis)
-  buffer_keymap("n", "<leader>gD", function()
-    gitsigns.diffthis("~")
-  end)
+  buffer_keymap("n", "<leader>gD", ":<C-U>Gitsigns diffthis origin/HEAD<CR>")
   buffer_keymap("n", "<leader>tb", gitsigns.toggle_current_line_blame)
   buffer_keymap("n", "<leader>td", gitsigns.toggle_deleted)
   buffer_keymap({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")

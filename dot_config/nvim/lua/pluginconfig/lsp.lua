@@ -20,6 +20,7 @@ local servers = {
   "terraformls",
   "bashls",
   "buf_ls",
+  "tombi",
 }
 
 mason.setup({
